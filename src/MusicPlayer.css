@@ -1,0 +1,213 @@
+/* src/components/MusicPlayer.css */
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    /* Default font */
+}
+
+body {
+    background: wheat;
+}
+
+/* Base Styles */
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Music Player Styles */
+.music-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    border-radius: 15px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.music-player h2 {
+    margin: 10px 0;
+    font-size: 2em;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+    transition: color 0.3s ease;
+}
+
+/* YouTube player styles */
+.yt-player {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.yt-player:hover {
+    transform: scale(1.05);
+}
+
+/* Control Buttons */
+.controls {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.controls svg {
+    margin: 0 15px;
+    cursor: pointer;
+    color: #00bcd4;
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.controls svg:hover {
+    transform: scale(1.2);
+    color: #03a9f4;
+}
+
+/* Playlist Styles */
+.song-list {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.song-list h3 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+}
+
+.song-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.song-list li {
+    padding: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: #cccccc;
+    border-radius: 5px;
+}
+
+.song-list li:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+.song-list li.active {
+    font-weight: bold;
+    color: #00bcd4;
+    /* Highlight active song */
+}
+
+/* Theme Styles */
+/* Light Theme */
+.light-mode {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+/* Dark Theme */
+.dark-mode {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .music-player {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .controls svg {
+        margin: 0 8px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .song-list h3 {
+        font-size: 1.2em;
+    }
+}
+
+/* Full-Screen Button Styles */
+.full-screen-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #00bcd4;
+    transition: transform 0.3s ease;
+}
+
+.full-screen-button:hover {
+    transform: scale(1.1);
+    color: #03a9f4;
+}
+
+/* Dark Mode Toggle Button */
+button {
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    margin: 10px 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #03a9f4;
+    transform: translateY(-2px);
+}
