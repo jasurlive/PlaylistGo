@@ -48,8 +48,8 @@ const MusicPlayer = () => {
     };
 
     const opts = {
-        height: '350',
-        width: '540',
+        height: '250',
+        width: '440',
         playerVars: {
             autoplay: 1,
         },
