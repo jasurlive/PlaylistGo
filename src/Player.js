@@ -193,7 +193,7 @@ const Player = () => {
                             value={inputTitle}
                             onChange={(e) => setInputTitle(e.target.value)}
                         />
-                        <button onClick={addSong}>🎯</button>
+                        <button onClick={addSong}>➕</button>
                     </div>
                     {/* Use the Playlist component */}
                     <Playlist

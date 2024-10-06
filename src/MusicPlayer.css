@@ -450,7 +450,7 @@ ul {
     .controls {
         gap: 10px;
         /* Reduce gap on mobile */
-        font-size: 1.2rem;
+        font-size: 2rem;
         /* Adjusted for better usability */
     }
 
