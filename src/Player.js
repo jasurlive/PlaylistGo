@@ -130,7 +130,7 @@ const Player = () => {
 
     return (
         <div className="music-player dark-mode" id="player-container"> {/* Only dark mode class */}
-            <h2>{videoTracks[currentVideoIndex].title}</h2>
+            <h2>Now playing: {videoTracks[currentVideoIndex].title}</h2>
             {/* Use the YTPlayer component */}
             <YTPlayer
                 currentVideoIndex={currentVideoIndex}

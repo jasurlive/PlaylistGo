@@ -21,11 +21,20 @@ const Playlist = ({ customSongs, jasursList, currentVideoIndex, playSelectedVide
                                 draggable
                             >
                                 {track.title}{' '}
-                                <FaEdit onClick={(e) => { e.stopPropagation(); editSong(index); }} />
-                                <FaTrash onClick={(e) => { e.stopPropagation(); deleteSong(index); }} />
+                                <div className="icon-container"> {/* Wrapper for icons */}
+                                    <FaEdit
+                                        onClick={(e) => { e.stopPropagation(); editSong(index); }}
+                                        className="icon edit-icon"
+                                    />
+                                    <FaTrash
+                                        onClick={(e) => { e.stopPropagation(); deleteSong(index); }}
+                                        className="icon delete-icon"
+                                    />
+                                </div>
                                 {dropIndex === index && <div className="drop-line">Drop Here</div>}
                             </li>
                         ))}
+
                         {/* Drop Line */}
                         {dropIndex === customSongs.length && (
                             <li className="drop-line-container">
