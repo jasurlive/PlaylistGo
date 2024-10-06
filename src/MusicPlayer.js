@@ -173,7 +173,7 @@ const MusicPlayer = () => {
                 <FaArrowsAlt onClick={toggleFullScreen} />
             </div>
             <button onClick={toggleDarkMode}>🌙</button>
-            <button onClick={toggleMiniPlayer}>{isMiniPlayer ? 'Expand' : '➖'}</button>
+            <button onClick={toggleMiniPlayer}>{isMiniPlayer ? '🟪' : '➖'}</button>
 
             {!isMiniPlayer && (
                 <div>
