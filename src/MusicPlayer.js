@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import YouTube from 'react-youtube';
 import { FaPlay, FaPause, FaForward, FaBackward, FaArrowsAlt, FaTrash, FaEdit } from 'react-icons/fa';
-import './MusicPlayer.css'; // Custom CSS for player styles
+import './MusicPlayer.css'; // Import the custom CSS
 
 const MusicPlayer = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -12,10 +12,10 @@ const MusicPlayer = () => {
     const [customSongs, setCustomSongs] = useState([]);
     const [inputLink, setInputLink] = useState('');
     const [inputTitle, setInputTitle] = useState('');
-    const [dropIndex, setDropIndex] = useState(null); // To track the index where the song is being dropped
+    const [dropIndex, setDropIndex] = useState(null); // To track where the song is being dropped
     const playerRef = useRef(null);
 
-    // Default song list (Jasur's list)
+    // Default playlist (Jasur's list)
     const jasursList = [
         { title: 'Heart is on fire', url: 'https://youtu.be/kBqqlW6-99M?si=kXaaJTqhA4PaY6Gd' },
         { title: 'Tosh', url: 'https://youtu.be/YcvGjB_MwMM?si=WnVgXpHkzbaPqQTK' },
@@ -24,10 +24,10 @@ const MusicPlayer = () => {
         { title: 'Heart is on fire', url: 'https://youtu.be/kBqqlW6-99M?si=kXaaJTqhA4PaY6Gd' },
     ];
 
-    // Combine user custom songs with Jasur's list
+    // Combine custom songs with Jasur's list
     const videoTracks = [...customSongs, ...jasursList];
 
-    // Load saved songs from localStorage
+    // Load custom songs from localStorage
     useEffect(() => {
         const savedSongs = JSON.parse(localStorage.getItem('customSongs'));
         if (savedSongs) {
@@ -35,11 +35,12 @@ const MusicPlayer = () => {
         }
     }, []);
 
+    // Save custom songs to localStorage
     useEffect(() => {
-        // Save custom songs to localStorage
         localStorage.setItem('customSongs', JSON.stringify(customSongs));
     }, [customSongs]);
 
+    // Extract YouTube video ID
     const extractVideoId = (url) => {
         // eslint-disable-next-line
         const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
@@ -55,6 +56,7 @@ const MusicPlayer = () => {
         },
     };
 
+    // Play and Pause toggle
     const onPlayPauseToggle = () => {
         const player = playerRef.current.internalPlayer;
         if (isPlaying) {
@@ -76,9 +78,7 @@ const MusicPlayer = () => {
     };
 
     const playPreviousVideo = () => {
-        setCurrentVideoIndex((prevIndex) =>
-            prevIndex === 0 ? videoTracks.length - 1 : prevIndex - 1
-        );
+        setCurrentVideoIndex((prevIndex) => prevIndex === 0 ? videoTracks.length - 1 : prevIndex - 1);
         setIsPlaying(true);
     };
 
@@ -98,7 +98,7 @@ const MusicPlayer = () => {
     const toggleFullScreen = () => {
         const playerContainer = document.getElementById('player-container');
         if (!document.fullscreenElement) {
-            playerContainer.requestFullscreen().catch(err => console.log(err));
+            playerContainer.requestFullscreen().catch((err) => console.log(err));
         } else {
             document.exitFullscreen();
         }
@@ -108,8 +108,8 @@ const MusicPlayer = () => {
         if (inputLink) {
             const newSong = { title: inputTitle || 'Untitled', url: inputLink };
             setCustomSongs((prevSongs) => [...prevSongs, newSong]);
-            setInputLink('');
-            setInputTitle('');
+            setInputLink(''); // Reset link input
+            setInputTitle(''); // Reset title input
         }
     };
 
@@ -132,23 +132,27 @@ const MusicPlayer = () => {
         e.dataTransfer.setData('text/plain', JSON.stringify(track));
     };
 
-    const handleDragOver = (e) => {
+    const handleDragOver = (e, index) => {
         e.preventDefault();
+        showDropLine(index); // Show drop line where the dragged item is hovering
     };
 
     const handleDrop = (e, index) => {
         e.preventDefault();
         const droppedSong = JSON.parse(e.dataTransfer.getData('text/plain'));
-        if (!customSongs.some(song => song.url === droppedSong.url)) {
+
+        // Ensure that the song isn't already in the customSongs list
+        if (!customSongs.some((song) => song.url === droppedSong.url)) {
             setCustomSongs((prevSongs) => {
                 const updatedSongs = [...prevSongs];
-                updatedSongs.splice(index, 0, droppedSong);
+                updatedSongs.splice(index, 0, droppedSong); // Insert dropped song at the correct index
                 return updatedSongs;
             });
         }
-        setDropIndex(null); // Reset drop index
+        setDropIndex(null); // Reset dropIndex after dropping
     };
 
+    // Show drop line at a specific index
     const showDropLine = (index) => {
         setDropIndex(index);
     };
@@ -164,18 +168,12 @@ const MusicPlayer = () => {
             />
             <div className="controls">
                 <FaBackward onClick={playPreviousVideo} />
-                {isPlaying ? (
-                    <FaPause onClick={onPlayPauseToggle} />
-                ) : (
-                    <FaPlay onClick={onPlayPauseToggle} />
-                )}
+                {isPlaying ? <FaPause onClick={onPlayPauseToggle} /> : <FaPlay onClick={onPlayPauseToggle} />}
                 <FaForward onClick={playNextVideo} />
                 <FaArrowsAlt onClick={toggleFullScreen} />
             </div>
-            <button onClick={toggleDarkMode}>Toggle Dark Mode</button>
-            <button onClick={toggleMiniPlayer}>
-                {isMiniPlayer ? 'Expand Player' : 'Minimize Player'}
-            </button>
+            <button onClick={toggleDarkMode}>🌙</button>
+            <button onClick={toggleMiniPlayer}>{isMiniPlayer ? 'Expand' : '➖'}</button>
 
             {!isMiniPlayer && (
                 <div>
@@ -194,45 +192,50 @@ const MusicPlayer = () => {
                         />
                         <button onClick={addSong}>Add Song</button>
                     </div>
-                    <div className="song-list">
-                        <h3>Your Playlist 🎧</h3>
-                        <ul>
-                            {customSongs.map((track, index) => (
-                                <li
-                                    key={index}
-                                    onDragStart={(e) => handleDragStart(e, track)}
-                                    onDragOver={handleDragOver}
-                                    onDrop={(e) => handleDrop(e, index)}
-                                    onMouseEnter={() => showDropLine(index)} // Show helper line
-                                    onMouseLeave={() => setDropIndex(null)} // Hide helper line
-                                    className={`song-item ${index === currentVideoIndex ? 'active' : ''} ${dropIndex === index ? 'drop-line' : ''}`}
-                                    draggable
-                                    onClick={() => playSelectedVideo(videoTracks.length + index)}
-                                >
-                                    {track.title}
-                                    <FaEdit onClick={() => editSong(index)} />
-                                    <FaTrash onClick={() => deleteSong(index)} />
-                                </li>
-                            ))}
-                        </ul>
-                        <h3>Jasur's Playlist 🎧</h3>
-                        <ul>
-                            {jasursList.map((track, index) => (
-                                <li
-                                    key={index}
-                                    onDragStart={(e) => handleDragStart(e, track)}
-                                    onDragOver={handleDragOver}
-                                    onDrop={(e) => handleDrop(e, customSongs.length + index)} // Drop index for Jasur's list
-                                    onMouseEnter={() => showDropLine(customSongs.length + index)} // Show helper line
-                                    onMouseLeave={() => setDropIndex(null)} // Hide helper line
-                                    className={`song-item ${index === currentVideoIndex ? 'active' : ''} ${dropIndex === customSongs.length + index ? 'drop-line' : ''}`}
-                                    draggable
-                                    onClick={() => playSelectedVideo(index)}
-                                >
-                                    {track.title}
-                                </li>
-                            ))}
-                        </ul>
+                    <div className="playlists-container">
+                        <div className="playlist-section">
+                            <h3>Your Playlist 🎧</h3>
+                            <ul>
+                                {customSongs.map((track, index) => (
+                                    <li
+                                        key={index}
+                                        className="song-item" // Added class for styling
+                                        onDragStart={(e) => handleDragStart(e, track)}
+                                        onDragOver={(e) => handleDragOver(e, index)}
+                                        onDrop={(e) => handleDrop(e, index)}
+                                        onClick={() => playSelectedVideo(index)}
+                                        draggable
+                                    >
+                                        {track.title}{' '}
+                                        <FaEdit onClick={(e) => { e.stopPropagation(); editSong(index); }} />
+                                        <FaTrash onClick={(e) => { e.stopPropagation(); deleteSong(index); }} />
+                                        {dropIndex === index && <div className="drop-line">Drop Here</div>}
+                                    </li>
+                                ))}
+                                {/* Drop Line */}
+                                {dropIndex === customSongs.length && (
+                                    <li className="drop-line-container">
+                                        <div className="drop-line">Drop Here</div>
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
+                        <div className="jasurs-list">
+                            <h3>Jasur's List 🎶</h3>
+                            <ul>
+                                {jasursList.map((track, index) => (
+                                    <li
+                                        key={index}
+                                        className="song-item" // Added class for styling
+                                        onDragStart={(e) => handleDragStart(e, track)}
+                                        draggable
+                                        onClick={() => playSelectedVideo(customSongs.length + index)}
+                                    >
+                                        {track.title}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             )}
