@@ -8,11 +8,63 @@
 }
 
 body {
-    background: linear-gradient(to bottom, #f0e4d7, #f7c6c7);
-    /* Gradient background */
+    margin: 0;
+    /* Remove default margin */
+    height: 100vh;
+    /* Prevent scrolling */
+    background: linear-gradient(270deg,
+            rgba(255, 92, 51, 0.5),
+            /* Color 1 - Orange */
+            rgba(255, 204, 51, 0.5),
+            /* Color 2 - Yellow */
+            rgba(51, 255, 204, 0.5),
+            /* Color 3 - Teal */
+            rgba(51, 204, 255, 0.5),
+            /* Color 4 - Sky Blue */
+            rgba(255, 51, 204, 0.5),
+            /* Color 5 - Magenta */
+            rgba(204, 51, 255, 0.5),
+            /* Color 6 - Purple */
+            rgba(168, 51, 255, 0.5),
+            /* Color 7 - Violet */
+            rgba(51, 51, 255, 0.5),
+            /* Color 8 - Blue */
+            rgba(51, 170, 255, 0.5),
+            /* Color 9 - Aqua */
+            rgba(51, 255, 87, 0.5),
+            /* Color 10 - Green */
+            rgba(255, 87, 51, 0.5),
+            /* Color 11 - Red-Orange */
+            rgba(255, 51, 161, 0.5),
+            /* Color 12 - Pink */
+            rgba(255, 219, 51, 0.5)
+            /* Color 13 - Golden Yellow */
+        );
+    background-size: 600% 600%;
+    /* Allows the gradient to stretch further */
+    animation: gradientAnimation 20s ease infinite;
+    /* Increased animation duration for smoother transition */
     color: #333;
-    height: 200vh;
 }
+
+/* Keyframes for the gradient animation */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+        /* Start position */
+    }
+
+    50% {
+        background-position: 100% 50%;
+        /* Middle position */
+    }
+
+    100% {
+        background-position: 0% 50%;
+        /* End position, back to start */
+    }
+}
+
 
 /* Base Styles */
 .App {

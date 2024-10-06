@@ -1,9 +1,9 @@
 // src/components/Player.js
 import React, { useState, useRef, useEffect } from 'react';
-import YouTube from 'react-youtube';
-import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaExpand, FaMinus, FaSquare } from 'react-icons/fa'; // Using Font Awesome icons
-import Playlist from './Playlist'; // Import Playlist component
-import './MusicPlayer.css'; // Import the custom CSS
+import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaExpand, FaMinus, FaSquare } from 'react-icons/fa'; // Font Awesome icons
+import Playlist from './Playlist'; // Playlist component
+import './MusicPlayer.css'; // Custom CSS
+import YTPlayer, { jasursList } from './YT'; // Import YouTube player and playlist
 
 const Player = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -14,19 +14,6 @@ const Player = () => {
     const [inputTitle, setInputTitle] = useState('');
     const [dropIndex, setDropIndex] = useState(null); // To track where the song is being dropped
     const playerRef = useRef(null);
-
-    // Default playlist (Jasur's list)
-    const jasursList = [
-        { title: 'Heart is on fire', url: 'https://youtu.be/kBqqlW6-99M?si=kXaaJTqhA4PaY6Gd' },
-        { title: 'Irakliy - Ya s toboy(cover)', url: 'https://youtu.be/3WmdZOF5bKk?si=LcXY8Gohxxx4cZSA' },
-        { title: 'Vetrom stat` (cover)', url: 'https://youtu.be/kkzEs0gdvZI?si=Z456wgKuJd0aE_PA' },
-        { title: 'Reamonn - Supergirl', url: 'https://youtu.be/ucI3IpuM-NQ?si=mH62PwU2B4_p1GFg' },
-        { title: 'Another Love', url: 'https://youtu.be/MwpMEbgC7DA?si=8HUQvzasZEq-4AZL' },
-        { title: 'Ava Max - So Am I', url: 'https://youtu.be/SxGLPVvNjvY?si=tVcL1slKTd_OOY3N' },
-        { title: 'Arcade', url: 'https://youtu.be/Qau6mObfSGM?si=RsrcZ0VUCOHaEwE4' },
-        { title: 'Chumoli', url: 'https://youtu.be/VNBxmb9VLRM?si=Fk7SNDPjp4MeqZuy' },
-        { title: 'Heart is on fire', url: 'https://youtu.be/kBqqlW6-99M?si=kXaaJTqhA4PaY6Gd' },
-    ];
 
     // Combine custom songs with Jasur's list
     const videoTracks = [...customSongs, ...jasursList];
@@ -43,22 +30,6 @@ const Player = () => {
     useEffect(() => {
         localStorage.setItem('customSongs', JSON.stringify(customSongs));
     }, [customSongs]);
-
-    // Extract YouTube video ID
-    const extractVideoId = (url) => {
-        // eslint-disable-next-line
-        const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
-        const match = url.match(regex);
-        return match ? match[1] : null;
-    };
-
-    const opts = {
-        height: '200',
-        width: '300',
-        playerVars: {
-            autoplay: 1,
-        },
-    };
 
     // Play and Pause toggle
     const onPlayPauseToggle = () => {
@@ -160,11 +131,12 @@ const Player = () => {
     return (
         <div className="music-player dark-mode" id="player-container"> {/* Only dark mode class */}
             <h2>{videoTracks[currentVideoIndex].title}</h2>
-            <YouTube
-                videoId={extractVideoId(videoTracks[currentVideoIndex].url)}
-                opts={opts}
-                onEnd={onVideoEnd}
-                ref={playerRef}
+            {/* Use the YTPlayer component */}
+            <YTPlayer
+                currentVideoIndex={currentVideoIndex}
+                videoTracks={videoTracks}
+                onVideoEnd={onVideoEnd}
+                playerRef={playerRef}
             />
             <div className="controls">
                 <FaBackward onClick={playPreviousVideo} style={{ cursor: 'pointer' }} />
@@ -179,9 +151,6 @@ const Player = () => {
                     {isMiniPlayer ? <FaSquare /> : <FaMinus />}
                 </div>
             </div>
-
-
-
 
             {!isMiniPlayer && (
                 <div>
