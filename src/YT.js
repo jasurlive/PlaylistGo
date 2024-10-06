@@ -11,7 +11,9 @@ export const jasursList = [
     { title: 'Another Love', url: 'https://youtu.be/MwpMEbgC7DA?si=8HUQvzasZEq-4AZL' },
     { title: 'Ava Max - So Am I', url: 'https://youtu.be/SxGLPVvNjvY?si=tVcL1slKTd_OOY3N' },
     { title: 'Arcade', url: 'https://youtu.be/Qau6mObfSGM?si=RsrcZ0VUCOHaEwE4' },
-    { title: 'Chumoli', url: 'https://youtu.be/VNBxmb9VLRM?si=Fk7SNDPjp4MeqZuy' },
+    { title: 'Femme like you', url: 'https://youtu.be/8qfM7offtiA?si=L-0D4vQeApvABOh_' },
+
+    // { title: 'NAME', url: 'LINK' },
 ];
 
 // YouTube player options with 16:9 ratio
