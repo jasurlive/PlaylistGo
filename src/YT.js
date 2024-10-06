@@ -18,8 +18,7 @@ export const jasursList = [
 
 // YouTube player options with 16:9 ratio
 const opts = {
-    height: '180',  // Calculated height for 16:9 ratio
-    width: '320',   // Fixed width of 320px
+
     playerVars: {
         autoplay: 1,              // Automatically start playing the video
         controls: 0,              // Hide all player controls

@@ -108,6 +108,60 @@ body {
     }
 }
 
+
+.youtube-container {
+    display: flex;
+    justify-content: center;
+    /* Center content horizontally */
+    align-items: center;
+    /* Center content vertically */
+    width: 100%;
+    /* Full width of the parent */
+    max-width: 500px;
+    /* Limit the maximum width */
+    border-radius: 15px;
+    /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+    overflow: hidden;
+    /* Hide overflow for rounded corners */
+    margin: 0 auto;
+    /* Center the container within its parent */
+    margin-top: 10px;
+}
+
+.youtube-container .video-wrapper {
+    display: flex;
+    width: 100%;
+    /* Full width of the wrapper */
+    padding-top: 56.25%;
+    /* Maintain 16:9 Aspect Ratio */
+    position: relative;
+    /* Required for absolute positioning of the iframe */
+}
+
+.youtube-container iframe {
+    position: absolute;
+    /* Position absolutely within the wrapper */
+    top: 0;
+    /* Align to top */
+    left: 0;
+    /* Align to left */
+    width: 100%;
+    /* Full width of the wrapper */
+    height: 100%;
+    /* Full height based on the aspect ratio */
+    border: none;
+    /* Remove border */
+    border-radius: 15px;
+    /* Match container radius */
+}
+
+
+
+
+
+
 .music-player {
     font-family: Arial, sans-serif;
     text-align: center;
