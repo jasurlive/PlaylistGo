@@ -7,7 +7,6 @@ import './MusicPlayer.css'; // Import the custom CSS
 const MusicPlayer = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-    const [isDarkMode, setIsDarkMode] = useState(false);
     const [isMiniPlayer, setIsMiniPlayer] = useState(false);
     const [customSongs, setCustomSongs] = useState([]);
     const [inputLink, setInputLink] = useState('');
@@ -18,8 +17,12 @@ const MusicPlayer = () => {
     // Default playlist (Jasur's list)
     const jasursList = [
         { title: 'Heart is on fire', url: 'https://youtu.be/kBqqlW6-99M?si=kXaaJTqhA4PaY6Gd' },
-        { title: 'Tosh', url: 'https://youtu.be/YcvGjB_MwMM?si=WnVgXpHkzbaPqQTK' },
-        { title: 'Let her go ft Ed Sheeran', url: 'https://youtu.be/HTcL9WkB_wg?si=iBgVj9oc7s8zREbh' },
+        { title: 'Irakliy - Ya s toboy(cover)', url: 'https://youtu.be/3WmdZOF5bKk?si=LcXY8Gohxxx4cZSA' },
+        { title: 'Vetrom stat` (cover)', url: 'https://youtu.be/kkzEs0gdvZI?si=Z456wgKuJd0aE_PA' },
+        { title: 'Reamonn - Supergirl', url: 'https://youtu.be/ucI3IpuM-NQ?si=mH62PwU2B4_p1GFg' },
+        { title: 'Another Love', url: 'https://youtu.be/MwpMEbgC7DA?si=8HUQvzasZEq-4AZL' },
+        { title: 'Ava Max - So Am I', url: 'https://youtu.be/SxGLPVvNjvY?si=tVcL1slKTd_OOY3N' },
+        { title: 'Arcade', url: 'https://youtu.be/Qau6mObfSGM?si=RsrcZ0VUCOHaEwE4' },
         { title: 'Chumoli', url: 'https://youtu.be/VNBxmb9VLRM?si=Fk7SNDPjp4MeqZuy' },
         { title: 'Heart is on fire', url: 'https://youtu.be/kBqqlW6-99M?si=kXaaJTqhA4PaY6Gd' },
     ];
@@ -49,8 +52,8 @@ const MusicPlayer = () => {
     };
 
     const opts = {
-        height: '250',
-        width: '440',
+        height: '225',
+        width: '400',
         playerVars: {
             autoplay: 1,
         },
@@ -78,17 +81,13 @@ const MusicPlayer = () => {
     };
 
     const playPreviousVideo = () => {
-        setCurrentVideoIndex((prevIndex) => prevIndex === 0 ? videoTracks.length - 1 : prevIndex - 1);
+        setCurrentVideoIndex((prevIndex) => (prevIndex === 0 ? videoTracks.length - 1 : prevIndex - 1));
         setIsPlaying(true);
     };
 
     const playSelectedVideo = (index) => {
         setCurrentVideoIndex(index);
         setIsPlaying(true);
-    };
-
-    const toggleDarkMode = () => {
-        setIsDarkMode(!isDarkMode);
     };
 
     const toggleMiniPlayer = () => {
@@ -158,7 +157,7 @@ const MusicPlayer = () => {
     };
 
     return (
-        <div className={`music-player ${isDarkMode ? 'dark-mode' : 'light-mode'}`} id="player-container">
+        <div className="music-player dark-mode" id="player-container"> {/* Only dark mode class */}
             <h2>{videoTracks[currentVideoIndex].title}</h2>
             <YouTube
                 videoId={extractVideoId(videoTracks[currentVideoIndex].url)}
@@ -172,7 +171,6 @@ const MusicPlayer = () => {
                 <FaForward onClick={playNextVideo} />
                 <FaArrowsAlt onClick={toggleFullScreen} />
             </div>
-            <button onClick={toggleDarkMode}>🌙</button>
             <button onClick={toggleMiniPlayer}>{isMiniPlayer ? '🟪' : '➖'}</button>
 
             {!isMiniPlayer && (
@@ -190,7 +188,7 @@ const MusicPlayer = () => {
                             value={inputTitle}
                             onChange={(e) => setInputTitle(e.target.value)}
                         />
-                        <button onClick={addSong}>Add Song</button>
+                        <button onClick={addSong}>🎯</button>
                     </div>
                     <div className="playlists-container">
                         <div className="playlist-section">
@@ -199,7 +197,7 @@ const MusicPlayer = () => {
                                 {customSongs.map((track, index) => (
                                     <li
                                         key={index}
-                                        className="song-item" // Added class for styling
+                                        className={`song-item ${currentVideoIndex === index ? 'active' : ''}`} // Add active class
                                         onDragStart={(e) => handleDragStart(e, track)}
                                         onDragOver={(e) => handleDragOver(e, index)}
                                         onDrop={(e) => handleDrop(e, index)}
@@ -220,16 +218,18 @@ const MusicPlayer = () => {
                                 )}
                             </ul>
                         </div>
-                        <div className="jasurs-list">
+                        <div className="playlist-section">
                             <h3>Jasur's List 🎶</h3>
                             <ul>
                                 {jasursList.map((track, index) => (
                                     <li
                                         key={index}
-                                        className="song-item" // Added class for styling
+                                        className={`song-item ${currentVideoIndex === customSongs.length + index ? 'active' : ''}`} // Add active class
                                         onDragStart={(e) => handleDragStart(e, track)}
-                                        draggable
+                                        onDragOver={(e) => handleDragOver(e, customSongs.length + index)}
+                                        onDrop={(e) => handleDrop(e, customSongs.length + index)}
                                         onClick={() => playSelectedVideo(customSongs.length + index)}
+                                        draggable
                                     >
                                         {track.title}
                                     </li>

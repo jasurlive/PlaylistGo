@@ -3,12 +3,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Trebuchet MS', Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Updated font */
 }
 
 body {
-    background: #f0e4d7;
+    background: linear-gradient(to bottom, #f0e4d7, #f7c6c7);
+    /* Gradient background */
     color: #333;
+    height: 200vh;
 }
 
 /* Base Styles */
@@ -28,7 +31,8 @@ body {
 }
 
 .App-header {
-    background-color: #282c34;
+    background-color: rgba(40, 44, 52, 0.9);
+    /* Semi-transparent background */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -52,78 +56,105 @@ body {
     }
 }
 
-/* Base styles */
 .music-player {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 20px auto;
-    padding: 20px;
+    padding: 30px;
     max-width: 600px;
-    background-color: #f0f0f0;
+    background: rgba(255, 255, 255, 0.95);
+    /* Slightly transparent background */
     border-radius: 15px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, color 0.3s ease;
+    /* Smooth transition */
 }
 
 .music-player.dark-mode {
-    background-color: #333;
-    color: #fff;
+    background-color: #282c34;
+    /* Darker mode */
+    color: #ffffff;
 }
 
 .music-player.light-mode {
     background-color: #ffffff;
-    color: #333333;
+    /* Light mode */
+    color: #333;
 }
 
 .controls {
     margin-top: 20px;
     display: flex;
     justify-content: center;
-    gap: 15px;
-    font-size: 1.5rem;
+    gap: 20px;
+    /* Increased gap for better spacing */
+    font-size: 2rem;
+    /* Increased control size */
+    cursor: pointer;
 }
 
 .add-song {
     margin-top: 20px;
     display: flex;
     gap: 10px;
+    justify-content: center;
 }
 
 .add-song input {
-    padding: 8px;
+    padding: 10px;
+    /* Increased padding */
     font-size: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid #007bff;
+    /* Changed border color */
     border-radius: 5px;
+    transition: border 0.3s ease;
+    /* Smooth transition */
+}
+
+.add-song input:focus {
+    border-color: #0056b3;
+    /* Focus state */
+    outline: none;
+    /* Remove default outline */
 }
 
 button {
-    padding: 8px 12px;
+    padding: 10px 16px;
+    /* Increased button size */
     border: none;
     background-color: #007bff;
     color: white;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
+    transition: background 0.3s ease;
+    /* Smooth transition */
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-/* Playlists section */
+/* Playlists Section */
 .playlists-container {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    flex-wrap: wrap;
+    /* Allow wrapping on small screens */
 }
 
 .playlist-section {
     width: 45%;
-    text-align: left;
+    text-align: center;
 }
 
 .playlist-section h3 {
     font-size: 1.2rem;
+    /* Increased heading size */
     margin-bottom: 10px;
+    color: #007bff;
+    /* Heading color */
 }
 
 ul {
@@ -132,18 +163,24 @@ ul {
 }
 
 .song-item {
-    padding: 10px;
+    padding: 15px;
+    /* Increased padding */
     margin: 5px 0;
-    background-color: #f9f9f9;
+    background-color: #00276e;
     border-radius: 5px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Added shadow */
+    transition: background 0.3s ease;
+    /* Smooth transition */
 }
 
 .song-item:hover {
-    background-color: #eee;
+    background-color: #1f9df8;
+    /* Light blue on hover */
 }
 
 .song-item.active {
@@ -159,13 +196,91 @@ ul {
 
 .song-item .fa-edit:hover {
     color: #ffa500;
+    /* Hover color for edit */
 }
 
 .song-item .fa-trash:hover {
     color: red;
+    /* Hover color for trash */
 }
 
 /* Drag-and-drop highlight */
 .song-item.drop-line {
     border-top: 2px solid #007bff;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .music-player {
+        padding: 15px;
+        /* Adjust padding on mobile */
+    }
+
+    .controls {
+        font-size: 1.5rem;
+        /* Smaller controls for mobile */
+    }
+
+    .playlists-container {
+        flex-direction: column;
+        /* Stack playlists vertically */
+        align-items: center;
+        /* Center align */
+    }
+
+    .playlist-section {
+        width: 100%;
+        /* Full width on mobile */
+        margin-bottom: 20px;
+        /* Space between sections */
+    }
+}
+
+@media (max-width: 480px) {
+    .add-song input {
+        font-size: 0.9rem;
+        /* Smaller input on mobile */
+    }
+
+    button {
+        font-size: 0.9rem;
+        /* Smaller button on mobile */
+    }
+
+    .controls {
+        gap: 10px;
+        /* Reduce gap on mobile */
+    }
+
+    .song-item {
+        font-size: 0.9rem;
+        /* Smaller font size for song items */
+    }
+
+    /* MusicPlayer.css */
+
+    .song-item {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .song-item.active {
+        /* Glow effect */
+        box-shadow: 0 0 20px rgba(255, 165, 0, 0.8);
+        /* Adjust the color and intensity */
+        background-color: rgba(255, 165, 0, 0.1);
+        /* Optional: a subtle background color */
+    }
+
+    .drop-line {
+        height: 2px;
+        background: #ff5722;
+        /* Color for the drop line */
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -5px;
+        /* Position above the item */
+    }
+
 }
