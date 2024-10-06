@@ -65,6 +65,12 @@ body {
     }
 }
 
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 /* Base Styles */
 .App {
@@ -326,8 +332,9 @@ ul {
 
 .icon-container {
     display: flex;
+    font-size: 20px;
     /* Align icons in a row */
-    gap: 10px;
+    gap: 25px;
     /* Space between icons */
 }
 
@@ -340,7 +347,8 @@ ul {
 
 .icon:hover {
     color: #e20087;
-    /* Change icon color on hover */
+    transform: scale(1.4);
+    /* Slightly scale up on hover */
 }
 
 /* Optional: Add some styling for the drop line */
@@ -355,12 +363,23 @@ ul {
     /* Center text in the drop line */
 }
 
+@media (max-width: 1250px) {
+    .music-player {
+        padding: 15px;
+        /* Adjust padding on mobile */
+        width: 80%;
+        /* Take full width on mobile */
+        border-radius: 10px;
+        /* Slightly less rounded corners */
+    }
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
     .music-player {
         padding: 15px;
         /* Adjust padding on mobile */
-        width: 90%;
+        width: 80%;
         /* Take full width on mobile */
         border-radius: 10px;
         /* Slightly less rounded corners */

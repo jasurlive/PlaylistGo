@@ -7,7 +7,7 @@ import YTPlayer, { jasursList } from './YT'; // Import YouTube player and playli
 
 const Player = () => {
     const [isPlaying, setIsPlaying] = useState(false);
-    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+    const [currentVideo, setCurrentVideo] = useState({ title: '', url: '' }); // Separate current video state
     const [isMiniPlayer, setIsMiniPlayer] = useState(false);
     const [customSongs, setCustomSongs] = useState([]);
     const [inputLink, setInputLink] = useState('');
@@ -48,17 +48,20 @@ const Player = () => {
     };
 
     const playNextVideo = () => {
-        setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoTracks.length);
+        const nextIndex = (videoTracks.indexOf(currentVideo) + 1) % videoTracks.length;
+        setCurrentVideo(videoTracks[nextIndex]);
         setIsPlaying(true);
     };
 
     const playPreviousVideo = () => {
-        setCurrentVideoIndex((prevIndex) => (prevIndex === 0 ? videoTracks.length - 1 : prevIndex - 1));
+        const prevIndex = (videoTracks.indexOf(currentVideo) - 1 + videoTracks.length) % videoTracks.length;
+        setCurrentVideo(videoTracks[prevIndex]);
         setIsPlaying(true);
     };
 
     const playSelectedVideo = (index) => {
-        setCurrentVideoIndex(index);
+        const selectedVideo = videoTracks[index];
+        setCurrentVideo(selectedVideo);
         setIsPlaying(true);
     };
 
@@ -85,7 +88,21 @@ const Player = () => {
     };
 
     const deleteSong = (index) => {
-        setCustomSongs((prevSongs) => prevSongs.filter((_, i) => i !== index));
+        setCustomSongs((prevSongs) => {
+            const updatedSongs = prevSongs.filter((_, i) => i !== index);
+
+            // Adjust currentVideo if the deleted song was the currently playing video
+            if (currentVideo.url === updatedSongs[index]?.url) {
+                if (updatedSongs.length > 0) {
+                    setCurrentVideo(updatedSongs[0]); // Change to the first song if available
+                } else {
+                    setCurrentVideo({ title: '', url: '' }); // Reset if no songs left
+                    setIsPlaying(false); // Stop playing if there are no songs left
+                }
+            }
+
+            return updatedSongs;
+        });
     };
 
     const editSong = (index) => {
@@ -130,16 +147,21 @@ const Player = () => {
 
     return (
         <div className="music-player dark-mode" id="player-container"> {/* Only dark mode class */}
-            <h2>Now playing: {videoTracks[currentVideoIndex].title}</h2>
+            <h2>Now playing: {currentVideo.title}</h2>
             {/* Use the YTPlayer component */}
             <div className="youtube-container">
                 <div className="video-wrapper">
-                    <YTPlayer
-                        currentVideoIndex={currentVideoIndex}
-                        videoTracks={videoTracks}
-                        onVideoEnd={onVideoEnd}
-                        playerRef={playerRef}
-                    />
+                    {currentVideo.url ? ( // Check if currentVideo.url is defined
+                        <YTPlayer
+                            currentVideoIndex={videoTracks.indexOf(currentVideo)}
+                            videoTracks={videoTracks}
+                            onVideoEnd={onVideoEnd}
+                            playerRef={playerRef}
+                            autoplay={isPlaying} // Pass isPlaying to control autoplay
+                        />
+                    ) : (
+                        <div class="text"><p>No video is currently playing. Give it a vibe with your music! 🎧😁</p></div> // Optional: show a message if no video is playing
+                    )}
                 </div>
             </div>
             <div className="controls">
@@ -177,7 +199,7 @@ const Player = () => {
                     <Playlist
                         customSongs={customSongs}
                         jasursList={jasursList}
-                        currentVideoIndex={currentVideoIndex}
+                        currentVideoIndex={videoTracks.indexOf(currentVideo)}
                         playSelectedVideo={playSelectedVideo}
                         deleteSong={deleteSong}
                         editSong={editSong}

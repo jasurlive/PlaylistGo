@@ -1,5 +1,5 @@
 // src/components/YT.js
-import React from 'react'; // Remove useRef from the import list
+import React from 'react';
 import YouTube from 'react-youtube';
 
 // Default playlist (Jasur's list)
@@ -12,16 +12,13 @@ export const jasursList = [
     { title: 'Ava Max - So Am I', url: 'https://youtu.be/SxGLPVvNjvY?si=tVcL1slKTd_OOY3N' },
     { title: 'Arcade', url: 'https://youtu.be/Qau6mObfSGM?si=RsrcZ0VUCOHaEwE4' },
     { title: 'Femme like you', url: 'https://youtu.be/8qfM7offtiA?si=L-0D4vQeApvABOh_' },
-
-    // { title: 'NAME', url: 'LINK' },
 ];
 
 // YouTube player options with 16:9 ratio
 const opts = {
-
     playerVars: {
-        autoplay: 1,              // Automatically start playing the video
-        controls: 0,              // Hide all player controls
+        autoplay: 0,              // Disable autoplay by default
+        controls: 1,              // Show player controls
         modestbranding: 1,        // Minimize YouTube branding
         rel: 0,
     },
@@ -36,11 +33,22 @@ export const extractVideoId = (url) => {
 };
 
 // YTPlayer component
-const YTPlayer = ({ currentVideoIndex, videoTracks, onVideoEnd, playerRef }) => {
+const YTPlayer = ({ currentVideoIndex, videoTracks, onVideoEnd, playerRef, autoplay }) => {
+    // Handle out-of-bounds index gracefully
+    const videoId = videoTracks[currentVideoIndex]?.url ? extractVideoId(videoTracks[currentVideoIndex].url) : '';
+
+    const playerOpts = {
+        ...opts,
+        playerVars: {
+            ...opts.playerVars,
+            autoplay: autoplay ? 1 : 0, // Set autoplay based on the prop
+        },
+    };
+
     return (
         <YouTube
-            videoId={extractVideoId(videoTracks[currentVideoIndex].url)}
-            opts={opts}
+            videoId={videoId}
+            opts={playerOpts}
             onEnd={onVideoEnd}
             ref={playerRef}
         />
