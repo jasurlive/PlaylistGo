@@ -1,7 +1,7 @@
 // src/components/Player.js
 import React, { useState, useRef, useEffect } from 'react';
 import YouTube from 'react-youtube';
-import { FaPlay, FaPause, FaForward, FaBackward, FaArrowsAlt } from 'react-icons/fa';
+import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaExpand, FaMinus, FaSquare } from 'react-icons/fa'; // Using Font Awesome icons
 import Playlist from './Playlist'; // Import Playlist component
 import './MusicPlayer.css'; // Import the custom CSS
 
@@ -53,8 +53,8 @@ const Player = () => {
     };
 
     const opts = {
-        height: '225',
-        width: '400',
+        height: '200',
+        width: '300',
         playerVars: {
             autoplay: 1,
         },
@@ -167,12 +167,21 @@ const Player = () => {
                 ref={playerRef}
             />
             <div className="controls">
-                <FaBackward onClick={playPreviousVideo} />
-                {isPlaying ? <FaPause onClick={onPlayPauseToggle} /> : <FaPlay onClick={onPlayPauseToggle} />}
-                <FaForward onClick={playNextVideo} />
-                <FaArrowsAlt onClick={toggleFullScreen} />
+                <FaBackward onClick={playPreviousVideo} style={{ cursor: 'pointer' }} />
+                {isPlaying ? (
+                    <FaPauseCircle onClick={onPlayPauseToggle} style={{ cursor: 'pointer' }} />
+                ) : (
+                    <FaPlayCircle onClick={onPlayPauseToggle} style={{ cursor: 'pointer' }} />
+                )}
+                <FaForward onClick={playNextVideo} style={{ cursor: 'pointer' }} />
+                <FaExpand onClick={toggleFullScreen} style={{ cursor: 'pointer' }} />
+                <div onClick={toggleMiniPlayer} style={{ cursor: 'pointer' }}>
+                    {isMiniPlayer ? <FaSquare /> : <FaMinus />}
+                </div>
             </div>
-            <button onClick={toggleMiniPlayer}>{isMiniPlayer ? '🟪' : '➖'}</button>
+
+
+
 
             {!isMiniPlayer && (
                 <div>

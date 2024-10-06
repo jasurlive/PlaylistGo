@@ -90,8 +90,19 @@ body {
     /* Increased gap for better spacing */
     font-size: 2rem;
     /* Increased control size */
-    cursor: pointer;
+
 }
+
+.controls>* {
+    transition: transform 0.2s;
+    /* Animation duration */
+}
+
+.controls>*:hover {
+    transform: scale(1.3);
+    /* Slightly enlarge the icon on hover */
+}
+
 
 .add-song {
     margin-top: 20px;
