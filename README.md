@@ -1,5 +1,8 @@
 # DJ Jasur Music Player
 
+![image](https://github.com/user-attachments/assets/71f6c6be-3515-4a9d-8df0-e6a8722c39f3)
+
+
 ![image](https://github.com/user-attachments/assets/3116ab61-2441-439c-a350-db33ea8b72b8)
 
 
