@@ -57,6 +57,17 @@ const Playlist = ({ customSongs, jasursList, currentVideoIndex, playSelectedVide
                                 draggable
                             >
                                 {track.title}
+                                <div className="icon-container"> {/* Wrapper for icons */}
+                                    <FaEdit
+                                        onClick={(e) => { e.stopPropagation(); editSong(index); }}
+                                        className="icon edit-icon"
+                                    />
+                                    <FaTrash
+                                        onClick={(e) => { e.stopPropagation(); deleteSong(index); }}
+                                        className="icon delete-icon"
+                                    />
+                                </div>
+                                {dropIndex === index && <div className="drop-line">Drop Here</div>}
                             </li>
                         ))}
                     </ul>
