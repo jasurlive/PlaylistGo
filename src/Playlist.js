@@ -8,7 +8,7 @@ const Playlist = ({ customSongs, jasursList, currentVideoIndex, playSelectedVide
         <div>
             <div className="playlists-container">
                 <div className="playlist-section">
-                    <h3>Your Playlist 🎧</h3>
+                    <h3>Your Playlist:</h3>
                     <ul>
                         {customSongs.map((track, index) => (
                             <li
@@ -44,7 +44,7 @@ const Playlist = ({ customSongs, jasursList, currentVideoIndex, playSelectedVide
                     </ul>
                 </div>
                 <div className="playlist-section">
-                    <h3>Jasur's Playlist 🎵🎶🎸</h3>
+                    <h3>Jasur's Playlist:</h3>
                     <ul>
                         {jasursList.map((track, index) => (
                             <li
