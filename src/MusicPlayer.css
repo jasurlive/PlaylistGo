@@ -183,7 +183,7 @@ body {
 }
 
 .music-player.dark-mode {
-    background-color: #282c34;
+    background-color: #282c34ac;
     /* Darker mode */
     color: #ffffff;
 }
@@ -194,10 +194,54 @@ body {
     color: #333;
 }
 
+#player-container:fullscreen {
+
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+#player-container:fullscreen {
+
+    background: linear-gradient(270deg,
+            rgba(51, 255, 204, 0.5),
+            /* Neon Orange */
+            rgba(51, 194, 255, 0.5),
+            /* Neon Yellow */
+            rgba(51, 255, 204, 0.5),
+            /* Neon Teal */
+            rgba(51, 204, 255, 0.5),
+            /* Neon Sky Blue */
+            rgba(255, 51, 204, 0.5),
+            /* Neon Magenta */
+            rgba(204, 51, 255, 0.5),
+            /* Neon Purple */
+            rgba(168, 51, 255, 0.5),
+            /* Neon Violet */
+            rgba(51, 51, 255, 0.5),
+            /* Neon Blue */
+            rgba(51, 170, 255, 0.5),
+            /* Neon Aqua */
+            rgba(51, 255, 201, 0.5),
+            /* Neon Green */
+            rgba(51, 221, 255, 0.5),
+            /* Neon Red-Orange */
+            rgba(255, 51, 161, 0.5),
+            /* Neon Pink */
+            rgba(51, 78, 255, 0.3)
+            /* Neon Golden Yellow */
+        );
+    background-size: 800% 800%;
+    /* Allows the gradient to stretch further */
+    animation: gradientAnimation 20s ease-in-out infinite;
+    /* Apply animation */
+
+}
+
 .controls {
     margin-top: 20px;
     display: flex;
     justify-content: center;
+    color: white;
     gap: 20px;
     /* Increased gap for better spacing */
     font-size: 2rem;
@@ -271,10 +315,12 @@ button:hover {
 }
 
 .playlist-section h3 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border: whitesmoke dashed 1px;
     /* Increased heading size */
     margin-bottom: 10px;
-    color: #007bff;
+    color: #ffffff;
     /* Heading color */
 }
 
