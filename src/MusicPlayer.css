@@ -371,10 +371,6 @@ ul {
     /* Hover color for trash */
 }
 
-/* Drag-and-drop highlight */
-.song-item.drop-line {
-    border-top: 2px solid #007bff;
-}
 
 .icon-container {
     display: flex;

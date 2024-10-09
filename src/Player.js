@@ -12,7 +12,8 @@ const Player = () => {
     const [customSongs, setCustomSongs] = useState([]);
     const [inputLink, setInputLink] = useState('');
     const [inputTitle, setInputTitle] = useState('');
-    const [dropIndex, setDropIndex] = useState(null); // To track where the song is being dropped
+    const [isEditing, setIsEditing] = useState(false);
+    const [editIndex, setEditIndex] = useState(-1); // To track which song is being edited
     const playerRef = useRef(null);
 
     // Combine custom songs with Jasur's list
@@ -80,7 +81,11 @@ const Player = () => {
 
     const addSong = () => {
         if (inputLink) {
-            const newSong = { title: inputTitle || 'Untitled', url: inputLink };
+            // Calculate the new song number based on the current length of customSongs
+            const newSongIndex = customSongs.length + 1;
+            // Set the new title to "Song #N" if no custom title is provided
+            const newSong = { title: inputTitle || `Song #${newSongIndex}`, url: inputLink };
+
             setCustomSongs((prevSongs) => [...prevSongs, newSong]);
             setInputLink(''); // Reset link input
             setInputTitle(''); // Reset title input
@@ -106,52 +111,30 @@ const Player = () => {
     };
 
     const editSong = (index) => {
-        const updatedTitle = prompt('Edit song title:', customSongs[index].title);
-        if (updatedTitle) {
-            setCustomSongs((prevSongs) => {
-                const updatedSongs = [...prevSongs];
-                updatedSongs[index].title = updatedTitle;
-                return updatedSongs;
-            });
-        }
+        setInputTitle(customSongs[index].title);
+        setInputLink(customSongs[index].url);
+        setEditIndex(index);
+        setIsEditing(true);
     };
 
-    const handleDragStart = (e, track) => {
-        e.dataTransfer.setData('text/plain', JSON.stringify(track));
-    };
-
-    const handleDragOver = (e, index) => {
-        e.preventDefault();
-        showDropLine(index); // Show drop line where the dragged item is hovering
-    };
-
-    const handleDrop = (e, index) => {
-        e.preventDefault();
-        const droppedSong = JSON.parse(e.dataTransfer.getData('text/plain'));
-
-        // Ensure that the song isn't already in the customSongs list
-        if (!customSongs.some((song) => song.url === droppedSong.url)) {
-            setCustomSongs((prevSongs) => {
-                const updatedSongs = [...prevSongs];
-                updatedSongs.splice(index, 0, droppedSong); // Insert dropped song at the correct index
-                return updatedSongs;
-            });
-        }
-        setDropIndex(null); // Reset dropIndex after dropping
-    };
-
-    // Show drop line at a specific index
-    const showDropLine = (index) => {
-        setDropIndex(index);
+    const updateSong = () => {
+        setCustomSongs((prevSongs) => {
+            const updatedSongs = [...prevSongs];
+            updatedSongs[editIndex] = { title: inputTitle, url: inputLink };
+            return updatedSongs;
+        });
+        setInputLink(''); // Reset link input
+        setInputTitle(''); // Reset title input
+        setIsEditing(false); // Reset editing state
+        setEditIndex(-1); // Reset edit index
     };
 
     return (
         <div className="music-player dark-mode" id="player-container"> {/* Only dark mode class */}
             <h2>Now playing: {currentVideo.title}</h2>
-            {/* Use the YTPlayer component */}
             <div className="youtube-container">
                 <div className="video-wrapper">
-                    {currentVideo.url ? ( // Check if currentVideo.url is defined
+                    {currentVideo.url ? (
                         <YTPlayer
                             currentVideoIndex={videoTracks.indexOf(currentVideo)}
                             videoTracks={videoTracks}
@@ -160,7 +143,7 @@ const Player = () => {
                             autoplay={isPlaying} // Pass isPlaying to control autoplay
                         />
                     ) : (
-                        <div class="text"><p>No video is currently playing. Give it a vibe with your music! 🎧😁</p></div> // Optional: show a message if no video is playing
+                        <div className="text"><p>No video is currently playing. Give it a vibe with your music! 🎧😁</p></div>
                     )}
                 </div>
             </div>
@@ -193,20 +176,20 @@ const Player = () => {
                             value={inputTitle}
                             onChange={(e) => setInputTitle(e.target.value)}
                         />
-                        <button onClick={addSong}>➕</button>
+                        <button onClick={isEditing ? updateSong : addSong}>
+                            {isEditing ? '✅ Update' : '🛒 Add'}
+                        </button>
                     </div>
-                    {/* Use the Playlist component */}
                     <Playlist
-                        customSongs={customSongs}
+                        customSongs={customSongs.map((song, index) => ({
+                            ...song,
+                            title: song.title || `Song #${index + 1}`, // Number songs
+                        }))}
                         jasursList={jasursList}
                         currentVideoIndex={videoTracks.indexOf(currentVideo)}
                         playSelectedVideo={playSelectedVideo}
                         deleteSong={deleteSong}
                         editSong={editSong}
-                        handleDragStart={handleDragStart}
-                        handleDragOver={handleDragOver}
-                        handleDrop={handleDrop}
-                        dropIndex={dropIndex}
                     />
                 </div>
             )}
