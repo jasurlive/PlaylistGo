@@ -25,6 +25,13 @@ const Player = () => {
         if (savedSongs) {
             setCustomSongs(savedSongs);
         }
+
+        // Select a random song from jasursList if no custom songs exist
+        if (savedSongs?.length === 0) {
+            const randomIndex = Math.floor(Math.random() * jasursList.length);
+            setCurrentVideo(jasursList[randomIndex]); // Set random song from jasursList
+            setIsPlaying(true); // Start playing immediately
+        }
     }, []);
 
     // Save custom songs to localStorage
