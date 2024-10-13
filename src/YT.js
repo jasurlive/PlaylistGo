@@ -4,14 +4,30 @@ import YouTube from 'react-youtube';
 
 // Default playlist (Jasur's list)
 export const jasursList = [
+
+    { title: 'Until I found you', url: 'https://youtu.be/oIKuyj2GQtY' },
     { title: 'Heart is on fire', url: 'https://youtu.be/kBqqlW6-99M?si=kXaaJTqhA4PaY6Gd' },
     { title: 'Irakliy - Ya s toboy(cover)', url: 'https://youtu.be/3WmdZOF5bKk?si=LcXY8Gohxxx4cZSA' },
     { title: 'Vetrom stat` (cover)', url: 'https://youtu.be/kkzEs0gdvZI?si=Z456wgKuJd0aE_PA' },
-    { title: 'Reamonn - Supergirl', url: 'https://youtu.be/ucI3IpuM-NQ?si=mH62PwU2B4_p1GFg' },
-    { title: 'Another Love', url: 'https://youtu.be/MwpMEbgC7DA?si=8HUQvzasZEq-4AZL' },
-    { title: 'Ava Max - So Am I', url: 'https://youtu.be/SxGLPVvNjvY?si=tVcL1slKTd_OOY3N' },
+    { title: 'Reamonn - Supergirl', url: 'https://youtu.be/ctmS5XX67Ek?si=NGZGPw0bcpfZciyi' },
+    { title: 'Another Love', url: 'https://youtu.be/Jkj36B1YuDU?si=Yku5tRPe7avRNr2R' },
+    { title: 'All the little lights', url: 'https://youtu.be/OkxVxox--Io?si=AE4wj_c_uqTWGrbB' },
     { title: 'Arcade', url: 'https://youtu.be/Qau6mObfSGM?si=RsrcZ0VUCOHaEwE4' },
-    { title: 'Femme like you', url: 'https://youtu.be/8qfM7offtiA?si=L-0D4vQeApvABOh_' },
+    { title: 'Burito - Po volnam', url: 'https://youtu.be/jqyJ4xW2gb0?si=VgrA4JKMWkeWDIA5' },
+    { title: 'To Be Free', url: 'https://youtu.be/hNd5pILkpSw?si=qiwZxiuS0yeiuOPs' },
+    { title: 'Castle of Glass', url: 'https://youtu.be/8Hr-IK8OdY0?si=72GHJaZfVtqeeAJa' },
+    { title: 'In the end (rmx)', url: 'https://youtu.be/WNeLUngb-Xg?si=V95nGOt0sMvhQG7c' },
+    { title: 'No Time To Die', url: 'https://youtu.be/GB_S2qFh5lU?si=XDH6CdXhqJq-g321' },
+    { title: 'Tired Of Being Sorry', url: 'https://youtu.be/gzFmctgW0s8?si=JfvG_0Sj-IdPWoBY' },
+    { title: 'Wonderful Life', url: 'https://youtu.be/qzn_6bXdgeE?si=BgnimyD5Frnn_-o-' },
+    { title: 'Shape of My Heart', url: 'https://youtu.be/pm3rDbXbZRI?si=7TxDuViBxhHGeZoU' },
+    { title: 'Today is a Good Day', url: 'https://youtu.be/qfv0j1FyjWw?si=djHeR7tPQQALeLoq' },
+
+
+
+
+    /* { title: 'NAME', url: 'LINK' }, */
+
 ];
 
 // YouTube player options with 16:9 ratio
