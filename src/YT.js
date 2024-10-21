@@ -5,8 +5,14 @@ import YouTube from 'react-youtube';
 // Default playlist (Jasur's list)
 export const jasursList = [
 
+    { title: 'Everything I Need', url: 'https://www.youtube.com/watch?v=9bCp7j3nC30' },
+    { title: 'Love the way you lie', url: 'https://youtu.be/h_-JFUci0BM?si=SHiuHs1NdIjpN0WP' },
+    { title: 'Moving Mountains', url: 'https://youtu.be/S_0r3hYg78o?si=Be6GShy7mgRcl9Ha' },
+    { title: 'Numb cover)', url: 'https://youtu.be/gHp-OjLOG5A?si=0abUDswbKz6rhQeX' },
     { title: 'Until I found you', url: 'https://youtu.be/oIKuyj2GQtY' },
     { title: 'Heart is on fire', url: 'https://youtu.be/kBqqlW6-99M?si=kXaaJTqhA4PaY6Gd' },
+    { title: 'Holes', url: 'https://youtu.be/DeFWClW7skQ?si=hkIGl-CTTw-FbnLz' },
+    { title: 'Survivors', url: 'https://www.youtube.com/watch?v=vN0gaXS8dQE' },
     { title: 'Irakliy - Ya s toboy(cover)', url: 'https://youtu.be/3WmdZOF5bKk?si=LcXY8Gohxxx4cZSA' },
     { title: 'Vetrom stat` (cover)', url: 'https://youtu.be/kkzEs0gdvZI?si=Z456wgKuJd0aE_PA' },
     { title: 'Reamonn - Supergirl', url: 'https://youtu.be/ctmS5XX67Ek?si=NGZGPw0bcpfZciyi' },
@@ -15,7 +21,9 @@ export const jasursList = [
     { title: 'Arcade', url: 'https://youtu.be/Qau6mObfSGM?si=RsrcZ0VUCOHaEwE4' },
     { title: 'Burito - Po volnam', url: 'https://youtu.be/jqyJ4xW2gb0?si=VgrA4JKMWkeWDIA5' },
     { title: 'To Be Free', url: 'https://youtu.be/hNd5pILkpSw?si=qiwZxiuS0yeiuOPs' },
-    { title: 'Castle of Glass', url: 'https://youtu.be/8Hr-IK8OdY0?si=72GHJaZfVtqeeAJa' },
+    { title: 'Castle of Glass', url: 'https://www.youtube.com/watch?v=PPkJeWPP2nM' },
+    { title: 'Ava Max - Alone', url: 'https://youtu.be/omvW1cI-3xg?si=zHiFadZaUUpddcgu' },
+    { title: 'Let Her Go (ft Ed Sheeran)', url: 'https://youtu.be/HTcL9WkB_wg?si=ILXw9EaPM4GJyx29' },
     { title: 'In the end (rmx)', url: 'https://youtu.be/WNeLUngb-Xg?si=V95nGOt0sMvhQG7c' },
     { title: 'No Time To Die', url: 'https://youtu.be/GB_S2qFh5lU?si=XDH6CdXhqJq-g321' },
     { title: 'Tired Of Being Sorry', url: 'https://youtu.be/gzFmctgW0s8?si=JfvG_0Sj-IdPWoBY' },
