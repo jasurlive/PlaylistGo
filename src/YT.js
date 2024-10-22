@@ -5,10 +5,12 @@ import YouTube from 'react-youtube';
 // Default playlist (Jasur's list)
 export const jasursList = [
 
+
+    { title: 'Lonely', url: 'https://youtu.be/M4hvSgnsnog?si=TtDhe_NUHM1NZaY9' },
     { title: 'Everything I Need', url: 'https://www.youtube.com/watch?v=9bCp7j3nC30' },
     { title: 'Love the way you lie', url: 'https://youtu.be/h_-JFUci0BM?si=SHiuHs1NdIjpN0WP' },
     { title: 'Moving Mountains', url: 'https://youtu.be/S_0r3hYg78o?si=Be6GShy7mgRcl9Ha' },
-    { title: 'Numb cover)', url: 'https://youtu.be/gHp-OjLOG5A?si=0abUDswbKz6rhQeX' },
+    { title: 'Numb (cover)', url: 'https://youtu.be/gHp-OjLOG5A?si=0abUDswbKz6rhQeX' },
     { title: 'Until I found you', url: 'https://youtu.be/oIKuyj2GQtY' },
     { title: 'Heart is on fire', url: 'https://youtu.be/kBqqlW6-99M?si=kXaaJTqhA4PaY6Gd' },
     { title: 'Holes', url: 'https://youtu.be/DeFWClW7skQ?si=hkIGl-CTTw-FbnLz' },
