@@ -112,6 +112,23 @@ body {
     }
 }
 
+.drag-icon {
+    cursor: grab;
+    /* Default cursor */
+    margin-right: 8px;
+    /* Space between the drag icon and the song title */
+    vertical-align: middle;
+    /* Align icon with text */
+}
+
+/* Change cursor on hover */
+.drag-icon:active {
+    cursor: grabbing;
+    /* Change cursor when hovering over the drag icon */
+}
+
+
+
 
 .youtube-container {
     display: flex;

@@ -197,6 +197,7 @@ const Player = () => {
                         playSelectedVideo={playSelectedVideo}
                         deleteSong={deleteSong}
                         editSong={editSong}
+                        setCustomSongs={setCustomSongs} // Pass setCustomSongs to enable reordering
                     />
                 </div>
             )}
