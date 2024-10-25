@@ -1,8 +1,9 @@
-// src/components/Playlist.js
+
 import React from 'react';
-import { useDrag, useDrop } from 'react-dnd'; // Import hooks for drag-and-drop
-import { FaTrash, FaEdit, FaGripVertical } from 'react-icons/fa'; // Import the grip icon for dragging
-import './MusicPlayer.css'; // Import the custom CSS
+import { useDrag, useDrop } from 'react-dnd';
+import { FaTrash, FaEdit, FaGripVertical } from 'react-icons/fa';
+import './MusicPlayer.css';
+import nowPlayingGif from './img/equal_small.gif';
 
 // Define an item type for drag-and-drop
 const ITEM_TYPE = 'SONG_ITEM';
@@ -32,7 +33,14 @@ const SongItem = ({ track, index, moveSong, playSelectedVideo, deleteSong, editS
             onClick={() => playSelectedVideo(index)}
         >
             <FaGripVertical className="drag-icon" /> {/* Drag icon */}
-            {track.title}{' '}
+            {track.title}
+            {currentVideoIndex === index && ( // Check if the song is the current one playing
+                <img
+                    src={nowPlayingGif}
+                    alt="Now Playing"
+                    className="now-playing-gif" // Add the GIF if the song is currently playing
+                />
+            )}
             <div className="icon-container"> {/* Wrapper for icons */}
                 <FaEdit
                     onClick={(e) => { e.stopPropagation(); editSong(index); }}
@@ -63,16 +71,17 @@ const Playlist = ({ customSongs, jasursList, currentVideoIndex, playSelectedVide
                     <h3>Your Playlist:</h3>
                     <ul>
                         {customSongs.map((track, index) => (
-                            <SongItem
-                                key={index}
-                                track={track}
-                                index={index}
-                                moveSong={moveSong}
-                                playSelectedVideo={playSelectedVideo}
-                                deleteSong={deleteSong}
-                                editSong={editSong}
-                                currentVideoIndex={currentVideoIndex}
-                            />
+                            <li key={index}>
+                                <SongItem
+                                    track={track}
+                                    index={index}
+                                    moveSong={moveSong}
+                                    playSelectedVideo={playSelectedVideo}
+                                    deleteSong={deleteSong}
+                                    editSong={editSong}
+                                    currentVideoIndex={currentVideoIndex}
+                                />
+                            </li>
                         ))}
                     </ul>
                 </div>
@@ -86,6 +95,13 @@ const Playlist = ({ customSongs, jasursList, currentVideoIndex, playSelectedVide
                                 onClick={() => playSelectedVideo(customSongs.length + index)}
                             >
                                 {track.title}
+                                {currentVideoIndex === customSongs.length + index && ( // Add the GIF to currently playing song in random playlist
+                                    <img
+                                        src={nowPlayingGif}
+                                        alt="Now Playing"
+                                        className="now-playing-gif" // Use same GIF as custom playlist
+                                    />
+                                )}
                                 <div className="icon-container"> {/* Wrapper for icons */}
                                     {/* Icons can be added if needed */}
                                 </div>

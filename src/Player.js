@@ -3,7 +3,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaExpand, FaMinus, FaSquare } from 'react-icons/fa'; // Font Awesome icons
 import Playlist from './Playlist'; // Playlist component
 import './MusicPlayer.css'; // Custom CSS
-import YTPlayer, { jasursList } from './YT'; // Import YouTube player and playlist
+import YTPlayer, { jasursList } from './YT';
+import nowPlayingGif from './img/equal_big.gif';
 
 const Player = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -138,7 +139,17 @@ const Player = () => {
 
     return (
         <div className="music-player dark-mode" id="player-container"> {/* Only dark mode class */}
-            <h2>Now playing: {currentVideo.title}</h2>
+            <h2>
+                {isPlaying && (
+                    <img
+                        src={nowPlayingGif}
+                        alt="Now Playing"
+                        className="now-playing-big-gif" // Add the GIF if the song is currently playing
+                    />
+                )}
+                Now playing: {currentVideo.title}
+            </h2>
+
             <div className="youtube-container">
                 <div className="video-wrapper">
                     {currentVideo.url ? (
