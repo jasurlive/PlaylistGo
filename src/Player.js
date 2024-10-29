@@ -137,6 +137,13 @@ const Player = () => {
         setEditIndex(-1); // Reset edit index
     };
 
+    // New function to handle keydown events (Enter key)
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            isEditing ? updateSong() : addSong();
+        }
+    };
+
     return (
         <div className="music-player dark-mode" id="player-container"> {/* Only dark mode class */}
             <h2>
@@ -187,12 +194,14 @@ const Player = () => {
                             placeholder="YouTube Link"
                             value={inputLink}
                             onChange={(e) => setInputLink(e.target.value)}
+                            onKeyDown={handleKeyDown} // Listen for the Enter key
                         />
                         <input
                             type="text"
                             placeholder="Song Title (optional)"
                             value={inputTitle}
                             onChange={(e) => setInputTitle(e.target.value)}
+                            onKeyDown={handleKeyDown} // Listen for the Enter key
                         />
                         <button onClick={isEditing ? updateSong : addSong}>
                             {isEditing ? '✅ Update' : '🛒 Add'}
