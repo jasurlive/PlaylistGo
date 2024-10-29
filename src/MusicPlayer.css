@@ -225,30 +225,16 @@ body {
             rgba(51, 255, 204, 0.5),
             /* Neon Teal */
             rgba(51, 204, 255, 0.5),
-            /* Neon Sky Blue */
-            rgba(255, 51, 204, 0.5),
-            /* Neon Magenta */
-            rgba(204, 51, 255, 0.5),
             /* Neon Purple */
-            rgba(168, 51, 255, 0.5),
-            /* Neon Violet */
-            rgba(51, 51, 255, 0.5),
+            rgba(185, 104, 247, 0.716),
             /* Neon Blue */
             rgba(51, 170, 255, 0.5),
             /* Neon Aqua */
             rgba(51, 255, 201, 0.5),
             /* Neon Green */
-            rgba(51, 221, 255, 0.5),
-            /* Neon Red-Orange */
-
-            /* Neon Pink */
-            rgba(51, 78, 255, 0.5)
-            /* Neon Golden Yellow */
-        );
+            rgba(51, 221, 255, 0.5));
     background-size: 800% 800%;
-    /* Allows the gradient to stretch further */
     animation: gradientAnimation 20s ease-in-out infinite;
-    /* Apply animation */
 
 }
 
