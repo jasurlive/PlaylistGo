@@ -127,6 +127,16 @@ body {
     /* Change cursor when hovering over the drag icon */
 }
 
+.shuffle-button {
+    color: #ffffff;
+    /* Darker when inactive */
+    transition: color 0.3s ease;
+}
+
+.shuffle-button.active {
+    color: #f1ff73;
+    /* Bright yellow when active */
+}
 
 
 

@@ -1,6 +1,7 @@
 // src/components/Player.js
 import React, { useState, useRef, useEffect } from 'react';
-import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaExpand, FaMinus, FaSquare } from 'react-icons/fa'; // Font Awesome icons
+import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaExpand, FaMinus, FaSquare, FaRandom } from 'react-icons/fa';
+
 import Playlist from './Playlist'; // Playlist component
 import './MusicPlayer.css'; // Custom CSS
 import YTPlayer, { jasursList } from './YT';
@@ -15,6 +16,7 @@ const Player = () => {
     const [inputTitle, setInputTitle] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [editIndex, setEditIndex] = useState(-1); // To track which song is being edited
+    const [isShuffle, setIsShuffle] = useState(false); // Shuffle mode state
     const playerRef = useRef(null);
 
     // Combine custom songs with Jasur's list
@@ -57,7 +59,13 @@ const Player = () => {
     };
 
     const playNextVideo = () => {
-        const nextIndex = (videoTracks.indexOf(currentVideo) + 1) % videoTracks.length;
+        let nextIndex;
+        if (isShuffle) {
+            // Get a random index different from the current video
+            nextIndex = Math.floor(Math.random() * videoTracks.length);
+        } else {
+            nextIndex = (videoTracks.indexOf(currentVideo) + 1) % videoTracks.length;
+        }
         setCurrentVideo(videoTracks[nextIndex]);
         setIsPlaying(true);
     };
@@ -89,14 +97,12 @@ const Player = () => {
 
     const addSong = () => {
         if (inputLink) {
-            // Calculate the new song number based on the current length of customSongs
             const newSongIndex = customSongs.length + 1;
-            // Set the new title to "Song #N" if no custom title is provided
             const newSong = { title: inputTitle || `Song #${newSongIndex}`, url: inputLink };
 
             setCustomSongs((prevSongs) => [...prevSongs, newSong]);
-            setInputLink(''); // Reset link input
-            setInputTitle(''); // Reset title input
+            setInputLink('');
+            setInputTitle('');
         }
     };
 
@@ -104,13 +110,12 @@ const Player = () => {
         setCustomSongs((prevSongs) => {
             const updatedSongs = prevSongs.filter((_, i) => i !== index);
 
-            // Adjust currentVideo if the deleted song was the currently playing video
             if (currentVideo.url === updatedSongs[index]?.url) {
                 if (updatedSongs.length > 0) {
-                    setCurrentVideo(updatedSongs[0]); // Change to the first song if available
+                    setCurrentVideo(updatedSongs[0]);
                 } else {
-                    setCurrentVideo({ title: '', url: '' }); // Reset if no songs left
-                    setIsPlaying(false); // Stop playing if there are no songs left
+                    setCurrentVideo({ title: '', url: '' });
+                    setIsPlaying(false);
                 }
             }
 
@@ -131,13 +136,12 @@ const Player = () => {
             updatedSongs[editIndex] = { title: inputTitle, url: inputLink };
             return updatedSongs;
         });
-        setInputLink(''); // Reset link input
-        setInputTitle(''); // Reset title input
-        setIsEditing(false); // Reset editing state
-        setEditIndex(-1); // Reset edit index
+        setInputLink('');
+        setInputTitle('');
+        setIsEditing(false);
+        setEditIndex(-1);
     };
 
-    // New function to handle keydown events (Enter key)
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
             isEditing ? updateSong() : addSong();
@@ -151,7 +155,7 @@ const Player = () => {
                     <img
                         src={nowPlayingGif}
                         alt="Now Playing"
-                        className="now-playing-big-gif" // Add the GIF if the song is currently playing
+                        className="now-playing-big-gif"
                     />
                 )}
                 Now playing: {currentVideo.title}
@@ -165,7 +169,7 @@ const Player = () => {
                             videoTracks={videoTracks}
                             onVideoEnd={onVideoEnd}
                             playerRef={playerRef}
-                            autoplay={isPlaying} // Pass isPlaying to control autoplay
+                            autoplay={isPlaying}
                         />
                     ) : (
                         <div className="text"><p>No video is currently playing. Give it a vibe with your music! 🎧😁</p></div>
@@ -184,6 +188,9 @@ const Player = () => {
                 <div onClick={toggleMiniPlayer} style={{ cursor: 'pointer' }}>
                     {isMiniPlayer ? <FaSquare /> : <FaMinus />}
                 </div>
+                <div className={`shuffle-button ${isShuffle ? 'active' : ''}`} onClick={() => setIsShuffle(!isShuffle)} style={{ cursor: 'pointer' }}>
+                    <FaRandom />
+                </div>
             </div>
 
             {!isMiniPlayer && (
@@ -194,14 +201,14 @@ const Player = () => {
                             placeholder="YouTube Link"
                             value={inputLink}
                             onChange={(e) => setInputLink(e.target.value)}
-                            onKeyDown={handleKeyDown} // Listen for the Enter key
+                            onKeyDown={handleKeyDown}
                         />
                         <input
                             type="text"
                             placeholder="Song Title (optional)"
                             value={inputTitle}
                             onChange={(e) => setInputTitle(e.target.value)}
-                            onKeyDown={handleKeyDown} // Listen for the Enter key
+                            onKeyDown={handleKeyDown}
                         />
                         <button onClick={isEditing ? updateSong : addSong}>
                             {isEditing ? '✅ Update' : '🛒 Add'}
