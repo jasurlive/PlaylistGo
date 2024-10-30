@@ -128,7 +128,7 @@ body {
 }
 
 .shuffle-button {
-    color: #ffffff;
+    color: #c3c3c3;
     /* Darker when inactive */
     transition: color 0.3s ease;
 }
@@ -139,6 +139,128 @@ body {
 }
 
 
+/* EDIT HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE */
+
+/* src/MusicPlayer.css */
+
+/* Container for the search input */
+.search-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Transparent white background */
+    /* Light background for consistency */
+    border-radius: 8px;
+    /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+    /* Bright shadow effect */
+    transition: background-color 0.3s ease;
+    /* Transition effect for hover */
+}
+
+.search-container:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* Slightly darker on hover */
+}
+
+
+/* Button for searching */
+.search-container button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    /* Rounded corners */
+    background-color: rgba(40, 167, 69, 0.9);
+    /* Bright green button color */
+    /* Slightly transparent green */
+    color: white;
+    /* White text */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    font-size: 16px;
+    /* Larger text */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Transition effects */
+}
+
+.search-container button:hover {
+    background-color: rgba(40, 167, 69, 1);
+    /* Solid green on hover */
+    transform: scale(1.05);
+    /* Slightly enlarge button on hover */
+}
+
+/* Style for search results */
+.search-results {
+    margin-top: 10px;
+    /* Space above results */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Transparent white for results */
+    /* Light background for results */
+    border-radius: 8px;
+    /* Rounded corners */
+    max-height: 200px;
+    /* Limit height */
+    overflow-y: auto;
+    /* Scrollable results */
+    padding: 10px;
+    /* Padding inside results container */
+    transition: background-color 0.3s ease;
+    /* Transition effect */
+}
+
+.search-results:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* Slightly darker on hover */
+}
+
+/* Individual result items */
+.search-result-item {
+    padding: 10px;
+    /* Padding around each result */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    /* Separator line */
+    /* Bright separator line */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.2s, transform 0.2s;
+    /* Transition effect */
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+    /* Remove border from last item */
+}
+
+.search-result-item:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    /* Highlight on hover */
+    transform: translateY(-2px);
+    /* Slight lift effect on hover */
+}
+
+/* Styling for the empty state */
+.empty-search {
+    color: #fff;
+    /* White text */
+    /* Bright color for empty state */
+    text-align: center;
+    /* Centered text */
+    padding: 20px;
+    /* Padding around the empty state */
+    transition: color 0.3s ease;
+    /* Transition for color */
+}
+
+.empty-search:hover {
+    color: rgba(255, 255, 255, 0.8);
+    /* Slightly lighter on hover */
+}
+
+
+/*                                                                     END */
 
 .youtube-container {
     display: flex;
@@ -277,6 +399,7 @@ body {
 }
 
 .add-song input {
+    width: 40%;
     padding: 10px;
     /* Increased padding */
     font-size: 1rem;
@@ -381,7 +504,7 @@ h2 {
 }
 
 .song-item:hover {
-    background-color: #1f9df8;
+    background-color: #00b988;
     /* Light blue on hover */
 }
 
@@ -392,7 +515,7 @@ h2 {
 
 .song-item .fa-edit,
 .song-item .fa-trash {
-    margin-left: 10px;
+    margin-left: 20px;
     cursor: pointer;
 }
 

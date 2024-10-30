@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+// eslint-disable-next-line
 import { FaTrash, FaEdit, FaGripVertical } from 'react-icons/fa';
 import './MusicPlayer.css';
 import nowPlayingGif from './img/equal_small.gif';
@@ -43,10 +44,10 @@ const SongItem = ({
                 />
             )}
             <div className="icon-container"> {/* Wrapper for icons */}
-                <FaEdit
+                {/* <FaEdit
                     onClick={(e) => { e.stopPropagation(); editSong(index); }}
                     className="icon edit-icon"
-                />
+                /> */}
                 <FaTrash
                     onClick={(e) => { e.stopPropagation(); deleteSong(index); }}
                     className="icon delete-icon"
