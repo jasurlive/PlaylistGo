@@ -170,7 +170,7 @@ const Player = () => {
 
         const API_KEY = 'AIzaSyDmXg_MlBEvUb3oAtMpj-fi4Fet80b21fM'; // Replace with your YouTube API key
         try {
-            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(searchQuery)}&type=video&key=${API_KEY}`);
+            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(searchQuery)}&type=video&maxResults=50&key=${API_KEY}`); // Set maxResults to a default value
             const data = await response.json();
 
             if (Array.isArray(data.items)) {
@@ -189,6 +189,7 @@ const Player = () => {
             setSearchResults([]);
         }
     };
+
 
     // Function to clear search input and results when input is focused
     const clearSearch = () => {
@@ -252,10 +253,11 @@ const Player = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             onFocus={clearSearch} // Clear input and results on focus
-                            onKeyDown={(e) => e.key === 'Enter' && searchYouTube()}
+                            onKeyDown={(e) => e.key === 'Enter' && searchYouTube()} // Trigger search on Enter key
                         />
                         <button onClick={searchYouTube}>🔍 Search</button>
                     </div>
+
 
                     {/* Display Search Results */}
                     {searchResults.length > 0 && (
