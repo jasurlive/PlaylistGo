@@ -586,12 +586,11 @@ h2 {
         /* Slightly less rounded corners */
     }
 
-    .add-song {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        justify-content: center;
+    .add-song input {
+        font-size: 0.9rem;
+        /* Smaller input on mobile */
+        width: 100%;
+        /* Full width */
     }
 
     .controls {
