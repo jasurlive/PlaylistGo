@@ -1,11 +1,13 @@
 // src/components/Player.js
 import React, { useState, useRef, useEffect } from 'react';
-import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaExpand, FaMinus, FaSquare, FaRandom, FaPlus, FaCheckCircle } from 'react-icons/fa';
+import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaExpand, FaMinus, FaSquare, FaRandom, FaPlus, FaCheckCircle, FaTimes } from 'react-icons/fa';
 
-import Playlist from './Playlist'; // Playlist component
-import './MusicPlayer.css'; // Custom CSS
+import Playlist from './Playlist';
+import './MusicPlayer.css';
 import YTPlayer, { jasursList } from './YT';
 import nowPlayingGif from './img/equal_big.gif';
+import Shortcuts from './Shortcuts';
+
 
 const Player = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -45,6 +47,24 @@ const Player = () => {
     useEffect(() => {
         localStorage.setItem('customSongs', JSON.stringify(customSongs));
     }, [customSongs]);
+
+
+
+    const resultsRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (resultsRef.current && !resultsRef.current.contains(event.target)) {
+                clearSearch(); // Clear the search query and results
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
 
     // Play and Pause toggle
     const onPlayPauseToggle = () => {
@@ -187,7 +207,7 @@ const Player = () => {
     const searchYouTube = async () => {
         if (!searchQuery) return;
 
-        const API_KEY = 'AIzaSyDmXg_MlBEvUb3oAtMpj-fi4Fet80b21fM'; // Replace with your YouTube API key
+        const API_KEY = 'AIzaSyDmXg_MlBEvUb3oAtMpj-fi4Fet80b21fM';
         try {
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(searchQuery)}&type=video&maxResults=50&key=${API_KEY}`); // Set maxResults to a default value
             const data = await response.json();
@@ -214,8 +234,26 @@ const Player = () => {
         setSearchResults([]);
     };
 
+    const closeSearchResults = () => {
+        clearSearch();
+    };
+
     return (
         <div className="music-player dark-mode" id="player-container">
+
+            {/* Shortcuts component to enable keyboard shortcuts */}
+            <Shortcuts
+                onSearchFocus={() => document.querySelector('input[type="text"]').focus()}
+                onPlayPauseToggle={onPlayPauseToggle}
+                onPlayPrevious={playPreviousVideo}
+                onPlayNext={playNextVideo}
+                onToggleShuffle={() => {
+                    setIsShuffle(!isShuffle);
+                    if (!isShuffle) setPlayedSongs(new Set()); // Reset played songs when shuffle mode is enabled
+                }}
+                onToggleFullScreen={toggleFullScreen}
+            />
+
             <h2>
                 {isPlaying && (
                     <img
@@ -244,6 +282,7 @@ const Player = () => {
             </div>
 
             <div className="controls">
+                {/* Control icons */}
                 <FaBackward onClick={playPreviousVideo} style={{ cursor: 'pointer' }} />
                 {isPlaying ? (
                     <FaPauseCircle onClick={onPlayPauseToggle} style={{ cursor: 'pointer' }} />
@@ -269,25 +308,31 @@ const Player = () => {
                     <div className="add-song">
                         <input
                             type="text"
-                            placeholder="Search for a song..."
+                            placeholder="Search for a song... (S)"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             onFocus={clearSearch} // Clear input and results on focus
-                            onKeyDown={(e) => e.key === 'Enter' && searchYouTube()} // Trigger search on Enter key
+                            onKeyDown={(e) => e.key === 'Enter' && searchYouTube()}
                         />
                         <button onClick={searchYouTube}>🔍 Search</button>
                     </div>
 
+
+
                     {/* Display Search Results */}
                     {searchResults.length > 0 && (
-                        <div className="search-results">
+                        <div className="search-results" ref={resultsRef}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <h3>Search Results</h3>
+                                <FaTimes onClick={closeSearchResults} style={{ cursor: 'pointer', color: 'red' }} /> {/* Close icon */}
+                            </div>
                             {searchResults.map((result, index) => (
                                 <div
                                     key={index}
                                     className="search-result-item"
                                     style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
                                 >
-                                    <img src={result.thumbnail} alt={result.title} style={{ width: '50px', height: 'auto', marginRight: '10px' }} />
+                                    <img src={result.thumbnail} alt={result.title} style={{ width: '100px', height: 'auto', marginRight: '10px' }} />
                                     <span>{result.title}</span>
                                     <button
                                         onClick={() => addSongFromSearch(result)}
