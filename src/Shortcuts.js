@@ -11,35 +11,37 @@ const Shortcuts = ({
 }) => {
     useEffect(() => {
         const handleKeydown = (event) => {
-            // Check if the active element is not the input field
+            // Check if the active element is an input field
             const isInputFocused = document.activeElement.tagName === 'INPUT';
 
-            if (event.key === 's') {
-                // Only prevent the default behavior if the input isn't focused
-                if (!isInputFocused) {
+            // If the input is focused, do not execute any shortcuts
+            if (isInputFocused) {
+                return; // Exit the function early
+            }
+
+            // Shortcuts functionality
+            switch (event.key) {
+                case 's':
                     event.preventDefault(); // Prevent "s" from appearing in the input field
                     onSearchFocus(); // Focus the search input only if it's not already focused
-                }
-            } else {
-                switch (event.key) {
-                    case 'k':
-                        onPlayPauseToggle();
-                        break;
-                    case '4':
-                        onPlayPrevious();
-                        break;
-                    case '6':
-                        onPlayNext();
-                        break;
-                    case 'q':
-                        onToggleShuffle();
-                        break;
-                    case 'f':
-                        onToggleFullScreen();
-                        break;
-                    default:
-                        break;
-                }
+                    break;
+                case 'k':
+                    onPlayPauseToggle();
+                    break;
+                case 'ArrowLeft': // Use ArrowLeft for Play Previous
+                    onPlayPrevious();
+                    break;
+                case 'ArrowRight': // Use ArrowRight for Play Next
+                    onPlayNext();
+                    break;
+                case 'q':
+                    onToggleShuffle();
+                    break;
+                case 'f':
+                    onToggleFullScreen();
+                    break;
+                default:
+                    break;
             }
         };
 
