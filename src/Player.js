@@ -20,6 +20,7 @@ const Player = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [addedSongs, setAddedSongs] = useState(new Set()); // Track added songs
+    const [playedSongs, setPlayedSongs] = useState(new Set()); // Track played songs in shuffle mode
     const playerRef = useRef(null);
 
     // Combine custom songs with Jasur's list
@@ -63,11 +64,23 @@ const Player = () => {
 
     const playNextVideo = () => {
         let nextIndex;
+
         if (isShuffle) {
-            nextIndex = Math.floor(Math.random() * videoTracks.length);
+            // Find an unplayed song for shuffle
+            const unplayedSongs = videoTracks.filter((_, i) => !playedSongs.has(i));
+            if (unplayedSongs.length === 0) {
+                // All songs have been played at least once
+                setIsPlaying(false);
+                setPlayedSongs(new Set()); // Reset the played songs set
+                return; // Exit function to stop playback
+            }
+            nextIndex = videoTracks.indexOf(unplayedSongs[Math.floor(Math.random() * unplayedSongs.length)]);
+            setPlayedSongs((prev) => new Set(prev).add(nextIndex));
         } else {
+            // Regular playback
             nextIndex = (videoTracks.indexOf(currentVideo) + 1) % videoTracks.length;
         }
+
         setCurrentVideo(videoTracks[nextIndex]);
         setIsPlaying(true);
     };
@@ -82,6 +95,11 @@ const Player = () => {
         const selectedVideo = videoTracks[index];
         setCurrentVideo(selectedVideo);
         setIsPlaying(true);
+
+        if (isShuffle) {
+            // Add to played songs in shuffle mode
+            setPlayedSongs((prev) => new Set(prev).add(index));
+        }
     };
 
     const toggleMiniPlayer = () => {
@@ -102,7 +120,8 @@ const Player = () => {
             const newSongIndex = customSongs.length + 1;
             const newSong = { title: inputTitle || `Song #${newSongIndex}`, url: inputLink };
 
-            setCustomSongs((prevSongs) => [...prevSongs, newSong]);
+            // Add the song to the top of the list
+            setCustomSongs((prevSongs) => [newSong, ...prevSongs]); // New song at the start
             setAddedSongs((prev) => new Set(prev).add(newSong.url)); // Mark this song as added
             setInputLink('');
             setInputTitle('');
@@ -110,7 +129,8 @@ const Player = () => {
     };
 
     const addSongFromSearch = (song) => {
-        setCustomSongs((prevSongs) => [...prevSongs, song]);
+        // Add the song to the top of the list
+        setCustomSongs((prevSongs) => [song, ...prevSongs]); // New song at the start
         setAddedSongs((prev) => new Set(prev).add(song.url)); // Mark this song as added
     };
 
@@ -157,7 +177,6 @@ const Player = () => {
         setIsEditing(false);
         setEditIndex(-1);
     };
-    /*   EDITING FUNCTION HERE */
     // eslint-disable-next-line
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
@@ -190,8 +209,6 @@ const Player = () => {
         }
     };
 
-
-    // Function to clear search input and results when input is focused
     const clearSearch = () => {
         setSearchQuery('');
         setSearchResults([]);
@@ -238,7 +255,10 @@ const Player = () => {
                 <div onClick={toggleMiniPlayer} style={{ cursor: 'pointer' }}>
                     {isMiniPlayer ? <FaSquare /> : <FaMinus />}
                 </div>
-                <div className={`shuffle-button ${isShuffle ? 'active' : ''}`} onClick={() => setIsShuffle(!isShuffle)} style={{ cursor: 'pointer' }}>
+                <div className={`shuffle-button ${isShuffle ? 'active' : ''}`} onClick={() => {
+                    setIsShuffle(!isShuffle);
+                    if (!isShuffle) setPlayedSongs(new Set()); // Reset played songs when shuffle mode is enabled
+                }} style={{ cursor: 'pointer' }}>
                     <FaRandom />
                 </div>
             </div>
@@ -257,7 +277,6 @@ const Player = () => {
                         />
                         <button onClick={searchYouTube}>🔍 Search</button>
                     </div>
-
 
                     {/* Display Search Results */}
                     {searchResults.length > 0 && (
@@ -285,7 +304,6 @@ const Player = () => {
 
                     <div>
                         <div className="add-song">
-
                         </div>
                         <Playlist
                             customSongs={customSongs.map((song, index) => ({
