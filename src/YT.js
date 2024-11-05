@@ -7,6 +7,15 @@ export const jasursList = [
 
 
 
+    { title: 'Maroon 5 - Memories', url: 'https://www.youtube.com/watch?v=SlPhMPnQ58k&pp=ygUPbWFyb29uIG1lbW9yaWVz' },
+    { title: 'post malone - rockstar (feat. 21 savage)', url: 'https://www.youtube.com/watch?v=9lQP9-F8kIQ' },
+    { title: 'Charlie Puth - Attention', url: 'https://youtu.be/6QYcd7RggNU?si=A2i597tAKIDwQtq5' },
+    { title: 'Drake - God`s plan', url: 'https://www.youtube.com/watch?v=ScfgOVJiu_I' },
+    { title: 'Dua Lipa - Levitating', url: 'https://www.youtube.com/watch?v=j2c3tR_qfiQ' },
+    { title: 'Justin Bieber - Baby', url: 'https://www.youtube.com/watch?v=khOFw2f4bQY' },
+
+
+
     { title: 'State of Grace', url: 'https://www.youtube.com/watch?v=gr4cqcqnAN0' },
     { title: 'Taylor Swift - Back To December', url: 'https://youtu.be/QUwxKWT6m7U?si=LNPBWKl0DqXIfOP2' },
     { title: 'As it was', url: 'https://youtu.be/Qfm6nfz1QNQ?si=3mMjYFpALij7GELl' },

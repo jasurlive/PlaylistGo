@@ -1,6 +1,6 @@
 // src/components/Player.js
 import React, { useState, useRef, useEffect } from 'react';
-import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaExpand, FaMinus, FaSquare, FaRandom, FaPlus, FaCheckCircle, FaTimes } from 'react-icons/fa';
+import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaExpand, FaMinus, FaSquare, FaRandom, FaPlus, FaCheckCircle, FaTimes, FaRedoAlt } from 'react-icons/fa';
 
 import Playlist from './Playlist';
 import './MusicPlayer.css';
@@ -23,6 +23,8 @@ const Player = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [addedSongs, setAddedSongs] = useState(new Set()); // Track added songs
     const [playedSongs, setPlayedSongs] = useState(new Set()); // Track played songs in shuffle mode
+    const [isRepeatOne, setIsRepeatOne] = useState(false); // Repeat-one mode state
+
     const playerRef = useRef(null);
 
     // Combine custom songs with Jasur's list
@@ -79,8 +81,13 @@ const Player = () => {
     };
 
     const onVideoEnd = () => {
-        playNextVideo();
+        if (isRepeatOne) {
+            playerRef.current.internalPlayer.playVideo(); // Replay the same video
+        } else {
+            playNextVideo();
+        }
     };
+
 
     const playNextVideo = () => {
         let nextIndex;
@@ -294,12 +301,23 @@ const Player = () => {
                 <div onClick={toggleMiniPlayer} style={{ cursor: 'pointer' }}>
                     {isMiniPlayer ? <FaSquare /> : <FaMinus />}
                 </div>
-                <div className={`shuffle-button ${isShuffle ? 'active' : ''}`} onClick={() => {
-                    setIsShuffle(!isShuffle);
-                    if (!isShuffle) setPlayedSongs(new Set()); // Reset played songs when shuffle mode is enabled
-                }} style={{ cursor: 'pointer' }}>
-                    <FaRandom />
+                <div className={`shuffle-button ${isShuffle ? 'active' : ''}`}
+                    onClick={() => {
+                        setIsShuffle(!isShuffle);
+                        if (!isShuffle) setPlayedSongs(new Set()); // Reset played songs when shuffle mode is enabled
+                    }}
+                    style={{ cursor: 'pointer' }}
+                >
+                    <FaRandom /> {/* Shuffle icon */}
                 </div>
+
+                <div className={`repeat-button ${isRepeatOne ? 'active' : ''}`}
+                    onClick={() => setIsRepeatOne(!isRepeatOne)}
+                    style={{ cursor: 'pointer' }}
+                >
+                    <FaRedoAlt /> {/* Main repeat icon */}
+                </div>
+
             </div>
 
             {!isMiniPlayer && (

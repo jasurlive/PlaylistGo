@@ -138,6 +138,19 @@ body {
     /* Bright yellow when active */
 }
 
+.repeat-button {
+    color: #c3c3c3;
+    /* Darker when inactive */
+    transition: color 0.3s ease;
+}
+
+.repeat-button.active {
+    color: #f1ff73;
+}
+
+
+
+
 
 /* EDIT HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE */
 
