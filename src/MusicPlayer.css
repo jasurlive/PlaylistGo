@@ -439,12 +439,20 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background 0.3s ease;
     /* Smooth transition */
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #c540b1;
+    transition: background 0.5s ease-in-out;
+    transform: translateY(-2px);
+
+
+}
+
+button:active {
+    transform: scale(0.9);
+    transition: background 0.5s ease-in-out;
 }
 
 /* Playlists Section */

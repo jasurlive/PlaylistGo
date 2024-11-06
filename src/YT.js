@@ -5,16 +5,21 @@ import YouTube from 'react-youtube';
 // Default playlist (Jasur's list)
 export const jasursList = [
 
+    /* { title: 'NAME', url: 'LINK' }, */
 
-
+    { title: 'Charlie Puth - Attention', url: 'https://youtu.be/Oz5JDtkf1as' },
+    { title: 'Something Just Like This', url: 'https://youtu.be/FM7MFYoylVs?si=TrbAGj-JAUeEJ4bd' },
+    { title: 'Bruno Mars - Grenade', url: 'https://youtu.be/4YrzJ9RZ9qY' },
+    { title: 'Let Me Love You', url: 'https://youtu.be/SMs0GnYze34?si=T-UORWGqJCoitcOM' },
+    { title: 'Sweet But Psycho', url: 'https://youtu.be/2KBFD0aoZy8' },
+    { title: 'Who`s laughing now', url: 'https://youtu.be/4JYSgIiSZSA?si=3v9kDuzvYJvWaOsO' },
+    { title: 'Girls Like You', url: 'https://youtu.be/aJOTlE1K90k' },
+    { title: 'Camila Cabello - Havana', url: 'https://youtu.be/HCjNJDNzw8Y?si=QjZAi7GPIc4ParOQ' },
     { title: 'Maroon 5 - Memories', url: 'https://www.youtube.com/watch?v=SlPhMPnQ58k&pp=ygUPbWFyb29uIG1lbW9yaWVz' },
     { title: 'post malone - rockstar (feat. 21 savage)', url: 'https://www.youtube.com/watch?v=9lQP9-F8kIQ' },
-    { title: 'Charlie Puth - Attention', url: 'https://youtu.be/6QYcd7RggNU?si=A2i597tAKIDwQtq5' },
     { title: 'Drake - God`s plan', url: 'https://www.youtube.com/watch?v=ScfgOVJiu_I' },
     { title: 'Dua Lipa - Levitating', url: 'https://www.youtube.com/watch?v=j2c3tR_qfiQ' },
     { title: 'Justin Bieber - Baby', url: 'https://www.youtube.com/watch?v=khOFw2f4bQY' },
-
-
 
     { title: 'State of Grace', url: 'https://www.youtube.com/watch?v=gr4cqcqnAN0' },
     { title: 'Taylor Swift - Back To December', url: 'https://youtu.be/QUwxKWT6m7U?si=LNPBWKl0DqXIfOP2' },
@@ -77,15 +82,15 @@ export const jasursList = [
 
 
 
-    /* { title: 'NAME', url: 'LINK' }, */
+
 
 ];
 
 // YouTube player options with 16:9 ratio
 const opts = {
     playerVars: {
-        autoplay: 0,              // Disable autoplay by default
-        controls: 1,              // Show player controls
+        autoplay: 1,              // Disable autoplay by default
+        controls: 0,              // Show player controls
         modestbranding: 1,        // Minimize YouTube branding
         rel: 0,
     },

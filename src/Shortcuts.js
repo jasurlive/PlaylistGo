@@ -8,6 +8,7 @@ const Shortcuts = ({
     onPlayNext,
     onToggleShuffle,
     onToggleFullScreen,
+    onToggleRepeatOne,
 }) => {
     useEffect(() => {
         const handleKeydown = (event) => {
@@ -26,12 +27,15 @@ const Shortcuts = ({
                     onSearchFocus(); // Focus the search input only if it's not already focused
                     break;
                 case 'k':
+                case '5':
                     onPlayPauseToggle();
                     break;
                 case 'ArrowLeft': // Use ArrowLeft for Play Previous
+                case '4':
                     onPlayPrevious();
                     break;
                 case 'ArrowRight': // Use ArrowRight for Play Next
+                case '6':
                     onPlayNext();
                     break;
                 case 'q':
@@ -39,6 +43,10 @@ const Shortcuts = ({
                     break;
                 case 'f':
                     onToggleFullScreen();
+                    break;
+                case 'r':
+                case 'w':
+                    onToggleRepeatOne();
                     break;
                 default:
                     break;
@@ -58,6 +66,7 @@ const Shortcuts = ({
         onPlayNext,
         onToggleShuffle,
         onToggleFullScreen,
+        onToggleRepeatOne,
     ]);
 
     return null; // This component does not render anything

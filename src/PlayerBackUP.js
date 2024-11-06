@@ -1,12 +1,12 @@
 // src/components/Player.js
 import React, { useState, useRef, useEffect } from 'react';
-import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaExpand, FaMinus, FaSquare, FaRandom, FaPlus, FaCheckCircle } from 'react-icons/fa';
+import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaExpand, FaMinus, FaSquare, FaRandom, FaPlus, FaCheckCircle, FaTimes, FaRedoAlt } from 'react-icons/fa';
 
-import Playlist from './Playlist'; // Playlist component
-import './MusicPlayer.css'; // Custom CSS
+import Playlist from './Playlist';
+import './MusicPlayer.css';
 import YTPlayer, { jasursList } from './YT';
 import nowPlayingGif from './img/equal_big.gif';
-import Shortcuts from './Shortcuts'; // Shortcut component for keyboard shortcuts
+import Shortcuts from './Shortcuts';
 
 
 const Player = () => {
@@ -23,6 +23,8 @@ const Player = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [addedSongs, setAddedSongs] = useState(new Set()); // Track added songs
     const [playedSongs, setPlayedSongs] = useState(new Set()); // Track played songs in shuffle mode
+    const [isRepeatOne, setIsRepeatOne] = useState(false); // Repeat-one mode state
+
     const playerRef = useRef(null);
 
     // Combine custom songs with Jasur's list
@@ -48,6 +50,24 @@ const Player = () => {
         localStorage.setItem('customSongs', JSON.stringify(customSongs));
     }, [customSongs]);
 
+
+
+    const resultsRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (resultsRef.current && !resultsRef.current.contains(event.target)) {
+                clearSearch(); // Clear the search query and results
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+
     // Play and Pause toggle
     const onPlayPauseToggle = () => {
         const player = playerRef.current.internalPlayer;
@@ -61,8 +81,13 @@ const Player = () => {
     };
 
     const onVideoEnd = () => {
-        playNextVideo();
+        if (isRepeatOne) {
+            playerRef.current.internalPlayer.playVideo(); // Replay the same video
+        } else {
+            playNextVideo();
+        }
     };
+
 
     const playNextVideo = () => {
         let nextIndex;
@@ -216,6 +241,10 @@ const Player = () => {
         setSearchResults([]);
     };
 
+    const closeSearchResults = () => {
+        clearSearch();
+    };
+
     return (
         <div className="music-player dark-mode" id="player-container">
 
@@ -260,6 +289,7 @@ const Player = () => {
             </div>
 
             <div className="controls">
+                {/* Control icons */}
                 <FaBackward onClick={playPreviousVideo} style={{ cursor: 'pointer' }} />
                 {isPlaying ? (
                     <FaPauseCircle onClick={onPlayPauseToggle} style={{ cursor: 'pointer' }} />
@@ -271,12 +301,23 @@ const Player = () => {
                 <div onClick={toggleMiniPlayer} style={{ cursor: 'pointer' }}>
                     {isMiniPlayer ? <FaSquare /> : <FaMinus />}
                 </div>
-                <div className={`shuffle-button ${isShuffle ? 'active' : ''}`} onClick={() => {
-                    setIsShuffle(!isShuffle);
-                    if (!isShuffle) setPlayedSongs(new Set()); // Reset played songs when shuffle mode is enabled
-                }} style={{ cursor: 'pointer' }}>
-                    <FaRandom />
+                <div className={`shuffle-button ${isShuffle ? 'active' : ''}`}
+                    onClick={() => {
+                        setIsShuffle(!isShuffle);
+                        if (!isShuffle) setPlayedSongs(new Set()); // Reset played songs when shuffle mode is enabled
+                    }}
+                    style={{ cursor: 'pointer' }}
+                >
+                    <FaRandom /> {/* Shuffle icon */}
                 </div>
+
+                <div className={`repeat-button ${isRepeatOne ? 'active' : ''}`}
+                    onClick={() => setIsRepeatOne(!isRepeatOne)}
+                    style={{ cursor: 'pointer' }}
+                >
+                    <FaRedoAlt /> {/* Main repeat icon */}
+                </div>
+
             </div>
 
             {!isMiniPlayer && (
@@ -289,14 +330,20 @@ const Player = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             onFocus={clearSearch} // Clear input and results on focus
-                            onKeyDown={(e) => e.key === 'Enter' && searchYouTube()} // Trigger search on Enter key
+                            onKeyDown={(e) => e.key === 'Enter' && searchYouTube()}
                         />
                         <button onClick={searchYouTube}>🔍 Search</button>
                     </div>
 
+
+
                     {/* Display Search Results */}
                     {searchResults.length > 0 && (
-                        <div className="search-results">
+                        <div className="search-results" ref={resultsRef}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <h3>Search Results</h3>
+                                <FaTimes onClick={closeSearchResults} style={{ cursor: 'pointer', color: 'red' }} /> {/* Close icon */}
+                            </div>
                             {searchResults.map((result, index) => (
                                 <div
                                     key={index}

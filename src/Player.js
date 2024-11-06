@@ -259,7 +259,9 @@ const Player = () => {
                     if (!isShuffle) setPlayedSongs(new Set()); // Reset played songs when shuffle mode is enabled
                 }}
                 onToggleFullScreen={toggleFullScreen}
+                onToggleRepeatOne={() => setIsRepeatOne(!isRepeatOne)} // Pass the repeat-one toggle function here
             />
+
 
             <h2>
                 {isPlaying && (
