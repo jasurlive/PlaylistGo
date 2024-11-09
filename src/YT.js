@@ -90,7 +90,7 @@ export const jasursList = [
 const opts = {
     playerVars: {
         autoplay: 1,              // Disable autoplay by default
-        controls: 0,              // Show player controls
+        controls: 1,              // Show player controls
         modestbranding: 1,        // Minimize YouTube branding
         rel: 0,
     },
