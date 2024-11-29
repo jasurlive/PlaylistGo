@@ -7,6 +7,12 @@ export const jasursList = [
 
     /* { title: 'NAME', url: 'LINK' }, */
 
+
+    { title: 'Selena Gomez - Buscando Amor', url: 'https://youtu.be/2P6EExu3H5s?si=f2hv9y52VqxnVOmL' },
+    { title: 'Shawn Mendes - In My Blood', url: 'https://youtu.be/36tggrpRoTI?si=CiCfVdO8Oepjt4Rs' },
+    { title: 'Positive Vibes ☀️😸', url: 'https://www.youtube.com/live/knwE9IfIoUw?si=4z_JuMsPnK-2ahvM' },
+    { title: 'Charlie Puth - We Don`t Talk Anymore', url: 'https://youtu.be/bpFVJJBgtXY?si=L2NuwOWGhmdKacwg' },
+    { title: 'Selena Gomez - Adiós', url: 'https://youtu.be/9H_368c2Hzw?si=UOBGyTGbUe_fISFW' },
     { title: 'Charlie Puth - Attention', url: 'https://youtu.be/Oz5JDtkf1as' },
     { title: 'Something Just Like This', url: 'https://youtu.be/FM7MFYoylVs?si=TrbAGj-JAUeEJ4bd' },
     { title: 'Bruno Mars - Grenade', url: 'https://youtu.be/4YrzJ9RZ9qY' },

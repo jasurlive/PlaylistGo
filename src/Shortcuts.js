@@ -30,11 +30,9 @@ const Shortcuts = ({
                 case '5':
                     onPlayPauseToggle();
                     break;
-                case 'ArrowLeft': // Use ArrowLeft for Play Previous
                 case '4':
                     onPlayPrevious();
                     break;
-                case 'ArrowRight': // Use ArrowRight for Play Next
                 case '6':
                     onPlayNext();
                     break;
