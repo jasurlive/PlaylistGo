@@ -1,16 +1,20 @@
 // src/components/YT.js
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import YouTube from 'react-youtube';
-
 // Default playlist (Jasur's list)
 export const jasursList = [
 
     /* { title: 'NAME', url: 'LINK' }, */
 
-
+    { title: 'Heroes Tonight', url: 'https://www.youtube.com/watch?v=074rfF4RJZc' },
+    { title: 'Zara Larsson - This One`s For You', url: 'https://youtu.be/MoHnffhBwqs?si=_FGX4ucMtOTcD2to' },
+    { title: 'The Cup Of Life - Ricky Martin', url: 'https://youtu.be/CBfSeqfeggI?si=A2RRcM0PSvAsvpHF' },
+    { title: 'Shakira - Hips Don`t Lie', url: 'https://youtu.be/p3pEe6aAJ4k?si=bzrAEs7c-zSwqBUo' },
+    { title: 'Shakira - La La La World Cup 2014', url: 'https://youtu.be/2igups6VdcA?si=N5uu5genirJuWXWC' },
+    { title: 'Shakira - Chantaje (letra)', url: 'https://youtu.be/J76eQJP3UIQ?si=juYKqG_UCEta8y19' },
+    { title: 'Zara Larsson – Don`t Worry Bout Me', url: 'https://youtu.be/u_tzZd9kIWg?si=y-s2yCVh4U2JLsJJ' },
     { title: 'Selena Gomez - Buscando Amor', url: 'https://youtu.be/2P6EExu3H5s?si=f2hv9y52VqxnVOmL' },
     { title: 'Shawn Mendes - In My Blood', url: 'https://youtu.be/36tggrpRoTI?si=CiCfVdO8Oepjt4Rs' },
-    { title: 'Positive Vibes ☀️😸', url: 'https://www.youtube.com/live/knwE9IfIoUw?si=4z_JuMsPnK-2ahvM' },
     { title: 'Charlie Puth - We Don`t Talk Anymore', url: 'https://youtu.be/bpFVJJBgtXY?si=L2NuwOWGhmdKacwg' },
     { title: 'Selena Gomez - Adiós', url: 'https://youtu.be/9H_368c2Hzw?si=UOBGyTGbUe_fISFW' },
     { title: 'Charlie Puth - Attention', url: 'https://youtu.be/Oz5JDtkf1as' },
@@ -110,10 +114,28 @@ export const extractVideoId = (url) => {
     return match ? match[1] : null;
 };
 
-// YTPlayer component
-const YTPlayer = ({ currentVideoIndex, videoTracks, onVideoEnd, playerRef, autoplay }) => {
-    // Handle out-of-bounds index gracefully
+const YTPlayer = ({ currentVideoIndex, videoTracks, onVideoEnd, playerRef, autoplay, onToggleFullScreen }) => {
     const videoId = videoTracks[currentVideoIndex]?.url ? extractVideoId(videoTracks[currentVideoIndex].url) : '';
+
+    const playerContainerRef = useRef(null);
+
+    // Function to toggle fullscreen
+    const toggleFullscreen = () => {
+        if (playerContainerRef.current) {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                playerContainerRef.current.requestFullscreen();
+            }
+        }
+    };
+
+    // Call fullscreen toggle from parent component
+    useEffect(() => {
+        if (onToggleFullScreen) {
+            onToggleFullScreen(toggleFullscreen);
+        }
+    }, [onToggleFullScreen]);
 
     const playerOpts = {
         ...opts,
@@ -124,12 +146,14 @@ const YTPlayer = ({ currentVideoIndex, videoTracks, onVideoEnd, playerRef, autop
     };
 
     return (
-        <YouTube
-            videoId={videoId}
-            opts={playerOpts}
-            onEnd={onVideoEnd}
-            ref={playerRef}
-        />
+        <div ref={playerContainerRef} style={{ width: '100%', height: '100%' }}>
+            <YouTube
+                videoId={videoId}
+                opts={playerOpts}
+                onEnd={onVideoEnd}
+                ref={playerRef}
+            />
+        </div>
     );
 };
 

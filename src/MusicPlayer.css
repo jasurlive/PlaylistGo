@@ -4,64 +4,139 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    /* Updated font */
+
 }
 
 body {
     margin: 0;
-    /* Prevent scrolling */
     background: linear-gradient(270deg,
             rgba(255, 92, 51, 0.5),
-            /* Color 1 - Orange */
             rgba(255, 204, 51, 0.5),
-            /* Color 2 - Yellow */
             rgba(51, 255, 204, 0.5),
-            /* Color 3 - Teal */
             rgba(51, 204, 255, 0.5),
-            /* Color 4 - Sky Blue */
             rgba(255, 51, 204, 0.5),
-            /* Color 5 - Magenta */
             rgba(204, 51, 255, 0.5),
-            /* Color 6 - Purple */
             rgba(168, 51, 255, 0.5),
-            /* Color 7 - Violet */
             rgba(51, 51, 255, 0.5),
-            /* Color 8 - Blue */
             rgba(51, 170, 255, 0.5),
-            /* Color 9 - Aqua */
             rgba(51, 255, 87, 0.5),
-            /* Color 10 - Green */
             rgba(255, 87, 51, 0.5),
-            /* Color 11 - Red-Orange */
             rgba(255, 51, 161, 0.5),
-            /* Color 12 - Pink */
-            rgba(255, 219, 51, 0.5)
-            /* Color 13 - Golden Yellow */
-        );
+            rgba(255, 219, 51, 0.5));
     background-size: 600% 600%;
-    /* Allows the gradient to stretch further */
     animation: gradientAnimation 20s ease infinite;
-    /* Increased animation duration for smoother transition */
     color: #333;
 }
 
-/* Keyframes for the gradient animation */
 @keyframes gradientAnimation {
     0% {
         background-position: 0% 50%;
-        /* Start position */
     }
 
     50% {
         background-position: 100% 50%;
-        /* Middle position */
     }
 
     100% {
         background-position: 0% 50%;
-        /* End position, back to start */
     }
 }
+
+
+
+/* NEW TEST STYLE */
+
+
+.song-item {
+    position: relative;
+    padding-bottom: 10px;
+    transition: background 0.3s ease-in-out;
+}
+
+.song-item.active {
+    position: relative;
+    background: linear-gradient(90deg, rgba(255, 0, 255, 0.8), rgba(0, 255, 255, 0.8));
+    animation: gradientAnimationSong 3s infinite ease-in-out;
+    color: white;
+}
+
+@keyframes gradientAnimationSong {
+    0% {
+        background: linear-gradient(90deg, rgba(255, 99, 132, 0.7), rgba(54, 162, 235, 0.7));
+    }
+
+    25% {
+        background: linear-gradient(90deg, rgba(255, 159, 64, 0.7), rgba(75, 192, 192, 0.7));
+    }
+
+    50% {
+        background: linear-gradient(90deg, rgba(75, 192, 192, 0.7), rgba(153, 102, 255, 0.7));
+    }
+
+    75% {
+        background: linear-gradient(90deg, rgba(153, 102, 255, 0.7), rgba(255, 99, 132, 0.7));
+    }
+}
+
+
+
+.view-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.view-icon {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #a8a8a8;
+    transition: color 0.2s;
+}
+
+.view-icon.active {
+    color: #f4ff60;
+}
+
+.playlist-section {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 5px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.playlist-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.playlist-icon {
+    margin-right: 0.5rem;
+}
+
+.song-list.cubical-view {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 0.5rem;
+}
+
+.song-list.cubical-view .song-item {
+    height: 75px;
+    font-size: 0.75rem;
+    text-align: center;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
 
 .text {
     display: flex;
@@ -70,7 +145,6 @@ body {
     justify-content: center;
 }
 
-/* Base Styles */
 .App {
     text-align: center;
 }
@@ -88,7 +162,6 @@ body {
 
 .App-header {
     background-color: rgba(40, 44, 52, 0.9);
-    /* Semi-transparent background */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -114,33 +187,25 @@ body {
 
 .drag-icon {
     cursor: grab;
-    /* Default cursor */
     margin-right: 8px;
-    /* Space between the drag icon and the song title */
     vertical-align: middle;
-    /* Align icon with text */
 }
 
-/* Change cursor on hover */
 .drag-icon:active {
     cursor: grabbing;
-    /* Change cursor when hovering over the drag icon */
 }
 
 .shuffle-button {
     color: #c3c3c3;
-    /* Darker when inactive */
     transition: color 0.3s ease;
 }
 
 .shuffle-button.active {
     color: #f1ff73;
-    /* Bright yellow when active */
 }
 
 .repeat-button {
     color: #c3c3c3;
-    /* Darker when inactive */
     transition: color 0.3s ease;
 }
 
@@ -178,173 +243,113 @@ body {
 
 /* EDIT HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE */
 
-/* src/MusicPlayer.css */
-
-/* Container for the search input */
 .search-container {
     display: flex;
     flex-direction: column;
     margin: 20px 0;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.1);
-    /* Transparent white background */
-    /* Light background for consistency */
     border-radius: 8px;
-    /* Rounded corners */
     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-    /* Bright shadow effect */
     transition: background-color 0.3s ease;
-    /* Transition effect for hover */
 }
 
 .search-container:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    /* Slightly darker on hover */
 }
 
 
-/* Button for searching */
 .search-container button {
     padding: 10px;
     border: none;
     border-radius: 5px;
-    /* Rounded corners */
     background-color: rgba(40, 167, 69, 0.9);
-    /* Bright green button color */
-    /* Slightly transparent green */
     color: white;
-    /* White text */
     cursor: pointer;
-    /* Pointer cursor on hover */
     font-size: 16px;
-    /* Larger text */
     transition: background-color 0.3s ease, transform 0.2s ease;
-    /* Transition effects */
 }
 
 .search-container button:hover {
     background-color: rgba(40, 167, 69, 1);
-    /* Solid green on hover */
     transform: scale(1.05);
-    /* Slightly enlarge button on hover */
 }
 
-/* Style for search results */
 .search-results {
     margin-top: 10px;
-    /* Space above results */
     background-color: rgba(255, 255, 255, 0.1);
-    /* Transparent white for results */
-    /* Light background for results */
     border-radius: 8px;
-    /* Rounded corners */
     max-height: 200px;
-    /* Limit height */
     overflow-y: auto;
-    /* Scrollable results */
     padding: 10px;
-    /* Padding inside results container */
     transition: background-color 0.3s ease;
-    /* Transition effect */
 }
 
 .search-results:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    /* Slightly darker on hover */
 }
 
-/* Individual result items */
 .search-result-item {
     padding: 10px;
-    /* Padding around each result */
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    /* Separator line */
-    /* Bright separator line */
     cursor: pointer;
-    /* Pointer cursor on hover */
     transition: background-color 0.2s, transform 0.2s;
-    /* Transition effect */
 }
 
 .search-result-item:last-child {
     border-bottom: none;
-    /* Remove border from last item */
 }
 
 .search-result-item:hover {
     background-color: rgba(255, 255, 255, 0.3);
-    /* Highlight on hover */
     transform: translateY(-2px);
-    /* Slight lift effect on hover */
 }
 
-/* Styling for the empty state */
 .empty-search {
     color: #fff;
-    /* White text */
-    /* Bright color for empty state */
     text-align: center;
-    /* Centered text */
     padding: 20px;
-    /* Padding around the empty state */
     transition: color 0.3s ease;
-    /* Transition for color */
 }
 
 .empty-search:hover {
     color: rgba(255, 255, 255, 0.8);
-    /* Slightly lighter on hover */
 }
 
 
 /*                                                                     END */
 
+.youtube-container.fullscreen {
+    padding-top: 56.25%;
+}
+
 .youtube-container {
     display: flex;
     justify-content: center;
-    /* Center content horizontally */
     align-items: center;
-    /* Center content vertically */
     width: 100%;
-    /* Full width of the parent */
-    max-width: 500px;
-    /* Limit the maximum width */
+    max-width: 30rem;
     border-radius: 15px;
-    /* Rounded corners */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for depth */
     overflow: hidden;
-    /* Hide overflow for rounded corners */
     margin: 0 auto;
-    /* Center the container within its parent */
     margin-top: 10px;
 }
 
 .youtube-container .video-wrapper {
     display: flex;
     width: 100%;
-    /* Full width of the wrapper */
     padding-top: 56.25%;
-    /* Maintain 16:9 Aspect Ratio */
     position: relative;
-    /* Required for absolute positioning of the iframe */
 }
 
 .youtube-container iframe {
     position: absolute;
-    /* Position absolutely within the wrapper */
     top: 0;
-    /* Align to top */
     left: 0;
-    /* Align to left */
     width: 100%;
-    /* Full width of the wrapper */
     height: 100%;
-    /* Full height based on the aspect ratio */
     border: none;
-    /* Remove border */
     border-radius: 15px;
-    /* Match container radius */
 }
 
 
@@ -357,29 +362,20 @@ body {
     text-align: center;
     margin: 20px auto;
     padding: 30px;
-    max-width: 1000px;
+    max-width: 85%;
     background: rgba(255, 255, 255, 0.95);
-    /* Slightly transparent background */
     border-radius: 15px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     transition: background 0.3s ease, color 0.3s ease;
-    /* Smooth transition */
 }
 
 .music-player.dark-mode {
     background-color: #282c34ac;
-    /* Darker mode */
     color: #ffffff;
 }
 
-.music-player.light-mode {
-    background-color: #ffffff;
-    /* Light mode */
-    color: #333;
-}
-
 #player-container:fullscreen {
-
+    width: 100%;
     overflow: scroll;
     overflow-x: hidden;
 }
@@ -388,19 +384,12 @@ body {
 
     background: linear-gradient(270deg,
             rgba(51, 255, 204, 0.5),
-            /* Neon Orange */
             rgba(51, 194, 255, 0.5),
-            /* Neon Yellow */
             rgba(51, 255, 204, 0.5),
-            /* Neon Teal */
             rgba(51, 204, 255, 0.5),
-            /* Neon Purple */
             rgba(185, 104, 247, 0.716),
-            /* Neon Blue */
             rgba(51, 170, 255, 0.5),
-            /* Neon Aqua */
             rgba(51, 255, 201, 0.5),
-            /* Neon Green */
             rgba(51, 221, 255, 0.5));
     background-size: 800% 800%;
     animation: gradientAnimation 20s ease-in-out infinite;
@@ -413,19 +402,15 @@ body {
     justify-content: center;
     color: white;
     gap: 20px;
-    /* Increased gap for better spacing */
     font-size: 2rem;
-    /* Increased control size */
 }
 
 .controls>* {
     transition: transform 0.2s;
-    /* Animation duration */
 }
 
 .controls>*:hover {
-    transform: scale(1.3);
-    /* Slightly enlarge the icon on hover */
+    transform: scale(1.1);
 }
 
 .add-song {
@@ -438,32 +423,25 @@ body {
 .add-song input {
     width: 40%;
     padding: 10px;
-    /* Increased padding */
     font-size: 1rem;
     border: 1px solid #007bff;
-    /* Changed border color */
     border-radius: 5px;
     transition: border 0.3s ease;
-    /* Smooth transition */
 }
 
 .add-song input:focus {
     border-color: #0056b3;
-    /* Focus state */
     outline: none;
-    /* Remove default outline */
 }
 
 button {
     padding: 10px 16px;
-    /* Increased button size */
     border: none;
     background-color: #007bff;
     color: white;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
-    /* Smooth transition */
 }
 
 button:hover {
@@ -479,18 +457,15 @@ button:active {
     transition: background 0.5s ease-in-out;
 }
 
-/* Playlists Section */
 .playlists-container {
     display: flex;
     justify-content: space-between;
     align-items: start;
     margin-top: 25px;
-    flex-wrap: wrap;
-    /* Allow wrapping on small screens */
 }
 
 .playlist-section {
-    width: 45%;
+    width: 48%;
     text-align: center;
 }
 
@@ -499,10 +474,8 @@ button:active {
     padding: 1rem;
     font-weight: bold;
     border: whitesmoke dashed 1px;
-    /* Increased heading size */
     margin-bottom: 10px;
     color: #ffffff;
-    /* Heading color */
 }
 
 ul {
@@ -520,7 +493,6 @@ ul {
 .now-playing-big-gif {
     position: relative;
     width: auto;
-    /* Adjust size */
     height: 1.5rem;
     margin-inline: 5px;
     vertical-align: middle;
@@ -534,7 +506,6 @@ h2 {
 
 .song-item {
     padding: 20px;
-    /* Increased padding */
     margin: 5px 0;
     background-color: #00276e;
     border-radius: 5px;
@@ -543,130 +514,95 @@ h2 {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Added shadow */
     transition: background 0.3s ease;
-    /* Smooth transition */
 }
 
 .song-item:hover {
     background-color: #00b988;
-    /* Light blue on hover */
+    cursor: pointer;
 }
 
-.song-item.active {
-    background-color: #007bff;
-    color: white;
-}
 
-.song-item .fa-edit,
+
 .song-item .fa-trash {
     margin-left: 20px;
     cursor: pointer;
 }
 
-.song-item .fa-edit:hover {
-    color: #ffa500;
-    /* Hover color for edit */
-}
 
 .song-item .fa-trash:hover {
     color: red;
-    /* Hover color for trash */
 }
 
 
 .icon-container {
     display: flex;
-    /* Align icons in a row */
     gap: 25px;
-    /* Space between icons */
 }
 
 .icon {
     cursor: pointer;
-
     font-size: 17px;
-    /* Pointer cursor on icons */
     transition: color 0.3s;
-    /* Smooth transition for color */
 }
 
 .icon:hover {
     color: #e20087;
     transform: scale(1.4);
-    /* Slightly scale up on hover */
 }
 
-/* Optional: Add some styling for the drop line */
 .drop-line {
     border-top: 2px dashed #007bff;
-    /* Dashed border for drop line */
     margin-top: 5px;
-    /* Space above drop line */
     padding: 5px 0;
-    /* Padding for the drop line */
     text-align: center;
-    /* Center text in the drop line */
 }
 
 @media (max-width: 1250px) {
+
     .music-player {
         padding: 15px;
-        /* Adjust padding on mobile */
-        width: 80%;
-        /* Take full width on mobile */
+        width: 90%;
         border-radius: 10px;
-        /* Slightly less rounded corners */
     }
 }
 
-/* Responsive Styles */
+
+
+
 @media (max-width: 768px) {
+
     .music-player {
         padding: 15px;
-        /* Adjust padding on mobile */
-        width: 80%;
-        /* Take full width on mobile */
+        width: 100%;
         border-radius: 10px;
-        /* Slightly less rounded corners */
     }
 
     .add-song input {
         font-size: 0.9rem;
-        /* Smaller input on mobile */
         width: 100%;
-        /* Full width */
     }
 
     .controls {
         font-size: 1.5rem;
-        /* Smaller controls for mobile */
 
         align-items: center;
-        /* Center align controls */
     }
 
     .playlists-container {
         flex-direction: column;
         width: 100%;
-        /* Stack playlists vertically */
         align-items: center;
-        /* Center align */
         gap: 20px;
-        /* Added gap for better spacing */
     }
 
     .playlist-section {
         width: 100%;
-        /* Full width on mobile */
         margin-bottom: 20px;
-        /* Space between sections */
     }
 
     .song-item {
-        /* Stack song item contents */
         padding: 10px;
-        /* Reduced padding for smaller screens */
     }
 }
 
@@ -682,51 +618,37 @@ h2 {
 
     .add-song input {
         font-size: 0.9rem;
-        /* Smaller input on mobile */
         width: 100%;
-        /* Full width */
     }
 
     button {
         font-size: 0.9rem;
-        /* Smaller button on mobile */
     }
 
     .controls {
         gap: 10px;
-        /* Reduce gap on mobile */
         font-size: 2rem;
-        /* Adjusted for better usability */
     }
 
     .song-item {
         font-size: 0.9rem;
-        /* Smaller font size for song items */
         width: 100%;
-        /* Full width */
         padding: 15px;
-        /* Further reduced padding */
     }
 
-    /* MusicPlayer.css */
     .song-item {
         position: relative;
         transition: all 0.3s ease;
     }
 
-    .song-item.active {
-        background-color: #007bff;
-        color: white;
-    }
+
 
     .drop-line {
         height: 2px;
         background: #ff5722;
-        /* Color for the drop line */
         position: absolute;
         left: 0;
         right: 0;
         top: -5px;
-        /* Position above the item */
     }
 }
