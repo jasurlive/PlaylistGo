@@ -90,6 +90,7 @@ const Playlist = ({
     playSelectedVideo,
     deleteSong,
     setCustomSongs,
+    setJasursList,
 }) => {
     const [isCustomCollapsed, setCustomCollapsed] = useState(false);
     const [isJasursCollapsed, setJasursCollapsed] = useState(false);
@@ -115,11 +116,27 @@ const Playlist = ({
         localStorage.setItem('jasursViewStyle', jasursViewStyle);
     }, [jasursViewStyle]);
 
-    const moveSong = (dragIndex, hoverIndex) => {
-        setCustomSongs((prevSongs) => {
-            const updatedSongs = [...prevSongs];
-            const [movedSong] = updatedSongs.splice(dragIndex, 1);
-            updatedSongs.splice(hoverIndex, 0, movedSong);
+    const moveSong = (dragIndex, hoverIndex, listType) => {
+        if (listType === 'custom') {
+            setCustomSongs((prevSongs) => {
+                const updatedSongs = [...prevSongs];
+                const [movedSong] = updatedSongs.splice(dragIndex, 1);
+                updatedSongs.splice(hoverIndex, 0, movedSong);
+                return updatedSongs;
+            });
+        } else {
+            setJasursList((prevSongs) => {
+                const updatedSongs = [...prevSongs];
+                const [movedSong] = updatedSongs.splice(dragIndex, 1);
+                updatedSongs.splice(hoverIndex, 0, movedSong);
+                return updatedSongs;
+            });
+        }
+    };
+
+    const deleteJasursSong = (index) => {
+        setJasursList((prevSongs) => {
+            const updatedSongs = prevSongs.filter((_, i) => i !== index);
             return updatedSongs;
         });
     };
@@ -139,7 +156,7 @@ const Playlist = ({
                         key={index}
                         track={track}
                         index={index}
-                        moveSong={moveSong}
+                        moveSong={(dragIndex, hoverIndex) => moveSong(dragIndex, hoverIndex, 'custom')}
                         playSelectedVideo={playSelectedVideo}
                         deleteSong={deleteSong}
                         currentVideoIndex={currentVideoIndex}
@@ -156,13 +173,15 @@ const Playlist = ({
                 setViewStyle={setJasursViewStyle}
             >
                 {jasursList.map((track, index) => (
-                    <li
+                    <SongItem
                         key={index}
-                        className={`song-item ${currentVideoIndex === customSongs.length + index ? 'active' : ''}`}
-                        onClick={() => playSelectedVideo(customSongs.length + index)}
-                    >
-                        {track.title}
-                    </li>
+                        track={track}
+                        index={index}
+                        moveSong={(dragIndex, hoverIndex) => moveSong(dragIndex, hoverIndex, 'jasurs')}
+                        playSelectedVideo={(index) => playSelectedVideo(customSongs.length + index)}
+                        deleteSong={deleteJasursSong}
+                        currentVideoIndex={currentVideoIndex - customSongs.length}
+                    />
                 ))}
             </PlaylistSection>
         </div>

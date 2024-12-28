@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaExpand, FaMinus, FaSquare, FaRandom, FaPlus, FaCheckCircle, FaTimes, FaRedoAlt } from 'react-icons/fa';
 import Playlist from './Playlist';
 import './MusicPlayer.css';
-import YTPlayer, { jasursList } from './YT';
+import YTPlayer, { extractVideoId } from './YT';
 import nowPlayingGif from './img/equal_big.gif';
 import Shortcuts from './Shortcuts';
+import * as XLSX from 'xlsx';
 
 const Player = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -18,20 +19,42 @@ const Player = () => {
     const [playedSongs, setPlayedSongs] = useState(new Set());
     const [isRepeatOne, setIsRepeatOne] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [jasursList, setJasursList] = useState([]);
     const playerRef = useRef(null);
     const resultsRef = useRef(null);
+
+    const fetchPlaylist = async () => {
+        try {
+            const response = await fetch(`${process.env.PUBLIC_URL}/songs.xlsx`);
+            const arrayBuffer = await response.arrayBuffer();
+            const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+            const sheet = workbook.Sheets["Active"];
+            const data = XLSX.utils.sheet_to_json(sheet);
+
+            const processedData = data.slice(1).map((row) => ({
+                title: row["Title"] || 'Untitled',
+                url: row["Youtube Link"] || '',
+            }));
+
+            setJasursList(processedData);
+        } catch (error) {
+            console.error('Error fetching or processing playlist Excel file:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchPlaylist();
+    }, []);
 
     const videoTracks = [...customSongs, ...jasursList];
 
     useEffect(() => {
         const savedSongs = JSON.parse(localStorage.getItem('customSongs'));
         if (savedSongs) setCustomSongs(savedSongs);
-        if (savedSongs?.length === 0) {
-            const randomIndex = Math.floor(Math.random() * jasursList.length);
-            setCurrentVideo(jasursList[randomIndex]);
-            setIsPlaying(true);
+        if (savedSongs?.length === 0 && jasursList.length > 0) {
+            setCurrentVideo(jasursList[0]); // Select the first song from jasursList
         }
-    }, []);
+    }, [jasursList]);
 
     useEffect(() => {
         localStorage.setItem('customSongs', JSON.stringify(customSongs));
@@ -109,6 +132,7 @@ const Player = () => {
         const selectedVideo = videoTracks[index];
         setCurrentVideo(selectedVideo);
         setIsPlaying(true);
+        playerRef.current.internalPlayer.loadVideoById(extractVideoId(selectedVideo.url)); // Load and play the video
         if (isShuffle) {
             setPlayedSongs((prev) => new Set(prev).add(index));
         }
@@ -300,6 +324,7 @@ const Player = () => {
                         playSelectedVideo={playSelectedVideo}
                         deleteSong={deleteSong}
                         setCustomSongs={setCustomSongs}
+                        setJasursList={setJasursList}
                     />
                 </>
             )}

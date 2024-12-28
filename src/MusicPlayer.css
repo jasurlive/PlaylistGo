@@ -4,7 +4,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
 }
 
 body {
@@ -42,11 +41,6 @@ body {
     }
 }
 
-
-
-/* NEW TEST STYLE */
-
-
 .song-item {
     position: relative;
     padding-bottom: 10px;
@@ -54,7 +48,6 @@ body {
 }
 
 .song-item.active {
-    position: relative;
     background: linear-gradient(90deg, rgba(255, 0, 255, 0.8), rgba(0, 255, 255, 0.8));
     animation: gradientAnimationSong 3s infinite ease-in-out;
     color: white;
@@ -77,8 +70,6 @@ body {
         background: linear-gradient(90deg, rgba(153, 102, 255, 0.7), rgba(255, 99, 132, 0.7));
     }
 }
-
-
 
 .view-toggle {
     display: flex;
@@ -122,7 +113,7 @@ body {
 
 .song-list.cubical-view {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     padding: 0.5rem;
 }
@@ -136,7 +127,6 @@ body {
     border-radius: 4px;
     flex-shrink: 0;
 }
-
 
 .text {
     display: flex;
@@ -213,7 +203,6 @@ body {
     color: #f1ff73;
 }
 
-
 .updown-button {
     position: fixed;
     bottom: 20px;
@@ -236,13 +225,6 @@ body {
     font-size: 1.5em;
 }
 
-
-
-
-
-
-/* EDIT HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE */
-
 .search-container {
     display: flex;
     flex-direction: column;
@@ -257,7 +239,6 @@ body {
 .search-container:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
-
 
 .search-container button {
     padding: 10px;
@@ -316,9 +297,6 @@ body {
     color: rgba(255, 255, 255, 0.8);
 }
 
-
-/*                                                                     END */
-
 .youtube-container.fullscreen {
     padding-top: 56.25%;
 }
@@ -352,11 +330,6 @@ body {
     border-radius: 15px;
 }
 
-
-
-
-
-
 .music-player {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -381,7 +354,6 @@ body {
 }
 
 #player-container:fullscreen {
-
     background: linear-gradient(270deg,
             rgba(51, 255, 204, 0.5),
             rgba(51, 194, 255, 0.5),
@@ -393,7 +365,6 @@ body {
             rgba(51, 221, 255, 0.5));
     background-size: 800% 800%;
     animation: gradientAnimation 20s ease-in-out infinite;
-
 }
 
 .controls {
@@ -448,8 +419,6 @@ button:hover {
     background-color: #c540b1;
     transition: background 0.5s ease-in-out;
     transform: translateY(-2px);
-
-
 }
 
 button:active {
@@ -503,7 +472,6 @@ h2 {
     padding: 0.2rem;
 }
 
-
 .song-item {
     padding: 20px;
     margin: 5px 0;
@@ -522,18 +490,14 @@ h2 {
     cursor: pointer;
 }
 
-
-
 .song-item .fa-trash {
     margin-left: 20px;
     cursor: pointer;
 }
 
-
 .song-item .fa-trash:hover {
     color: red;
 }
-
 
 .icon-container {
     display: flex;
@@ -559,7 +523,6 @@ h2 {
 }
 
 @media (max-width: 1250px) {
-
     .music-player {
         padding: 15px;
         width: 90%;
@@ -567,11 +530,7 @@ h2 {
     }
 }
 
-
-
-
 @media (max-width: 768px) {
-
     .music-player {
         padding: 15px;
         width: 100%;
@@ -585,7 +544,6 @@ h2 {
 
     .controls {
         font-size: 1.5rem;
-
         align-items: center;
     }
 
@@ -607,7 +565,6 @@ h2 {
 }
 
 @media (max-width: 480px) {
-
     .add-song {
         margin-top: 20px;
         display: flex;
@@ -640,8 +597,6 @@ h2 {
         position: relative;
         transition: all 0.3s ease;
     }
-
-
 
     .drop-line {
         height: 2px;

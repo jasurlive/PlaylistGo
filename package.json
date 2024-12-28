@@ -21,7 +21,8 @@
     "react-youtube": "^10.1.0",
     "styled-components": "^6.1.13",
     "tsparticles": "^3.7.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "predeploy": "npm run build",
