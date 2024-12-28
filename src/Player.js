@@ -31,7 +31,7 @@ const Player = () => {
             const sheet = workbook.Sheets["Active"];
             const data = XLSX.utils.sheet_to_json(sheet);
 
-            const processedData = data.slice(1).map((row) => ({
+            const processedData = data.slice(0).map((row) => ({
                 title: row["Title"] || 'Untitled',
                 url: row["Youtube Link"] || '',
             }));
