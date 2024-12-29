@@ -33,7 +33,7 @@ const Player = () => {
 
             const processedData = data.slice(0).map((row) => ({
                 title: row["Title"] || 'Untitled',
-                url: row["Youtube Link"] || '',
+                url: row["YouTube Link"] || '',
             }));
 
             setJasursList(processedData);
