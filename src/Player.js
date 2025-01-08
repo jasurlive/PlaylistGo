@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaExpand, FaMinus, FaSquare, FaRandom, FaPlus, FaCheckCircle, FaTimes, FaRedoAlt } from 'react-icons/fa';
 import Playlist from './Playlist';
 import './MusicPlayer.css';
-import YTPlayer, { extractVideoId } from './YT';
+import YTPlayer, { extractVideoId } from './add/YouTube';
 import nowPlayingGif from './img/equal_big.gif';
-import Shortcuts from './Shortcuts';
+import Shortcuts from './add/Shortcuts';
 import * as XLSX from 'xlsx';
 
 const Player = () => {
@@ -185,7 +185,7 @@ const Player = () => {
     const searchYouTube = async () => {
         if (!searchQuery) return;
 
-        const API_KEY = 'AIzaSyDmXg_MlBEvUb3oAtMpj-fi4Fet80b21fM';
+        const API_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
         try {
             const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(searchQuery)}&type=video&maxResults=50&key=${API_KEY}`);
             const data = await response.json();

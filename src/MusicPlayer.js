@@ -1,8 +1,8 @@
 // src/components/MusicPlayer.js
 import React from 'react';
 import Player from './Player';
-import UpDown from './UpDown';
-import SnowFall from './SnowFall';
+import UpDown from './add/UpDown';
+import SnowFall from './add/SnowFall';
 
 const MusicPlayer = () => {
     return (

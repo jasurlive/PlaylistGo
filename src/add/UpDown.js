@@ -1,7 +1,7 @@
 // src/components/UpDown.js
 import React, { useState, useEffect } from 'react';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
-import './MusicPlayer.css';
+import '../MusicPlayer.css';
 
 const UpDown = () => {
     const [isTop, setIsTop] = useState(true);

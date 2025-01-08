@@ -51,7 +51,7 @@ const YTPlayer = ({ currentVideoIndex, videoTracks, onVideoEnd, playerRef, autop
     };
 
     return (
-        <div ref={playerContainerRef} style={{ width: '100%', height: '100%' }}>
+        <div ref={playerContainerRef}>
             <YouTube
                 videoId={videoId}
                 opts={playerOpts}

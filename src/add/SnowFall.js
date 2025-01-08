@@ -6,8 +6,8 @@ const SnowFall = () => {
     return (
         <Snowfall
             color="white"
-            snowflakeCount={100}
-            radius={[0, 6]}
+            snowflakeCount={70}
+            radius={[0, 5]}
             style={{
                 position: "fixed",
                 top: 0,
