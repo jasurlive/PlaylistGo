@@ -1,0 +1,34 @@
+.container-online-users {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 2rem;
+    border-radius: 10px;
+    margin-bottom: 5rem;
+    width: 90%;
+}
+
+.container-online-users h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.container-online-users ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.container-online-users li {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container-online-users li p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #333;
+}
