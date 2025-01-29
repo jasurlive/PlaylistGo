@@ -17,7 +17,7 @@ const SnowFall = () => {
 
     return (
         <Snowfall
-            snowflakeCount={70} // Number of snowflakes
+            snowflakeCount={15} // Number of snowflakes
             radius={[0, 20]}      // Radius (size range) of snowflakes (ensure this is an array)
             style={{
                 position: "fixed",

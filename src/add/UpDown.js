@@ -5,10 +5,28 @@ import '../MusicPlayer.css';
 
 const UpDown = () => {
     const [isTop, setIsTop] = useState(true);
+    const [isBottom, setIsBottom] = useState(false);
+    const [scrollDirection, setScrollDirection] = useState('down');
 
     useEffect(() => {
+        let lastScrollY = window.scrollY;
+
         const handleScroll = () => {
-            setIsTop(window.scrollY === 0);
+            const currentScrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+
+            const atTop = currentScrollY <= 1;
+            const atBottom = windowHeight + currentScrollY >= documentHeight - 2;
+
+            setIsTop(atTop);
+            setIsBottom(atBottom);
+
+            if (!atTop && !atBottom) {
+                setScrollDirection(currentScrollY > lastScrollY ? 'down' : 'up');
+            }
+
+            lastScrollY = currentScrollY;
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -18,24 +36,25 @@ const UpDown = () => {
     }, []);
 
     const scrollTo = () => {
-        if (isTop) {
-            window.scrollTo({
-                top: document.documentElement.scrollHeight,
-                behavior: 'smooth'
-            });
+        if (isBottom) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (isTop || scrollDirection === 'down') {
+            window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
         } else {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     };
 
     return (
         <div className="updown-button" onClick={scrollTo}>
-            {isTop ? <FaChevronDown className="updown-icon" /> : <FaChevronUp className="updown-icon" />}
+            {isTop || (!isBottom && scrollDirection === 'down') ? (
+                <FaChevronDown className="updown-icon" />
+            ) : (
+                <FaChevronUp className="updown-icon" />
+            )}
         </div>
     );
 };
 
 export default UpDown;
+

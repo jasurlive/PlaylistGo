@@ -205,15 +205,15 @@ body {
 
 .updown-button {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 10px;
+    right: 10px;
     cursor: pointer;
     background: linear-gradient(135deg, #1cffa8, #2575fc);
     color: #fff;
     padding: 12px;
     border-radius: 5%;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-    font-size: 24px;
+    font-size: 20px;
     transition: transform 0.3s;
     z-index: 10;
 }
