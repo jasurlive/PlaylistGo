@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { firestore } from '../add/Firebase';
-import { doc, setDoc, collection, onSnapshot, serverTimestamp, query, where } from 'firebase/firestore';
-import { UAParser } from 'ua-parser-js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import './css/online.css';
+import React, { useEffect, useState } from "react";
+import { firestore } from "../add/Firebase";
+import {
+    doc,
+    setDoc,
+    collection,
+    onSnapshot,
+    serverTimestamp,
+    query,
+    where,
+} from "firebase/firestore";
+import { UAParser } from "ua-parser-js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import "./css/online.css";
 
 function Online() {
     const [onlineUsers, setOnlineUsers] = useState([]);
@@ -14,27 +22,47 @@ function Online() {
     useEffect(() => {
         const parser = new UAParser();
         const uaResult = parser.getResult();
-        const userId = localStorage.getItem('userId') || crypto.randomUUID();
-        localStorage.setItem('userId', userId);
 
-        const userStatusDocRef = doc(firestore, 'status', userId);
+        // Get current date and time
+        const now = new Date();
+        const date = now.toLocaleDateString("en-GB").replace(/\//g, "-"); // Format: DD-MM-YYYY
+        const time = now
+            .toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true })
+            .toLowerCase()
+            .replace(/ /g, ""); // Example: 09:30am
 
-        const isOfflineForFirestore = { state: 'offline', last_changed: serverTimestamp() };
+        // Extract user details
+        const browser = uaResult.browser.name || "unknown";
+        const os = uaResult.os.name || "unknown";
+        const device = uaResult.device.model || "Desktop";
+
+        // Create readable document ID
+        const docId = `${date}-${time}-${browser}-${device}-${os}`.toLowerCase().replace(/ /g, "-");
+
+        // Firestore reference
+        const userStatusDocRef = doc(firestore, "djmusic", docId);
+
+        const isOfflineForFirestore = { state: "offline", last_changed: serverTimestamp() };
         const isOnlineForFirestore = {
-            state: 'online',
+            state: "online",
             last_changed: serverTimestamp(),
-            browser: uaResult.browser.name,
-            os: uaResult.os.name,
-            device: uaResult.device.model || 'Desktop',
-            ip: localStorage.getItem('userIP') || '',
+            browser,
+            os,
+            device,
+            ip: localStorage.getItem("userIP") || "",
         };
 
+        // Fetch IP and store it if not already saved
         const fetchIpOnce = async () => {
-            if (!localStorage.getItem('userIP')) {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                localStorage.setItem('userIP', data.ip);
-                isOnlineForFirestore.ip = data.ip;
+            if (!localStorage.getItem("userIP")) {
+                try {
+                    const response = await fetch("https://api.ipify.org?format=json");
+                    const data = await response.json();
+                    localStorage.setItem("userIP", data.ip);
+                    isOnlineForFirestore.ip = data.ip;
+                } catch (error) {
+                    console.error("Failed to fetch IP:", error);
+                }
             }
         };
 
@@ -47,27 +75,28 @@ function Online() {
 
         updateStatus(true);
 
-        const userStatusCollectionRef = collection(firestore, 'status');
-        const onlineUsersQuery = query(userStatusCollectionRef, where('state', '==', 'online'));
+        const userStatusCollectionRef = collection(firestore, "djmusic");
+        const onlineUsersQuery = query(userStatusCollectionRef, where("state", "==", "online"));
+
         const unsubscribe = onSnapshot(onlineUsersQuery, (snapshot) => {
             setOnlineUsers(snapshot.docs.map((doc) => doc.data()));
             setLoading(false);
         });
 
         const handleVisibilityChange = () => {
-            if (document.visibilityState === 'hidden') {
+            if (document.visibilityState === "hidden") {
                 updateStatus(false);
             } else {
                 updateStatus(true);
             }
         };
 
-        document.addEventListener('visibilitychange', handleVisibilityChange);
+        document.addEventListener("visibilitychange", handleVisibilityChange);
 
         return () => {
             updateStatus(false);
             unsubscribe();
-            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            document.removeEventListener("visibilitychange", handleVisibilityChange);
         };
     }, []);
 
@@ -81,7 +110,7 @@ function Online() {
             <h5>
                 <button onClick={toggleDetails}>
                     <FontAwesomeIcon icon={isDetailVisible ? faChevronUp : faChevronDown} />
-                    {isDetailVisible ? ' Hide' : ' Show'}
+                    {isDetailVisible ? " Hide" : " Show"}
                 </button>
             </h5>
 
@@ -93,7 +122,10 @@ function Online() {
                             <p>IP Address: {user.ip}</p>
                             <p>OS: {user.os}</p>
                             <p>Device: {user.device}</p>
-                            <p>Last Changed: {user.last_changed ? new Date(user.last_changed.toDate()).toLocaleString() : 'N/A'}</p>
+                            <p>
+                                Last Changed:{" "}
+                                {user.last_changed ? new Date(user.last_changed.toDate()).toLocaleString() : "N/A"}
+                            </p>
                         </li>
                     ))}
                 </ul>
@@ -103,4 +135,3 @@ function Online() {
 }
 
 export default Online;
-
