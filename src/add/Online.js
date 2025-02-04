@@ -22,82 +22,69 @@ function Online() {
     useEffect(() => {
         const parser = new UAParser();
         const uaResult = parser.getResult();
-
-        // Get current date and time
-        const now = new Date();
-        const date = now.toLocaleDateString("en-GB").replace(/\//g, "-"); // Format: DD-MM-YYYY
-        const time = now
-            .toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true })
-            .toLowerCase()
-            .replace(/ /g, ""); // Example: 09:30am
-
-        // Extract user details
         const browser = uaResult.browser.name || "unknown";
         const os = uaResult.os.name || "unknown";
         const device = uaResult.device.model || "Desktop";
 
-        // Create readable document ID
-        const docId = `${date}-${time}-${browser}-${device}-${os}`.toLowerCase().replace(/ /g, "-");
-
-        // Firestore reference
-        const userStatusDocRef = doc(firestore, "djmusic", docId);
-
-        const isOfflineForFirestore = { state: "offline", last_changed: serverTimestamp() };
-        const isOnlineForFirestore = {
-            state: "online",
-            last_changed: serverTimestamp(),
-            browser,
-            os,
-            device,
-            ip: localStorage.getItem("userIP") || "",
-        };
-
-        // Fetch IP and store it if not already saved
-        const fetchIpOnce = async () => {
-            if (!localStorage.getItem("userIP")) {
-                try {
+        const fetchIpAndUpdate = async () => {
+            try {
+                let ip = localStorage.getItem("userIP");
+                if (!ip) {
                     const response = await fetch("https://api.ipify.org?format=json");
                     const data = await response.json();
-                    localStorage.setItem("userIP", data.ip);
-                    isOnlineForFirestore.ip = data.ip;
-                } catch (error) {
-                    console.error("Failed to fetch IP:", error);
+                    ip = data.ip;
+                    localStorage.setItem("userIP", ip);
                 }
-            }
-        };
 
-        fetchIpOnce();
+                const docId = `${ip}-${browser}-${device}-${os}`.toLowerCase().replace(/ /g, "-");
+                const userStatusDocRef = doc(firestore, "djmusic", docId);
 
-        const updateStatus = async (isOnline) => {
-            const status = isOnline ? isOnlineForFirestore : isOfflineForFirestore;
-            await setDoc(userStatusDocRef, status, { merge: true });
-        };
+                const isOfflineForFirestore = { state: "offline", last_changed: serverTimestamp() };
+                const isOnlineForFirestore = {
+                    state: "online",
+                    last_changed: serverTimestamp(),
+                    browser,
+                    os,
+                    device,
+                    ip,
+                };
 
-        updateStatus(true);
+                const updateStatus = async (isOnline) => {
+                    const status = isOnline ? isOnlineForFirestore : isOfflineForFirestore;
+                    await setDoc(userStatusDocRef, status, { merge: true });
+                };
 
-        const userStatusCollectionRef = collection(firestore, "djmusic");
-        const onlineUsersQuery = query(userStatusCollectionRef, where("state", "==", "online"));
-
-        const unsubscribe = onSnapshot(onlineUsersQuery, (snapshot) => {
-            setOnlineUsers(snapshot.docs.map((doc) => doc.data()));
-            setLoading(false);
-        });
-
-        const handleVisibilityChange = () => {
-            if (document.visibilityState === "hidden") {
-                updateStatus(false);
-            } else {
                 updateStatus(true);
+
+                const userStatusCollectionRef = collection(firestore, "djmusic");
+                const onlineUsersQuery = query(userStatusCollectionRef, where("state", "==", "online"));
+
+                const unsubscribe = onSnapshot(onlineUsersQuery, (snapshot) => {
+                    setOnlineUsers(snapshot.docs.map((doc) => doc.data()));
+                    setLoading(false);
+                });
+
+                const handleVisibilityChange = () => {
+                    if (document.visibilityState === "hidden") {
+                        updateStatus(false);
+                    } else {
+                        updateStatus(true);
+                    }
+                };
+
+                document.addEventListener("visibilitychange", handleVisibilityChange);
+
+                return () => {
+                    updateStatus(false);
+                    unsubscribe();
+                    document.removeEventListener("visibilitychange", handleVisibilityChange);
+                };
+            } catch (error) {
+                console.error("Error fetching IP:", error);
             }
         };
 
-        document.addEventListener("visibilitychange", handleVisibilityChange);
-
-        return () => {
-            updateStatus(false);
-            unsubscribe();
-            document.removeEventListener("visibilitychange", handleVisibilityChange);
-        };
+        fetchIpAndUpdate();
     }, []);
 
     const toggleDetails = () => setIsDetailVisible(!isDetailVisible);

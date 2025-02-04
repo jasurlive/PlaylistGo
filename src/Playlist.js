@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { FaTrash, FaGripVertical, FaChevronDown, FaChevronUp, FaMusic, FaThLarge, FaBars } from 'react-icons/fa';
-import './MusicPlayer.css';
+import { FaTrash, FaChevronDown, FaChevronUp, FaMusic, FaThLarge, FaBars } from 'react-icons/fa';
+import './add/css/playlist.css';
 
 const ITEM_TYPE = 'SONG_ITEM';
 
@@ -12,6 +12,7 @@ const SongItem = ({
     playSelectedVideo,
     deleteSong,
     currentVideoIndex,
+    viewStyle,
 }) => {
     const [, dragRef] = useDrag({
         type: ITEM_TYPE,
@@ -34,16 +35,18 @@ const SongItem = ({
             className={`song-item ${currentVideoIndex === index ? 'active' : ''}`}
             onClick={() => playSelectedVideo(index)}
         >
-            <FaGripVertical className="drag-icon" />
+
             <span className="song-title">{track.title}</span>
             {currentVideoIndex === index && <div className="now-playing-gradient" />}
-            <FaTrash
-                onClick={(e) => {
-                    e.stopPropagation();
-                    deleteSong(index);
-                }}
-                className="icon delete-icon"
-            />
+            {viewStyle !== 'cubical-view' && (
+                <FaTrash
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        deleteSong(index);
+                    }}
+                    className="icon delete-icon"
+                />
+            )}
         </li>
     );
 };
@@ -94,10 +97,10 @@ const Playlist = ({
 }) => {
     const [isCustomCollapsed, setCustomCollapsed] = useState(false);
     const [isJasursCollapsed, setJasursCollapsed] = useState(false);
-    const [customViewStyle, setCustomViewStyle] = useState('list-view');
+    const [customViewStyle, setCustomViewStyle] = useState('cubical-view');
     const [jasursViewStyle, setJasursViewStyle] = useState('list-view');
 
-    // Load view styles from localStorage on component mount
+
     useEffect(() => {
         const savedCustomViewStyle = localStorage.getItem('customViewStyle');
         const savedJasursViewStyle = localStorage.getItem('jasursViewStyle');
@@ -106,12 +109,12 @@ const Playlist = ({
         if (savedJasursViewStyle) setJasursViewStyle(savedJasursViewStyle);
     }, []);
 
-    // Save custom view style to localStorage when it changes
+
     useEffect(() => {
         localStorage.setItem('customViewStyle', customViewStyle);
     }, [customViewStyle]);
 
-    // Save Jasur's view style to localStorage when it changes
+
     useEffect(() => {
         localStorage.setItem('jasursViewStyle', jasursViewStyle);
     }, [jasursViewStyle]);
@@ -160,6 +163,7 @@ const Playlist = ({
                         playSelectedVideo={playSelectedVideo}
                         deleteSong={deleteSong}
                         currentVideoIndex={currentVideoIndex}
+                        viewStyle={customViewStyle}
                     />
                 ))}
             </PlaylistSection>
@@ -181,6 +185,7 @@ const Playlist = ({
                         playSelectedVideo={(index) => playSelectedVideo(customSongs.length + index)}
                         deleteSong={deleteJasursSong}
                         currentVideoIndex={currentVideoIndex - customSongs.length}
+                        viewStyle={jasursViewStyle}
                     />
                 ))}
             </PlaylistSection>
