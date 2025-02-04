@@ -259,7 +259,7 @@ body {
 .music-player {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
-    margin: 20px auto;
+    margin: 5px auto;
     padding: 30px;
     max-width: 95%;
     background: rgba(255, 255, 255, 0.95);
