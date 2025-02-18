@@ -5,7 +5,7 @@ const Header = () => {
     return (
 
 
-        <div className="header" onClick={() => window.location.href = "/"}>
+        <div className="header" onClick={() => window.location.href = "/DJ"}>
             <div className="logo-text">DJ's playlist ツ 🖤🎧</div>
         </div>
     );

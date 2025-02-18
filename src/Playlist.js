@@ -133,8 +133,8 @@ const Playlist = ({
         }),
         useSensor(TouchSensor, {
             activationConstraint: {
-                delay: 200, // Slightly longer delay to prevent accidental drags
-                tolerance: 10, // Increased tolerance for more responsive dragging
+                delay: 100, // Slightly longer delay to prevent accidental drags
+                tolerance: 150, // Increased tolerance for more responsive dragging
             },
         })
     );

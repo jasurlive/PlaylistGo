@@ -56,12 +56,18 @@ const Player = () => {
         fetchPlaylist();
     }, []);
 
-
-    const videoTracks = [...customSongs, ...jasursList];
+    useEffect(() => {
+        const savedCustomSongs = localStorage.getItem('customSongs');
+        if (savedCustomSongs) {
+            setCustomSongs(JSON.parse(savedCustomSongs));
+        }
+    }, []);
 
     useEffect(() => {
         localStorage.setItem('customSongs', JSON.stringify(customSongs));
     }, [customSongs]);
+
+    const videoTracks = [...customSongs, ...jasursList];
 
     useEffect(() => {
         const handleClickOutside = (event) => {
