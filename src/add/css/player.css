@@ -67,55 +67,6 @@ body {
     justify-content: center;
 }
 
-.App {
-    text-align: center;
-}
-
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
-}
-
-.App-header {
-    background-color: rgba(40, 44, 52, 0.9);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
-
-.App-link {
-    color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.drag-icon {
-    cursor: grab;
-    margin-right: 8px;
-    vertical-align: middle;
-}
-
-.drag-icon:active {
-    cursor: grabbing;
-}
 
 .shuffle-button,
 .repeat-button {
@@ -125,7 +76,7 @@ body {
 
 .shuffle-button.active,
 .repeat-button.active {
-    color: #f1ff73;
+    color: #02ffb3;
 }
 
 .updown-button {
@@ -186,7 +137,7 @@ body {
     margin-top: 10px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    max-height: 200px;
+    max-height: 250px;
     overflow-y: auto;
     padding: 10px;
     transition: background-color 0.3s ease;
@@ -244,6 +195,7 @@ body {
     width: 100%;
     padding-top: 56.25%;
     position: relative;
+    z-index: 2000;
 }
 
 .youtube-container iframe {
@@ -268,7 +220,7 @@ body {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
-.music-player.dark-mode {
+.music-player {
     background-color: #282c34ac;
     color: #ffffff;
 }
@@ -304,7 +256,12 @@ body {
 }
 
 .controls>*:hover {
-    transform: scale(1.1);
+    transform: scale(1);
+    box-shadow: 1px 1px 1px 1px rgba(0, 255, 234, 0.704);
+}
+
+.controls>*:active {
+    transform: scale(0.85);
 }
 
 .add-song {
@@ -348,33 +305,28 @@ button:active {
     transform: scale(0.9);
 }
 
-@media (max-width: 1250px) {
-    .music-player {
-        padding: 15px;
-        width: 90%;
-        border-radius: 10px;
-    }
-}
-
-@media (max-width: 768px) {
+@media (min-width: 768px) {
     .music-player {
         padding: 15px;
         width: 100%;
         border-radius: 10px;
     }
 
-    .add-song input {
-        font-size: 0.9rem;
-        width: 100%;
-    }
 
-    .controls {
+
+    h2 {
         font-size: 1.5rem;
-        align-items: center;
     }
 }
 
 @media (max-width: 480px) {
+
+    .music-player {
+        padding: 15px;
+        width: 100%;
+        border-radius: 10px;
+    }
+
     .add-song {
         margin-top: 20px;
         display: flex;
@@ -395,5 +347,9 @@ button:active {
     .controls {
         gap: 10px;
         font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1rem;
     }
 }

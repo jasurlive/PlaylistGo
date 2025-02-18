@@ -30,7 +30,6 @@
     border: 1px solid #ccc;
     padding: 0.5rem;
     border-radius: 5px;
-    overflow: hidden;
     text-align: center;
 }
 
@@ -197,6 +196,7 @@ h2 {
 
     .song-item {
         padding: 10px;
+        user-select: none;
     }
 }
 
@@ -225,12 +225,8 @@ h2 {
         flex-grow: 1;
     }
 
-    .drop-line {
-        height: 2px;
-        background: #ff5722;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: -5px;
+    .song-list.cubical-view .song-item:hover,
+    .song-list.list-view .song-item:hover {
+        background-color: none;
     }
 }

@@ -39,10 +39,7 @@ const Shortcuts = ({
                 case 'q':
                     onToggleShuffle();
                     break;
-                case 'f':
-                    event.preventDefault();
-                    onToggleFullScreen(); // Call the function to toggle fullscreen
-                    break;
+
                 case 'r':
                 case 'w':
                     onToggleRepeatOne();

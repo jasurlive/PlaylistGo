@@ -3,9 +3,11 @@ import '../add/css/header.css';
 
 const Header = () => {
     return (
-        <header className="header">
-            <div className="logo">your playlist ツ 🖤🎧</div>
-        </header>
+
+
+        <div className="header" onClick={() => window.location.href = "/"}>
+            <div className="logo-text">DJ's playlist ツ 🖤🎧</div>
+        </div>
     );
 };
 

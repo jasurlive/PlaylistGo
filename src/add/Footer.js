@@ -24,7 +24,7 @@ const Footer = () => {
                         <FontAwesomeIcon icon={faEnvelope} />
                     </a>
                 </div>
-                <p>&copy; 2023{currentYear > 2023 ? `-${currentYear}` : ''} <a href='https://jasurlive.uz'>jasurlive.uz</a> | All rights reserved ©</p>
+                <p>&copy; 2023{currentYear > 2023 ? `-${currentYear}` : ''} <a href='https://jasurlive.uz'>jasurlive.uz</a> | All rights reserved.</p>
             </div>
         </footer>
     );

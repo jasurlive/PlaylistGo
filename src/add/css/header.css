@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
 .header {
     background-color: #f0f8ff88;
     color: #333;
@@ -10,19 +12,30 @@
     text-align: center;
     width: 18rem;
     margin: 5px auto 0;
-    font-family: 'Comic Sans MS', 'Comic Neue', cursive;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
-.logo {
-    font-size: 1.4em;
-    font-weight: bold;
+
+.logo-text {
+    font-family: 'Dancing Script', cursive, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
     background: linear-gradient(45deg, #ff6b6b, #f06595, #cc5de8, #845ef7, #5c7cfa, #339af0, #22b8cf, #000000, #000000, #000000, #000000, #000000);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradient 3s ease infinite;
+    animation: gradient 6s ease infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
 }
+
+
 
 @keyframes gradient {
     0% {
