@@ -1,4 +1,4 @@
-# DJ Jasur Music Player in Typescript
+# DJ YouTube Music Player in Typescript
 
 Now users can search songs directly on the page itself 🎉✅🔍♻️
 

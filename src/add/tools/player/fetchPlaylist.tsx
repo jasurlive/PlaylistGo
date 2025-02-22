@@ -10,7 +10,7 @@ interface Video {
 
 export const fetchPlaylist = async (setJasursList: React.Dispatch<React.SetStateAction<Video[]>>, setCurrentVideo: React.Dispatch<React.SetStateAction<Video>>, setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>, playerRef: React.RefObject<any>) => {
     try {
-        const response = await fetch('/songs.xlsx');
+        const response = await fetch('python/songs.xlsx');
         const arrayBuffer = await response.arrayBuffer();
         const workbook = XLSX.read(arrayBuffer, { type: 'array' });
         const sheet = workbook.Sheets["Active"];
