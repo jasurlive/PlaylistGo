@@ -90,24 +90,20 @@ ul {
     padding-left: 0;
 }
 
-.now-playing-gif {
-    width: 50px;
-    height: auto;
-    margin-left: 10px;
-    vertical-align: middle;
-}
+
 
 .now-playing-big-gif {
-    position: relative;
     width: auto;
     height: 1.5rem;
-    margin-inline: 5px;
+    margin-right: 5px;
     vertical-align: middle;
 }
 
 h2 {
     font-size: 1.5rem;
     padding: 0.2rem;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .song-list.list-view .song-item {

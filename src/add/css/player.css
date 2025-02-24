@@ -1,13 +1,11 @@
-/* Global Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
 }
 
 body {
-    margin: 0;
     background: linear-gradient(270deg,
             rgba(255, 92, 51, 0.5),
             rgba(255, 204, 51, 0.5),
@@ -57,21 +55,13 @@ body {
 }
 
 .view-icon.active {
-    color: #f4ff60;
+    color: #02ffb3;
 }
-
-.text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
 
 .shuffle-button,
 .repeat-button {
     color: #c3c3c3;
-    transition: color 0.3s ease;
+    transition: color 0.3s;
 }
 
 .shuffle-button.active,
@@ -98,32 +88,27 @@ body {
     transform: scale(1.1);
 }
 
-.updown-icon {
-    font-size: 1.5em;
-}
-
 .youtube-container {
+    position: sticky;
+    top: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     width: 100%;
     max-width: 30rem;
     border-radius: 15px;
     overflow: hidden;
-    margin: 0 auto;
-    margin-top: 10px;
-}
-
-.youtube-container.fullscreen {
-    padding-top: 56.25%;
+    margin: 10px auto 0;
+    border: rgba(255, 255, 255, 0.515) 1px solid;
+    background-color: #000000b5;
+    z-index: 500;
+    resize: both;
 }
 
 .youtube-container .video-wrapper {
-    display: flex;
     width: 100%;
     padding-top: 56.25%;
     position: relative;
-    z-index: 2000;
 }
 
 .youtube-container iframe {
@@ -137,7 +122,6 @@ body {
 }
 
 .music-player {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
     margin: 5px auto;
     padding: 30px;
@@ -145,38 +129,20 @@ body {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 15px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-.music-player {
+    transition: background 0.3s, color 0.3s;
     background-color: #282c34ac;
     color: #ffffff;
 }
 
-#player-container:fullscreen {
-    width: 100%;
-    overflow: scroll;
-    overflow-x: hidden;
-    background: linear-gradient(270deg,
-            rgba(51, 255, 204, 0.5),
-            rgba(51, 194, 255, 0.5),
-            rgba(51, 255, 204, 0.5),
-            rgba(51, 204, 255, 0.5),
-            rgba(185, 104, 247, 0.716),
-            rgba(51, 170, 255, 0.5),
-            rgba(51, 255, 201, 0.5),
-            rgba(51, 221, 255, 0.5));
-    background-size: 800% 800%;
-    animation: gradientAnimation 20s ease-in-out infinite;
-}
 
 .controls {
-    margin-top: 20px;
+    margin: 20px 0 10px;
     display: flex;
     justify-content: center;
     color: white;
     gap: 20px;
     font-size: 2rem;
+    cursor: pointer;
 }
 
 .controls>* {
@@ -206,7 +172,7 @@ body {
     font-size: 1rem;
     border: 1px solid #007bff;
     border-radius: 5px;
-    transition: border 0.3s ease;
+    transition: border 0.3s;
 }
 
 .add-song input:focus {
@@ -214,27 +180,7 @@ body {
     outline: none;
 }
 
-button {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 16px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.5s ease-in-out, transform 0.2s ease;
-}
 
-button:hover {
-    background-color: #c540b1;
-    transform: translateY(-2px);
-}
-
-button:active {
-    transform: scale(0.9);
-}
 
 @media (min-width: 768px) {
     .music-player {
@@ -243,14 +189,29 @@ button:active {
         border-radius: 10px;
     }
 
-
-
     h2 {
         font-size: 1.5rem;
     }
 }
 
 @media (max-width: 480px) {
+
+
+    .youtube-container {
+        position: sticky;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 100%;
+        border-radius: 15px;
+        overflow: hidden;
+        margin: 10px auto 0;
+        border: rgba(255, 255, 255, 0.515) 1px solid;
+        background-color: #000000b5;
+        z-index: 500;
+        resize: both;
+    }
 
     .music-player {
         padding: 15px;
@@ -270,9 +231,6 @@ button:active {
         width: 100%;
     }
 
-    button {
-        font-size: 0.9rem;
-    }
 
     .controls {
         gap: 10px;

@@ -76,7 +76,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                             <span>{result.title}</span>
                             <button
                                 onClick={() => addSongFromSearch(result)}
-                                className="button"
+                                className="add-button"
                             >
                                 {addedSongs.has(result.url) ? <FaCheckCircle /> : <FaPlus />}
                                 <span>

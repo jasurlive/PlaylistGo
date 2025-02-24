@@ -94,17 +94,17 @@ const Player: React.FC = () => {
                         autoplay={isPlaying}
                     />
                 </div>
-            </div>
-            <PlayerControls
-                isPlaying={isPlaying}
-                onPlayPauseToggle={() => onPlayPauseToggle(isPlaying, setIsPlaying, playerRef)}
-                playNextVideo={() => playNextVideo(videoTracks, currentVideo, setCurrentVideo, setIsPlaying, isShuffle, playerRef)}
-                playPreviousVideo={() => playPreviousVideo(videoTracks, currentVideo, setCurrentVideo, setIsPlaying, playerRef)}
-                isShuffle={isShuffle}
-                setIsShuffle={setIsShuffle}
-                isRepeatOne={isRepeatOne}
-                setIsRepeatOne={setIsRepeatOne}
-            />
+
+                <PlayerControls
+                    isPlaying={isPlaying}
+                    onPlayPauseToggle={() => onPlayPauseToggle(isPlaying, setIsPlaying, playerRef)}
+                    playNextVideo={() => playNextVideo(videoTracks, currentVideo, setCurrentVideo, setIsPlaying, isShuffle, playerRef)}
+                    playPreviousVideo={() => playPreviousVideo(videoTracks, currentVideo, setCurrentVideo, setIsPlaying, playerRef)}
+                    isShuffle={isShuffle}
+                    setIsShuffle={setIsShuffle}
+                    isRepeatOne={isRepeatOne}
+                    setIsRepeatOne={setIsRepeatOne}
+                /></div>
             <SearchBar
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
