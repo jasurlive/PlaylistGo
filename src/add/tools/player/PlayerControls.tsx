@@ -1,6 +1,7 @@
 import React from 'react';
-import { FaPlayCircle, FaPauseCircle, FaForward, FaBackward, FaRandom, FaRedoAlt } from 'react-icons/fa';
-
+import { GrPause, GrPlayFill } from "react-icons/gr";
+import { LuRepeat1, LuShuffle } from "react-icons/lu";
+import { RxTrackNext, RxTrackPrevious } from "react-icons/rx";
 interface PlayerControlsProps {
     isPlaying: boolean;
     onPlayPauseToggle: () => void;
@@ -24,23 +25,30 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
 }) => {
     return (
         <div className="controls">
-            <FaBackward onClick={playPreviousVideo} />
-            {isPlaying ? (
-                <FaPauseCircle onClick={onPlayPauseToggle} />
-            ) : (
-                <FaPlayCircle onClick={onPlayPauseToggle} />
-            )}
-            <FaForward onClick={playNextVideo} />
-            <div className={`shuffle-button ${isShuffle ? 'active' : ''}`}
+            <button className={`shuffle-button ${isShuffle ? 'active' : ''}`}
                 onClick={() => setIsShuffle(!isShuffle)}
             >
-                <FaRandom />
-            </div>
-            <div className={`repeat-button ${isRepeatOne ? 'active' : ''}`}
+                <LuShuffle />
+            </button>
+            <button onClick={playPreviousVideo}>
+                <RxTrackPrevious />
+            </button>
+            <button onClick={onPlayPauseToggle}>
+                {isPlaying ? (
+                    <GrPause />
+                ) : (
+                    <GrPlayFill />
+                )}
+            </button>
+            <button className="next-button" onClick={playNextVideo}>
+                <RxTrackNext />
+            </button>
+
+            <button className={`repeat-button ${isRepeatOne ? 'active' : ''}`}
                 onClick={() => setIsRepeatOne(!isRepeatOne)}
             >
-                <FaRedoAlt />
-            </div>
+                <LuRepeat1 />
+            </button>
         </div>
     );
 };

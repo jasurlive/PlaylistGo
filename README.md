@@ -2,6 +2,9 @@
 
 Now users can search songs directly on the page itself 🎉✅🔍♻️
 
+![image](https://github.com/user-attachments/assets/364e27a4-11d8-4937-928d-7e44a08cd84b)
+
+
 ![image](https://github.com/user-attachments/assets/383d27bd-f099-4172-9dda-7e0a64098908)
 
 

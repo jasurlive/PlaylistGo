@@ -44,14 +44,21 @@ const YTPlayer: React.FC<YTPlayerProps> = ({ currentVideoId, videoTracks, onVide
         },
     };
 
+    const onVideoEndHandler = () => {
+        onVideoEnd();
+    };
+
     return (
         <div>
             <YouTube
                 key={videoId}
                 videoId={videoId || ''}
                 opts={playerOpts}
-                onEnd={onVideoEnd}
+                onEnd={onVideoEndHandler}
                 ref={playerRef}
+                onReady={(event) => {
+                    playerRef.current = event.target;
+                }}
             />
         </div>
     );

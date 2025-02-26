@@ -5,18 +5,7 @@ interface Video {
     thumbnail: string;
 }
 
-export const onPlayPauseToggle = (isPlaying: boolean, setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>, playerRef: React.RefObject<any>) => {
-    const player = playerRef.current?.internalPlayer;
-    if (player) {
-        if (isPlaying) {
-            player.pauseVideo();
-            setIsPlaying(false);
-        } else {
-            player.playVideo();
-            setIsPlaying(true);
-        }
-    }
-};
+
 
 export const onVideoEnd = (isRepeatOne: boolean, playNextVideo: () => void, playerRef: React.RefObject<any>) => {
     const player = playerRef.current?.internalPlayer;

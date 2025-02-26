@@ -103,7 +103,7 @@ interface Video {
     id: string;
     title: string;
     url: string;
-    thumbnail: string; // Ensure thumbnail is always defined
+    thumbnail: string;
 }
 
 interface PlaylistProps {

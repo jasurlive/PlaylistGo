@@ -9,7 +9,7 @@ import PlayerControls from './add/tools/player/PlayerControls';
 import SearchBar from './add/tools/player/SearchBar';
 import { fetchPlaylist } from './add/tools/player/fetchPlaylist';
 import { useCustomSongs } from './add/tools/player/useCustomSongs';
-import { onPlayPauseToggle, onVideoEnd, playNextVideo, playPreviousVideo, playSelectedVideo } from './add/tools/player/videoControls';
+import { playNextVideo, playPreviousVideo, playSelectedVideo } from './add/tools/player/videoControls';
 
 interface Video {
     id: string;
@@ -70,15 +70,51 @@ const Player: React.FC = () => {
         setSearchResults([]);
     };
 
+    const handlePlayPauseToggle = () => {
+        if (playerRef.current) {
+            const playerState = playerRef.current.getPlayerState();
+            if (playerState === 1) {
+                playerRef.current.pauseVideo();
+                setIsPlaying(false);
+            } else {
+                playerRef.current.playVideo();
+                setIsPlaying(true);
+            }
+        }
+    };
+
+    const toggleFullScreen = () => {
+        if (playerRef.current) {
+            playerRef.current.getIframe().contentWindow.postMessage(
+                JSON.stringify({
+                    event: 'command',
+                    func: 'fullscreen',
+                    args: []
+                }),
+                '*'
+            );
+        }
+    };
+
+    const onVideoEndHandler = () => {
+        if (isRepeatOne) {
+            playerRef.current.seekTo(0);
+            playerRef.current.playVideo();
+        } else {
+            playNextVideo(videoTracks, currentVideo, setCurrentVideo, setIsPlaying, isShuffle, playerRef);
+        }
+    };
+
     return (
         <div className="music-player" id="player-container">
             <Shortcuts
                 onSearchFocus={() => (document.querySelector('input[type="text"]') as HTMLInputElement)?.focus()}
-                onPlayPauseToggle={() => onPlayPauseToggle(isPlaying, setIsPlaying, playerRef)}
+                onPlayPauseToggle={handlePlayPauseToggle}
                 onPlayPrevious={() => playPreviousVideo(videoTracks, currentVideo, setCurrentVideo, setIsPlaying, playerRef)}
                 onPlayNext={() => playNextVideo(videoTracks, currentVideo, setCurrentVideo, setIsPlaying, isShuffle, playerRef)}
                 onToggleShuffle={() => setIsShuffle(!isShuffle)}
                 onToggleRepeatOne={() => setIsRepeatOne(!isRepeatOne)}
+                onToggleFullScreen={toggleFullScreen}
             />
             <h2>
                 {isPlaying && <img src={nowPlayingGif} alt="Now Playing" className="now-playing-big-gif" />}
@@ -89,7 +125,7 @@ const Player: React.FC = () => {
                     <YTPlayer
                         currentVideoId={currentVideo.id}
                         videoTracks={videoTracks}
-                        onVideoEnd={() => onVideoEnd(isRepeatOne, () => playNextVideo(videoTracks, currentVideo, setCurrentVideo, setIsPlaying, isShuffle, playerRef), playerRef)}
+                        onVideoEnd={onVideoEndHandler}
                         playerRef={playerRef}
                         autoplay={isPlaying}
                     />
@@ -97,7 +133,7 @@ const Player: React.FC = () => {
 
                 <PlayerControls
                     isPlaying={isPlaying}
-                    onPlayPauseToggle={() => onPlayPauseToggle(isPlaying, setIsPlaying, playerRef)}
+                    onPlayPauseToggle={handlePlayPauseToggle}
                     playNextVideo={() => playNextVideo(videoTracks, currentVideo, setCurrentVideo, setIsPlaying, isShuffle, playerRef)}
                     playPreviousVideo={() => playPreviousVideo(videoTracks, currentVideo, setCurrentVideo, setIsPlaying, playerRef)}
                     isShuffle={isShuffle}

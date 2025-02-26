@@ -26,7 +26,6 @@
     margin-top: 20px;
     width: 100%;
     height: 20rem;
-    max-width: 1200px;
     margin: 20px auto;
     padding: 10px;
     border-radius: 10px;
@@ -67,28 +66,37 @@
     background-color: #f0f0f059;
 }
 
+.search-result-item button {
+    display: block;
+    border: none;
+    color: #fff;
+    background: #007bff;
+    flex: 0 0 auto;
+    width: fit-content;
+    min-width: 80px;
+    max-width: 80px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.search-result-item button:hover {
+    background: #000cb3;
+    transform: translateY(-3px);
+    cursor: pointer;
+}
+
+.search-result-item button:active {
+    background-color: bisque;
+    color: #000cb3;
+}
+
 
 .thumbnail {
     width: 100px;
     height: auto;
     margin-right: 20px;
     border-radius: 5px;
-}
-
-.add-button {
-    padding: 10px 20px;
-    width: 100px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.add-button:hover {
-    background-color: #000cb3;
-    transform: translateY(-3px);
 }
 
 .search-container {
@@ -137,9 +145,18 @@
     text-align: center;
 }
 
+.search-result-title {
+    font-size: 15px;
+    margin: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
 
 
-@media (max-width: 500px) {
+
+@media (max-width: 480px) {
     .thumbnail {
         width: 70px;
         height: auto;
@@ -164,29 +181,29 @@
         transition: background-color 0.3s ease;
     }
 
-    .search-result-item .button {
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        width: 75px;
+    .search-result-item button {
+        display: block;
+        border: none;
+        color: #fff;
+        background: #007bff;
+        flex: 0 0 auto;
+        width: fit-content;
+        min-width: 70px;
+        max-width: 70px;
         height: 30px;
+        border-radius: 5px;
         font-size: 8px;
     }
 
-    .add-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 70px;
-        height: 40px;
-        font-size: 8px;
-        text-align: right;
-        border: none;
-        border-radius: 5px;
-        background-color: #007bff;
-        color: #fff;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
+
+
+    .search-result-title {
+        font-size: 12px;
+        margin: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
     }
 
 }

@@ -169,7 +169,7 @@ h2 {
     text-align: center;
 }
 
-@media (min-width: 769px) and (max-width: 19000px) {
+@media (min-width: 769px) {
 
     .song-list.list-view {
         font-size: 1rem;
@@ -177,7 +177,12 @@ h2 {
 
 }
 
-@media (max-width: 768px) {
+
+
+@media (max-width: 480px)
+/* ------------------------------------------------------------ MOBILE */
+    {
+
     .playlists-container {
         flex-direction: column;
         width: 100%;
@@ -190,25 +195,17 @@ h2 {
         margin-bottom: 20px;
     }
 
-    .song-item {
-        padding: 10px;
-        user-select: none;
-    }
-}
-
-@media (max-width: 480px)
-/* ------------------------------------------------------------ MOBILE */
-    {
 
     .song-list.cubical-view {
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
-        padding: 0.5rem;
+        padding: 1rem;
     }
 
     .song-list.list-view {
         font-size: 0.7rem;
+        padding: 1.5rem;
     }
 
     .song-list.cubical-view .song-item {
@@ -225,4 +222,6 @@ h2 {
     .song-list.list-view .song-item:hover {
         background-color: none;
     }
+
+
 }

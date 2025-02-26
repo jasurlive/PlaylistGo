@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from 'react';
-import { FaPlus, FaCheckCircle, FaTimes } from 'react-icons/fa';
+import { FaPlus, FaCheckCircle } from 'react-icons/fa';
+import { SlClose } from "react-icons/sl";
 import '../../css/searchbar.css';
+import { BsSearchHeart } from "react-icons/bs";
 
 interface Video {
     id: string;
@@ -58,14 +60,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
                     onFocus={clearSearch}
                     onKeyDown={(e) => e.key === 'Enter' && searchYouTube()}
                 />
-                <button onClick={searchYouTube}>🔍Search</button>
+                <button onClick={searchYouTube}><BsSearchHeart />Search</button>
             </div>
 
             {searchResults.length > 0 && (
                 <div className="search-results" ref={resultsRef}>
                     <div className="search-results-header">
                         <h3>Search Results</h3>
-                        <FaTimes onClick={closeSearchResults} className="close-icon" />
+                        <SlClose onClick={closeSearchResults} className="close-icon" />
                     </div>
                     {searchResults.map((result) => (
                         <div
@@ -73,10 +75,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
                             className="search-result-item"
                         >
                             <img src={result.thumbnail} alt={result.title} className="thumbnail" />
-                            <span>{result.title}</span>
+                            <span className="search-result-title">{result.title}</span>
                             <button
                                 onClick={() => addSongFromSearch(result)}
-                                className="add-button"
                             >
                                 {addedSongs.has(result.url) ? <FaCheckCircle /> : <FaPlus />}
                                 <span>

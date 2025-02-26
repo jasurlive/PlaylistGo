@@ -23,7 +23,7 @@ const Shortcuts: React.FC<ShortcutsProps> = ({
         const handleKeydown = (event: KeyboardEvent) => {
             const isInputFocused = document.activeElement?.tagName === 'INPUT';
 
-            if (isInputFocused) {
+            if (isInputFocused || event.ctrlKey || event.altKey || event.shiftKey || event.metaKey) {
                 return;
             }
 
@@ -47,7 +47,12 @@ const Shortcuts: React.FC<ShortcutsProps> = ({
                     break;
                 case 'r':
                 case 'w':
+                case '1':
                     onToggleRepeatOne();
+                    break;
+                case 'f':
+                    event.preventDefault();
+                    onToggleFullScreen?.();
                     break;
                 default:
                     break;
