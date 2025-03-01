@@ -83,18 +83,7 @@ const Player: React.FC = () => {
         }
     };
 
-    const toggleFullScreen = () => {
-        if (playerRef.current) {
-            playerRef.current.getIframe().contentWindow.postMessage(
-                JSON.stringify({
-                    event: 'command',
-                    func: 'fullscreen',
-                    args: []
-                }),
-                '*'
-            );
-        }
-    };
+
 
     const onVideoEndHandler = () => {
         if (isRepeatOne) {
@@ -114,7 +103,6 @@ const Player: React.FC = () => {
                 onPlayNext={() => playNextVideo(videoTracks, currentVideo, setCurrentVideo, setIsPlaying, isShuffle, playerRef)}
                 onToggleShuffle={() => setIsShuffle(!isShuffle)}
                 onToggleRepeatOne={() => setIsRepeatOne(!isRepeatOne)}
-                onToggleFullScreen={toggleFullScreen}
             />
             <h2>
                 {isPlaying && <img src={nowPlayingGif} alt="Now Playing" className="now-playing-big-gif" />}

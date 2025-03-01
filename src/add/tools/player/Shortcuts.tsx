@@ -6,7 +6,6 @@ interface ShortcutsProps {
     onPlayPrevious: () => void;
     onPlayNext: () => void;
     onToggleShuffle: () => void;
-    onToggleFullScreen?: () => void;
     onToggleRepeatOne: () => void;
 }
 
@@ -16,7 +15,6 @@ const Shortcuts: React.FC<ShortcutsProps> = ({
     onPlayPrevious,
     onPlayNext,
     onToggleShuffle,
-    onToggleFullScreen,
     onToggleRepeatOne,
 }) => {
     useEffect(() => {
@@ -50,12 +48,6 @@ const Shortcuts: React.FC<ShortcutsProps> = ({
                 case '1':
                     onToggleRepeatOne();
                     break;
-                case 'f':
-                    event.preventDefault();
-                    onToggleFullScreen?.();
-                    break;
-                default:
-                    break;
             }
         };
 
@@ -70,7 +62,6 @@ const Shortcuts: React.FC<ShortcutsProps> = ({
         onPlayPrevious,
         onPlayNext,
         onToggleShuffle,
-        onToggleFullScreen,
         onToggleRepeatOne,
     ]);
 
