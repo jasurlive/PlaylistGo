@@ -1,14 +1,11 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-export default defineConfig(async () => {
-  const viteTsconfigPaths = (await import("vite-tsconfig-paths")).default;
-  return {
-    base: "/DJ/",
-    plugins: [react(), viteTsconfigPaths()],
-    server: {
-      open: true,
-    },
-
-  };
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  base: '/',
+  server: {
+    open: true,
+  },
 });
