@@ -1,6 +1,5 @@
 {
   "name": "music-player",
-  "homepage": "https://jasurgraduate.github.io/DJ",
   "version": "2.2.2",
   "private": true,
   "dependencies": {
