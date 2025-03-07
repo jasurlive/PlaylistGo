@@ -112,7 +112,7 @@ class EditButtonDelegate(QStyledItemDelegate):
             edit_button.rect = QRect(
                 option.rect.right() - 60, option.rect.top(), 30, option.rect.height()
             )
-            edit_button.icon = qta.icon("fa.edit")
+            edit_button.icon = qta.icon("fa5s.edit")
             edit_button.iconSize = QSize(20, 20)
             edit_button.state = QStyle.StateFlag.State_Enabled
             QApplication.style().drawControl(
@@ -123,7 +123,7 @@ class EditButtonDelegate(QStyledItemDelegate):
             delete_button.rect = QRect(
                 option.rect.right() - 30, option.rect.top(), 30, option.rect.height()
             )
-            delete_button.icon = qta.icon("fa.trash")
+            delete_button.icon = qta.icon("fa5s.trash")
             delete_button.iconSize = QSize(20, 20)
             delete_button.state = QStyle.StateFlag.State_Enabled
             QApplication.style().drawControl(
