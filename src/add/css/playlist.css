@@ -10,6 +10,26 @@
     color: white;
 }
 
+.drag-handle {
+    outline: none;
+    width: 20px;
+    height: 25px;
+}
+
+.drag-handle:hover {
+    cursor: grab;
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+}
+
+.song-item.dragging {
+    filter: drop-shadow(0 0 10px rgb(255, 255, 255));
+}
+
+
+
 @keyframes gradientAnimationSong {
 
     0%,
@@ -113,7 +133,7 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     display: flex;
-    text-align: left;
+    text-align: center;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -132,14 +152,11 @@ h2 {
     transition: background 0.3s ease;
 }
 
-.song-list.cubical-view .song-item:hover,
-.song-list.list-view .song-item:hover {
-    background-color: #0eb085;
-}
 
 .song-item .fa-trash {
-    margin-left: 20px;
     cursor: pointer;
+    width: 20px;
+    height: 20px;
 }
 
 .song-item .fa-trash:hover {
@@ -148,7 +165,6 @@ h2 {
 
 .icon-container {
     display: flex;
-    gap: 25px;
 }
 
 .icon {
@@ -205,7 +221,6 @@ h2 {
 
     .song-list.list-view {
         font-size: 0.7rem;
-        padding: 1.5rem;
     }
 
     .song-list.cubical-view .song-item {
@@ -224,4 +239,12 @@ h2 {
     }
 
 
+}
+
+@media (min-width: 481px) {
+
+    .song-list.cubical-view .song-item:hover,
+    .song-list.list-view .song-item:hover {
+    background-color: #0eb085;
+}
 }
