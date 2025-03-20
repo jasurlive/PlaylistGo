@@ -12,8 +12,10 @@ dist
 dist-ssr
 *.local
 
+public/python/__pycache__
+
 # Editor directories and files
-.vscode/*
+.vscode
 !.vscode/extensions.json
 .idea
 .DS_Store

@@ -1,4 +1,4 @@
-import MusicPlayer from './MusicPlayer';
+import MusicPlayer from "../MusicPlayer";
 
 function App() {
   return (
