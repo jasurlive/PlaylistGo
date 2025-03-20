@@ -14,6 +14,8 @@ dist-ssr
 
 public/python/__pycache__
 
+
+
 # Editor directories and files
 .vscode
 !.vscode/extensions.json
