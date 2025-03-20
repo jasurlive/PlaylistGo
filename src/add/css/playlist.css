@@ -47,14 +47,10 @@
   height: 1.7rem;
 }
 
-.drag-handle:hover {
-  cursor: grab;
-  color: #e20087;
-}
-.trash-icon:hover {
-  cursor: pointer;
-  color: #e20087;
-  transform: scale(1.3);
+.song-item.dragging {
+  box-shadow: 0px 0px 10px 5px rgba(0, 255, 255, 0.8);
+  transform: scale(1.05);
+  z-index: 2;
 }
 
 .drag-handle:active {
@@ -155,6 +151,14 @@ h2 {
     font-size: 0.7rem;
   }
 
+  .drag-handle:active {
+    color: #e20087;
+  }
+  .trash-icon:active {
+    color: #e20087;
+    transform: scale(1.3);
+  }
+
   .trash-icon {
     width: 1rem;
     height: 1rem;
@@ -188,6 +192,16 @@ h2 {
   .playlist-section {
     max-height: 30rem;
     overflow-y: scroll;
+  }
+
+  .drag-handle:hover {
+    cursor: grab;
+    color: #e20087;
+  }
+  .trash-icon:hover {
+    cursor: pointer;
+    color: #e20087;
+    transform: scale(1.3);
   }
 
   .playlist-section::-webkit-scrollbar {

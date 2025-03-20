@@ -47,14 +47,15 @@ const SongItem: React.FC<SongItemProps> = ({
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    zIndex: isDragging ? 2 : 1,
   };
 
   return (
     <li
       ref={setNodeRef}
       style={style}
-      className={`song-item ${currentVideoId === track.id ? "active" : ""}`}
+      className={`song-item ${currentVideoId === track.id ? "active" : ""} ${
+        isDragging ? "dragging" : ""
+      }`}
       onClick={() => playSelectedVideo(track.id)}
     >
       <RxDragHandleHorizontal
