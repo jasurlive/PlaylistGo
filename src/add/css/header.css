@@ -1,53 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lobster&family=Great+Vibes&family=Kaushan+Script&family=Alex+Brush&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lobster&family=Great+Vibes&family=Kaushan+Script&family=Alex+Brush&display=swap");
 
 .header-logo {
-    background-color: #f0f8ff88;
-    color: #333;
-    border-radius: 12px;
-    border: 1px solid #ffffff;
-    padding: 0.1rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    max-width: 25rem;
-    margin: 5px auto 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
+  background-color: #f0f8ff88;
+  color: #333;
+  border-radius: 12px;
+  border: 1px solid #ffffff;
+  padding: 0.1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 25rem;
+  margin: 5px auto 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
-
 
 .logo-text {
-    font-family: 'Kaushan Script', cursive, sans-serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    background: #000b6fd0;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradient 6s ease infinite;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
+  font-family: "Kaushan Script", cursive, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: #000b6fd0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 6s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
 }
 
-
-
 @keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
+  0% {
+    background-position: 0% 50%;
+  }
 
-    50% {
-        background-position: 100% 50%;
-    }
+  50% {
+    background-position: 100% 50%;
+  }
 
-    100% {
-        background-position: 0% 50%;
-    }
+  100% {
+    background-position: 0% 50%;
+  }
 }

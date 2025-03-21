@@ -62,7 +62,7 @@ body {
 
 .updown-button {
   position: fixed;
-  bottom: 10px;
+  bottom: 1rem;
   right: 10px;
   cursor: pointer;
   background: linear-gradient(135deg, #1cffa8, #2575fc);
@@ -75,7 +75,7 @@ body {
 }
 
 .updown-button:hover {
-  background: linear-gradient(135deg, #11a16a, #1a52b3);
+  background: linear-gradient(135deg, #1cffa8, #2575fc);
 }
 
 .updown-button:active {
@@ -201,7 +201,7 @@ body {
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding: 10px;
     white-space: nowrap;
     overflow: hidden;
@@ -230,7 +230,7 @@ body {
   }
 
   h2 {
-    font-size: 1rem;
+    font-size: 0.8rem;
     padding: 10px;
     white-space: nowrap;
     overflow: hidden;

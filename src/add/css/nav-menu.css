@@ -1,0 +1,37 @@
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 2;
+}
+
+.bottom-nav button {
+  text-decoration: none;
+  color: #d4e8ff;
+  transition: background-color 0.3s ease-in, border-color 0.3s ease;
+  background: rgba(55, 55, 55, 0.851);
+  display: flex;
+  flex: 1;
+  padding: 0.8rem 0;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(92, 92, 92, 0.5);
+  border-top-left-radius: 0.2rem;
+  border-top-right-radius: 0.2rem;
+  cursor: pointer;
+  flex-direction: column;
+  outline: none;
+}
+
+.bottom-nav button:hover {
+  background-color: #1c4777;
+  color: whitesmoke;
+}
+
+.bottom-nav button svg {
+  margin-bottom: 4px;
+}
