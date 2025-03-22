@@ -1,5 +1,3 @@
-// src/components/MusicPlayer.js
-import React from "react";
 import Player from "./Player";
 import UpDown from "./add/tools/basic/UpDown";
 import SnowFall from "./add/tools/basic/SnowFall";

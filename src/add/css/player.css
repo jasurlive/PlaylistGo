@@ -6,58 +6,41 @@
 }
 
 body {
-  background: linear-gradient(
-    270deg,
-    rgba(255, 92, 51, 0.5),
-    rgba(255, 204, 51, 0.5),
-    rgba(51, 255, 204, 0.5),
-    rgba(51, 204, 255, 0.5),
-    rgba(255, 51, 204, 0.5),
-    rgba(204, 51, 255, 0.5),
-    rgba(168, 51, 255, 0.5),
-    rgba(51, 51, 255, 0.5),
-    rgba(51, 170, 255, 0.5),
-    rgba(51, 255, 87, 0.5),
-    rgba(255, 87, 51, 0.5),
-    rgba(255, 51, 161, 0.5),
-    rgba(255, 219, 51, 0.5)
-  );
+  background: linear-gradient(270deg,
+      rgba(255, 92, 51, 0.5),
+      rgba(255, 204, 51, 0.5),
+      rgba(51, 255, 204, 0.5),
+      rgba(51, 204, 255, 0.5),
+      rgba(255, 51, 204, 0.5),
+      rgba(204, 51, 255, 0.5),
+      rgba(168, 51, 255, 0.5),
+      rgba(51, 51, 255, 0.5),
+      rgba(51, 170, 255, 0.5),
+      rgba(51, 255, 87, 0.5),
+      rgba(255, 87, 51, 0.5),
+      rgba(255, 51, 161, 0.5),
+      rgba(255, 219, 51, 0.5));
   background-size: 600% 600%;
   animation: gradientAnimation 20s ease infinite;
   color: #333;
 }
 
 @keyframes gradientAnimation {
-  0% {
+
+  0%,
+  100% {
     background-position: 0% 50%;
   }
 
   50% {
     background-position: 100% 50%;
   }
-
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
-.view-toggle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.view-icon {
-  cursor: pointer;
-  font-size: 1.5rem;
-  color: #a8a8a8;
-  transition: color 0.2s;
-}
-
-.view-icon.active {
-  color: #02ffb3;
+.now-playing-big-gif {
+  height: 1.2rem;
+  margin-right: 5px;
+  vertical-align: middle;
 }
 
 .updown-button {
@@ -72,14 +55,10 @@ body {
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
   font-size: 20px;
   z-index: 10;
-}
-
-.updown-button:hover {
-  background: linear-gradient(135deg, #1cffa8, #2575fc);
+  transition: transform 0.05s ease-in;
 }
 
 .updown-button:active {
-  transition: ease-in 0.05s;
   transform: scale(0.85);
 }
 
@@ -90,15 +69,16 @@ body {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 30rem;
   border-radius: 15px;
   overflow: hidden;
-  margin: 10px auto 0;
-  border: rgba(255, 255, 255, 0.515) 1px solid;
+  margin: 10px auto;
+  border: 1px solid rgba(255, 255, 255, 0.515);
   background-color: #000000b5;
   user-select: none;
-  -webkit-user-select: none;
-  z-index: 500;
+  z-index: 10;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: bottom right;
 }
 
 .youtube-container .video-wrapper {
@@ -119,23 +99,21 @@ body {
 
 .music-player {
   text-align: center;
-  margin: 5px auto;
-  padding: 30px;
-  max-width: 95%;
-  background: rgba(255, 255, 255, 0.95);
+  width: 100%;
+  margin: 5px 0;
+  background-color: #282c34c3;
+  color: #ffffff;
   border-radius: 15px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   transition: background 0.3s, color 0.3s;
-  background-color: #282c34ac;
-  color: #ffffff;
 }
 
 .controls {
   margin: 20px 0 10px;
   display: flex;
   justify-content: space-between;
-  color: white;
   gap: 1.3rem;
+  color: white;
 }
 
 .controls button {
@@ -144,7 +122,11 @@ body {
   cursor: pointer;
   font-size: 2rem;
   color: #c3c3c3;
-  transition: color 0.3s;
+  transition: color 0.3s, transform 0.05s ease-in;
+}
+
+.controls button:active {
+  transform: scale(0.85);
 }
 
 .shuffle-button,
@@ -156,10 +138,6 @@ body {
 .shuffle-button.active,
 .repeat-button.active {
   color: #02ffb3;
-}
-
-.controls button > :active {
-  transform: scale(0.85);
 }
 
 .add-song {
@@ -184,44 +162,39 @@ body {
   outline: none;
 }
 
-.youtube-container {
-  resize: both;
-  background-image: url("../img/icons/resize.png");
-  background-size: 20px 20px;
-  background-repeat: no-repeat;
-  background-position: bottom right;
-  box-sizing: border-box;
-}
+/* ----------------------------------------------------------- DESKTOP */
+@media (min-width: 601px) {
 
-@media (min-width: 768px) {
+  .youtube-container {
+    max-width: 30rem;
+  }
+
   .music-player {
     padding: 15px;
     width: 100%;
     border-radius: 10px;
   }
 
-  h2 {
+  .music-player h2 {
     font-size: 1rem;
     padding: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: block;
+    margin: 0;
   }
 }
 
-@media (max-width: 480px) {
-  .music-player {
-    padding: 15px;
-    width: 100%;
+/* ----------------------------------------------------------- MOBILE */
+@media (max-width: 600px) {
+
+  .youtube-container {
     border-radius: 10px;
   }
 
-  .add-song {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
+  .music-player {
+    width: 100%;
+    border-radius: 10px;
   }
 
   .add-song input {
@@ -229,15 +202,10 @@ body {
     width: 100%;
   }
 
-  h2 {
+  .music-player h2 {
     font-size: 0.8rem;
-    padding: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: block;
   }
-}
-
-@media (min-width: 769px) {
 }

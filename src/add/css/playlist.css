@@ -24,13 +24,12 @@
 }
 
 .song-item.active {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 0, 255, 0.8),
-    rgba(0, 255, 255, 0.8)
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 0, 255, 0.8),
+      rgba(0, 255, 255, 0.8));
   animation: gradientAnimationSong 3s infinite ease-in-out;
   color: white;
+  border: #ffffff solid 1px;
 }
 
 .trash-icon,
@@ -65,27 +64,24 @@
 }
 
 @keyframes gradientAnimationSong {
+
   0%,
   75% {
-    background: linear-gradient(
-      90deg,
-      rgba(255, 99, 132, 0.7),
-      rgba(54, 162, 235, 0.7)
-    );
+    background: linear-gradient(90deg,
+        rgba(255, 99, 132, 0.7),
+        rgba(54, 162, 235, 0.7));
   }
+
   25% {
-    background: linear-gradient(
-      90deg,
-      rgba(255, 159, 64, 0.7),
-      rgba(75, 192, 192, 0.7)
-    );
+    background: linear-gradient(90deg,
+        rgba(255, 159, 64, 0.7),
+        rgba(75, 192, 192, 0.7));
   }
+
   50% {
-    background: linear-gradient(
-      90deg,
-      rgba(75, 192, 192, 0.7),
-      rgba(153, 102, 255, 0.7)
-    );
+    background: linear-gradient(90deg,
+        rgba(75, 192, 192, 0.7),
+        rgba(153, 102, 255, 0.7));
   }
 }
 
@@ -129,11 +125,6 @@ ul {
   padding: 0;
 }
 
-.now-playing-big-gif {
-  height: 1.5rem;
-  margin-right: 5px;
-  vertical-align: middle;
-}
 
 h2 {
   font-size: 1.5rem;
@@ -171,15 +162,12 @@ h2 {
     width: 100%;
     align-items: center;
     gap: 20px;
+    padding: 10px;
   }
 
   .playlist-section {
     width: 100%;
     margin-bottom: 20px;
-  }
-
-  .song-item:hover {
-    background-color: transparent;
   }
 }
 

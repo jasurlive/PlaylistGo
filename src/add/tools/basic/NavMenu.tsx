@@ -9,13 +9,13 @@ const NavMenu = () => {
   const [modalContent, setModalContent] = useState<string>("");
 
   const handleNavClick = (section: string) => {
-    setModalContent(section); // Set the section to be shown in the modal
-    setIsModalOpen(true); // Open the modal
+    setModalContent(section);
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false); // Close the modal
-    setModalContent(""); // Clear modal content
+    setIsModalOpen(false);
+    setModalContent("");
   };
 
   return (
