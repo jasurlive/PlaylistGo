@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { firestore } from "../api/Firebase";
+import { FaUsersViewfinder } from "react-icons/fa6";
+import { FaUserSecret } from "react-icons/fa";
+import { RiLoader2Fill } from "react-icons/ri";
 import {
   doc,
   setDoc,
@@ -8,11 +11,13 @@ import {
   serverTimestamp,
   query,
   where,
+  getDoc,
+  deleteDoc,
+  getDocs,
+  Timestamp,
 } from "firebase/firestore";
-import { UAParser } from "ua-parser-js"; /* 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons"; */
 import "../../css/online.css";
+import { UAParser } from "ua-parser-js";
 
 interface UserStatus {
   state: string;
@@ -26,6 +31,7 @@ interface UserStatus {
 function Online() {
   const [onlineUsers, setOnlineUsers] = useState<UserStatus[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [allTimeVisitors, setAllTimeVisitors] = useState<number>(0);
   const [isDetailVisible] = useState<boolean>(false);
 
   useEffect(() => {
@@ -83,7 +89,6 @@ function Online() {
 
         const unsubscribe = onSnapshot(onlineUsersQuery, (snapshot) => {
           setOnlineUsers(snapshot.docs.map((doc) => doc.data() as UserStatus));
-          setLoading(false);
         });
 
         const handleVisibilityChange = () => {
@@ -109,41 +114,90 @@ function Online() {
       }
     };
 
-    fetchIpAndUpdate();
-  }, []);
-  /* 
-        const toggleDetails = () => setIsDetailVisible(!isDetailVisible); */
+    const updateAllTimeVisitors = async () => {
+      try {
+        const visitorsDocRef = doc(
+          firestore,
+          "alltimeVisitors",
+          "DJvisitorCount"
+        );
+        const visitorDoc = await getDoc(visitorsDocRef);
 
-  if (loading) return <div>Loading...</div>;
+        if (visitorDoc.exists()) {
+          const visitorsData = visitorDoc.data();
+          const currentVisitors = visitorsData?.count || 0;
+
+          await setDoc(
+            visitorsDocRef,
+            { count: currentVisitors + 1 },
+            { merge: true }
+          );
+        } else {
+          await setDoc(visitorsDocRef, { count: 1 });
+        }
+
+        const updatedVisitorCount = await getDoc(visitorsDocRef);
+        setAllTimeVisitors(updatedVisitorCount.data()?.count || 0);
+      } catch (error) {
+        console.error("Error updating all-time visitors:", error);
+      }
+    };
+
+    const deleteOldOnlineUserData = async () => {
+      try {
+        const twoWeeksAgo = Timestamp.fromDate(new Date(Date.now() - 12096e5)); // 2 weeks ago
+        const userStatusCollectionRef = collection(firestore, "djmusic");
+        const oldUsersQuery = query(
+          userStatusCollectionRef,
+          where("last_changed", "<", twoWeeksAgo)
+        );
+
+        const snapshot = await getDocs(oldUsersQuery);
+        snapshot.forEach((doc) => {
+          deleteDoc(doc.ref);
+        });
+      } catch (error) {
+        console.error("Error deleting old online user data:", error);
+      }
+    };
+
+    const fetchData = async () => {
+      await fetchIpAndUpdate();
+      await updateAllTimeVisitors();
+      await deleteOldOnlineUserData();
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 0);
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="container-online-users">
+        <h1>
+          <FaUserSecret />
+          Total visitors: <RiLoader2Fill className="loading-icon" />
+        </h1>
+        <h1>
+          <FaUsersViewfinder />
+          Online: <RiLoader2Fill className="loading-icon" />
+        </h1>
+      </div>
+    );
+  }
 
   return (
     <div className="container-online-users">
-      <h1>🟢 Online: {onlineUsers.length}</h1>
-      {/* <h5>
-                <button onClick={toggleDetails}>
-                    <FontAwesomeIcon icon={isDetailVisible ? faChevronUp : faChevronDown} />
-                    {isDetailVisible ? " Hide" : " Show"}
-                </button>
-            </h5> */}
-
-      {isDetailVisible && (
-        <ul>
-          {onlineUsers.map((user, index) => (
-            <li key={index}>
-              <p>Browser: {user.browser}</p>
-              <p>IP Address: {user.ip}</p>
-              <p>OS: {user.os}</p>
-              <p>Device: {user.device}</p>
-              <p>
-                Last Changed:{" "}
-                {user.last_changed
-                  ? new Date(user.last_changed.toDate()).toLocaleString()
-                  : "N/A"}
-              </p>
-            </li>
-          ))}
-        </ul>
-      )}
+      <h1>
+        <FaUserSecret />
+        Total visitors: {allTimeVisitors}
+      </h1>
+      <h1>
+        <FaUsersViewfinder /> Online: {onlineUsers.length}
+      </h1>
     </div>
   );
 }

@@ -19,7 +19,6 @@
   flex-grow: 1;
   text-align: left;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -163,11 +162,15 @@ h2 {
     align-items: center;
     gap: 20px;
     padding: 10px;
+    overflow-y: scroll;
   }
 
   .playlist-section {
     width: 100%;
-    margin-bottom: 20px;
+    max-height: 50vh;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #07017d #fff7c2;
   }
 }
 

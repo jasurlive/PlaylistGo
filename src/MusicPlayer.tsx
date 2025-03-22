@@ -10,9 +10,7 @@ const MusicPlayer = () => {
     <div>
       <Header />
       <Player />
-      <UpDown />
       <Online />
-      <Footer />
     </div>
   );
 };

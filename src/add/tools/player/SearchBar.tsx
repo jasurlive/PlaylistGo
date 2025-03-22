@@ -65,7 +65,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
         />
         <button onClick={searchYouTube}>
           <BsSearchHeart />
-          Search
         </button>
       </div>
 

@@ -100,6 +100,7 @@ body {
 .music-player {
   text-align: center;
   width: 100%;
+  height: 100%;
   margin: 5px 0;
   background-color: #282c34c3;
   color: #ffffff;
@@ -193,6 +194,7 @@ body {
   }
 
   .music-player {
+    padding: 10px 0;
     width: 100%;
     border-radius: 10px;
   }

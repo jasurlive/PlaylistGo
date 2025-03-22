@@ -125,7 +125,7 @@
 
 .search-container button {
     margin-left: 10px;
-    padding: 2px 12px;
+    padding: 2px 1.5rem;
     border: none;
     border-radius: 5px;
     background-color: #007bff;
@@ -133,11 +133,11 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     height: 40px;
+    font-size: 2rem;
 }
 
 .search-container button:hover {
     background-color: #000cb3;
-    transform: translateY(-3px);
 }
 
 .empty-search {
@@ -156,7 +156,7 @@
 
 
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .thumbnail {
         width: 70px;
         height: auto;
@@ -194,8 +194,6 @@
         border-radius: 5px;
         font-size: 8px;
     }
-
-
 
     .search-result-title {
         font-size: 12px;

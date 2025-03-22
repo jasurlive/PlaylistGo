@@ -7,6 +7,9 @@ import { useCustomSongs } from "./add/tools/player/useCustomSongs";
 import { useYouTubeSearch } from "./add/tools/youtube/useYouTubeSearch";
 import { Video } from "./add/tools/playlist/types";
 import PlayerContent from "./add/tools/player/PlayerContent";
+import NavMenu from "./add/tools/basic/NavMenu";
+
+import SearchBar from "./add/tools/player/SearchBar";
 
 const Player: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -46,18 +49,26 @@ const Player: React.FC = () => {
     setAddedSongs((prev) => new Set(prev).add(song.url));
   };
 
+  const handlePlaySelectedVideo = (id: string) => {
+    const selectedVideo = videoTracks.find((video) => video.id === id);
+    if (selectedVideo) {
+      setCurrentVideo(selectedVideo);
+      setIsPlaying(true);
+    }
+  };
+
   return (
     <div className="music-player" id="player-container">
-      <h2>
-        {isPlaying && (
-          <img
-            src={nowPlayingGif}
-            alt="Now Playing"
-            className="now-playing-big-gif"
-          />
-        )}
-        💽: {currentVideo.title}
-      </h2>
+      <SearchBar
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        searchYouTube={searchYouTube}
+        searchResults={searchResults}
+        addedSongs={addedSongs}
+        addSongFromSearch={addSongFromSearch}
+        clearSearch={clearSearch}
+      />
+
       <PlayerContent
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
@@ -80,6 +91,33 @@ const Player: React.FC = () => {
         jasursList={jasursList}
         setCustomSongs={setCustomSongs}
         setJasursList={setJasursList}
+      />
+
+      <h2>
+        {isPlaying && (
+          <img
+            src={nowPlayingGif}
+            alt="Now Playing"
+            className="now-playing-big-gif"
+          />
+        )}
+        💽: {currentVideo.title}
+      </h2>
+
+      <NavMenu
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        searchResults={searchResults}
+        searchYouTube={searchYouTube}
+        clearSearch={clearSearch}
+        addedSongs={addedSongs}
+        addSongFromSearch={addSongFromSearch}
+        customSongs={customSongs}
+        jasursList={jasursList}
+        setCustomSongs={setCustomSongs}
+        setJasursList={setJasursList}
+        currentVideo={currentVideo}
+        playSelectedVideo={handlePlaySelectedVideo}
       />
     </div>
   );

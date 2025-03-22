@@ -1,8 +1,6 @@
 import React from "react";
 import Shortcuts from "./Shortcuts";
 import YouTubeContainer from "../youtube/YouTubeContainer";
-import SearchBar from "./SearchBar";
-import Playlist from "../../../Playlist";
 import { Video } from "../playlist/types";
 import {
   playNextVideo,
@@ -113,25 +111,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
         setCurrentVideo={setCurrentVideo}
         playerRef={playerRef}
       />
-      <SearchBar
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        searchYouTube={searchYouTube}
-        searchResults={searchResults}
-        addedSongs={addedSongs}
-        addSongFromSearch={addSongFromSearch}
-        clearSearch={clearSearch}
-      />
-      <Playlist
-        customSongs={customSongs}
-        jasursList={jasursList}
-        currentVideoId={currentVideo.id}
-        playSelectedVideo={(id: string) =>
-          playSelectedVideo(id, videoTracks, setCurrentVideo, setIsPlaying)
-        }
-        setCustomSongs={setCustomSongs}
-        setJasursList={setJasursList}
-      />
+      {/* Removed Playlist and SearchBar */}
     </>
   );
 };
