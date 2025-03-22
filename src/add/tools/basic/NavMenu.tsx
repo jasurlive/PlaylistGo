@@ -82,7 +82,7 @@ const NavMenu: React.FC<NavMenuProps> = ({
           <GiMusicalNotes size={24} />
           Playlists
         </button>
-        <button onClick={() => handleNavClick("Feedback")}>
+        <button onClick={() => (window.location.href = "https://jasurlive.uz")}>
           <FcIdea size={24} />
           Got an idea?
         </button>
@@ -105,27 +105,7 @@ const NavMenu: React.FC<NavMenuProps> = ({
                 setJasursList={setJasursList}
               />
             )}
-            {modalContent === "Feedback" && (
-              <div>
-                <h1>
-                  We Value Your Feedback
-                  <p>
-                    Help us improve the application by sharing your feedback or
-                    reporting any issues you encounter. Your input is greatly
-                    appreciated!
-                  </p>
-                  <a
-                    style={{
-                      textDecoration: "none",
-                      color: "rgb(249, 255, 180)",
-                    }}
-                    href="https://jasurlive.uz"
-                  >
-                    Send feedback
-                  </a>
-                </h1>
-              </div>
-            )}
+            {modalContent === "Feedback" && null}
           </div>
         </div>
       )}
