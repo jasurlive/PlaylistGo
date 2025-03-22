@@ -85,7 +85,7 @@
 }
 
 .playlist-section {
-  padding: 0.5rem;
+  padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
   text-align: center;
@@ -106,9 +106,6 @@
   margin-top: 25px;
 }
 
-.playlist-section {
-  width: 48%;
-}
 
 .playlist-section h3 {
   font-size: 1.4rem;
@@ -177,11 +174,13 @@ h2 {
 /* ------------------------------------------------------------------------- Desktop */
 @media (min-width: 601px) {
   .playlist-section {
-    max-height: 30rem;
+    height: 70vh;
+    width: 30%;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #07017d #fff7c2;
   }
+
 
   .drag-handle:hover,
   .trash-icon:hover {

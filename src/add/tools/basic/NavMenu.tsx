@@ -95,9 +95,6 @@ const NavMenu: React.FC<NavMenuProps> = ({
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <button onClick={handleCloseModal} className="close-button">
-              &times;
-            </button>
             {modalContent === "Playlists" && (
               <Playlist
                 customSongs={customSongs}
@@ -118,8 +115,11 @@ const NavMenu: React.FC<NavMenuProps> = ({
                     appreciated!
                   </p>
                   <a
-                    style={{ textDecoration: "none", color: "blue" }}
-                    href="https://t.me/jasurjacob_bot"
+                    style={{
+                      textDecoration: "none",
+                      color: "rgb(249, 255, 180)",
+                    }}
+                    href="https://jasurlive.uz"
                   >
                     Send feedback
                   </a>

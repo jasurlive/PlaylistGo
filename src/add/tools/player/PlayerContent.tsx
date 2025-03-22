@@ -76,7 +76,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
             document.querySelector('input[type="text"]') as HTMLInputElement
           )?.focus()
         }
-        onPlayPauseToggle={handlePlayPauseToggle} // Pass the function here
+        onPlayPauseToggle={handlePlayPauseToggle}
         onPlayPrevious={() =>
           playPreviousVideo(
             videoTracks,

@@ -25,6 +25,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
   setIsRepeatOne,
 }) => {
   useEffect(() => {
+    console.log("PlayerControls mounted");
     const savedShuffle = localStorage.getItem("isShuffle");
     const savedRepeatOne = localStorage.getItem("isRepeatOne");
 
@@ -37,10 +38,12 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
   }, [setIsShuffle, setIsRepeatOne]);
 
   useEffect(() => {
+    console.log("isShuffle updated:", isShuffle);
     localStorage.setItem("isShuffle", JSON.stringify(isShuffle));
   }, [isShuffle]);
 
   useEffect(() => {
+    console.log("isRepeatOne updated:", isRepeatOne);
     localStorage.setItem("isRepeatOne", JSON.stringify(isRepeatOne));
   }, [isRepeatOne]);
 
