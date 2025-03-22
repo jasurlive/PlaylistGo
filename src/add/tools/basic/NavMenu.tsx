@@ -84,7 +84,7 @@ const NavMenu: React.FC<NavMenuProps> = ({
         </button>
         <button onClick={() => (window.location.href = "https://jasurlive.uz")}>
           <FcIdea size={24} />
-          Got an idea?
+          Feedback?
         </button>
         <button onClick={toggleFullScreen}>
           {isFullScreen ? <FiMinimize size={24} /> : <FiMaximize size={24} />}
