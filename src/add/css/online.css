@@ -1,10 +1,9 @@
 .container-online-users {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 2rem auto;
-    gap: 2rem;
+    gap: 5px;
 }
 
 .loading-icon {
@@ -23,17 +22,16 @@
 }
 
 .container-online-users h1 {
-    font-size: 1.2rem;
-    color: #1c4677eb;
+    font-size: 1rem;
+    color: #fffffffa;
 }
 
 @media (max-width: 600px) {
     .container-online-users {
-        flex-direction: column;
+        margin-top: 4rem;
     }
 
     .container-online-users h1 {
         font-size: 0.8rem;
-        color: #1c4777;
     }
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { firestore } from "../api/Firebase";
+import { TfiStatsUp } from "react-icons/tfi";
 import { FaUsersViewfinder } from "react-icons/fa6";
 import { FaUserSecret } from "react-icons/fa";
 import { RiLoader2Fill } from "react-icons/ri";
@@ -191,6 +192,7 @@ function Online() {
 
   return (
     <div className="container-online-users">
+      <TfiStatsUp />
       <h1>
         <FaUserSecret />
         Total visitors: {allTimeVisitors}

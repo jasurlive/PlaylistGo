@@ -10,6 +10,7 @@ import PlayerContent from "./add/tools/player/PlayerContent";
 import NavMenu from "./add/tools/basic/NavMenu";
 
 import SearchBar from "./add/tools/player/SearchBar";
+import Online from "./add/tools/basic/Online";
 
 const Player: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -103,6 +104,8 @@ const Player: React.FC = () => {
         )}
         💽: {currentVideo.title}
       </h2>
+
+      <Online />
 
       <NavMenu
         searchQuery={searchQuery}

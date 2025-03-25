@@ -1,6 +1,6 @@
-import { useState } from "react";
 import "../../css/playlist.css";
-import { FaChevronDown, FaChevronUp, FaMusic } from "react-icons/fa";
+import { FaHeadphones } from "react-icons/fa";
+import { HiChevronDoubleDown } from "react-icons/hi2";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -35,8 +35,6 @@ const PlaylistSection: React.FC<PlaylistSectionProps> = ({
   playSelectedVideo,
   deleteSong,
 }) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 10 } }),
     useSensor(KeyboardSensor),
@@ -68,33 +66,23 @@ const PlaylistSection: React.FC<PlaylistSectionProps> = ({
         strategy={verticalListSortingStrategy}
       >
         <div className="playlist-section">
-          <div
-            className="playlist-header"
-            onClick={() => setIsCollapsed(!isCollapsed)}
-          >
-            <span className="playlist-icon">
-              <FaMusic />
-            </span>
-            <h3>{title}</h3>
-            {isCollapsed ? (
-              <FaChevronDown className="toggle-icon" />
-            ) : (
-              <FaChevronUp className="toggle-icon" />
-            )}
+          <div className="playlist-header">
+            <FaHeadphones />
+
+            {title}
+            <HiChevronDoubleDown />
           </div>
-          {!isCollapsed && (
-            <ul className="song-list">
-              {songs.map((track) => (
-                <SongItem
-                  key={track.id}
-                  track={track}
-                  playSelectedVideo={playSelectedVideo}
-                  deleteSong={deleteSong}
-                  currentVideoId={currentVideoId}
-                />
-              ))}
-            </ul>
-          )}
+          <ul className="song-list">
+            {songs.map((track) => (
+              <SongItem
+                key={track.id}
+                track={track}
+                playSelectedVideo={playSelectedVideo}
+                deleteSong={deleteSong}
+                currentVideoId={currentVideoId}
+              />
+            ))}
+          </ul>
         </div>
       </SortableContext>
     </DndContext>

@@ -10,7 +10,6 @@ const MusicPlayer = () => {
     <div>
       <Header />
       <Player />
-      <Online />
     </div>
   );
 };

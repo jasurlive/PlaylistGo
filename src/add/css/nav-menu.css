@@ -27,18 +27,16 @@
   outline: none;
 }
 
-
-.bottom-nav button:active,
-.bottom-nav button:focus {
+.bottom-nav button.active {
   background-color: rgb(251, 255, 208);
   color: #1c4777;
 }
+
 
 .bottom-nav button:hover {
   background-color: #dfdfdf;
   color: #1c4777;
 }
-
 
 .bottom-nav button svg {
   margin-bottom: 4px;
@@ -53,15 +51,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 11;
-  background-color: #444444c8;
 }
 
 .modal-content {
   width: 100%;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(121, 121, 121, 0.2);
   position: relative;
 }
 
@@ -78,4 +73,12 @@
 
 .close-button:hover {
   color: #ff0000;
+}
+
+@media screen and (max-width: 600px) {
+  .modal-overlay {
+    background-color: #0e2136c6;
+    z-index: 10;
+  }
+
 }
