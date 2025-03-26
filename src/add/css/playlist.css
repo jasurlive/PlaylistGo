@@ -1,6 +1,6 @@
 .song-item {
   position: relative;
-  padding: 15px;
+  padding: 1.05rem;
   margin: 5px 0;
   background-color: #184475;
   border-radius: 5px;
@@ -11,6 +11,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background 0.3s ease-in-out;
   user-select: none;
+  border: rgba(170, 170, 170, 0.736) solid 1px;
 }
 
 .song-item .song-title {
