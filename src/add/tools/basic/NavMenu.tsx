@@ -1,7 +1,6 @@
 import { FiHome, FiMaximize, FiMinimize } from "react-icons/fi";
-import { GiMusicalNotes } from "react-icons/gi";
 import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
-import { IoIosTimer } from "react-icons/io"; // Added import for timer icon
+import { IoIosTimer } from "react-icons/io";
 import { useState, useEffect } from "react";
 import "../../css/nav-menu.css";
 import Playlist from "../../../Playlist";
@@ -38,8 +37,8 @@ const NavMenu: React.FC<NavMenuProps> = ({
   currentVideo,
   playSelectedVideo,
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [modalContent, setModalContent] = useState<string>("Playlists");
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [timer, setTimer] = useState<number | null>(null);
   const [remainingTime, setRemainingTime] = useState<number | null>(null);
@@ -58,7 +57,6 @@ const NavMenu: React.FC<NavMenuProps> = ({
           } else {
             clearInterval(timerInterval!);
             if (finishLastSong) {
-              // Logic to finish the last song
               console.log("Finishing the last song...");
             }
             return null;
@@ -72,22 +70,41 @@ const NavMenu: React.FC<NavMenuProps> = ({
     };
   }, [timer, finishLastSong]);
 
+  useEffect(() => {
+    const savedModalState = localStorage.getItem("playlistViewState");
+    if (savedModalState) {
+      const { isModalOpen, modalContent } = JSON.parse(savedModalState);
+      setIsModalOpen(isModalOpen);
+      setModalContent(modalContent);
+      setActiveButton(isModalOpen ? modalContent : "Main");
+    } else {
+      setActiveButton("Playlists");
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "playlistViewState",
+      JSON.stringify({ isModalOpen, modalContent })
+    );
+  }, [isModalOpen, modalContent]);
+
   const handleNavClick = (section: string) => {
     if (isModalOpen && modalContent === section) {
       setIsModalOpen(false);
       setModalContent("");
-      setActiveButton(""); // Clear active state
+      setActiveButton("");
     } else {
       setModalContent(section);
       setIsModalOpen(true);
-      setActiveButton(section); // Set active state
+      setActiveButton(section);
     }
   };
 
   const handleMainClick = () => {
     setIsModalOpen(false);
     setModalContent("");
-    setActiveButton("Main"); // Set active state
+    setActiveButton("Main");
   };
 
   const handleCloseModal = () => {
@@ -100,7 +117,7 @@ const NavMenu: React.FC<NavMenuProps> = ({
       document.documentElement.requestFullscreen();
       setIsFullScreen(true);
     } else {
-      document.exitFullscreen(); // Call the function instead of checking its reference
+      document.exitFullscreen();
       setIsFullScreen(false);
     }
   };
@@ -148,7 +165,7 @@ const NavMenu: React.FC<NavMenuProps> = ({
           className={activeButton === "FullScreen" ? "active" : ""}
         >
           {isFullScreen ? <FiMinimize size={24} /> : <FiMaximize size={24} />}
-          {isFullScreen ? "Mini" : "Full Screen"}
+          {isFullScreen ? "Mini View" : "Full Screen"}
         </button>
       </div>
 
