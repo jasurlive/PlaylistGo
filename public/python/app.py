@@ -157,14 +157,19 @@ class SearchThread(QThread):
 
             results = []
             for item in data.get("items", []):
-                video_title = item["snippet"]["title"]
-                video_id = item["id"]["videoId"]
-                video_url = f"https://www.youtube.com/watch?v={video_id}"
-                thumbnail_url = item["snippet"]["thumbnails"]["high"]["url"]
+                if "videoId" in item["id"]:  # Check if 'videoId' exists
+                    video_title = item["snippet"]["title"]
+                    video_id = item["id"]["videoId"]
+                    video_url = f"https://www.youtube.com/watch?v={video_id}"
+                    thumbnail_url = item["snippet"]["thumbnails"]["high"]["url"]
 
-                results.append(
-                    {"title": video_title, "url": video_url, "thumbnail": thumbnail_url}
-                )
+                    results.append(
+                        {
+                            "title": video_title,
+                            "url": video_url,
+                            "thumbnail": thumbnail_url,
+                        }
+                    )
 
             self.results_signal.emit(results)
         except requests.exceptions.RequestException:
