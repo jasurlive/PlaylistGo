@@ -49,25 +49,19 @@ function Online() {
         let city: string = localStorage.getItem("userCity") ?? "";
         let country: string = localStorage.getItem("userCountry") ?? "";
 
-        if (!ip) {
-          const response = await fetch("https://api.ipify.org?format=json");
-          const data = await response.json();
-          ip = data.ip;
-          localStorage.setItem("userIP", ip);
-        }
-
-        if (!city || !country) {
+        if (!ip || !city || !country) {
           const geoResponse = await fetch(
-            `https://get.geojs.io/v1/ip/geo/${ip}.json`
+            "https://get.geojs.io/v1/ip/geo.json"
           );
           const geoData = await geoResponse.json();
+          ip = geoData.ip || "unknown";
           city = geoData.city || "Unknown";
           country = geoData.country || "Unknown";
+
+          localStorage.setItem("userIP", ip);
           localStorage.setItem("userCity", city);
           localStorage.setItem("userCountry", country);
         }
-
-        if (!ip) return;
 
         const docId = `${ip}-${browser}-${device}-${os}`
           .toLowerCase()
