@@ -24,12 +24,6 @@ const socialLinks = [
     className: "social-icon",
   },
   {
-    href: "https://www.linkedin.com/in/jasurlive/",
-    icon: FaLinkedinIn,
-    className: "social-icon",
-  },
-
-  {
     href: "https://t.me/jasurjacob_bot",
     icon: FaTelegram,
     className: "social-icon",
@@ -63,19 +57,21 @@ const SocialMenu: React.FC = () => {
 
 const Social: React.FC = () => {
   return (
-    <Popover.Root>
-      <Popover.Trigger asChild>
-        <button className="social-button">
-          <FaUserAstronaut />
-        </button>
-      </Popover.Trigger>
+    <div className="social-container">
+      <Popover.Root>
+        <Popover.Trigger asChild>
+          <button className="social-button">
+            <FaUserAstronaut />
+          </button>
+        </Popover.Trigger>
 
-      <Popover.Portal>
-        <Popover.Content>
-          <SocialMenu />
-        </Popover.Content>
-      </Popover.Portal>
-    </Popover.Root>
+        <Popover.Portal>
+          <Popover.Content>
+            <SocialMenu />
+          </Popover.Content>
+        </Popover.Portal>
+      </Popover.Root>
+    </div>
   );
 };
 

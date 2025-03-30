@@ -1,6 +1,6 @@
 .social-button {
     position: fixed;
-    bottom: 5rem;
+    bottom: 4.5rem;
     right: 5px;
     cursor: pointer;
     background: linear-gradient(135deg, #0700c898, #e11cff83);
@@ -9,7 +9,6 @@
     border-radius: 15%;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s;
-    z-index: 6;
     border: white 1px solid;
     font-size: 1.5rem;
 }
@@ -24,12 +23,12 @@
 
 .social-menu {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    margin-bottom: 2rem;
     gap: 12px;
     background: linear-gradient(135deg, #e11cffbc, #2574fcae);
     padding: 12px;
     border-radius: 8px;
-    margin-bottom: 1rem;
     font-size: 2rem;
     animation: slideIn 0.5s ease-in-out;
 }
