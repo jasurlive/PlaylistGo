@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { FaTrash } from "react-icons/fa";
@@ -26,6 +27,13 @@ const SongItem: React.FC<SongItemProps> = ({
     isDragging,
   } = useSortable({ id: track.id });
 
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleDragHandleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsClicked((prev) => !prev);
+  };
+
   return (
     <li
       ref={setNodeRef}
@@ -37,8 +45,9 @@ const SongItem: React.FC<SongItemProps> = ({
     >
       <RxDragHandleHorizontal
         {...listeners}
-        className="drag-handle"
+        className={`drag-handle ${isClicked ? "clicked" : ""}`}
         style={{ touchAction: "none" }}
+        onClick={handleDragHandleClick}
       />
       <span className="song-title">{track.title}</span>
       {currentVideoId === track.id && <div className="now-playing-gradient" />}
