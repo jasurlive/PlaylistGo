@@ -1,5 +1,5 @@
 import PlaylistSection from "./add/tools/playlist/PlaylistSection";
-import { Video } from "./add/tools/playlist/types";
+import { Video } from "./add/tools/types/video";
 
 interface PlaylistProps {
   customSongs: Video[];
