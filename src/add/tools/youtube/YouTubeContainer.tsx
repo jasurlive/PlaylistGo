@@ -2,7 +2,7 @@ import React from "react";
 import YTPlayer from "./YouTube";
 import PlayerControls from "../player/PlayerControls";
 import { playNextVideo, playPreviousVideo } from "../player/videoControls";
-import { Video } from "../playlist/types";
+import { Video } from "../types/video";
 
 interface YouTubeContainerProps {
   currentVideo: Video;

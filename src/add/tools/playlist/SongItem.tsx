@@ -3,7 +3,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { FaTrash } from "react-icons/fa";
 import { RxDragHandleHorizontal } from "react-icons/rx";
-import { Video } from "./types";
+import { Video } from "../types/video";
 
 interface SongItemProps {
   track: Video;

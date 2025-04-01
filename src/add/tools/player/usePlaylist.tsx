@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 import { generateUniqueId } from "./ID";
 import * as XLSX from "xlsx";
-
-interface Video {
-  id: string;
-  title: string;
-  url: string;
-  thumbnail: string;
-}
+import { Video } from "../types/video";
 
 const usePlaylist = () => {
   const [customSongs, setCustomSongs] = useState<Video[]>([]);

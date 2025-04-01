@@ -1,9 +1,4 @@
-interface Video {
-  id: string;
-  title: string;
-  url: string;
-  thumbnail: string;
-}
+import { Video } from "../types/video";
 
 export const onVideoEnd = (
   isRepeatOne: boolean,

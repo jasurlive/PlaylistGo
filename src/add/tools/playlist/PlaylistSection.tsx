@@ -16,7 +16,7 @@ import {
 } from "@dnd-kit/core";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import SongItem from "./SongItem";
-import { Video } from "./types";
+import { Video } from "../types/video";
 
 interface PlaylistSectionProps {
   title: string;

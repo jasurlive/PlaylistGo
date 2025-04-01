@@ -1,12 +1,6 @@
 import * as XLSX from "xlsx";
 import { generateUniqueId } from "./ID";
-
-interface Video {
-  id: string;
-  title: string;
-  url: string;
-  thumbnail: string;
-}
+import { Video } from "../types/video";
 
 export const fetchPlaylist = async (
   setJasursList: React.Dispatch<React.SetStateAction<Video[]>>,

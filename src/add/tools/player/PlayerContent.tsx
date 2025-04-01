@@ -1,7 +1,7 @@
 import React from "react";
 import Shortcuts from "./Shortcuts";
 import YouTubeContainer from "../youtube/YouTubeContainer";
-import { Video } from "../playlist/types";
+import { Video } from "../types/video";
 import {
   playNextVideo,
   playPreviousVideo,

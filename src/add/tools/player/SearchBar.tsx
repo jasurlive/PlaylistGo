@@ -3,13 +3,7 @@ import { FaPlus, FaCheckCircle } from "react-icons/fa";
 import { SlClose } from "react-icons/sl";
 import "../../css/searchbar.css";
 import { BsSearchHeart } from "react-icons/bs";
-
-interface Video {
-  id: string;
-  title: string;
-  url: string;
-  thumbnail: string;
-}
+import { Video } from "../types/video";
 
 interface SearchBarProps {
   searchQuery: string;

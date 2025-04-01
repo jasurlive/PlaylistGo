@@ -5,7 +5,7 @@ import nowPlayingGif from "./add/img/icons/equal_big.gif";
 import { fetchPlaylist } from "./add/tools/player/fetchPlaylist";
 import { useCustomSongs } from "./add/tools/player/useCustomSongs";
 import { useYouTubeSearch } from "./add/tools/youtube/useYouTubeSearch";
-import { Video } from "./add/tools/playlist/types";
+import { Video } from "./add/tools/types/video";
 import PlayerContent from "./add/tools/player/PlayerContent";
 import NavMenu from "./add/tools/basic/NavMenu";
 

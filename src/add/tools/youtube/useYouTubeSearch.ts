@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Video } from "../playlist/types";
+import { Video } from "../types/video";
 import { generateUniqueId } from "../player/ID";
 
 export const useYouTubeSearch = () => {
