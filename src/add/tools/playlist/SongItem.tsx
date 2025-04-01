@@ -27,6 +27,8 @@ const SongItem: React.FC<SongItemProps> = ({
     isDragging,
   } = useSortable({ id: track.id });
 
+  const [isMouseOnHold, setIsMouseOnHold] = useState(false);
+
   const [isClicked, setIsClicked] = useState(false);
 
   const handleDragHandleClick = (e: React.MouseEvent) => {
@@ -39,14 +41,18 @@ const SongItem: React.FC<SongItemProps> = ({
       ref={setNodeRef}
       style={{ transform: CSS.Transform.toString(transform), transition }}
       className={`song-item ${currentVideoId === track.id ? "active" : ""} ${
-        isDragging ? "dragging" : ""
+        isDragging || isMouseOnHold ? "dragging" : ""
       }`}
       onClick={() => playSelectedVideo(track.id)}
     >
       <RxDragHandleHorizontal
         {...listeners}
-        className={`drag-handle ${isClicked ? "clicked" : ""}`}
+        className={`drag-handle ${isMouseOnHold ? "clicked" : ""}`}
         style={{ touchAction: "none" }}
+        onMouseDown={() => setIsMouseOnHold(true)}
+        onMouseUp={() => setIsMouseOnHold(false)}
+        onTouchStart={() => setIsMouseOnHold(true)}
+        onTouchEnd={() => setIsMouseOnHold(false)}
         onClick={handleDragHandleClick}
       />
       <span className="song-title">{track.title}</span>
