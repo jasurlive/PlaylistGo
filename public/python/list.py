@@ -301,15 +301,13 @@ class SongReorderWindow(QMainWindow):
             )
             return
 
+        max_row = sheet.max_row
+        if max_row > 1:
+            sheet.delete_rows(2, max_row - 1)
+
         for row_idx, (title, link) in enumerate(new_order, start=2):
             sheet.cell(row=row_idx, column=title_col, value=title)
             sheet.cell(row=row_idx, column=link_col, value=link)
-
-        for title, link in self.deleted_songs:
-            for row in range(2, sheet.max_row + 1):
-                if sheet.cell(row=row, column=title_col).value == title:
-                    sheet.delete_rows(row)
-                    break
 
         try:
             workbook.save(excel_file)
