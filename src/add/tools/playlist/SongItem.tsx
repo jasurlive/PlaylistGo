@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+
 import { FaTrash } from "react-icons/fa";
 import { RxDragHandleHorizontal } from "react-icons/rx";
+
 import { SongItemProps } from "../types/interface";
 
 const SongItem: React.FC<SongItemProps> = ({
