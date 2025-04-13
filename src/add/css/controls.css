@@ -3,10 +3,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 85%;
+    bottom: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: 20rem;
+    max-width: 90%;
     justify-content: space-between;
     gap: 1.5rem;
     color: white;
@@ -25,9 +25,32 @@
     transform: scale(0.85);
 }
 
-.controls button:hover {
-    color: #ff6cfa;
+.pause-icon.playing {
+    animation: colorShiftPause 5s linear infinite;
 }
+
+@keyframes colorShiftPause {
+    0% {
+        color: #ff90c0;
+    }
+
+    25% {
+        color: #00eeff;
+    }
+
+    50% {
+        color: #85baff;
+    }
+
+    75% {
+        color: #d773ff;
+    }
+
+    100% {
+        color: #00ffcc;
+    }
+}
+
 
 .shuffle-button,
 .repeat-button {
@@ -42,12 +65,16 @@
 
 @media (max-width: 600px) {
     .controls button {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
 }
 
 @media (min-width: 601px) {
     .controls button {
         font-size: 3rem;
+    }
+
+    .controls button:hover {
+        color: #ff6cfa;
     }
 }

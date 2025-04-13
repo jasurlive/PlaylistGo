@@ -50,7 +50,11 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
         <RxTrackPrevious />
       </button>
       <button className="play-pause" onClick={onPlayPauseToggle}>
-        {isPlaying ? <GrPause /> : <GrPlayFill />}
+        {isPlaying ? (
+          <GrPause className={`pause-icon ${isPlaying ? "playing" : ""}`} />
+        ) : (
+          <GrPlayFill />
+        )}
       </button>
       <button onClick={playNextVideo}>
         <RxTrackNext />

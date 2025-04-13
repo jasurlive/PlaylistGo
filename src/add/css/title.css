@@ -41,6 +41,7 @@
 
 }
 
+/* 
 .title-name svg.playing {
     animation: colorShift 5s linear infinite;
 }
@@ -83,13 +84,13 @@
     }
 
     90% {
-        color: #ff0033
+        color: #00e1ff
     }
 
     100% {
         color: #ff007f
     }
-}
+} */
 
 @media (max-width: 600px) {
     .title-name {

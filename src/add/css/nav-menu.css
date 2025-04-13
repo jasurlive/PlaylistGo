@@ -44,6 +44,56 @@
   outline: none;
 }
 
+.bottom-nav svg {
+  animation: colorShiftNav 5s linear infinite;
+}
+
+@keyframes colorShiftNav {
+  0% {
+    color: #ff007f
+  }
+
+  10% {
+    color: #ff9900
+  }
+
+  20% {
+    color: #ccff00
+  }
+
+  30% {
+    color: #00ff00
+  }
+
+  40% {
+    color: #00ffff
+  }
+
+  50% {
+    color: #0099ff
+  }
+
+  60% {
+    color: #6600ff
+  }
+
+  70% {
+    color: #cc00ff
+  }
+
+  80% {
+    color: #ff00cc
+  }
+
+  90% {
+    color: #ff0033
+  }
+
+  100% {
+    color: #ff007f
+  }
+}
+
 .bottom-nav button:hover {
   background-color: #dfdfdf3b;
   color: #ffffff;
