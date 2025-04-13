@@ -130,7 +130,7 @@ h2 {
 }
 
 /* ------------------------------------------------------------------------- Mobile */
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .song-item .song-title {
     margin: 0 1rem 0 2rem;
     font-size: 0.7rem;
@@ -168,12 +168,12 @@ h2 {
     height: 100%;
     overflow-y: scroll;
     scrollbar-width: wide;
-    scrollbar-color: #73fff6 #fff7c2;
+    scrollbar-color: #07017d #fffdf3;
   }
 }
 
 /* ------------------------------------------------------------------------- Desktop */
-@media (min-width: 601px) {
+@media (min-width: 1001px) {
   .playlist-section {
     position: relative;
     height: 100vh;

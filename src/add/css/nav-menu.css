@@ -75,7 +75,7 @@
   color: #ff0000;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
   .modal-overlay {
     background-color: #0e2136c6;
     z-index: 10;
