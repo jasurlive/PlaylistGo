@@ -1,0 +1,53 @@
+.controls {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 20rem;
+    justify-content: space-between;
+    gap: 1.5rem;
+    color: white;
+    z-index: 10;
+}
+
+.controls button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #c3c3c3;
+    transition: color 0.3s, transform 0.05s ease-in;
+}
+
+.controls button:active {
+    transform: scale(0.85);
+}
+
+.controls button:hover {
+    color: #ff6cfa;
+}
+
+.shuffle-button,
+.repeat-button {
+    color: #c3c3c3;
+    transition: color 0.3s;
+}
+
+.shuffle-button.active,
+.repeat-button.active {
+    color: #02ffb3;
+}
+
+@media (max-width: 600px) {
+    .controls button {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 601px) {
+    .controls button {
+        font-size: 3rem;
+    }
+}

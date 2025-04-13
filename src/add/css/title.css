@@ -1,0 +1,107 @@
+.title-container {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    gap: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.035);
+}
+
+.title-name,
+.title-artist {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.title-name {
+    font-size: 1.5rem;
+}
+
+.title-artist {
+    font-size: 1rem;
+}
+
+.title-name svg,
+.title-artist svg {
+    font-size: 1.2em;
+    color: #ffffff;
+
+}
+
+.title-name svg.playing {
+    animation: colorShift 5s linear infinite;
+}
+
+@keyframes colorShift {
+    0% {
+        color: #ff007f
+    }
+
+    10% {
+        color: #ff9900
+    }
+
+    20% {
+        color: #ccff00
+    }
+
+    30% {
+        color: #00ff00
+    }
+
+    40% {
+        color: #00ffff
+    }
+
+    50% {
+        color: #0099ff
+    }
+
+    60% {
+        color: #6600ff
+    }
+
+    70% {
+        color: #cc00ff
+    }
+
+    80% {
+        color: #ff00cc
+    }
+
+    90% {
+        color: #ff0033
+    }
+
+    100% {
+        color: #ff007f
+    }
+}
+
+@media (max-width: 600px) {
+    .title-name {
+        font-size: 1.3rem;
+    }
+
+    .title-artist {
+        font-size: 1.2rem;
+    }
+
+    .title-name svg,
+    .title-artist svg {
+        font-size: 1.5em;
+    }
+}

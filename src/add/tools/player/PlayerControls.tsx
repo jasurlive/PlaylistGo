@@ -3,6 +3,7 @@ import { GrPause, GrPlayFill } from "react-icons/gr";
 import { LuRepeat1, LuShuffle } from "react-icons/lu";
 import { RxTrackNext, RxTrackPrevious } from "react-icons/rx";
 import { PlayerControlsProps } from "../types/interface";
+import "../../css/controls.css";
 
 const PlayerControls: React.FC<PlayerControlsProps> = ({
   isPlaying,
@@ -48,10 +49,10 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
       <button onClick={playPreviousVideo}>
         <RxTrackPrevious />
       </button>
-      <button onClick={onPlayPauseToggle}>
+      <button className="play-pause" onClick={onPlayPauseToggle}>
         {isPlaying ? <GrPause /> : <GrPlayFill />}
       </button>
-      <button className="next-button" onClick={playNextVideo}>
+      <button onClick={playNextVideo}>
         <RxTrackNext />
       </button>
       <button

@@ -1,4 +1,4 @@
-// all interfaces here come on boy!
+// all interfaces here! come on baby!
 
 export interface Video {
   id: string;

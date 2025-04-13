@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { generateUniqueId } from "./add/tools/player/ID";
 import "./add/css/player.css";
-import nowPlayingGif from "./add/img/icons/equal_big.gif";
 import { fetchPlaylist } from "./add/tools/player/fetchPlaylist";
 import { useCustomSongs } from "./add/tools/player/useCustomSongs";
 import { useYouTubeSearch } from "./add/tools/youtube/useYouTubeSearch";
@@ -11,6 +10,16 @@ import NavMenu from "./add/tools/basic/NavMenu";
 
 import SearchBar from "./add/tools/player/SearchBar";
 import Online from "./add/tools/basic/Online";
+
+import Title from "./add/tools/player/Title";
+
+import PlayerControls from "./add/tools/player/PlayerControls";
+import "./add/css/header.css";
+
+import {
+  playNextVideo,
+  playPreviousVideo,
+} from "./add/tools/player/videoControls";
 
 const Player: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -58,8 +67,24 @@ const Player: React.FC = () => {
     }
   };
 
+  const handlePlayPauseToggle = () => {
+    if (playerRef.current) {
+      const playerState = playerRef.current.getPlayerState();
+      if (playerState === 1) {
+        playerRef.current.pauseVideo();
+        setIsPlaying(false);
+      } else {
+        playerRef.current.playVideo();
+        setIsPlaying(true);
+      }
+    }
+  };
+
   return (
     <div className="music-player" id="player-container">
+      <div className="header-logo" onClick={() => (window.location.href = "/")}>
+        <div className="logo-text">🎧 playlistgo.vercel.app ツ🖤</div>
+      </div>
       <SearchBar
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -94,18 +119,35 @@ const Player: React.FC = () => {
         setJasursList={setJasursList}
       />
 
-      <h2>
-        {isPlaying && (
-          <img
-            src={nowPlayingGif}
-            alt="Now Playing"
-            className="now-playing-big-gif"
-          />
-        )}
-        💽: {currentVideo.title}
-      </h2>
+      <Title title={currentVideo.title} isPlaying={isPlaying} />
 
-      <Online />
+      <PlayerControls
+        isPlaying={isPlaying}
+        onPlayPauseToggle={handlePlayPauseToggle}
+        playNextVideo={() =>
+          playNextVideo(
+            videoTracks,
+            currentVideo,
+            setCurrentVideo,
+            setIsPlaying,
+            isShuffle,
+            playerRef
+          )
+        }
+        playPreviousVideo={() =>
+          playPreviousVideo(
+            videoTracks,
+            currentVideo,
+            setCurrentVideo,
+            setIsPlaying,
+            playerRef
+          )
+        }
+        isShuffle={isShuffle}
+        setIsShuffle={setIsShuffle}
+        isRepeatOne={isRepeatOne}
+        setIsRepeatOne={setIsRepeatOne}
+      />
 
       <NavMenu
         searchQuery={searchQuery}

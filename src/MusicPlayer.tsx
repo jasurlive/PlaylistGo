@@ -9,7 +9,6 @@ import Social from "./add/tools/basic/Social";
 const MusicPlayer = () => {
   return (
     <div>
-      <Header />
       <Player />
       <Social />
     </div>

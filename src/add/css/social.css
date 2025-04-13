@@ -1,6 +1,6 @@
 .social-button {
     position: fixed;
-    bottom: 4.5rem;
+    bottom: 5px;
     right: 5px;
     cursor: pointer;
     background: linear-gradient(135deg, #0700c898, #e11cff83);
@@ -11,6 +11,7 @@
     transition: transform 0.3s;
     border: white 1px solid;
     font-size: 1.5rem;
+    z-index: 100;
 }
 
 .social-button:hover {
@@ -23,7 +24,7 @@
 
 .social-menu {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-bottom: 2rem;
     gap: 12px;
     background: linear-gradient(135deg, #e11cffbc, #2574fcae);

@@ -6,22 +6,7 @@
 }
 
 body {
-  background: linear-gradient(270deg,
-      rgba(255, 92, 51, 0.5),
-      rgba(255, 204, 51, 0.5),
-      rgba(51, 255, 204, 0.5),
-      rgba(51, 204, 255, 0.5),
-      rgba(255, 51, 204, 0.5),
-      rgba(204, 51, 255, 0.5),
-      rgba(168, 51, 255, 0.5),
-      rgba(51, 51, 255, 0.5),
-      rgba(51, 170, 255, 0.5),
-      rgba(51, 255, 87, 0.5),
-      rgba(255, 87, 51, 0.5),
-      rgba(255, 51, 161, 0.5),
-      rgba(255, 219, 51, 0.5));
-  background-size: 600% 600%;
-  animation: gradientAnimation 20s ease infinite;
+  background-color: #282c34;
   color: #333;
 }
 
@@ -43,28 +28,9 @@ body {
   vertical-align: middle;
 }
 
-.updown-button {
-  position: fixed;
-  bottom: 1rem;
-  right: 10px;
-  cursor: pointer;
-  background: linear-gradient(135deg, #1cffa8, #2575fc);
-  color: #fff;
-  padding: 12px;
-  border-radius: 5%;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-  font-size: 20px;
-  z-index: 10;
-  transition: transform 0.05s ease-in;
-}
 
-.updown-button:active {
-  transform: scale(0.85);
-}
 
 .youtube-container {
-  position: sticky;
-  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,7 +41,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.515);
   background-color: #000000b5;
   user-select: none;
-  z-index: 10;
+  z-index: 5;
   background-size: 20px 20px;
   background-repeat: no-repeat;
   background-position: bottom right;
@@ -102,43 +68,11 @@ body {
   width: 100%;
   height: 80vh;
   margin: 5px 0;
-  background-color: #282c34c3;
   color: #ffffff;
   border-radius: 15px;
   transition: background 0.3s, color 0.3s;
 }
 
-.controls {
-  margin: 20px 0 10px;
-  display: flex;
-  justify-content: space-between;
-  gap: 1.3rem;
-  color: white;
-}
-
-.controls button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 2rem;
-  color: #c3c3c3;
-  transition: color 0.3s, transform 0.05s ease-in;
-}
-
-.controls button:active {
-  transform: scale(0.85);
-}
-
-.shuffle-button,
-.repeat-button {
-  color: #c3c3c3;
-  transition: color 0.3s;
-}
-
-.shuffle-button.active,
-.repeat-button.active {
-  color: #02ffb3;
-}
 
 .add-song {
   margin-top: 20px;
@@ -166,7 +100,7 @@ body {
 @media (min-width: 601px) {
 
   .youtube-container {
-    max-width: 30rem;
+    max-width: 35rem;
   }
 
   .music-player {

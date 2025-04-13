@@ -1,19 +1,10 @@
+/*************  ✨ Windsurf Command 🌟  *************/
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lobster&family=Great+Vibes&family=Kaushan+Script&family=Alex+Brush&display=swap");
 
 .header-logo {
-  background-color: #f0f8ff88;
-  color: #333;
-  border-radius: 12px;
-  border: 1px solid #ffffff;
-  padding: 0.1rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
   text-align: center;
-  max-width: fit-content;
-  margin: 5px auto 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
@@ -21,11 +12,12 @@
   font-family: "Kaushan Script", cursive, sans-serif;
   font-size: 1.4rem;
   font-weight: 700;
-  background: #000b6fd0;
+  background: linear-gradient(90deg, #ff0000, #ff9900, #33cc33, #3399ff, #cc33ff);
+  background-size: 500% 500%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradient 6s ease infinite;
+  animation: equalizerEffect 5s linear infinite;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,14 +26,6 @@
   vertical-align: middle;
   cursor: pointer;
   z-index: 10;
-}
-
-.logo-text:hover {
-  background: linear-gradient(90deg, #ff0000, #ff9900, #33cc33, #3399ff, #cc33ff);
-  background-size: 500% 500%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: equalizerEffect 3s linear infinite;
 }
 
 @keyframes equalizerEffect {
@@ -69,3 +53,17 @@
     background-position: 0% 50%;
   }
 }
+
+@media (max-width: 600px) {
+  .header-logo {
+    position: relative;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+  }
+}
+
+/*******  c40758ec-c43c-4151-9029-ceb49fc3a259  *******/

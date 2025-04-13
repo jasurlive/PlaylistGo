@@ -7,19 +7,36 @@
   justify-content: space-around;
   align-items: center;
   z-index: 100;
+  transform: translateY(100%);
+  opacity: 0;
+  animation: slideUpCurtain 0.5s ease-out forwards;
+  background: rgba(55, 55, 55, 0.851);
+  border-top: 1px solid rgba(92, 92, 92, 0.5);
+}
+
+@keyframes slideUpCurtain {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .bottom-nav button {
   text-decoration: none;
   color: #ffffff;
   transition: background-color 0.3s ease-in, border-color 0.3s ease;
-  background: rgba(55, 55, 55, 0.851);
+  background: transparent;
   display: flex;
   flex: 1;
-  padding: 0.8rem 0;
+  padding: 0.2rem 0;
   justify-content: center;
   align-items: center;
-  border: 1px solid rgba(92, 92, 92, 0.5);
+  border: none;
   border-top-left-radius: 0.2rem;
   border-top-right-radius: 0.2rem;
   cursor: pointer;
@@ -27,15 +44,9 @@
   outline: none;
 }
 
-.bottom-nav button.active {
-  background-color: rgb(251, 255, 208);
-  color: #1c4777;
-}
-
-
 .bottom-nav button:hover {
-  background-color: #dfdfdf;
-  color: #1c4777;
+  background-color: #dfdfdf3b;
+  color: #ffffff;
 }
 
 .bottom-nav button svg {
@@ -51,6 +62,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: slideUpCurtain 0.15s ease-out forwards;
 }
 
 .modal-content {
@@ -80,5 +92,4 @@
     background-color: #0e2136c6;
     z-index: 10;
   }
-
 }
