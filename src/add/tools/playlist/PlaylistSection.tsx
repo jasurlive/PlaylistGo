@@ -16,16 +16,7 @@ import {
 } from "@dnd-kit/core";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import SongItem from "./SongItem";
-import { Video } from "../types/video";
-
-interface PlaylistSectionProps {
-  title: string;
-  songs: Video[];
-  setSongs: React.Dispatch<React.SetStateAction<Video[]>>;
-  currentVideoId: string;
-  playSelectedVideo: (id: string) => void;
-  deleteSong: (id: string) => void;
-}
+import { PlaylistSectionProps } from "../types/interface";
 
 const PlaylistSection: React.FC<PlaylistSectionProps> = ({
   title,

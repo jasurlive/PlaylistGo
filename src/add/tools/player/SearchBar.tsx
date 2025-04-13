@@ -3,17 +3,7 @@ import { FaPlus, FaCheckCircle } from "react-icons/fa";
 import { SlClose } from "react-icons/sl";
 import "../../css/searchbar.css";
 import { BsSearchHeart } from "react-icons/bs";
-import { Video } from "../types/video";
-
-interface SearchBarProps {
-  searchQuery: string;
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-  searchYouTube: () => void;
-  searchResults: Video[];
-  addedSongs: Set<string>;
-  addSongFromSearch: (song: Video) => void;
-  clearSearch: () => void;
-}
+import { SearchBarProps } from "../types/interface";
 
 const SearchBar: React.FC<SearchBarProps> = ({
   searchQuery,

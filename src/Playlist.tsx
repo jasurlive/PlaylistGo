@@ -1,14 +1,5 @@
 import PlaylistSection from "./add/tools/playlist/PlaylistSection";
-import { Video } from "./add/tools/types/video";
-
-interface PlaylistProps {
-  customSongs: Video[];
-  jasursList: Video[];
-  currentVideoId: string;
-  playSelectedVideo: (id: string) => void;
-  setCustomSongs: React.Dispatch<React.SetStateAction<Video[]>>;
-  setJasursList: React.Dispatch<React.SetStateAction<Video[]>>;
-}
+import { PlaylistProps } from "./add/tools/types/interface";
 
 const Playlist: React.FC<PlaylistProps> = ({
   customSongs,

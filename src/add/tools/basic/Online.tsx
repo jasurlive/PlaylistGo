@@ -19,17 +19,7 @@ import {
 } from "firebase/firestore";
 import "../../css/online.css";
 import { UAParser } from "ua-parser-js";
-
-interface UserStatus {
-  state: string;
-  last_changed: any;
-  browser: string;
-  os: string;
-  device: string;
-  ip: string;
-  city: string;
-  country: string;
-}
+import { UserStatus } from "../types/interface";
 
 function Online() {
   const [onlineUsers, setOnlineUsers] = useState<UserStatus[]>([]);

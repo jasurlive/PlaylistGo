@@ -1,36 +1,12 @@
 import React from "react";
 import Shortcuts from "./Shortcuts";
 import YouTubeContainer from "../youtube/YouTubeContainer";
-import { Video } from "../types/video";
+import { PlayerContentProps } from "../types/interface";
 import {
   playNextVideo,
   playPreviousVideo,
   playSelectedVideo,
 } from "./videoControls";
-
-interface PlayerContentProps {
-  isPlaying: boolean;
-  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
-  currentVideo: Video;
-  setCurrentVideo: React.Dispatch<React.SetStateAction<Video>>;
-  videoTracks: Video[];
-  isShuffle: boolean;
-  setIsShuffle: React.Dispatch<React.SetStateAction<boolean>>;
-  isRepeatOne: boolean;
-  setIsRepeatOne: React.Dispatch<React.SetStateAction<boolean>>;
-  playerRef: React.RefObject<any>;
-  searchQuery: string;
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-  searchResults: Video[];
-  searchYouTube: () => void;
-  clearSearch: () => void;
-  addedSongs: Set<string>;
-  addSongFromSearch: (song: Video) => void;
-  customSongs: Video[];
-  jasursList: Video[];
-  setCustomSongs: React.Dispatch<React.SetStateAction<Video[]>>;
-  setJasursList: React.Dispatch<React.SetStateAction<Video[]>>;
-}
 
 const PlayerContent: React.FC<PlayerContentProps> = ({
   isPlaying,

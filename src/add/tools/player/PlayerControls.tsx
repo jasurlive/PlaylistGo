@@ -2,17 +2,7 @@ import React, { useEffect } from "react";
 import { GrPause, GrPlayFill } from "react-icons/gr";
 import { LuRepeat1, LuShuffle } from "react-icons/lu";
 import { RxTrackNext, RxTrackPrevious } from "react-icons/rx";
-
-interface PlayerControlsProps {
-  isPlaying: boolean;
-  onPlayPauseToggle: () => void;
-  playNextVideo: () => void;
-  playPreviousVideo: () => void;
-  isShuffle: boolean;
-  setIsShuffle: (shuffle: boolean) => void;
-  isRepeatOne: boolean;
-  setIsRepeatOne: (repeatOne: boolean) => void;
-}
+import { PlayerControlsProps } from "../types/interface";
 
 const PlayerControls: React.FC<PlayerControlsProps> = ({
   isPlaying,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Video } from "../types/video";
+import { Video } from "../types/interface";
 
 export const useCustomSongs = () => {
   const [customSongs, setCustomSongs] = useState<Video[]>([]);

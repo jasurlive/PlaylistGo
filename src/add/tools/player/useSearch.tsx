@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { generateUniqueId } from "../player/ID";
-import { Song } from "../types/video";
+import { Song } from "../types/interface";
 
 const useSearch = (
   setCustomSongs: React.Dispatch<React.SetStateAction<Song[]>>,

@@ -1,4 +1,4 @@
-import { Video } from "../types/video";
+import { Video } from "../types/interface";
 
 export const onVideoEnd = (
   isRepeatOne: boolean,

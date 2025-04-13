@@ -2,20 +2,7 @@ import React from "react";
 import YTPlayer from "./YouTube";
 import PlayerControls from "../player/PlayerControls";
 import { playNextVideo, playPreviousVideo } from "../player/videoControls";
-import { Video } from "../types/video";
-
-interface YouTubeContainerProps {
-  currentVideo: Video;
-  videoTracks: Video[];
-  isPlaying: boolean;
-  isShuffle: boolean;
-  isRepeatOne: boolean;
-  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsShuffle: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsRepeatOne: React.Dispatch<React.SetStateAction<boolean>>;
-  setCurrentVideo: React.Dispatch<React.SetStateAction<Video>>;
-  playerRef: React.RefObject<any>;
-}
+import { YouTubeContainerProps } from "../types/interface";
 
 const YouTubeContainer: React.FC<YouTubeContainerProps> = ({
   currentVideo,

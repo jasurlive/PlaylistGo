@@ -1,13 +1,5 @@
 import { useEffect } from "react";
-
-interface ShortcutsProps {
-  onSearchFocus: () => void;
-  onPlayPauseToggle: () => void;
-  onPlayPrevious: () => void;
-  onPlayNext: () => void;
-  onToggleShuffle: () => void;
-  onToggleRepeatOne: () => void;
-}
+import { ShortcutsProps } from "../types/interface";
 
 const Shortcuts: React.FC<ShortcutsProps> = ({
   onSearchFocus,

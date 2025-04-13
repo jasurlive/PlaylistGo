@@ -4,23 +4,7 @@ import { IoIosTimer } from "react-icons/io";
 import { useState, useEffect } from "react";
 import "../../css/nav-menu.css";
 import Playlist from "../../../Playlist";
-import { Video } from "../playlist/types";
-
-interface NavMenuProps {
-  searchQuery: string;
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-  searchResults: Video[];
-  searchYouTube: () => void;
-  clearSearch: () => void;
-  addedSongs: Set<string>;
-  addSongFromSearch: (song: Video) => void;
-  customSongs: Video[];
-  jasursList: Video[];
-  setCustomSongs: React.Dispatch<React.SetStateAction<Video[]>>;
-  setJasursList: React.Dispatch<React.SetStateAction<Video[]>>;
-  currentVideo: Video;
-  playSelectedVideo: (id: string) => void;
-}
+import { NavMenuProps } from "../types/interface";
 
 const NavMenu: React.FC<NavMenuProps> = ({
   searchQuery,

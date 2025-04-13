@@ -3,14 +3,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { FaTrash } from "react-icons/fa";
 import { RxDragHandleHorizontal } from "react-icons/rx";
-import { Video } from "../types/video";
-
-interface SongItemProps {
-  track: Video;
-  playSelectedVideo: (id: string) => void;
-  deleteSong: (id: string) => void;
-  currentVideoId: string;
-}
+import { SongItemProps } from "../types/interface";
 
 const SongItem: React.FC<SongItemProps> = ({
   track,
