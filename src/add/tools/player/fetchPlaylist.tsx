@@ -26,7 +26,7 @@ export const fetchPlaylist = async (
 
     if (processedData.length > 0) {
       setCurrentVideo(processedData[0]);
-      setIsPlaying(true);
+      setIsPlaying(false);
       const player = playerRef.current?.internalPlayer;
       if (player) {
         player.playVideo();
