@@ -78,6 +78,7 @@
 @media (max-width: 600px) {
     .title-name {
         font-size: 1.3rem;
+        animation: marquee 10s linear infinite;
     }
 
     .title-artist {
