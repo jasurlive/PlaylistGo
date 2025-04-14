@@ -1,5 +1,11 @@
-# DJ YouTube Music Player in Typescript
+## DJ YouTube Music Player in Typescript
 
-Now users can search songs directly on the page itself 🎉✅🔍♻️
+# Reinventing the bike.
 
-![image](https://github.com/user-attachments/assets/3991c528-8e1d-4d0e-8810-bd432a10e2e1)
+# YouTube Music Player 🎉✅🔍♻️
+
+![image](https://github.com/user-attachments/assets/64770f3d-cab1-4994-a5bd-bd735425c660)
+
+![image](https://github.com/user-attachments/assets/00202869-5ddd-4378-8a0f-2a5a65e43098)
+
+![image](https://github.com/user-attachments/assets/b6e83049-55f9-45b2-b32b-e18388f204d9)
