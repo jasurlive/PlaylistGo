@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { GrPause, GrPlayFill } from "react-icons/gr";
 import { LuRepeat1, LuShuffle } from "react-icons/lu";
 import { RxTrackNext, RxTrackPrevious } from "react-icons/rx";
-import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import {
+  IoVolumeHighSharp,
+  IoVolumeMediumSharp,
+  IoVolumeLowSharp,
+  IoVolumeMute,
+} from "react-icons/io5";
+
 import { PlayerControlsProps } from "../types/interface";
 import "../../css/controls.css";
 
@@ -79,7 +85,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
           {isPlaying ? (
             <GrPause className={`pause-icon ${isPlaying ? "playing" : ""}`} />
           ) : (
-            <GrPlayFill />
+            <GrPlayFill className={`play-icon ${isPlaying ? "" : "playing"}`} />
           )}
         </button>
 
@@ -96,11 +102,27 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
       </div>
 
       <div className="volume-container">
-        <button className="mute-button" onClick={handleMuteToggle}>
-          {isMuted ? (
-            <FaVolumeMute style={{ color: "#ff6347" }} />
+        <button
+          className="mute-button"
+          onClick={handleMuteToggle}
+          title={
+            isMuted || volume === 0
+              ? "Muted"
+              : volume <= 0.4
+              ? "Low"
+              : volume <= 0.8
+              ? "Medium"
+              : "High"
+          }
+        >
+          {isMuted || volume === 0 ? (
+            <IoVolumeMute style={{ color: "#ff4d4f" }} />
+          ) : volume <= 0.4 ? (
+            <IoVolumeLowSharp style={{ color: "#ffc107" }} />
+          ) : volume <= 0.8 ? (
+            <IoVolumeMediumSharp style={{ color: "#1e90ff" }} />
           ) : (
-            <FaVolumeUp style={{ color: "#02ffb3" }} />
+            <IoVolumeHighSharp style={{ color: "#02ffb3" }} />
           )}
         </button>
 
