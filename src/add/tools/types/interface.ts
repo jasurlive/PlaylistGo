@@ -1,5 +1,7 @@
 // all interfaces here! come on baby!
 
+import { RefObject } from "react";
+
 export interface Video {
   id: string;
   title: string;
@@ -79,9 +81,12 @@ export interface PlayerControlsProps {
   playNextVideo: () => void;
   playPreviousVideo: () => void;
   isShuffle: boolean;
-  setIsShuffle: (shuffle: boolean) => void;
+  setIsShuffle: React.Dispatch<React.SetStateAction<boolean>>;
   isRepeatOne: boolean;
-  setIsRepeatOne: (repeatOne: boolean) => void;
+  setIsRepeatOne: React.Dispatch<React.SetStateAction<boolean>>;
+  playerRef: RefObject<any>;
+  isMuted: boolean;
+  setIsMuted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface SearchBarProps {
@@ -125,6 +130,11 @@ export interface YTPlayerProps {
   onVideoEnd: () => void;
   playerRef: React.RefObject<any>;
   autoplay: boolean;
+  isPlaying: boolean;
+  setIsPlaying: (playing: boolean) => void;
+  setIsMuted: (isMuted: boolean) => void;
+  isMuted: boolean;
+  handleMuteToggle: () => void;
 }
 export interface YouTubeContainerProps {
   currentVideo: Video;

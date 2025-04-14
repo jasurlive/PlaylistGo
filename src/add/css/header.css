@@ -17,7 +17,7 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: equalizerEffect 5s linear infinite;
+  animation: equalizerEffect 40s linear infinite;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,6 +1,6 @@
 .title-container {
     position: absolute;
-    bottom: 20%;
+    bottom: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
@@ -14,9 +14,21 @@
     gap: 1rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.035);
+    overflow: hidden;
 }
 
-.title-name,
+.title-name {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #ffffff;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 1.5rem;
+    animation: marquee 5s linear infinite;
+}
+
 .title-artist {
     display: flex;
     align-items: center;
@@ -38,59 +50,30 @@
 .title-artist svg {
     font-size: 1.2em;
     color: #ffffff;
-
 }
 
-/* 
-.title-name svg.playing {
-    animation: colorShift 5s linear infinite;
-}
-
-@keyframes colorShift {
+@keyframes marquee {
     0% {
-        color: #ff007f
+        transform: translateX(100%);
     }
 
-    10% {
-        color: #ff9900
-    }
-
-    20% {
-        color: #ccff00
-    }
-
-    30% {
-        color: #00ff00
-    }
-
-    40% {
-        color: #00ffff
+    25% {
+        transform: translateX(50%);
     }
 
     50% {
-        color: #0099ff
+        transform: translateX(0%);
     }
 
-    60% {
-        color: #6600ff
-    }
-
-    70% {
-        color: #cc00ff
-    }
-
-    80% {
-        color: #ff00cc
-    }
-
-    90% {
-        color: #00e1ff
+    75% {
+        transform: translateX(-50%);
     }
 
     100% {
-        color: #ff007f
+        transform: translateX(-150%);
     }
-} */
+}
+
 
 @media (max-width: 600px) {
     .title-name {
@@ -104,5 +87,11 @@
     .title-name svg,
     .title-artist svg {
         font-size: 1.5em;
+    }
+}
+
+@media (min-width: 601px) {
+    .title-container {
+        width: 35rem;
     }
 }

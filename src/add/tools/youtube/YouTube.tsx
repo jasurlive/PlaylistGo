@@ -1,15 +1,6 @@
-import React from "react";
-import YouTube from "react-youtube";
+import React, { useEffect } from "react";
+import ReactPlayer from "react-player";
 import { YTPlayerProps } from "../types/interface";
-
-const opts = {
-  playerVars: {
-    autoplay: 1,
-    controls: 1,
-    modestbranding: 1,
-    rel: 0,
-  },
-};
 
 export const extractVideoId = (url: string): string | null => {
   try {
@@ -31,32 +22,48 @@ const YTPlayer: React.FC<YTPlayerProps> = ({
   onVideoEnd,
   playerRef,
   autoplay,
+  isPlaying,
+  setIsPlaying,
+  isMuted, // Added isMuted prop
 }) => {
   const video = videoTracks.find((video) => video.id === currentVideoId);
   const videoId = video ? extractVideoId(video.url) : "";
+  const url = videoId ? `https://www.youtube.com/watch?v=${videoId}` : "";
 
-  const playerOpts = {
-    ...opts,
-    playerVars: {
-      ...opts.playerVars,
-      autoplay: autoplay ? 1 : 0,
-    },
-  };
-
-  const onVideoEndHandler = () => {
-    onVideoEnd();
-  };
+  // Automatically sync the isPlaying state with ReactPlayer
+  useEffect(() => {
+    if (!isPlaying && playerRef?.current) {
+      // ReactPlayer will handle pausing itself based on the `playing` prop
+    }
+  }, [isPlaying]);
 
   return (
     <div>
-      <YouTube
+      <ReactPlayer
         key={videoId}
-        videoId={videoId || ""}
-        opts={playerOpts}
-        onEnd={onVideoEndHandler}
-        ref={playerRef}
-        onReady={(event) => {
-          playerRef.current = event.target;
+        url={url}
+        playing={isPlaying} // Controlled via the isPlaying state
+        controls
+        muted={isMuted} // Controlled via the isMuted state passed as prop
+        width="100%"
+        height="100%"
+        config={{
+          youtube: {
+            playerVars: {
+              autoplay: autoplay ? 1 : 0,
+              controls: 0,
+              modestbranding: 1,
+              rel: 0,
+            },
+          },
+        }}
+        onPlay={() => setIsPlaying(true)} // When the video starts, mark it as playing
+        onPause={() => setIsPlaying(false)} // When the video is paused, mark it as not playing
+        onEnded={onVideoEnd}
+        ref={(player) => {
+          if (player && playerRef) {
+            playerRef.current = player; // Assign the ReactPlayer instance to the ref
+          }
         }}
       />
     </div>

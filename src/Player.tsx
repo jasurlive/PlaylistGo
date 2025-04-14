@@ -7,15 +7,11 @@ import { useYouTubeSearch } from "./add/tools/youtube/useYouTubeSearch";
 import { Video } from "./add/tools/types/interface";
 import PlayerContent from "./add/tools/player/PlayerContent";
 import NavMenu from "./add/tools/basic/NavMenu";
-
 import SearchBar from "./add/tools/player/SearchBar";
 import Online from "./add/tools/basic/Online";
-
 import Title from "./add/tools/player/Title";
-
 import PlayerControls from "./add/tools/player/PlayerControls";
 import "./add/css/header.css";
-
 import {
   playNextVideo,
   playPreviousVideo,
@@ -23,6 +19,7 @@ import {
 
 const Player: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(false); // Add mute state
   const [currentVideo, setCurrentVideo] = useState<Video>({
     id: "",
     title: "",
@@ -68,16 +65,12 @@ const Player: React.FC = () => {
   };
 
   const handlePlayPauseToggle = () => {
-    if (playerRef.current) {
-      const playerState = playerRef.current.getPlayerState();
-      if (playerState === 1) {
-        playerRef.current.pauseVideo();
-        setIsPlaying(false);
-      } else {
-        playerRef.current.playVideo();
-        setIsPlaying(true);
-      }
-    }
+    setIsPlaying((prev) => !prev); // Toggle play/pause using isPlaying state
+  };
+
+  // Mute toggle handler
+  const handleMuteToggle = () => {
+    setIsMuted((prev) => !prev); // Toggle mute state
   };
 
   return (
@@ -147,6 +140,9 @@ const Player: React.FC = () => {
         setIsShuffle={setIsShuffle}
         isRepeatOne={isRepeatOne}
         setIsRepeatOne={setIsRepeatOne}
+        setIsMuted={setIsMuted} // Pass set function to control mute state
+        isMuted={isMuted}
+        playerRef={playerRef} // Pass playerRef to PlayerControls
       />
 
       <NavMenu

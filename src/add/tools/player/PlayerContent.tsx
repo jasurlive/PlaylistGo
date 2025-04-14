@@ -32,16 +32,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   setJasursList,
 }) => {
   const handlePlayPauseToggle = () => {
-    if (playerRef.current) {
-      const playerState = playerRef.current.getPlayerState();
-      if (playerState === 1) {
-        playerRef.current.pauseVideo();
-        setIsPlaying(false);
-      } else {
-        playerRef.current.playVideo();
-        setIsPlaying(true);
-      }
-    }
+    setIsPlaying((prev) => !prev);
   };
 
   return (
@@ -87,7 +78,6 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
         setCurrentVideo={setCurrentVideo}
         playerRef={playerRef}
       />
-      {/* Removed Playlist and SearchBar */}
     </>
   );
 };

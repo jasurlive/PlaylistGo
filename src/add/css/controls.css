@@ -1,13 +1,19 @@
+.controls-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .controls {
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    bottom: 10%;
+    bottom: 15%;
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 90%;
-    justify-content: space-between;
     gap: 1.5rem;
     color: white;
     z-index: 10;
@@ -51,7 +57,6 @@
     }
 }
 
-
 .shuffle-button,
 .repeat-button {
     color: #c3c3c3;
@@ -63,10 +68,53 @@
     color: #02ffb3;
 }
 
+.volume-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 1rem;
+    z-index: 10;
+}
+
+.mute-button {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #c3c3c3;
+    transition: color 0.3s;
+    margin-right: 1rem;
+}
+
+.volume-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15rem;
+}
+
+.volume-slider {
+    width: 100%;
+}
+
 @media (max-width: 600px) {
     .controls button {
         font-size: 2.5rem;
     }
+
+
+    .volume-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 95%;
+    }
+
 }
 
 @media (min-width: 601px) {
