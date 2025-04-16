@@ -3,20 +3,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 1rem 0;
 }
 
 .controls {
-    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    bottom: 15%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 90%;
     gap: 1.5rem;
     color: white;
-    z-index: 10;
 }
 
 .controls button {
@@ -70,15 +65,10 @@
 }
 
 .volume-container {
-    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    bottom: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin-top: 1rem;
-    z-index: 10;
+    margin: 1rem 0;
 }
 
 .mute-button {
@@ -98,6 +88,7 @@
 
 .volume-slider {
     width: 100%;
+    cursor: pointer;
 }
 
 @media (max-width: 600px) {
@@ -118,10 +109,16 @@
 
 @media (min-width: 601px) {
     .controls button {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 
     .controls button:hover {
         color: #ff6cfa;
     }
+
+    .controls,
+    .volume-container {
+        z-index: 10;
+    }
+
 }

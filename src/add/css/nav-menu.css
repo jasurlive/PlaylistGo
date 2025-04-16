@@ -4,13 +4,9 @@
   left: 0;
   width: 100%;
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  z-index: 100;
-  transform: translateY(100%);
-  opacity: 0;
+  z-index: 20;
   animation: slideUpCurtain 0.5s ease-out forwards;
-  background: rgba(55, 55, 55, 0.851);
   border-top: 1px solid rgba(92, 92, 92, 0.5);
 }
 
@@ -39,9 +35,9 @@
   border: none;
   border-top-left-radius: 0.2rem;
   border-top-right-radius: 0.2rem;
-  cursor: pointer;
   flex-direction: column;
   outline: none;
+  cursor: pointer;
 }
 
 .bottom-nav svg {
@@ -99,10 +95,6 @@
   color: #ffffff;
 }
 
-.bottom-nav button svg {
-  margin-bottom: 4px;
-}
-
 .modal-overlay {
   position: absolute;
   top: 0;
@@ -119,27 +111,11 @@
   width: 100%;
   border-radius: 10px;
   overflow: hidden;
-  position: relative;
-}
-
-.close-button {
-  position: absolute;
-  top: 0;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 3rem;
-  cursor: pointer;
-  color: #e3e3e3;
-}
-
-.close-button:hover {
-  color: #ff0000;
 }
 
 @media screen and (max-width: 1000px) {
   .modal-overlay {
     background-color: #0e2136c6;
-    z-index: 10;
+    z-index: 15;
   }
 }

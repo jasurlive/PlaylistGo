@@ -10,7 +10,7 @@ const MusicPlayer = () => {
   return (
     <div>
       <Player />
-      <Social />
+      <Online />
     </div>
   );
 };

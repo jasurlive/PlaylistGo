@@ -3,7 +3,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    gap: 2px;
+    padding: 5px;
+    color: aliceblue;
 }
 
 .loading-icon {
@@ -22,16 +27,14 @@
 }
 
 .container-online-users h1 {
-    font-size: 1rem;
+    font-size: 10px;
     color: #fffffffa;
 }
 
 @media (max-width: 600px) {
-    .container-online-users {
-        margin-top: 4rem;
-    }
+
 
     .container-online-users h1 {
-        font-size: 0.8rem;
+        font-size: 8px;
     }
 }

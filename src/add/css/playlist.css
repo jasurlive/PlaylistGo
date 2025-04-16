@@ -21,6 +21,7 @@
   text-align: left;
   white-space: nowrap;
   text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .song-item.active {
