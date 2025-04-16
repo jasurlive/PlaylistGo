@@ -12,7 +12,6 @@
 }
 
 .loading-icon {
-    font-size: 1rem;
     animation: spinner-online 1s linear infinite;
 }
 
@@ -26,7 +25,8 @@
     }
 }
 
-.container-online-users h1 {
+.container-online-users h1,
+.loading-icon {
     font-size: 10px;
     color: #fffffffa;
 }
@@ -34,6 +34,7 @@
 @media (max-width: 600px) {
 
 
+    .loading-icon,
     .container-online-users h1 {
         font-size: 8px;
     }

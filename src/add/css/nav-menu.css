@@ -7,7 +7,6 @@
   align-items: center;
   z-index: 20;
   animation: slideUpCurtain 0.5s ease-out forwards;
-  border-top: 1px solid rgba(92, 92, 92, 0.5);
 }
 
 @keyframes slideUpCurtain {

@@ -33,6 +33,13 @@
   border: #ffffff solid 1px;
 }
 
+.no-songs-message {
+  font-size: 1.2rem;
+  color: #fff;
+  text-align: center;
+  margin-top: 1rem;
+}
+
 .trash-icon,
 .drag-handle {
   position: absolute;
@@ -132,6 +139,78 @@ h2 {
 
 /* ------------------------------------------------------------------------- Mobile */
 @media (max-width: 1000px) {
+
+
+  .playlists-wrapper {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: #fffdf3;
+    color: #07017d;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    border-radius: 0.5rem;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  .playlists-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    height: calc(100vh - 8rem);
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    scrollbar-width: 2rem;
+    scrollbar-color: #07017d #fffdf3;
+  }
+
+  .playlists-container::-webkit-scrollbar {
+    height: 0.4rem;
+  }
+
+  .playlists-container::-webkit-scrollbar-track {
+    background: #fffdf3;
+  }
+
+  .playlists-container::-webkit-scrollbar-thumb {
+    background: #07017d;
+    border-radius: 1rem;
+  }
+
+  .playlist-section {
+    scroll-snap-align: start;
+    min-width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #07017d #fffdf3;
+  }
+
+  .playlist-section::-webkit-scrollbar {
+    width: 0.3rem;
+  }
+
+  .playlist-section::-webkit-scrollbar-track {
+    background: #fffdf3;
+  }
+
+  .playlist-section::-webkit-scrollbar-thumb {
+    background: #07017d;
+    border-radius: 1rem;
+  }
+
   .song-item .song-title {
     margin: 0 1rem 0 2rem;
     font-size: 0.7rem;
@@ -153,24 +232,6 @@ h2 {
     color: #e20087;
     transform: scale(1.3);
   }
-
-  .playlists-container {
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    gap: 20px;
-    padding: 10px;
-    overflow-y: scroll;
-  }
-
-  .playlist-section {
-    width: 100%;
-    max-height: 50vh;
-    height: 100%;
-    overflow-y: scroll;
-    scrollbar-width: wide;
-    scrollbar-color: #07017d #fffdf3;
-  }
 }
 
 /* ------------------------------------------------------------------------- Desktop */
@@ -185,6 +246,9 @@ h2 {
     background-color: #1734556f;
   }
 
+  .no-songs-message-mobile {
+    display: none;
+  }
 
   .drag-handle:hover,
   .trash-icon:hover {
