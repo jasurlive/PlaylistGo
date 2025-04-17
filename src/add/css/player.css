@@ -27,16 +27,17 @@ body {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  border-radius: 15px;
-  overflow: hidden;
+  max-width: 100%;
   margin: 10px auto;
   border: 1px solid rgba(255, 255, 255, 0.515);
+  border-radius: 15px;
+  overflow: hidden;
   background-color: #000000b5;
-  user-select: none;
-  z-index: 5;
   background-size: 20px 20px;
   background-repeat: no-repeat;
   background-position: bottom right;
+  user-select: none;
+  z-index: 5;
 }
 
 .youtube-container .video-wrapper {
@@ -56,12 +57,18 @@ body {
 }
 
 .music-player {
-  margin: 5px 0;
+  width: 100%;
   color: #ffffff;
   border-radius: 15px;
   transition: background 0.3s, color 0.3s;
 }
 
+.music-player h2 {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .add-song {
   margin-top: 20px;
@@ -87,37 +94,29 @@ body {
 
 /* ----------------------------------------------------------- DESKTOP */
 @media (min-width: 601px) {
-
   .youtube-container {
     max-width: 35rem;
   }
 
   .music-player {
     padding: 15px;
-    width: 100%;
     border-radius: 10px;
   }
 
   .music-player h2 {
     font-size: 1.5rem;
     padding: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin: 0;
   }
 }
 
 /* ----------------------------------------------------------- MOBILE */
 @media (max-width: 600px) {
-
   .youtube-container {
     border-radius: 10px;
   }
 
   .music-player {
     padding: 10px 0;
-    width: 100%;
     border-radius: 10px;
   }
 
@@ -128,8 +127,5 @@ body {
 
   .music-player h2 {
     font-size: 1.2rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 }
