@@ -71,7 +71,8 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     <div className="controls-container">
       <div className="controls">
         <button
-          className={`shuffle-button ${isShuffle ? "active" : ""}`}
+          className={`shuffle-button ${isShuffle ? "active" : ""} #side`}
+          id="shuffle"
           onClick={() => setIsShuffle(!isShuffle)}
         >
           <LuShuffle />
@@ -94,7 +95,8 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
         </button>
 
         <button
-          className={`repeat-button ${isRepeatOne ? "active" : ""}`}
+          className={`repeat-button ${isRepeatOne ? "active" : ""} #side`}
+          id="repeat"
           onClick={() => setIsRepeatOne(!isRepeatOne)}
         >
           <LuRepeat1 />

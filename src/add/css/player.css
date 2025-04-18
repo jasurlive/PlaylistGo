@@ -28,7 +28,7 @@ body {
   align-items: center;
   width: 100%;
   max-width: 100%;
-  margin: 10px auto;
+  margin: 1.5rem auto;
   border: 1px solid rgba(255, 255, 255, 0.515);
   border-radius: 15px;
   overflow: hidden;

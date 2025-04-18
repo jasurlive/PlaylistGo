@@ -72,11 +72,11 @@
 }
 
 .mute-button {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     background: none;
     border: none;
     cursor: pointer;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
 }
 
 .volume-control {
@@ -91,26 +91,36 @@
     cursor: pointer;
 }
 
-@media (max-width: 600px) {
-    .controls button {
-        font-size: 2.5rem;
-    }
+#shuffle,
+#repeat {
+    font-size: 1.5rem;
 
+}
+
+.controls button {
+    font-size: 2.5rem;
+}
+
+/* ------------------------------------------------------------ MOBILE */
+@media (max-width: 600px) {
+
+    .controls-container {
+        gap: 1rem;
+    }
 
     .volume-container {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        width: 95%;
     }
 
 }
 
+/* ------------------------------------------------------------ DESKTOP */
+
 @media (min-width: 601px) {
-    .controls button {
-        font-size: 2.5rem;
-    }
+
 
     .controls button:hover {
         color: #ff6cfa;
