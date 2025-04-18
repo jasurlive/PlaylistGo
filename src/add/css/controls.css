@@ -104,9 +104,6 @@
 /* ------------------------------------------------------------ MOBILE */
 @media (max-width: 600px) {
 
-    .controls-container {
-        gap: 1rem;
-    }
 
     .volume-container {
         display: flex;
