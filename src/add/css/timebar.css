@@ -3,53 +3,78 @@
     flex-direction: column;
     gap: 8px;
     width: 30%;
-    padding: 8px 0;
     font-family: sans-serif;
     cursor: pointer;
+    z-index: 10;
 }
 
 .progress-bar {
     position: relative;
     height: 8px;
     background-color: #ddd;
-    border-radius: 4px;
+    overflow: hidden;
 }
 
 .progress {
-    position: relative;
     height: 100%;
-    background-color: #1db954;
+    background-color: #273760;
     transition: width 0.2s ease-in-out;
 }
 
-.cursor {
+@keyframes cursorDance {
+    0% {
+        background-color: #ff90c0;
+    }
+
+    25% {
+        background-color: #00eeff;
+    }
+
+    50% {
+        background-color: #85baff;
+    }
+
+    75% {
+        background-color: #d773ff;
+    }
+
+    100% {
+        background-color: #00ffcc;
+    }
+}
+
+.seek-cursor {
     position: absolute;
     top: 50%;
-    right: 0;
+    left: 0;
     width: 10px;
     height: 10px;
-    background-color: #ffffff;
-    border: 2px solid #1db954;
-    transform: translate(50%, -50%);
-    border-radius: 2px;
+    transform: translate(-50%, -50%);
+    border-radius: 10%;
     pointer-events: none;
+    animation: cursorDance 25s infinite linear;
 }
 
 .timing-info {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 14px;
     color: #ddd;
+    white-space: nowrap;
+    width: 100%;
 }
 
 @media (max-width: 1000px) {
     .timing-bar {
-        width: 99%;
+        width: 100%;
     }
 }
 
 @media (min-width: 1000px) {
-    .timing-bar {
+
+    .timing-bar,
+    .timing-info {
         width: 35rem;
     }
 }

@@ -92,25 +92,27 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
           <div
             className="progress"
             style={{ width: `${calculateProgress()}%` }}
-          >
-            {/* Add square cursor */}
-            <div className="cursor"></div>
-          </div>
+          ></div>
+          <div
+            className="seek-cursor"
+            style={{ left: `${calculateProgress()}%` }}
+          ></div>
         </div>
-        <div className="timing-info">
-          <span>
-            {Math.floor(playedSeconds / 60)}:
-            {Math.floor(playedSeconds % 60)
-              .toString()
-              .padStart(2, "0")}
-          </span>
-          <span>
-            {Math.floor(duration / 60)}:
-            {Math.floor(duration % 60)
-              .toString()
-              .padStart(2, "0")}
-          </span>
-        </div>
+      </div>
+
+      <div className="timing-info">
+        <span>
+          {Math.floor(playedSeconds / 60)}:
+          {Math.floor(playedSeconds % 60)
+            .toString()
+            .padStart(2, "0")}
+        </span>
+        <span>
+          {Math.floor(duration / 60)}:
+          {Math.floor(duration % 60)
+            .toString()
+            .padStart(2, "0")}
+        </span>
       </div>
       <div className="title-section">
         <Title title={title} isPlaying={isPlaying} />
