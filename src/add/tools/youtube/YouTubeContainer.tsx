@@ -21,8 +21,8 @@ const YouTubeContainer: React.FC<YouTubeContainerProps> = ({
 
   const onVideoEndHandler = () => {
     if (isRepeatOne) {
-      if (playerRef.current?.seekTo) {
-        playerRef.current.seekTo(0);
+      if (playerRef.current && typeof playerRef.current.seekTo === "function") {
+        playerRef.current.seekTo(0); // Call seekTo only if it exists
         setIsPlaying(true);
       }
     } else {
@@ -58,6 +58,7 @@ const YouTubeContainer: React.FC<YouTubeContainerProps> = ({
           handleMuteToggle={handleMuteToggle} // Pass handleMuteToggle to YTPlayer
           setPlayedSeconds={setPlayedSeconds} // Pass setPlayedSeconds to YTPlayer
           setDuration={setDuration} // Pass setDuration to YTPlayer
+          onSeek={(time) => playerRef.current?.seekTo(time)} // Pass onSeek prop
         />
       </div>
     </div>

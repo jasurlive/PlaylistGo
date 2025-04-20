@@ -29,6 +29,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
   playedSeconds,
   duration,
   title, // Add title prop
+  onSeek, // Add onSeek prop
 }) => {
   const [volume, setVolume] = useState(1);
 
@@ -76,14 +77,25 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     return duration > 0 ? (playedSeconds / duration) * 100 : 0;
   };
 
+  const handleSeek = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const clickX = event.clientX - rect.left;
+    const newProgress = clickX / rect.width;
+    const newTime = newProgress * duration;
+    onSeek(newTime); // Call onSeek with the calculated time
+  };
+
   return (
     <div className="controls-container">
-      <div className="timing-bar">
+      <div className="timing-bar" onClick={handleSeek}>
         <div className="progress-bar">
           <div
             className="progress"
             style={{ width: `${calculateProgress()}%` }}
-          ></div>
+          >
+            {/* Add square cursor */}
+            <div className="cursor"></div>
+          </div>
         </div>
         <div className="timing-info">
           <span>

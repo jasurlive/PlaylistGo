@@ -27,6 +27,7 @@ const YTPlayer: React.FC<YTPlayerProps> = ({
   isMuted,
   setPlayedSeconds, // Add setPlayedSeconds prop
   setDuration, // Add setDuration prop
+  onSeek, // Add onSeek prop
 }) => {
   const video = videoTracks.find((video) => video.id === currentVideoId);
   const videoId = video ? extractVideoId(video.url) : "";
@@ -47,6 +48,16 @@ const YTPlayer: React.FC<YTPlayerProps> = ({
     }
   }, [isPlaying]);
 
+  useEffect(() => {
+    if (playerRef?.current && onSeek !== undefined) {
+      playerRef.current.seekTo = (time: number) => {
+        const internalPlayer = playerRef.current.getInternalPlayer();
+        if (internalPlayer && typeof internalPlayer.seekTo === "function") {
+          internalPlayer.seekTo(time, "seconds"); // Call seekTo only if it exists
+        }
+      };
+    }
+  }, [playerRef, onSeek]);
   return (
     <div>
       <ReactPlayer

@@ -92,6 +92,7 @@ export interface PlayerControlsProps {
   playedSeconds: number;
   duration: number;
   title: string;
+  onSeek: (time: number) => void;
 }
 
 export interface SearchBarProps {
@@ -142,6 +143,7 @@ export interface YTPlayerProps {
   handleMuteToggle: () => void;
   setPlayedSeconds: (seconds: number) => void;
   setDuration: (duration: number) => void;
+  onSeek: (time: number) => void;
 }
 export interface YouTubeContainerProps {
   currentVideo: Video;
@@ -156,4 +158,5 @@ export interface YouTubeContainerProps {
   playerRef: React.RefObject<any>;
   setPlayedSeconds: React.Dispatch<React.SetStateAction<number>>;
   setDuration: React.Dispatch<React.SetStateAction<number>>;
+  onSeek?: (time: number) => void;
 }

@@ -75,6 +75,13 @@ const Player: React.FC = () => {
     setIsMuted((prev) => !prev); // Toggle mute state
   };
 
+  const handleSeek = (time: number) => {
+    if (playerRef.current && typeof playerRef.current.seekTo === "function") {
+      playerRef.current.seekTo(time); // Call seekTo only if it exists
+      setPlayedSeconds(time); // Update playedSeconds state
+    }
+  };
+
   return (
     <div className="music-player" id="player-container">
       <div className="header-logo" onClick={() => (window.location.href = "/")}>
@@ -148,6 +155,7 @@ const Player: React.FC = () => {
         playedSeconds={playedSeconds} // Pass playedSeconds to PlayerControls
         duration={duration} // Pass duration to PlayerControls
         title={currentVideo.title}
+        onSeek={handleSeek} // Pass handleSeek to PlayerControls
       />
 
       <NavMenu
