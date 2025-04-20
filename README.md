@@ -4,6 +4,8 @@
 
 # YouTube Music Player 🎉✅🔍♻️
 
+![image](https://github.com/user-attachments/assets/79436368-2b84-490b-bf64-a3e9936a680c)
+
 ![image](https://github.com/user-attachments/assets/64770f3d-cab1-4994-a5bd-bd735425c660)
 
 ![image](https://github.com/user-attachments/assets/00202869-5ddd-4378-8a0f-2a5a65e43098)
