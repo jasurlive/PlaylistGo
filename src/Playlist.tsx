@@ -20,20 +20,20 @@ const Playlist: React.FC<PlaylistProps> = ({
   return (
     <div className="playlists-container">
       <PlaylistSection
-        title="Your Playlist"
-        songs={customSongs}
-        setSongs={setCustomSongs}
-        currentVideoId={currentVideoId}
-        playSelectedVideo={playSelectedVideo}
-        deleteSong={(id) => deleteSong(id, true)}
-      />
-      <PlaylistSection
         title="Random Playlist"
         songs={jasursList}
         setSongs={setJasursList}
         currentVideoId={currentVideoId}
         playSelectedVideo={playSelectedVideo}
         deleteSong={(id) => deleteSong(id, false)}
+      />
+      <PlaylistSection
+        title="Your Playlist"
+        songs={customSongs}
+        setSongs={setCustomSongs}
+        currentVideoId={currentVideoId}
+        playSelectedVideo={playSelectedVideo}
+        deleteSong={(id) => deleteSong(id, true)}
       />
     </div>
   );

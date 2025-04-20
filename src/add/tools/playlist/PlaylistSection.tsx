@@ -65,16 +65,13 @@ const PlaylistSection: React.FC<PlaylistSectionProps> = ({
 
           {songs.length === 0 ? (
             <div className="no-songs-message">
-              <p>This playlist is empty for now.</p>
+              <p>Empty playlist</p>
               <br />
               You can add songs using search 🔎🎧
               <br />
               <br />
               <p>Enjoy! 🙂‍↔️🙂‍↕️🎸🎛️</p>
               <br />
-              <div className="no-songs-message-mobile">
-                <p>BONUS: Swipe for random playlist 👉🏻➡️</p>
-              </div>
             </div>
           ) : (
             <ul className="song-list">
