@@ -11,6 +11,8 @@ import {
 
 import { PlayerControlsProps } from "../types/interface";
 import "../../css/controls.css";
+import "../../css/timebar.css"; // Import player CSS
+import Title from "./Title"; // Import Title component
 
 const PlayerControls: React.FC<PlayerControlsProps> = ({
   isPlaying,
@@ -24,6 +26,9 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
   playerRef,
   setIsMuted,
   isMuted,
+  playedSeconds,
+  duration,
+  title, // Add title prop
 }) => {
   const [volume, setVolume] = useState(1);
 
@@ -67,8 +72,38 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     }
   };
 
+  const calculateProgress = () => {
+    return duration > 0 ? (playedSeconds / duration) * 100 : 0;
+  };
+
   return (
     <div className="controls-container">
+      <div className="timing-bar">
+        <div className="progress-bar">
+          <div
+            className="progress"
+            style={{ width: `${calculateProgress()}%` }}
+          ></div>
+        </div>
+        <div className="timing-info">
+          <span>
+            {Math.floor(playedSeconds / 60)}:
+            {Math.floor(playedSeconds % 60)
+              .toString()
+              .padStart(2, "0")}
+          </span>
+          <span>
+            {Math.floor(duration / 60)}:
+            {Math.floor(duration % 60)
+              .toString()
+              .padStart(2, "0")}
+          </span>
+        </div>
+      </div>
+      <div className="title-section">
+        <Title title={title} isPlaying={isPlaying} />
+      </div>
+
       <div className="controls">
         <button
           className={`shuffle-button ${isShuffle ? "active" : ""} #side`}
@@ -103,7 +138,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
         </button>
       </div>
 
-      <div className="volume-container">
+      {/* <div className="volume-container">
         <button
           className="mute-button"
           onClick={handleMuteToggle}
@@ -139,7 +174,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
             className="volume-slider"
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -1,0 +1,39 @@
+.timing-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 30%;
+    padding: 8px 0;
+    font-family: sans-serif;
+}
+
+.progress-bar {
+    position: relative;
+    height: 8px;
+    background-color: #ddd;
+    border-radius: 4px;
+}
+
+.progress {
+    background-color: #3b82f6;
+    transition: width 0.2s ease-in-out;
+}
+
+.timing-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #ddd;
+}
+
+@media (max-width: 1000px) {
+    .timing-bar {
+        width: 99%;
+    }
+}
+
+@media (min-width: 1000px) {
+    .timing-bar {
+        width: 35rem;
+    }
+}

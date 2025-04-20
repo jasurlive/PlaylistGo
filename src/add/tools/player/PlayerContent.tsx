@@ -30,6 +30,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   jasursList,
   setCustomSongs,
   setJasursList,
+  setPlayedSeconds, // Add setPlayedSeconds prop
+  setDuration, // Add setDuration prop
 }) => {
   const handlePlayPauseToggle = () => {
     setIsPlaying((prev) => !prev);
@@ -77,6 +79,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
         setIsRepeatOne={setIsRepeatOne}
         setCurrentVideo={setCurrentVideo}
         playerRef={playerRef}
+        setPlayedSeconds={setPlayedSeconds} // Pass setPlayedSeconds to YouTubeContainer
+        setDuration={setDuration} // Pass setDuration to YouTubeContainer
       />
     </>
   );

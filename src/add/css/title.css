@@ -6,10 +6,8 @@
     justify-content: center;
     text-align: center;
     width: 100%;
-    margin: 0 auto;
-    padding: 2rem;
     gap: 1rem;
-    border-radius: 10px;
+    margin-bottom: 2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.035);
     overflow: hidden;
 }
@@ -73,6 +71,11 @@
 
 
 @media (max-width: 600px) {
+
+    .title-container {
+        width: 100%;
+    }
+
     .title-name {
         font-size: 1.3rem;
         animation: marquee 10s linear infinite;

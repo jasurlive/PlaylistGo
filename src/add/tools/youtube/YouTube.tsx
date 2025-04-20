@@ -24,11 +24,21 @@ const YTPlayer: React.FC<YTPlayerProps> = ({
   autoplay,
   isPlaying,
   setIsPlaying,
-  isMuted, // Added isMuted prop
+  isMuted,
+  setPlayedSeconds, // Add setPlayedSeconds prop
+  setDuration, // Add setDuration prop
 }) => {
   const video = videoTracks.find((video) => video.id === currentVideoId);
   const videoId = video ? extractVideoId(video.url) : "";
   const url = videoId ? `https://www.youtube.com/watch?v=${videoId}` : "";
+
+  const handleProgress = (state: { playedSeconds: number }) => {
+    setPlayedSeconds(state.playedSeconds); // Update the current progress
+  };
+
+  const handleDuration = (duration: number) => {
+    setDuration(duration); // Set the total duration of the video
+  };
 
   // Automatically sync the isPlaying state with ReactPlayer
   useEffect(() => {
@@ -60,6 +70,8 @@ const YTPlayer: React.FC<YTPlayerProps> = ({
         onPlay={() => setIsPlaying(true)} // When the video starts, mark it as playing
         onPause={() => setIsPlaying(false)} // When the video is paused, mark it as not playing
         onEnded={onVideoEnd}
+        onProgress={handleProgress} // Track current progress
+        onDuration={handleDuration} // Track total duration
         ref={(player) => {
           if (player && playerRef) {
             playerRef.current = player; // Assign the ReactPlayer instance to the ref

@@ -14,6 +14,8 @@ const YouTubeContainer: React.FC<YouTubeContainerProps> = ({
   setIsRepeatOne,
   setCurrentVideo,
   playerRef,
+  setPlayedSeconds, // Add setPlayedSeconds prop
+  setDuration, // Add setDuration prop
 }) => {
   const [isMuted, setIsMuted] = useState(false); // Add state for mute
 
@@ -54,6 +56,8 @@ const YouTubeContainer: React.FC<YouTubeContainerProps> = ({
           isMuted={isMuted}
           setIsMuted={setIsMuted} // Pass isMuted state to YTPlayer
           handleMuteToggle={handleMuteToggle} // Pass handleMuteToggle to YTPlayer
+          setPlayedSeconds={setPlayedSeconds} // Pass setPlayedSeconds to YTPlayer
+          setDuration={setDuration} // Pass setDuration to YTPlayer
         />
       </div>
     </div>

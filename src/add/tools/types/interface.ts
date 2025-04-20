@@ -73,6 +73,8 @@ export interface PlayerContentProps {
   jasursList: Video[];
   setCustomSongs: React.Dispatch<React.SetStateAction<Video[]>>;
   setJasursList: React.Dispatch<React.SetStateAction<Video[]>>;
+  setPlayedSeconds: React.Dispatch<React.SetStateAction<number>>;
+  setDuration: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface PlayerControlsProps {
@@ -87,6 +89,9 @@ export interface PlayerControlsProps {
   playerRef: RefObject<any>;
   isMuted: boolean;
   setIsMuted: React.Dispatch<React.SetStateAction<boolean>>;
+  playedSeconds: number;
+  duration: number;
+  title: string;
 }
 
 export interface SearchBarProps {
@@ -135,6 +140,8 @@ export interface YTPlayerProps {
   setIsMuted: (isMuted: boolean) => void;
   isMuted: boolean;
   handleMuteToggle: () => void;
+  setPlayedSeconds: (seconds: number) => void;
+  setDuration: (duration: number) => void;
 }
 export interface YouTubeContainerProps {
   currentVideo: Video;
@@ -147,4 +154,6 @@ export interface YouTubeContainerProps {
   setIsRepeatOne: React.Dispatch<React.SetStateAction<boolean>>;
   setCurrentVideo: React.Dispatch<React.SetStateAction<Video>>;
   playerRef: React.RefObject<any>;
+  setPlayedSeconds: React.Dispatch<React.SetStateAction<number>>;
+  setDuration: React.Dispatch<React.SetStateAction<number>>;
 }

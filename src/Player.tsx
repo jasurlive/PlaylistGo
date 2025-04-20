@@ -31,6 +31,8 @@ const Player: React.FC = () => {
   const [isRepeatOne, setIsRepeatOne] = useState(false);
   const [jasursList, setJasursList] = useState<Video[]>([]);
   const playerRef = useRef<any>(null);
+  const [playedSeconds, setPlayedSeconds] = useState(0); // Track current progress
+  const [duration, setDuration] = useState(0); // Track total duration
 
   const {
     searchQuery,
@@ -99,6 +101,8 @@ const Player: React.FC = () => {
         isRepeatOne={isRepeatOne}
         setIsRepeatOne={setIsRepeatOne}
         playerRef={playerRef}
+        setPlayedSeconds={setPlayedSeconds} // Pass setPlayedSeconds to PlayerContent
+        setDuration={setDuration} // Pass setDuration to PlayerContent
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         searchResults={searchResults}
@@ -111,8 +115,6 @@ const Player: React.FC = () => {
         setCustomSongs={setCustomSongs}
         setJasursList={setJasursList}
       />
-
-      <Title title={currentVideo.title} isPlaying={isPlaying} />
 
       <PlayerControls
         isPlaying={isPlaying}
@@ -143,6 +145,9 @@ const Player: React.FC = () => {
         setIsMuted={setIsMuted} // Pass set function to control mute state
         isMuted={isMuted}
         playerRef={playerRef} // Pass playerRef to PlayerControls
+        playedSeconds={playedSeconds} // Pass playedSeconds to PlayerControls
+        duration={duration} // Pass duration to PlayerControls
+        title={currentVideo.title}
       />
 
       <NavMenu
