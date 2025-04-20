@@ -2,6 +2,7 @@ import React from "react";
 import { GrPause, GrPlayFill } from "react-icons/gr";
 import { LuRepeat1, LuShuffle } from "react-icons/lu";
 import { RxTrackNext, RxTrackPrevious } from "react-icons/rx";
+import "../../../css/buttons.css";
 
 interface ControlButtonsProps {
   isPlaying: boolean;

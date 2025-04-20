@@ -40,9 +40,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
         duration={duration}
         onSeek={onSeek}
       />
-      <div className="title-section">
-        <Title title={title} isPlaying={isPlaying} />
-      </div>
+      <Title title={title} isPlaying={isPlaying} />
       <ControlButtons
         isPlaying={isPlaying}
         onPlayPauseToggle={onPlayPauseToggle}
