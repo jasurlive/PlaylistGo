@@ -1,19 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { GrPause, GrPlayFill } from "react-icons/gr";
-import { LuRepeat1, LuShuffle } from "react-icons/lu";
-import { RxTrackNext, RxTrackPrevious } from "react-icons/rx";
-import {
-  IoVolumeHighSharp,
-  IoVolumeMediumSharp,
-  IoVolumeLowSharp,
-  IoVolumeMute,
-} from "react-icons/io5";
-
+import React, { useEffect } from "react";
 import { PlayerControlsProps } from "../types/interface";
 import "../../css/controls.css";
-import "../../css/timebar.css"; // Import player CSS
-import Title from "./Title"; // Import Title component
-
+import Title from "./controls/songTitle";
+import TimeBar from "./controls/timeBar";
+import ControlButtons from "./controls/controlButtons";
 const PlayerControls: React.FC<PlayerControlsProps> = ({
   isPlaying,
   onPlayPauseToggle,
@@ -23,16 +13,11 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
   setIsShuffle,
   isRepeatOne,
   setIsRepeatOne,
-  playerRef,
-  setIsMuted,
-  isMuted,
+  title,
   playedSeconds,
   duration,
-  title, // Add title prop
-  onSeek, // Add onSeek prop
+  onSeek,
 }) => {
-  const [volume, setVolume] = useState(1);
-
   useEffect(() => {
     const savedShuffle = localStorage.getItem("isShuffle");
     const savedRepeatOne = localStorage.getItem("isRepeatOne");
@@ -48,147 +33,26 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     localStorage.setItem("isRepeatOne", JSON.stringify(isRepeatOne));
   }, [isRepeatOne]);
 
-  const handleMuteToggle = () => {
-    const newMuted = !isMuted;
-    setIsMuted(newMuted);
-    if (playerRef?.current) {
-      const internalPlayer = playerRef.current.getInternalPlayer();
-      if (internalPlayer && typeof internalPlayer.setVolume === "function") {
-        internalPlayer.setVolume(newMuted ? 0 : volume * 100);
-      }
-    }
-  };
-
-  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = parseFloat(event.target.value);
-    setVolume(newVolume);
-    if (playerRef?.current) {
-      const internalPlayer = playerRef.current.getInternalPlayer();
-      if (internalPlayer && typeof internalPlayer.setVolume === "function") {
-        internalPlayer.setVolume(newVolume * 100);
-      }
-    }
-    if (isMuted) {
-      setIsMuted(false);
-    }
-  };
-
-  const calculateProgress = () => {
-    return duration > 0 ? (playedSeconds / duration) * 100 : 0;
-  };
-
-  const handleSeek = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const clickX = event.clientX - rect.left;
-    const newProgress = clickX / rect.width;
-    const newTime = newProgress * duration;
-    onSeek(newTime); // Call onSeek with the calculated time
-  };
-
   return (
     <div className="controls-container">
-      <div className="timing-bar" onClick={handleSeek}>
-        <div className="progress-bar">
-          <div
-            className="progress"
-            style={{ width: `${calculateProgress()}%` }}
-          ></div>
-          <div
-            className="seek-cursor"
-            style={{ left: `${calculateProgress()}%` }}
-          ></div>
-        </div>
-      </div>
-
-      <div className="timing-info">
-        <span>
-          {Math.floor(playedSeconds / 60)}:
-          {Math.floor(playedSeconds % 60)
-            .toString()
-            .padStart(2, "0")}
-        </span>
-        <span>
-          {Math.floor(duration / 60)}:
-          {Math.floor(duration % 60)
-            .toString()
-            .padStart(2, "0")}
-        </span>
-      </div>
+      <TimeBar
+        playedSeconds={playedSeconds}
+        duration={duration}
+        onSeek={onSeek}
+      />
       <div className="title-section">
         <Title title={title} isPlaying={isPlaying} />
       </div>
-
-      <div className="controls">
-        <button
-          className={`shuffle-button ${isShuffle ? "active" : ""} #side`}
-          id="shuffle"
-          onClick={() => setIsShuffle(!isShuffle)}
-        >
-          <LuShuffle />
-        </button>
-
-        <button onClick={playPreviousVideo}>
-          <RxTrackPrevious />
-        </button>
-
-        <button className="play-pause" onClick={onPlayPauseToggle}>
-          {isPlaying ? (
-            <GrPause className={`pause-icon ${isPlaying ? "playing" : ""}`} />
-          ) : (
-            <GrPlayFill className={`play-icon ${isPlaying ? "" : "playing"}`} />
-          )}
-        </button>
-
-        <button onClick={playNextVideo}>
-          <RxTrackNext />
-        </button>
-
-        <button
-          className={`repeat-button ${isRepeatOne ? "active" : ""} #side`}
-          id="repeat"
-          onClick={() => setIsRepeatOne(!isRepeatOne)}
-        >
-          <LuRepeat1 />
-        </button>
-      </div>
-
-      {/* <div className="volume-container">
-        <button
-          className="mute-button"
-          onClick={handleMuteToggle}
-          title={
-            isMuted || volume === 0
-              ? "Muted"
-              : volume <= 0.4
-              ? "Low"
-              : volume <= 0.8
-              ? "Medium"
-              : "High"
-          }
-        >
-          {isMuted || volume === 0 ? (
-            <IoVolumeMute style={{ color: "#ff4d4f" }} />
-          ) : volume <= 0.4 ? (
-            <IoVolumeLowSharp style={{ color: "#ffc107" }} />
-          ) : volume <= 0.8 ? (
-            <IoVolumeMediumSharp style={{ color: "#1e90ff" }} />
-          ) : (
-            <IoVolumeHighSharp style={{ color: "#02ffb3" }} />
-          )}
-        </button>
-
-        <div className="volume-control">
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={isMuted ? 0 : volume}
-            onChange={handleVolumeChange}
-            className="volume-slider"
-          />
-        </div>
-      </div> */}
+      <ControlButtons
+        isPlaying={isPlaying}
+        onPlayPauseToggle={onPlayPauseToggle}
+        playNextVideo={playNextVideo}
+        playPreviousVideo={playPreviousVideo}
+        isShuffle={isShuffle}
+        setIsShuffle={setIsShuffle}
+        isRepeatOne={isRepeatOne}
+        setIsRepeatOne={setIsRepeatOne}
+      />
     </div>
   );
 };

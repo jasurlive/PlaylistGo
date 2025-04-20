@@ -9,7 +9,7 @@ import PlayerContent from "./add/tools/player/PlayerContent";
 import NavMenu from "./add/tools/basic/NavMenu";
 import SearchBar from "./add/tools/player/SearchBar";
 import Online from "./add/tools/basic/Online";
-import Title from "./add/tools/player/Title";
+import Title from "./add/tools/player/controls/songTitle";
 import PlayerControls from "./add/tools/player/PlayerControls";
 import "./add/css/header.css";
 import {

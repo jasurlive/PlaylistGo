@@ -5,7 +5,6 @@
     width: 30%;
     font-family: sans-serif;
     cursor: pointer;
-    z-index: 10;
 }
 
 .progress-bar {
@@ -13,6 +12,7 @@
     height: 8px;
     background-color: #ddd;
     overflow: hidden;
+    z-index: 10;
 }
 
 .progress {
@@ -65,13 +65,15 @@
     width: 100%;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 600px) {
+
+    .time-bar-container,
     .timing-bar {
         width: 100%;
     }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 601px) {
 
     .timing-bar,
     .timing-info {
