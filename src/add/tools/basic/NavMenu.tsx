@@ -4,6 +4,7 @@ import "../../css/nav-menu.css";
 import Playlist from "../../../Playlist";
 import { NavMenuProps } from "../types/interface";
 import { BsChevronCompactUp, BsChevronCompactDown } from "react-icons/bs";
+import Shortcuts from "../player/Shortcuts";
 
 const NavMenu: React.FC<NavMenuProps> = ({
   searchQuery,
@@ -48,6 +49,16 @@ const NavMenu: React.FC<NavMenuProps> = ({
     }
   };
 
+  // toggle function for p shortcut
+
+  const toggleModal = () => {
+    setIsModalOpen((prev) => {
+      const newState = !prev;
+      setActiveButton(newState ? "Playlists" : "");
+      return newState;
+    });
+  };
+
   return (
     <div>
       <div className="bottom-nav">
@@ -78,6 +89,8 @@ const NavMenu: React.FC<NavMenuProps> = ({
           </div>
         </div>
       )}
+
+      <Shortcuts onToggleModal={toggleModal} />
     </div>
   );
 };

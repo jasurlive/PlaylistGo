@@ -8,6 +8,7 @@ const Shortcuts: React.FC<ShortcutsProps> = ({
   onPlayNext,
   onToggleShuffle,
   onToggleRepeatOne,
+  onToggleModal,
 }) => {
   useEffect(() => {
     const handleKeydown = (event: KeyboardEvent) => {
@@ -26,25 +27,32 @@ const Shortcuts: React.FC<ShortcutsProps> = ({
       switch (event.key) {
         case "s":
           event.preventDefault();
-          onSearchFocus();
+          onSearchFocus?.();
           break;
         case "k":
         case "5":
-          onPlayPauseToggle();
+          onPlayPauseToggle?.();
           break;
         case "4":
-          onPlayPrevious();
+          onPlayPrevious?.();
           break;
         case "6":
-          onPlayNext();
+          onPlayNext?.();
           break;
         case "q":
-          onToggleShuffle();
+          onToggleShuffle?.();
           break;
         case "r":
         case "w":
         case "1":
-          onToggleRepeatOne();
+          onToggleRepeatOne?.();
+          break;
+        case " ":
+        case "p":
+          event.preventDefault();
+          if (onToggleModal) {
+            onToggleModal();
+          }
           break;
       }
     };

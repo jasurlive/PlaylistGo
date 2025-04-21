@@ -106,12 +106,13 @@ export interface SearchBarProps {
 }
 
 export interface ShortcutsProps {
-  onSearchFocus: () => void;
-  onPlayPauseToggle: () => void;
-  onPlayPrevious: () => void;
-  onPlayNext: () => void;
-  onToggleShuffle: () => void;
-  onToggleRepeatOne: () => void;
+  onSearchFocus?: () => void;
+  onPlayPauseToggle?: () => void;
+  onPlayPrevious?: () => void;
+  onPlayNext?: () => void;
+  onToggleShuffle?: () => void;
+  onToggleRepeatOne?: () => void;
+  onToggleModal?: () => void;
 }
 
 export interface PlaylistSectionProps {
