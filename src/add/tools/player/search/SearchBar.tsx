@@ -1,9 +1,9 @@
 import { useRef, useEffect } from "react";
 import { FaPlus, FaCheckCircle } from "react-icons/fa";
 import { SlClose } from "react-icons/sl";
-import "../../css/searchbar.css";
+import "../../../css/searchbar.css";
 import { BsSearchHeart } from "react-icons/bs";
-import { SearchBarProps } from "../types/interface";
+import { SearchBarProps } from "../../types/interface";
 
 const SearchBar: React.FC<SearchBarProps> = ({
   searchQuery,

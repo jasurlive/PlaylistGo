@@ -1,15 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import { generateUniqueId } from "./add/tools/player/ID";
+import { generateUniqueId } from "./add/tools/player/fetch/ID";
 import "./add/css/player.css";
-import { fetchPlaylist } from "./add/tools/player/fetchPlaylist";
-import { useCustomSongs } from "./add/tools/player/useCustomSongs";
+import { fetchPlaylist } from "./add/tools/player/fetch/fetchPlaylist";
+import { useCustomSongs } from "./add/tools/player/use/useCustomSongs";
 import { useYouTubeSearch } from "./add/tools/youtube/useYouTubeSearch";
 import { Video } from "./add/tools/types/interface";
 import PlayerContent from "./add/tools/player/PlayerContent";
 import NavMenu from "./add/tools/basic/NavMenu";
-import SearchBar from "./add/tools/player/SearchBar";
-import Online from "./add/tools/basic/Online";
-import Title from "./add/tools/player/controls/songTitle";
+import SearchBar from "./add/tools/player/search/SearchBar";
 import PlayerControls from "./add/tools/player/PlayerControls";
 import "./add/css/header.css";
 import {
@@ -19,7 +17,7 @@ import {
 
 const Player: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(false); // Add mute state
+  const [isMuted, setIsMuted] = useState(false);
   const [currentVideo, setCurrentVideo] = useState<Video>({
     id: "",
     title: "",
@@ -31,8 +29,8 @@ const Player: React.FC = () => {
   const [isRepeatOne, setIsRepeatOne] = useState(false);
   const [jasursList, setJasursList] = useState<Video[]>([]);
   const playerRef = useRef<any>(null);
-  const [playedSeconds, setPlayedSeconds] = useState(0); // Track current progress
-  const [duration, setDuration] = useState(0); // Track total duration
+  const [playedSeconds, setPlayedSeconds] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const {
     searchQuery,
@@ -67,18 +65,13 @@ const Player: React.FC = () => {
   };
 
   const handlePlayPauseToggle = () => {
-    setIsPlaying((prev) => !prev); // Toggle play/pause using isPlaying state
-  };
-
-  // Mute toggle handler
-  const handleMuteToggle = () => {
-    setIsMuted((prev) => !prev); // Toggle mute state
+    setIsPlaying((prev) => !prev);
   };
 
   const handleSeek = (time: number) => {
     if (playerRef.current && typeof playerRef.current.seekTo === "function") {
-      playerRef.current.seekTo(time); // Call seekTo only if it exists
-      setPlayedSeconds(time); // Update playedSeconds state
+      playerRef.current.seekTo(time);
+      setPlayedSeconds(time);
     }
   };
 
@@ -108,8 +101,8 @@ const Player: React.FC = () => {
         isRepeatOne={isRepeatOne}
         setIsRepeatOne={setIsRepeatOne}
         playerRef={playerRef}
-        setPlayedSeconds={setPlayedSeconds} // Pass setPlayedSeconds to PlayerContent
-        setDuration={setDuration} // Pass setDuration to PlayerContent
+        setPlayedSeconds={setPlayedSeconds}
+        setDuration={setDuration}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         searchResults={searchResults}
@@ -149,13 +142,13 @@ const Player: React.FC = () => {
         setIsShuffle={setIsShuffle}
         isRepeatOne={isRepeatOne}
         setIsRepeatOne={setIsRepeatOne}
-        setIsMuted={setIsMuted} // Pass set function to control mute state
+        setIsMuted={setIsMuted}
         isMuted={isMuted}
-        playerRef={playerRef} // Pass playerRef to PlayerControls
-        playedSeconds={playedSeconds} // Pass playedSeconds to PlayerControls
-        duration={duration} // Pass duration to PlayerControls
+        playerRef={playerRef}
+        playedSeconds={playedSeconds}
+        duration={duration}
         title={currentVideo.title}
-        onSeek={handleSeek} // Pass handleSeek to PlayerControls
+        onSeek={handleSeek}
       />
 
       <NavMenu

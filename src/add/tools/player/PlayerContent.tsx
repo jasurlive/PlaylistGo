@@ -2,11 +2,7 @@ import React from "react";
 import Shortcuts from "./Shortcuts";
 import YouTubeContainer from "../youtube/YouTubeContainer";
 import { PlayerContentProps } from "../types/interface";
-import {
-  playNextVideo,
-  playPreviousVideo,
-  playSelectedVideo,
-} from "./videoControls";
+import { playNextVideo, playPreviousVideo } from "./videoControls";
 
 const PlayerContent: React.FC<PlayerContentProps> = ({
   isPlaying,
@@ -19,19 +15,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   isRepeatOne,
   setIsRepeatOne,
   playerRef,
-  searchQuery,
-  setSearchQuery,
-  searchResults,
-  searchYouTube,
-  clearSearch,
-  addedSongs,
-  addSongFromSearch,
-  customSongs,
-  jasursList,
-  setCustomSongs,
-  setJasursList,
-  setPlayedSeconds, // Add setPlayedSeconds prop
-  setDuration, // Add setDuration prop
+  setPlayedSeconds,
+  setDuration,
 }) => {
   const handlePlayPauseToggle = () => {
     setIsPlaying((prev) => !prev);
@@ -79,8 +64,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
         setIsRepeatOne={setIsRepeatOne}
         setCurrentVideo={setCurrentVideo}
         playerRef={playerRef}
-        setPlayedSeconds={setPlayedSeconds} // Pass setPlayedSeconds to YouTubeContainer
-        setDuration={setDuration} // Pass setDuration to YouTubeContainer
+        setPlayedSeconds={setPlayedSeconds}
+        setDuration={setDuration}
       />
     </>
   );
