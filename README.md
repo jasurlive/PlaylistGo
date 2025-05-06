@@ -1,6 +1,6 @@
 ## DJ YouTube Music Player in Typescript
 
-# Reinventing the bike.
+# Reinventing the bike 🚲.
 
 # YouTube Music Player 🎉✅🔍♻️
 
