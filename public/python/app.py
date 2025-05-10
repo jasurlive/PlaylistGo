@@ -147,7 +147,7 @@ class SearchThread(QThread):
         self.search_query = search_query
 
     def run(self):
-        API_KEY = os.getenv("VITE_YOUTUBE_API_KEY")
+        API_KEY = os.getenv("APP_YT_KEY")
         url = f"https://www.googleapis.com/youtube/v3/search?part=snippet&q={self.search_query}&type=video&maxResults=20&key={API_KEY}"
 
         try:
