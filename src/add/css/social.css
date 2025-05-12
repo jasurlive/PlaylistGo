@@ -1,0 +1,97 @@
+.social-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-button {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #0700c898, #e11cff83);
+    color: #fff;
+    padding: 12px;
+    border-radius: 15%;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+    border: white 1px solid;
+    font-size: 1.5rem;
+    z-index: 100;
+}
+
+.social-button:hover {
+    background-color: #1c4777;
+}
+
+.social-button:active {
+    transform: scale(0.8);
+}
+
+.social-menu {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    gap: 12px;
+    background: linear-gradient(135deg, #e11cffbc, #2574fcae);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 2rem;
+    animation: slideIn 0.5s ease-in-out;
+    z-index: 100;
+}
+
+.social-menu a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icon {
+    color: #ffffff;
+}
+
+.social-icon-ielts {
+    width: 2rem;
+    height: 2rem;
+    background-color: rgb(219, 0, 0);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.7rem;
+    color: white;
+}
+
+.social-icon:hover,
+.social-icon-ielts:hover {
+    color: #69fdbf;
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.social-icon:active,
+.social-icon-ielts:active {
+    transform: scale(0.8);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-30px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .social-menu {
+        background: linear-gradient(135deg, #e11cffbc, #2574fcae);
+    }
+}

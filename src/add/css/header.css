@@ -1,0 +1,69 @@
+/*************  ✨ Windsurf Command 🌟  *************/
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lobster&family=Great+Vibes&family=Kaushan+Script&family=Alex+Brush&display=swap");
+
+.header-logo {
+  position: absolute;
+  text-align: center;
+  cursor: pointer;
+}
+
+.logo-text {
+  font-family: "Kaushan Script", cursive, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ff0000, #ff9900, #33cc33, #3399ff, #cc33ff);
+  background-size: 500% 500%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: equalizerEffect 40s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  z-index: 10;
+}
+
+@keyframes equalizerEffect {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-logo {
+    position: relative;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+  }
+}
+
+/*******  c40758ec-c43c-4151-9029-ceb49fc3a259  *******/

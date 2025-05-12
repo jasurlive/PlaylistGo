@@ -1,0 +1,82 @@
+.timing-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 30%;
+    font-family: sans-serif;
+    cursor: pointer;
+}
+
+.progress-bar {
+    position: relative;
+    height: 8px;
+    background-color: #ddd;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.progress {
+    height: 100%;
+    background-color: #273760;
+    transition: width 0.2s ease-in-out;
+}
+
+@keyframes cursorDance {
+    0% {
+        background-color: #ff90c0;
+    }
+
+    25% {
+        background-color: #00eeff;
+    }
+
+    50% {
+        background-color: #85baff;
+    }
+
+    75% {
+        background-color: #d773ff;
+    }
+
+    100% {
+        background-color: #00ffcc;
+    }
+}
+
+.seek-cursor {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    transform: translate(-50%, -50%);
+    border-radius: 10%;
+    pointer-events: none;
+    animation: cursorDance 25s infinite linear;
+}
+
+.timing-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #ddd;
+    white-space: nowrap;
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+
+    .time-bar-container,
+    .timing-bar {
+        width: 100%;
+    }
+}
+
+@media (min-width: 601px) {
+
+    .timing-bar,
+    .timing-info {
+        width: 35rem;
+    }
+}

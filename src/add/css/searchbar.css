@@ -1,0 +1,202 @@
+.add-song {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.add-song input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+}
+
+.add-song input:focus {
+    border-color: #337ab7;
+    outline: none;
+}
+
+.search-results {
+    position: relative;
+    margin: 20px auto;
+    width: 100%;
+    height: 20rem;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #8e9fbf3d;
+    overflow-x: hidden;
+    overflow-y: visible;
+    z-index: 10;
+}
+
+.search-results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close-icon {
+    cursor: pointer;
+    color: #ff0000;
+    font-size: 2rem;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background-color: #f0f0f059;
+}
+
+.search-result-item button {
+    display: block;
+    flex: 0 0 auto;
+    width: fit-content;
+    min-width: 80px;
+    max-width: 80px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #fff;
+    background: #007bff;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.search-result-item button:hover {
+    background: #000cb3;
+    transform: translateY(-3px);
+    cursor: pointer;
+}
+
+.search-result-item button:active {
+    background-color: bisque;
+    color: #000cb3;
+}
+
+.thumbnail {
+    width: 100px;
+    height: auto;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.035);
+    z-index: 10;
+}
+
+.search-container input {
+    width: 100%;
+    height: 40px;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.search-container input:focus {
+    border-color: #337ab7;
+    outline: none;
+}
+
+.search-container button {
+    height: 40px;
+    padding: 2px 1.5rem;
+    font-size: 2rem;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #007bff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-container button:hover {
+    background-color: #000cb3;
+}
+
+.empty-search {
+    color: #337ab7;
+    text-align: center;
+}
+
+.search-result-title {
+    display: block;
+    margin: 10px;
+    font-size: 14px;
+    max-width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 600px) {
+    .thumbnail {
+        width: 70px;
+        height: auto;
+        margin-right: 5px;
+    }
+
+    .search-results {
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #8e9fbf3d;
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+
+    .search-result-item {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        border-bottom: 1px solid #ccc;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .search-result-item button {
+        display: block;
+        flex: 0 0 auto;
+        width: fit-content;
+        min-width: 70px;
+        max-width: 70px;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        font-size: 8px;
+        color: #fff;
+        background: #007bff;
+    }
+
+    .search-result-title {
+        display: block;
+        margin: 10px;
+        max-width: 40%;
+        font-size: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
