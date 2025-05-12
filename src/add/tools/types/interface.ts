@@ -129,6 +129,13 @@ export interface SongItemProps {
   playSelectedVideo: (id: string) => void;
   deleteSong: (id: string) => void;
   currentVideoId: string;
+  // For context menu actions
+  onPlayNext?: (id: string) => void;
+  onDuplicate?: (id: string) => void;
+  onGoToCurrent?: () => void;
+  isCurrentSongVisible?: boolean;
+  // For ref forwarding
+  ref?: React.Ref<HTMLLIElement>;
 }
 
 export interface YTPlayerProps {

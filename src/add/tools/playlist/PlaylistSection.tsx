@@ -1,4 +1,5 @@
 import "../../css/playlist.css";
+import React, { useRef } from "react";
 import { FaHeadphones } from "react-icons/fa";
 import { HiChevronDoubleDown } from "react-icons/hi2";
 import { DndContext, closestCenter } from "@dnd-kit/core";
@@ -33,6 +34,47 @@ const PlaylistSection: React.FC<PlaylistSectionProps> = ({
       activationConstraint: { delay: 100, tolerance: 150 },
     })
   );
+
+  const currentSongRef = useRef<HTMLLIElement>(null);
+
+  const scrollToCurrentSong = () => {
+    if (currentSongRef.current) {
+      currentSongRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
+
+  const isCurrentSongVisible = () => {
+    if (!currentSongRef.current) return false;
+    const rect = currentSongRef.current.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.bottom <=
+        (window.innerHeight || document.documentElement.clientHeight)
+    );
+  };
+
+  const handlePlayNext = (id: string) => {
+    const idx = songs.findIndex((s) => s.id === id);
+    const curIdx = songs.findIndex((s) => s.id === currentVideoId);
+    if (idx === -1 || curIdx === -1 || idx === curIdx) return;
+    const reordered = [...songs];
+    const [song] = reordered.splice(idx, 1);
+    reordered.splice(curIdx + 1, 0, song);
+    setSongs(reordered);
+  };
+
+  const handleDuplicate = (id: string) => {
+    const idx = songs.findIndex((s) => s.id === id);
+    if (idx === -1) return;
+    const song = songs[idx];
+    const newSong = { ...song, id: song.id + "_copy_" + Date.now() };
+    const newSongs = [...songs];
+    newSongs.splice(idx + 1, 0, newSong);
+    setSongs(newSongs);
+  };
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
@@ -82,6 +124,11 @@ const PlaylistSection: React.FC<PlaylistSectionProps> = ({
                   playSelectedVideo={playSelectedVideo}
                   deleteSong={deleteSong}
                   currentVideoId={currentVideoId}
+                  onPlayNext={handlePlayNext}
+                  onDuplicate={handleDuplicate}
+                  onGoToCurrent={scrollToCurrentSong}
+                  isCurrentSongVisible={isCurrentSongVisible()}
+                  ref={track.id === currentVideoId ? currentSongRef : undefined}
                 />
               ))}
             </ul>

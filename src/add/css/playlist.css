@@ -67,6 +67,54 @@
   cursor: grabbing;
 }
 
+.song-context-menu {
+  position: fixed;
+  z-index: 20;
+  background: #232b3b;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.25);
+  padding: 0.3rem 0;
+  display: flex;
+  flex-direction: column;
+  animation: fadeInMenu 0.15s;
+  border: 1px solid #0eb085;
+}
+
+.song-context-menu button {
+  background: none;
+  border: none;
+  color: inherit;
+  text-align: left;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.15s;
+}
+
+.song-context-menu button:hover:not(:disabled),
+.song-context-menu button:focus:not(:disabled) {
+  background: #0eb085;
+  color: #fff;
+}
+
+.song-context-menu button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@keyframes fadeInMenu {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
 @keyframes gradientAnimationSong {
 
