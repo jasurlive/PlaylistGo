@@ -80,6 +80,11 @@ const SongItem = forwardRef<
     // Touch and hold for context menu
     const handleTouchStart = (e: React.TouchEvent) => {
       const touch = e.touches[0];
+      // Prevent context menu if touching an icon
+      const target = e.target as HTMLElement;
+      if (target.closest(".trash-icon") || target.closest(".drag-handle")) {
+        return;
+      }
       setTouchTimer(
         setTimeout(() => {
           setContextMenu({ x: touch.clientX, y: touch.clientY });
@@ -159,14 +164,7 @@ const SongItem = forwardRef<
           />
         </li>
         {contextMenu && (
-          <div
-            ref={menuRef}
-            className="song-context-menu"
-            style={{
-              top: contextMenu.y,
-              left: contextMenu.x,
-            }}
-          >
+          <div ref={menuRef} className="song-context-menu">
             <button onClick={handlePlayNext}>Play next</button>
             <button onClick={handleDuplicate}>Duplicate</button>
             <button
