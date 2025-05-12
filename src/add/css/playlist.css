@@ -68,7 +68,7 @@
 }
 
 .song-context-menu {
-  position: fixed;
+  position: relative;
   z-index: 20;
   background: #232b3b;
   color: #fff;
