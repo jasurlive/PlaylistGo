@@ -93,6 +93,12 @@ const SongItem = forwardRef<
     };
     const handleTouchEnd = () => {
       if (touchTimer) clearTimeout(touchTimer);
+      setTouchTimer(null);
+    };
+    // Prevent menu on scroll/move (treat as cancel)
+    const handleTouchMove = () => {
+      if (touchTimer) clearTimeout(touchTimer);
+      setTouchTimer(null);
     };
 
     // Option actions
@@ -138,6 +144,7 @@ const SongItem = forwardRef<
           onContextMenu={handleContextMenu}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
+          onTouchMove={handleTouchMove}
           tabIndex={0}
         >
           <RxDragHandleHorizontal
