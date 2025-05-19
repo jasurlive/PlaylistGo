@@ -11,7 +11,7 @@ const LONG_PRESS_DURATION = 500;
 const SongItem = forwardRef<
   HTMLLIElement,
   SongItemProps & {
-    onPlayNext: (id: string) => void;
+    onAddQueue: (id: string) => void;
     onDuplicate: (id: string) => void;
     onGoToCurrent: () => void;
     isCurrentSongVisible: boolean;
@@ -23,7 +23,7 @@ const SongItem = forwardRef<
       playSelectedVideo,
       deleteSong,
       currentVideoId,
-      onPlayNext,
+      onAddQueue,
       onDuplicate,
       onGoToCurrent,
       isCurrentSongVisible,
@@ -57,12 +57,10 @@ const SongItem = forwardRef<
       const closeMenu = () => setContextMenu(null);
       window.addEventListener("mousedown", handle);
       window.addEventListener("touchstart", handle);
-      window.addEventListener("scroll", closeMenu, true);
       window.addEventListener("resize", closeMenu);
       return () => {
         window.removeEventListener("mousedown", handle);
         window.removeEventListener("touchstart", handle);
-        window.removeEventListener("scroll", closeMenu, true);
         window.removeEventListener("resize", closeMenu);
       };
     }, [contextMenu]);
@@ -105,7 +103,7 @@ const SongItem = forwardRef<
     const handlePlayNext = (e: React.MouseEvent | React.TouchEvent) => {
       e.stopPropagation();
       setContextMenu(null);
-      onPlayNext(track.id);
+      onAddQueue(track.id);
     };
     const handleDuplicate = (e: React.MouseEvent | React.TouchEvent) => {
       e.stopPropagation();
