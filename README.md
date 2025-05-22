@@ -1,13 +1,68 @@
-## DJ YouTube Music Player in Typescript
+# 🎧 DJ YouTube Music Player 🎵 (in TypeScript)
 
-# Reinventing the bike 🚲.
+**Reinventing the bike 🚲 with beats and code!**
 
-# YouTube Music Player 🎉✅🔍♻️
+Welcome to **PlaylistGo**, an open-source, web-based music player built in **TypeScript** that lets you search and play songs directly from **YouTube** using a simple **Excel playlist sheet**. Whether you're here to vibe or to code, this project is for you! 🎉✅🔍♻️
 
-![image](https://github.com/user-attachments/assets/79436368-2b84-490b-bf64-a3e9936a680c)
+![DJ YouTube Player UI](https://github.com/user-attachments/assets/a6fc2858-a750-40f1-b4c2-6518c5ad607d)
 
-![image](https://github.com/user-attachments/assets/64770f3d-cab1-4994-a5bd-bd735425c660)
+---
 
-![image](https://github.com/user-attachments/assets/00202869-5ddd-4378-8a0f-2a5a65e43098)
+## 📜 Features
 
-![image](https://github.com/user-attachments/assets/b6e83049-55f9-45b2-b32b-e18388f204d9)
+- 🎶 Search and play YouTube music tracks.
+- 📄 Load playlists from an Excel sheet.
+- 🔍 Uses YouTube Data API for song lookup.
+- ⚡ TypeScript-based architecture.
+- 🧩 Fully open to contributions and feature ideas.
+
+---
+
+## 📁 How It Works
+
+1. **Excel Sheet as Playlist**  
+   The app reads an Excel (`public/python/songs.xlsx`) file where each row represents a song with details like:
+
+   - `Song Name`
+   - `Artist`
+   - `YouTube Link`
+
+2. **YouTube Search**  
+   If no direct link is provided, the app will automatically search YouTube using the song name and artist, and play the best result.
+
+3. **Music Player UI**  
+   Simple and intuitive player interface with custom playlist support.
+
+---
+
+## 🛠️ Setup & Run
+
+**Pre-requisites:**
+
+- Node.js
+- YouTube API Key
+- A `.xlsx` playlist file
+
+```bash
+git clone https://github.com/jasurlive/PlaylistGo.git
+cd PlaylistGo
+npm install
+npm run dev
+```
+
+## 🧑‍💻 Contributing
+
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature/your-feature`.
+3. Make your changes and add comments.
+4. Submit a Pull Request.
+
+## 🐞 Reporting Bugs
+
+Please report any issues through the Issues page.
+
+---
+
+## 📜 License
+
+This project is licensed under the Apache-2.0 License.
