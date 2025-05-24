@@ -1,6 +1,7 @@
 import sys
 import os
 import pandas as pd
+import random
 from openpyxl import load_workbook
 from PyQt6.QtWidgets import (
     QApplication,
@@ -16,16 +17,13 @@ from PyQt6.QtWidgets import (
     QDialog,
     QFormLayout,
     QDialogButtonBox,
-    QHBoxLayout,
     QMenu,
     QStyle,
     QStyledItemDelegate,
     QStyleOptionButton,
-    QStyleOptionViewItem,
-    QToolButton,
 )
 from PyQt6.QtCore import Qt, QTimer, QRect, QSize
-from PyQt6.QtGui import QCursor, QIcon
+from PyQt6.QtGui import QCursor
 import qtawesome as qta
 
 
@@ -180,6 +178,27 @@ class SongReorderWindow(QMainWindow):
         self.refresh_button.clicked.connect(self.refresh_list)
         self.main_layout.addWidget(self.refresh_button)
 
+        # --- Add Shuffle Button ---
+        self.shuffle_button = QPushButton("Shuffle")
+        self.shuffle_button.setStyleSheet(
+            """
+            QPushButton {
+                padding: 12px 20px;
+                font-size: 16px;
+                background-color: #e67e22;
+                color: #ffffff;
+                border: none;
+                border-radius: 5px;
+            }
+            QPushButton:hover {
+                background-color: #d35400;
+            }
+            """
+        )
+        self.shuffle_button.clicked.connect(self.shuffle_songs_in_excel)
+        self.main_layout.addWidget(self.shuffle_button)
+        # --- End Shuffle Button ---
+
         self.reorder_list = QListWidget()
         self.reorder_list.setDragDropMode(QAbstractItemView.DragDropMode.InternalMove)
         self.reorder_list.setItemDelegate(EditButtonDelegate(self))
@@ -209,6 +228,10 @@ class SongReorderWindow(QMainWindow):
         )
         self.reorder_list.viewport().setCursor(QCursor(Qt.CursorShape.OpenHandCursor))
         self.reorder_list.viewport().installEventFilter(self)
+        self.reorder_list.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.reorder_list.customContextMenuRequested.connect(
+            self.show_song_context_menu
+        )
         self.main_layout.addWidget(self.reorder_list)
 
         self.save_order_button = QPushButton("Save Order to Excel")
@@ -244,6 +267,7 @@ class SongReorderWindow(QMainWindow):
         self.undo_stack = []
 
         self.load_songs_from_excel()
+        self.update_song_count()  # Ensure count is set at startup
 
     def refresh_list(self):
         self.refresh_button.setText("Refreshed! 🔃")
@@ -316,6 +340,35 @@ class SongReorderWindow(QMainWindow):
         except Exception as e:
             self.message_label.setText(f"Failed to save to Excel: {e}")
 
+    def shuffle_songs_in_excel(self):
+        excel_file = os.path.join(os.path.dirname(__file__), "songs.xlsx")
+        try:
+            df = pd.read_excel(excel_file, sheet_name="Active")
+            if len(df) <= 1:
+                self.message_label.setText("Not enough songs to shuffle.")
+                return
+            df_shuffled = df.sample(
+                frac=1, random_state=random.randint(0, 999999)
+            ).reset_index(drop=True)
+            # Write back to Excel, keeping headers and columns intact
+            workbook = load_workbook(excel_file)
+            sheet = workbook["Active"]
+            # Clear existing rows except header
+            max_row = sheet.max_row
+            if max_row > 1:
+                sheet.delete_rows(2, max_row - 1)
+            # Write shuffled data
+            for row_idx, row in enumerate(df_shuffled.itertuples(index=False), start=2):
+                for col_idx, value in enumerate(row, start=1):
+                    sheet.cell(row=row_idx, column=col_idx, value=value)
+            workbook.save(excel_file)
+            self.message_label.setText("Songs shuffled successfully!")
+            self.refresh_list()
+        except FileNotFoundError:
+            self.message_label.setText("Excel file not found! Please ensure it exists.")
+        except Exception as e:
+            self.message_label.setText(f"Failed to shuffle songs: {e}")
+
     def delete_song_by_title(self, title_to_delete):
         for i in range(self.reorder_list.count()):
             if self.reorder_list.item(i).text() == title_to_delete:
@@ -364,6 +417,52 @@ class SongReorderWindow(QMainWindow):
             else:
                 source.setCursor(QCursor(Qt.CursorShape.OpenHandCursor))
         return super().eventFilter(source, event)
+
+    def show_song_context_menu(self, pos):
+        item = self.reorder_list.itemAt(pos)
+        if item is None:
+            return
+        menu = QMenu(self)
+        place_first_action = menu.addAction("Place First")
+        shuffle_swap_action = menu.addAction("Shuffle (Swap)")
+        action = menu.exec(self.reorder_list.viewport().mapToGlobal(pos))
+        if action == place_first_action:
+            self.place_song_first(item)
+        elif action == shuffle_swap_action:
+            self.shuffle_swap_song(item)
+
+    def place_song_first(self, item):
+        row = self.reorder_list.row(item)
+        if row > 0:
+            self.reorder_list.takeItem(row)
+            self.reorder_list.insertItem(0, item)
+            self.reorder_list.setCurrentItem(item)
+            self.message_label.setText(f"'{item.text()}' placed first.")
+
+    def shuffle_swap_song(self, item):
+        count = self.reorder_list.count()
+        if count < 2:
+            return
+        current_row = self.reorder_list.row(item)
+        other_indices = [i for i in range(count) if i != current_row]
+        swap_row = random.choice(other_indices)
+        swap_item = self.reorder_list.item(swap_row)
+        # Swap text and user data
+        item_text, item_data = item.text(), item.data(Qt.ItemDataRole.UserRole)
+        swap_text, swap_data = swap_item.text(), swap_item.data(
+            Qt.ItemDataRole.UserRole
+        )
+        item.setText(swap_text)
+        item.setData(Qt.ItemDataRole.UserRole, swap_data)
+        swap_item.setText(item_text)
+        swap_item.setData(Qt.ItemDataRole.UserRole, item_data)
+        self.message_label.setText(
+            f"'{item.text()}' swapped with '{swap_item.text()}'."
+        )
+
+    def update_song_count(self):
+        count = self.reorder_list.count()
+        self.setWindowTitle(f"Reorder Songs | {count} songs")
 
 
 if __name__ == "__main__":
