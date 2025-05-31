@@ -20,22 +20,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
     clearSearch();
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        resultsRef.current &&
-        !resultsRef.current.contains(event.target as Node)
-      ) {
-        clearSearch();
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [clearSearch]);
-
   return (
     <div className="add-song">
       <div className="search-container">
@@ -44,7 +28,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
           placeholder="Search for a song... (S)"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          onFocus={clearSearch}
           onKeyDown={(e) => e.key === "Enter" && searchYouTube()}
         />
         <button onClick={searchYouTube}>
