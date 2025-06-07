@@ -151,8 +151,10 @@ const SongItem = forwardRef<
             style={{ touchAction: "none" }}
             onMouseDown={() => setIsMouseOnHold(true)}
             onMouseUp={() => setIsMouseOnHold(false)}
+            onMouseLeave={() => setIsMouseOnHold(false)}
             onTouchStart={() => setIsMouseOnHold(true)}
             onTouchEnd={() => setIsMouseOnHold(false)}
+            onTouchCancel={() => setIsMouseOnHold(false)}
             onClick={(e) => e.stopPropagation()}
           />
           <span className="song-title">{track.title}</span>
