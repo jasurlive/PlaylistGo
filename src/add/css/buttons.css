@@ -68,7 +68,22 @@
 }
 
 /* ------------------------------------------------------------ MOBILE */
-@media (max-width: 600px) {}
+@media (max-width: 600px) {
+
+    .controls {
+        gap: 1rem;
+    }
+
+    .controls button {
+        font-size: 1.5rem;
+    }
+
+    #shuffle,
+    #repeat {
+        font-size: 1.2rem;
+    }
+
+}
 
 /* ------------------------------------------------------------ DESKTOP */
 
