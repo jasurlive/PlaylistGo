@@ -36,15 +36,26 @@
 
 .search-results-header {
     display: flex;
+    background: #3379b7;
+    padding: 15px;
+    border-radius: 10px;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    position: sticky;
+    top: 0;
 }
 
 .close-icon {
     cursor: pointer;
-    color: #ff0000;
+    color: #ff00ae;
     font-size: 2rem;
+}
+
+.close-icon:hover {
+    color: #ff00ae;
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
 }
 
 .search-result-item {
