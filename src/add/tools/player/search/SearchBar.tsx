@@ -38,7 +38,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       {searchResults.length > 0 && (
         <div className="search-results" ref={resultsRef}>
           <div className="search-results-header">
-            <h3>Search Results</h3>
+            <h4>Search Results 🔽</h4>
             <SlClose onClick={closeSearchResults} className="close-icon" />
           </div>
           {searchResults.map((result) => (
