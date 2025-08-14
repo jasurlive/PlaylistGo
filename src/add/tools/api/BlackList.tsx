@@ -10,11 +10,6 @@ export const blacklistedCities: {
     city: "Almaty",
     ips: ["104.28.193", "37.99.26"],
   },
-  {
-    country: "South Korea",
-    city: "Guro-ru",
-    ips: ["210.207.88"],
-  },
 ];
 
 // Block if city matches, city is "All", or IP prefix matches in entry
