@@ -8,7 +8,12 @@ export const blacklistedCities: {
   {
     country: "Kazakhstan",
     city: "Almaty",
-    ips: ["104.28.193", "37.99.26"],
+    ips: ["104.28.193", "37.99.26", "173.244"],
+  },
+  {
+    country: "Kazakhstan",
+    city: "Shymkent",
+    ips: ["104.28.193", "37.99.26", "173.244"],
   },
 ];
 
