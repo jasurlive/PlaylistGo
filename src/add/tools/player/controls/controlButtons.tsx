@@ -3,6 +3,7 @@ import { GrPause, GrPlayFill } from "react-icons/gr";
 import { LuRepeat1, LuShuffle } from "react-icons/lu";
 import { RxTrackNext, RxTrackPrevious } from "react-icons/rx";
 import "../../../css/buttons.css";
+import FullScreenComponent from "./fullScreen";
 
 interface ControlButtonsProps {
   isPlaying: boolean;
@@ -13,6 +14,8 @@ interface ControlButtonsProps {
   setIsShuffle: (value: boolean) => void;
   isRepeatOne: boolean;
   setIsRepeatOne: (value: boolean) => void;
+  isFullScreen: boolean;
+  setIsFullScreen: (value: boolean) => void;
 }
 
 const ControlButtons: React.FC<ControlButtonsProps> = ({
@@ -24,6 +27,8 @@ const ControlButtons: React.FC<ControlButtonsProps> = ({
   setIsShuffle,
   isRepeatOne,
   setIsRepeatOne,
+  isFullScreen,
+  setIsFullScreen,
 }) => {
   return (
     <div className="controls">
@@ -58,6 +63,10 @@ const ControlButtons: React.FC<ControlButtonsProps> = ({
       >
         <LuRepeat1 />
       </button>
+      <FullScreenComponent
+        isFullScreen={isFullScreen}
+        setIsFullScreen={setIsFullScreen}
+      />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { PlayerControlsProps } from "../types/interface";
 import "../../css/controls.css";
 import Title from "./controls/songTitle";
@@ -33,6 +33,32 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
     localStorage.setItem("isRepeatOne", JSON.stringify(isRepeatOne));
   }, [isRepeatOne]);
 
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement
+        .requestFullscreen()
+        .then(() => setIsFullScreen(true))
+        .catch((err) => console.error("Failed to set fullscreen:", err));
+    } else {
+      document
+        .exitFullscreen()
+        .then(() => setIsFullScreen(false))
+        .catch((err) => console.error("Failed to exit fullscreen:", err));
+    }
+  };
+
+  useEffect(() => {
+    const handleFullScreenChange = () => {
+      setIsFullScreen(!!document.fullscreenElement);
+    };
+    document.addEventListener("fullscreenchange", handleFullScreenChange);
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullScreenChange);
+    };
+  }, []);
+
   return (
     <div className="controls-container">
       <TimeBar
@@ -50,6 +76,8 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
         setIsShuffle={setIsShuffle}
         isRepeatOne={isRepeatOne}
         setIsRepeatOne={setIsRepeatOne}
+        isFullScreen={isFullScreen}
+        setIsFullScreen={toggleFullScreen}
       />
     </div>
   );

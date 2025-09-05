@@ -19,6 +19,12 @@
     transform: scale(0.85);
 }
 
+.fullscreen-button svg {
+    color: #c3c3c3;
+    transition: color 0.3s;
+    width: 1.5rem;
+}
+
 .pause-icon.playing,
 .play-icon.playing {
     animation: colorShiftPause 5s linear infinite;
