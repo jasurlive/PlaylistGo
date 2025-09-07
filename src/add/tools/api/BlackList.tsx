@@ -9,6 +9,10 @@ export const blacklistedCities: {
     country: "Kazakhstan",
     city: "All",
   },
+  {
+    country: "United States",
+    city: "Atlanta",
+  },
 ];
 
 // Block if city matches, city is "All", or IP prefix matches in entry
