@@ -12,7 +12,7 @@ export const blacklistedCities: {
     city: "All",
   },
   {
-    browser: "Mobile Safari",
+    browser: "safari",
     device: "ios",
   },
 ];
