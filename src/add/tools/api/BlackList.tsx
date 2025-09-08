@@ -1,33 +1,71 @@
 import React, { useEffect, useState } from "react";
 
 export const blacklistedCities: {
-  country: string;
-  city: string;
+  country?: string;
+  city?: string;
   ips?: string[];
+  browser?: string;
+  device?: string;
 }[] = [
   {
     country: "Kazakhstan",
     city: "All",
   },
   {
-    country: "United States",
-    city: "Atlanta",
+    browser: "Mobile Safari",
+    device: "ios",
   },
 ];
 
-// Block if city matches, city is "All", or IP prefix matches in entry
+const detectBrowserAndDevice = () => {
+  const ua = navigator.userAgent.toLowerCase();
+
+  let browser = "unknown";
+  if (ua.includes("chrome") && !ua.includes("edg")) browser = "chrome";
+  else if (ua.includes("firefox")) browser = "firefox";
+  else if (ua.includes("safari") && !ua.includes("chrome")) browser = "safari";
+  else if (ua.includes("edg")) browser = "edge";
+
+  let device = "unknown";
+  if (/windows/i.test(ua)) device = "windows";
+  else if (/macintosh|mac os x/i.test(ua)) device = "mac";
+  else if (/android/i.test(ua)) device = "android";
+  else if (/iphone|ipad|ipod/i.test(ua)) device = "ios";
+
+  return { browser, device };
+};
+
+// ✅ Block if (country/city/ip) match OR (browser+device) match
 export const isCityBlacklisted = (
   countryName: string,
   cityName: string,
   ip?: string
 ): boolean => {
-  return blacklistedCities.some(
-    (entry) =>
+  const { browser, device } = detectBrowserAndDevice();
+
+  return blacklistedCities.some((entry) => {
+    // Match by country/city/IP if provided
+    const locationMatch =
+      entry.country &&
+      entry.city &&
       entry.country.toLowerCase() === countryName.toLowerCase() &&
       (entry.city.toLowerCase() === "all" ||
         entry.city.toLowerCase() === cityName.toLowerCase() ||
-        (ip && entry.ips && entry.ips.some((prefix) => ip.startsWith(prefix))))
-  );
+        (ip && entry.ips && entry.ips.some((prefix) => ip.startsWith(prefix))));
+
+    // ✅ Match by browser+device if provided (even without country/city)
+    const browserDeviceMatch =
+      (!entry.browser || entry.browser.toLowerCase() === browser) &&
+      (!entry.device || entry.device.toLowerCase() === device);
+
+    // If entry defines country/city → require both location + browser/device match
+    if (entry.country || entry.city || entry.ips) {
+      return locationMatch && browserDeviceMatch;
+    }
+
+    // If entry ONLY defines browser/device → just check those
+    return browserDeviceMatch;
+  });
 };
 
 interface CountryBlacklistProps {
@@ -83,30 +121,12 @@ const CountryBlacklist: React.FC<CountryBlacklistProps> = ({
 
         let isBlocked = false;
         let reason = "";
-        if (country && isCityBlacklisted(country, city, ip)) {
+        if (isCityBlacklisted(country, city, ip)) {
           isBlocked = true;
-          const entry = blacklistedCities.find(
-            (e) =>
-              e.country.toLowerCase() === country.toLowerCase() &&
-              e.city.toLowerCase() === "all"
-          );
-          if (entry) {
-            reason = `country (${country})`;
-          } else {
-            const ipEntry = blacklistedCities.find(
-              (e) =>
-                e.country.toLowerCase() === country.toLowerCase() &&
-                e.city.toLowerCase() === city.toLowerCase() &&
-                e.ips &&
-                e.ips.some((prefix) => ip.startsWith(prefix))
-            );
-            if (ipEntry) {
-              reason = `IP (${ip}) in ${city}, ${country}`;
-            } else {
-              reason = `city (${city}, ${country})`;
-            }
-          }
+          const { browser, device } = detectBrowserAndDevice();
+          reason = `Blocked by rule (country=${country}, city=${city}, browser=${browser}, device=${device})`;
         }
+
         setBlocked(isBlocked);
         setBlockedReason(isBlocked ? reason : null);
         if (onAccessCheck) {
@@ -140,8 +160,7 @@ const CountryBlacklist: React.FC<CountryBlacklistProps> = ({
 
   return blocked ? (
     <div style={{ color: "red", fontWeight: "bold" }}>
-      Access denied for {blockedReason ? blockedReason : `${city}, ${country}`}{" "}
-      🚫
+      Access denied for {blockedReason} 🚫
     </div>
   ) : (
     <div style={{ color: "green", fontWeight: "bold" }}>
