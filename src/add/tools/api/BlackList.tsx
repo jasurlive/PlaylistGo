@@ -1,70 +1,52 @@
 import React, { useEffect, useState } from "react";
+import { UAParser } from "ua-parser-js";
 
-export const blacklistedCities: {
+export const blacklistedUsers: {
   country?: string;
   city?: string;
   ips?: string[];
   browser?: string;
   device?: string;
+  os?: string;
 }[] = [
-  {
-    country: "Kazakhstan",
-    city: "All",
-  },
-  {
-    browser: "safari",
-    device: "ios",
-  },
+  { country: "Kazakhstan" }, // Block all from Kazakhstan
+  { country: "North Korea", city: "Pyongyang" }, // Block only New York, USA
+  { device: "iPhone", os: "ios" },
+  { browser: "Mobile Safari", os: "ios" },
 ];
 
-const detectBrowserAndDevice = () => {
-  const ua = navigator.userAgent.toLowerCase();
-
-  let browser = "unknown";
-  if (ua.includes("chrome") && !ua.includes("edg")) browser = "chrome";
-  else if (ua.includes("firefox")) browser = "firefox";
-  else if (ua.includes("safari") && !ua.includes("chrome")) browser = "safari";
-  else if (ua.includes("edg")) browser = "edge";
-
-  let device = "unknown";
-  if (/windows/i.test(ua)) device = "windows";
-  else if (/macintosh|mac os x/i.test(ua)) device = "mac";
-  else if (/android/i.test(ua)) device = "android";
-  else if (/iphone|ipad|ipod/i.test(ua)) device = "ios";
-
-  return { browser, device };
+const detectBrowserDeviceOs = () => {
+  const parser = new UAParser();
+  const uaResult = parser.getResult();
+  const browser = uaResult.browser.name || "unknown";
+  const os = uaResult.os.name || "unknown";
+  // device.model may be undefined for desktop, so fallback
+  const device = uaResult.device.model || "Desktop";
+  return { browser, device, os };
 };
 
-// ✅ Block if (country/city/ip) match OR (browser+device) match
-export const isCityBlacklisted = (
-  countryName: string,
-  cityName: string,
+// Block if ALL fields in a blacklist entry match the user (including city)
+export const isUserBlacklisted = (
+  country?: string,
+  city?: string,
   ip?: string
 ): boolean => {
-  const { browser, device } = detectBrowserAndDevice();
+  const { browser, device, os } = detectBrowserDeviceOs();
 
-  return blacklistedCities.some((entry) => {
-    // Match by country/city/IP if provided
-    const locationMatch =
-      entry.country &&
-      entry.city &&
-      entry.country.toLowerCase() === countryName.toLowerCase() &&
-      (entry.city.toLowerCase() === "all" ||
-        entry.city.toLowerCase() === cityName.toLowerCase() ||
-        (ip && entry.ips && entry.ips.some((prefix) => ip.startsWith(prefix))));
-
-    // ✅ Match by browser+device if provided (even without country/city)
-    const browserDeviceMatch =
-      (!entry.browser || entry.browser.toLowerCase() === browser) &&
-      (!entry.device || entry.device.toLowerCase() === device);
-
-    // If entry defines country/city → require both location + browser/device match
-    if (entry.country || entry.city || entry.ips) {
-      return locationMatch && browserDeviceMatch;
+  return blacklistedUsers.some((entry) => {
+    if (
+      (entry.country &&
+        entry.country.toLowerCase() !== (country || "").toLowerCase()) ||
+      (entry.city && entry.city.toLowerCase() !== (city || "").toLowerCase()) ||
+      (entry.browser &&
+        entry.browser.toLowerCase() !== browser.toLowerCase()) ||
+      (entry.device && entry.device.toLowerCase() !== device.toLowerCase()) ||
+      (entry.os && entry.os.toLowerCase() !== os.toLowerCase()) ||
+      (entry.ips && ip && !entry.ips.some((prefix) => ip.startsWith(prefix)))
+    ) {
+      return false;
     }
-
-    // If entry ONLY defines browser/device → just check those
-    return browserDeviceMatch;
+    return true;
   });
 };
 
@@ -121,12 +103,11 @@ const CountryBlacklist: React.FC<CountryBlacklistProps> = ({
 
         let isBlocked = false;
         let reason = "";
-        if (isCityBlacklisted(country, city, ip)) {
+        if (isUserBlacklisted(country, city, ip)) {
+          const { browser, device, os } = detectBrowserDeviceOs();
           isBlocked = true;
-          const { browser, device } = detectBrowserAndDevice();
-          reason = `Blocked by rule (country=${country}, city=${city}, browser=${browser}, device=${device})`;
+          reason = `Blocked by rule (country=${country}, city=${city}, browser=${browser}, device=${device}, os=${os})`;
         }
-
         setBlocked(isBlocked);
         setBlockedReason(isBlocked ? reason : null);
         if (onAccessCheck) {
