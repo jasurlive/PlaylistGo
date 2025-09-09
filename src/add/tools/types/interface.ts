@@ -41,14 +41,15 @@ export interface NavMenuProps {
 }
 
 export interface UserStatus {
-  state: string;
-  last_changed: any;
-  browser: string;
-  os: string;
-  device: string;
-  ip: string;
-  city: string;
-  country: string;
+  state: "online" | "offline";
+  last_changed: any; // Firestore Timestamp
+  last_active?: any;
+  browser?: string;
+  os?: string;
+  device?: string;
+  ip?: string;
+  city?: string;
+  country?: string;
 }
 
 export interface PlayerContentProps {

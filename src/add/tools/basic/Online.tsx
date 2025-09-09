@@ -27,7 +27,6 @@ function Online() {
   const [allTimeVisitors, setAllTimeVisitors] = useState<number>(0);
 
   useEffect(() => {
-    let intervalId: NodeJS.Timeout;
     const fetchIpAndUpdate = async () => {
       try {
         const parser = new UAParser();
@@ -59,73 +58,68 @@ function Online() {
           .replace(/ /g, "-");
         const userStatusDocRef = doc(firestore, "djmusic", docId);
 
-        const isOfflineForFirestore = {
-          state: "offline",
-          last_changed: serverTimestamp(),
-        };
-        const isOnlineForFirestore = {
-          state: "online",
-          last_changed: serverTimestamp(),
-          browser,
-          os,
-          device,
-          ip,
-          city,
-          country,
-        };
-
-        const updateStatus = async (isOnline: boolean) => {
-          const status = isOnline
-            ? isOnlineForFirestore
-            : isOfflineForFirestore;
-          await setDoc(userStatusDocRef, status, { merge: true });
+        const setOnline = async () => {
+          await setDoc(
+            userStatusDocRef,
+            {
+              state: "online",
+              last_changed: serverTimestamp(),
+              last_active: serverTimestamp(), // ✅ always fresh
+              browser,
+              os,
+              device,
+              ip,
+              city,
+              country,
+            },
+            { merge: true }
+          );
         };
 
-        // Set online on mount
-        updateStatus(true);
+        const setOffline = async () => {
+          await setDoc(
+            userStatusDocRef,
+            {
+              state: "offline",
+              last_changed: serverTimestamp(),
+            },
+            { merge: true }
+          );
+        };
 
-        // Update last_changed every minute while tab is visible
-        intervalId = setInterval(() => {
-          if (document.visibilityState === "visible") {
-            updateStatus(true);
-          }
-        }, 60000); // 1 minute
+        // ✅ 1. Mark user online instantly
+        await setOnline();
 
+        // ✅ 2. Heartbeat every 1 min to refresh last_active
+        const heartbeat = setInterval(() => {
+          setOnline();
+        }, 60 * 1000);
+
+        // ✅ 3. Track online users with 20-min freshness
         const userStatusCollectionRef = collection(firestore, "djmusic");
-        // Only get users whose last_changed is within the last 20 minutes
-        const twentyMinutesAgo = Timestamp.fromDate(
-          new Date(Date.now() - 20 * 60 * 1000)
-        );
-        const onlineUsersQuery = query(
-          userStatusCollectionRef,
-          where("state", "==", "online"),
-          where("last_changed", ">=", twentyMinutesAgo)
-        );
-
-        const unsubscribe = onSnapshot(onlineUsersQuery, (snapshot) => {
-          setOnlineUsers(snapshot.docs.map((doc) => doc.data() as UserStatus));
+        const unsubscribe = onSnapshot(userStatusCollectionRef, (snapshot) => {
+          const now = Date.now();
+          const twentyMinutesAgo = now - 20 * 60 * 1000;
+          const activeUsers = snapshot.docs
+            .map((doc) => doc.data() as UserStatus)
+            .filter((u) => {
+              if (u.state !== "online" || !u.last_active) return false;
+              const lastActive =
+                u.last_active.toDate?.() ?? new Date(u.last_active);
+              return lastActive.getTime() > twentyMinutesAgo;
+            });
+          setOnlineUsers(activeUsers);
         });
 
-        const handleVisibilityChange = () => {
-          if (document.visibilityState === "hidden") {
-            updateStatus(false);
-          } else {
-            updateStatus(true);
-          }
-        };
-
-        document.addEventListener("visibilitychange", handleVisibilityChange);
-        window.addEventListener("beforeunload", () => updateStatus(false));
+        // ✅ 4. Cleanup on tab close/refresh
+        const handleUnload = () => setOffline();
+        window.addEventListener("beforeunload", handleUnload);
 
         return () => {
-          updateStatus(false);
+          clearInterval(heartbeat);
           unsubscribe();
-          document.removeEventListener(
-            "visibilitychange",
-            handleVisibilityChange
-          );
-          window.removeEventListener("beforeunload", () => updateStatus(false));
-          clearInterval(intervalId);
+          window.removeEventListener("beforeunload", handleUnload);
+          setOffline();
         };
       } catch (error) {
         console.error("Error fetching location data:", error);
@@ -163,7 +157,7 @@ function Online() {
 
     const deleteOldOnlineUserData = async () => {
       try {
-        const twoWeeksAgo = Timestamp.fromDate(new Date(Date.now() - 12096e5)); // 2 weeks ago
+        const twoWeeksAgo = Timestamp.fromDate(new Date(Date.now() - 12096e5));
         const userStatusCollectionRef = collection(firestore, "djmusic");
         const oldUsersQuery = query(
           userStatusCollectionRef,
@@ -184,9 +178,7 @@ function Online() {
       await updateAllTimeVisitors();
       await deleteOldOnlineUserData();
 
-      setTimeout(() => {
-        setLoading(false);
-      }, 0);
+      setLoading(false);
     };
 
     fetchData();
