@@ -27,6 +27,7 @@ function Online() {
   const [allTimeVisitors, setAllTimeVisitors] = useState<number>(0);
 
   useEffect(() => {
+    let intervalId: NodeJS.Timeout;
     const fetchIpAndUpdate = async () => {
       try {
         const parser = new UAParser();
@@ -80,12 +81,25 @@ function Online() {
           await setDoc(userStatusDocRef, status, { merge: true });
         };
 
+        // Set online on mount
         updateStatus(true);
 
+        // Update last_changed every minute while tab is visible
+        intervalId = setInterval(() => {
+          if (document.visibilityState === "visible") {
+            updateStatus(true);
+          }
+        }, 60000); // 1 minute
+
         const userStatusCollectionRef = collection(firestore, "djmusic");
+        // Only get users whose last_changed is within the last 20 minutes
+        const twentyMinutesAgo = Timestamp.fromDate(
+          new Date(Date.now() - 20 * 60 * 1000)
+        );
         const onlineUsersQuery = query(
           userStatusCollectionRef,
-          where("state", "==", "online")
+          where("state", "==", "online"),
+          where("last_changed", ">=", twentyMinutesAgo)
         );
 
         const unsubscribe = onSnapshot(onlineUsersQuery, (snapshot) => {
@@ -101,6 +115,7 @@ function Online() {
         };
 
         document.addEventListener("visibilitychange", handleVisibilityChange);
+        window.addEventListener("beforeunload", () => updateStatus(false));
 
         return () => {
           updateStatus(false);
@@ -109,6 +124,8 @@ function Online() {
             "visibilitychange",
             handleVisibilityChange
           );
+          window.removeEventListener("beforeunload", () => updateStatus(false));
+          clearInterval(intervalId);
         };
       } catch (error) {
         console.error("Error fetching location data:", error);
