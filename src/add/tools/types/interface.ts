@@ -2,6 +2,35 @@
 
 import { RefObject } from "react";
 
+export interface ShortcutsProps {
+  onSearchFocus?: () => void;
+  onPlayPauseToggle?: () => void;
+  onPlayPrevious?: () => void;
+  onPlayNext?: () => void;
+  onToggleShuffle?: () => void;
+  onToggleRepeatOne?: () => void;
+  onToggleModal?: () => void;
+  onToggleFullScreen?: () => void;
+}
+
+export interface FullScreenComponentProps {
+  isFullScreen: boolean;
+  setIsFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface ControlButtonsProps {
+  isPlaying: boolean;
+  onPlayPauseToggle: () => void;
+  playNextVideo: () => void;
+  playPreviousVideo: () => void;
+  isShuffle: boolean;
+  setIsShuffle: (value: boolean) => void;
+  isRepeatOne: boolean;
+  setIsRepeatOne: (value: boolean) => void;
+  isFullScreen: boolean;
+  setIsFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 export interface Video {
   id: string;
   title: string;
@@ -104,16 +133,6 @@ export interface SearchBarProps {
   addedSongs: Set<string>;
   addSongFromSearch: (song: Video) => void;
   clearSearch: () => void;
-}
-
-export interface ShortcutsProps {
-  onSearchFocus?: () => void;
-  onPlayPauseToggle?: () => void;
-  onPlayPrevious?: () => void;
-  onPlayNext?: () => void;
-  onToggleShuffle?: () => void;
-  onToggleRepeatOne?: () => void;
-  onToggleModal?: () => void;
 }
 
 export interface PlaylistSectionProps {
