@@ -1,23 +1,24 @@
 import React from "react";
 import { BsFullscreen, BsFullscreenExit } from "react-icons/bs";
 import "../../../css/buttons.css";
-
-interface FullScreenComponentProps {
-  isFullScreen: boolean;
-  setIsFullScreen: (value: boolean) => void;
-}
+import { FullScreenComponentProps } from "../../types/interface";
+import Shortcuts from "../../player/Shortcuts";
 
 const FullScreenComponent: React.FC<FullScreenComponentProps> = ({
   isFullScreen,
   setIsFullScreen,
 }) => {
+  const toggleFullScreen = () => {
+    setIsFullScreen(!isFullScreen);
+  };
+
   return (
-    <button
-      className="fullscreen-button"
-      onClick={() => setIsFullScreen(!isFullScreen)}
-    >
-      {isFullScreen ? <BsFullscreenExit /> : <BsFullscreen />}
-    </button>
+    <>
+      <button className="fullscreen-button" onClick={toggleFullScreen}>
+        {isFullScreen ? <BsFullscreenExit /> : <BsFullscreen />}
+      </button>
+      <Shortcuts onToggleFullScreen={toggleFullScreen} />
+    </>
   );
 };
 

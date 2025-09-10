@@ -4,19 +4,7 @@ import { LuRepeat1, LuShuffle } from "react-icons/lu";
 import { RxTrackNext, RxTrackPrevious } from "react-icons/rx";
 import "../../../css/buttons.css";
 import FullScreenComponent from "./fullScreen";
-
-interface ControlButtonsProps {
-  isPlaying: boolean;
-  onPlayPauseToggle: () => void;
-  playNextVideo: () => void;
-  playPreviousVideo: () => void;
-  isShuffle: boolean;
-  setIsShuffle: (value: boolean) => void;
-  isRepeatOne: boolean;
-  setIsRepeatOne: (value: boolean) => void;
-  isFullScreen: boolean;
-  setIsFullScreen: (value: boolean) => void;
-}
+import { ControlButtonsProps } from "../../types/interface";
 
 const ControlButtons: React.FC<ControlButtonsProps> = ({
   isPlaying,

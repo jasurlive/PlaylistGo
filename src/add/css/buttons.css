@@ -7,7 +7,8 @@
     margin: 3rem 0;
 }
 
-.controls button {
+.controls button,
+.fullscreen-button {
     background: none;
     border: none;
     cursor: pointer;

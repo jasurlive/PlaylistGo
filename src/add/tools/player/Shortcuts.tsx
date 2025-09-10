@@ -9,6 +9,7 @@ const Shortcuts: React.FC<ShortcutsProps> = ({
   onToggleShuffle,
   onToggleRepeatOne,
   onToggleModal,
+  onToggleFullScreen,
 }) => {
   useEffect(() => {
     const handleKeydown = (event: KeyboardEvent) => {
@@ -47,6 +48,9 @@ const Shortcuts: React.FC<ShortcutsProps> = ({
         case "1":
           onToggleRepeatOne?.();
           break;
+        case "f":
+          onToggleFullScreen?.();
+          break;
         case " ":
         case "p":
           event.preventDefault();
@@ -69,6 +73,7 @@ const Shortcuts: React.FC<ShortcutsProps> = ({
     onPlayNext,
     onToggleShuffle,
     onToggleRepeatOne,
+    onToggleFullScreen,
   ]);
 
   return null;
