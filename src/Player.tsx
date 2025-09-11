@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { generateUniqueId } from "./add/tools/player/fetch/ID";
 import "./add/css/player.css";
 import { fetchPlaylist } from "./add/tools/player/fetch/fetchPlaylist";
-import { useCustomSongs } from "./add/tools/player/use/useCustomSongs";
+import { usecustomList } from "./add/tools/player/use/useCustomSongs";
 import { useYouTubeSearch } from "./add/tools/youtube/useYouTubeSearch";
 import { Video } from "./add/tools/types/interface";
 import PlayerContent from "./add/tools/player/PlayerContent";
@@ -17,17 +17,16 @@ import {
 
 const Player: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(false);
   const [currentVideo, setCurrentVideo] = useState<Video>({
     id: "",
     title: "",
     url: "",
     thumbnail: "",
   });
-  const { customSongs, setCustomSongs } = useCustomSongs();
+  const { customList, setcustomList } = usecustomList();
   const [isShuffle, setIsShuffle] = useState(false);
   const [isRepeatOne, setIsRepeatOne] = useState(false);
-  const [jasursList, setJasursList] = useState<Video[]>([]);
+  const [adminsList, setadminsList] = useState<Video[]>([]);
   const playerRef = useRef<any>(null);
   const [playedSeconds, setPlayedSeconds] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -43,13 +42,13 @@ const Player: React.FC = () => {
   } = useYouTubeSearch();
 
   useEffect(() => {
-    fetchPlaylist(setJasursList, setCurrentVideo, setIsPlaying, playerRef);
+    fetchPlaylist(setadminsList, setCurrentVideo, setIsPlaying, playerRef);
   }, []);
 
-  const videoTracks = [...customSongs, ...jasursList];
+  const videoTracks = [...customList, ...adminsList];
 
   const addSongFromSearch = (song: Video) => {
-    setCustomSongs((prevSongs) => [
+    setcustomList((prevSongs) => [
       { ...song, id: generateUniqueId() },
       ...prevSongs,
     ]);
@@ -80,7 +79,7 @@ const Player: React.FC = () => {
       <div className="header-logo" onClick={() => (window.location.href = "/")}>
         <div className="logo-text">🎧 playlistgo.vercel.app ツ🖤</div>
       </div>
-      <SearchBar
+      <SearchBar // all youtube search related functions
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         searchYouTube={searchYouTube}
@@ -90,23 +89,23 @@ const Player: React.FC = () => {
         clearSearch={clearSearch}
       />
 
-      <PlayerContent
-        isPlaying={isPlaying}
+      <PlayerContent // main player component, video iframe, handling next video on end, updating played songs, etc.
+        isPlaying={isPlaying} //for play/pause button
         setIsPlaying={setIsPlaying}
-        currentVideo={currentVideo}
+        currentVideo={currentVideo} //for handling things around current song
         setCurrentVideo={setCurrentVideo}
-        videoTracks={videoTracks}
+        videoTracks={videoTracks} //for handling shuffle and next/previous video
         isShuffle={isShuffle}
-        setIsShuffle={setIsShuffle}
+        setIsShuffle={setIsShuffle} //handling shuffle
         isRepeatOne={isRepeatOne}
         setIsRepeatOne={setIsRepeatOne}
         playerRef={playerRef}
         setPlayedSeconds={setPlayedSeconds}
-        setDuration={setDuration}
+        setDuration={setDuration} //track song duration
       />
 
-      <PlayerControls
-        isPlaying={isPlaying}
+      <PlayerControls // all control buttons, seek bar, etc.
+        isPlaying={isPlaying} //for play/pause button
         onPlayPauseToggle={handlePlayPauseToggle}
         playNextVideo={() =>
           playNextVideo(
@@ -135,16 +134,16 @@ const Player: React.FC = () => {
         playedSeconds={playedSeconds}
         duration={duration}
         title={currentVideo.title}
-        onSeek={handleSeek}
+        onSeek={handleSeek} //for handling clicks/touches on seek bar
       />
 
-      <NavMenu
-        customSongs={customSongs}
-        jasursList={jasursList}
+      <NavMenu //navbar, playlist animation, etc.
+        customList={customList}
+        adminsList={adminsList} //displaying admin&user playlists (songs)
         currentVideo={currentVideo}
-        playSelectedVideo={handlePlaySelectedVideo}
-        setCustomSongs={setCustomSongs}
-        setJasursList={setJasursList}
+        playSelectedVideo={handlePlaySelectedVideo} //handling click on song from playlist
+        setcustomList={setcustomList} //for drag n drop function for playlists
+        setadminsList={setadminsList}
       />
     </div>
   );

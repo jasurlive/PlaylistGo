@@ -3,7 +3,7 @@ import { generateUniqueId } from "../fetch/ID";
 import { Song } from "../../types/interface";
 
 const useSearch = (
-  setCustomSongs: React.Dispatch<React.SetStateAction<Song[]>>,
+  setcustomList: React.Dispatch<React.SetStateAction<Song[]>>,
   addedSongs: Set<string>
 ) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -38,7 +38,7 @@ const useSearch = (
   };
 
   const addSongFromSearch = (song: Song): void => {
-    setCustomSongs((prevSongs) => [
+    setcustomList((prevSongs) => [
       { ...song, id: generateUniqueId() },
       ...prevSongs,
     ]);

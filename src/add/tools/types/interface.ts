@@ -45,22 +45,22 @@ export interface Song {
   thumbnail: string;
 }
 export interface PlaylistProps {
-  customSongs: Video[];
-  jasursList: Video[];
+  customList: Video[];
+  adminsList: Video[];
   currentVideoId: string;
   playSelectedVideo: (id: string) => void;
-  setCustomSongs: React.Dispatch<React.SetStateAction<Video[]>>;
-  setJasursList: React.Dispatch<React.SetStateAction<Video[]>>;
+  setcustomList: React.Dispatch<React.SetStateAction<Video[]>>;
+  setadminsList: React.Dispatch<React.SetStateAction<Video[]>>;
 }
 
 export interface NavMenuProps {
-  customSongs: Video[];
-  jasursList: Video[];
+  customList: Video[];
+  adminsList: Video[];
   currentVideo: Video;
 
   playSelectedVideo: (id: string) => void;
-  setCustomSongs: React.Dispatch<React.SetStateAction<Video[]>>;
-  setJasursList: React.Dispatch<React.SetStateAction<Video[]>>;
+  setcustomList: React.Dispatch<React.SetStateAction<Video[]>>;
+  setadminsList: React.Dispatch<React.SetStateAction<Video[]>>;
 }
 
 export interface UserStatus {
@@ -145,9 +145,6 @@ export interface YTPlayerProps {
   autoplay: boolean;
   isPlaying: boolean;
   setIsPlaying: (playing: boolean) => void;
-  setIsMuted: (isMuted: boolean) => void;
-  isMuted: boolean;
-  handleMuteToggle: () => void;
   setPlayedSeconds: (seconds: number) => void;
   setDuration: (duration: number) => void;
   onSeek: (time: number) => void;

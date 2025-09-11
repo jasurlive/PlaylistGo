@@ -6,12 +6,12 @@ import PlaylistToggle from "../player/controls/playlistToggle";
 import ModalToggle from "../player/controls/modalToggle";
 
 const NavMenu: React.FC<NavMenuProps> = ({
-  customSongs,
-  jasursList,
+  customList,
+  adminsList,
   currentVideo,
   playSelectedVideo,
-  setCustomSongs,
-  setJasursList,
+  setcustomList,
+  setadminsList,
 }) => {
   return (
     <ModalToggle storageKey="playlistViewState" defaultOpen={true}>
@@ -26,12 +26,12 @@ const NavMenu: React.FC<NavMenuProps> = ({
             <div className="modal-overlay">
               <div className="modal-content">
                 <Playlist
-                  customSongs={customSongs}
-                  jasursList={jasursList}
+                  customList={customList}
+                  adminsList={adminsList}
                   currentVideoId={currentVideo.id}
                   playSelectedVideo={playSelectedVideo}
-                  setCustomSongs={setCustomSongs}
-                  setJasursList={setJasursList}
+                  setcustomList={setcustomList}
+                  setadminsList={setadminsList}
                 />
               </div>
             </div>

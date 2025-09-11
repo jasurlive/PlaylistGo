@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { Video } from "../../types/interface";
 
-export const useCustomSongs = () => {
-  const [customSongs, setCustomSongs] = useState<Video[]>([]);
+export const usecustomList = () => {
+  const [customList, setcustomList] = useState<Video[]>([]);
 
   useEffect(() => {
-    const savedCustomSongs = localStorage.getItem("customSongs");
-    if (savedCustomSongs) {
-      setCustomSongs(JSON.parse(savedCustomSongs));
+    const savedcustomList = localStorage.getItem("customList");
+    if (savedcustomList) {
+      setcustomList(JSON.parse(savedcustomList));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("customSongs", JSON.stringify(customSongs));
-  }, [customSongs]);
+    localStorage.setItem("customList", JSON.stringify(customList));
+  }, [customList]);
 
-  return { customSongs, setCustomSongs };
+  return { customList, setcustomList };
 };
