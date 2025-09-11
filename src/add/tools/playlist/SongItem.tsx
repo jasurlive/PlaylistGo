@@ -11,8 +11,7 @@ const LONG_PRESS_DURATION = 500;
 const SongItem = forwardRef<
   HTMLLIElement,
   SongItemProps & {
-    onAddQueue: (id: string) => void;
-    onDuplicate: (id: string) => void;
+    onAction: (action: "playNext" | "duplicate", id: string) => void; // ✅ all in one
     onGoToCurrent: () => void;
     isCurrentSongVisible: boolean;
   }
@@ -23,8 +22,7 @@ const SongItem = forwardRef<
       playSelectedVideo,
       deleteSong,
       currentVideoId,
-      onAddQueue,
-      onDuplicate,
+      onAction, // ✅ right click handler
       onGoToCurrent,
       isCurrentSongVisible,
     },
@@ -51,13 +49,16 @@ const SongItem = forwardRef<
     useEffect(() => {
       if (!contextMenu) return;
       const handle = (e: MouseEvent | TouchEvent) => {
-        if (menuRef.current && !menuRef.current.contains(e.target as Node))
+        if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
           setContextMenu(null);
+        }
       };
       const closeMenu = () => setContextMenu(null);
+
       window.addEventListener("mousedown", handle);
       window.addEventListener("touchstart", handle);
       window.addEventListener("resize", closeMenu);
+
       return () => {
         window.removeEventListener("mousedown", handle);
         window.removeEventListener("touchstart", handle);
@@ -65,7 +66,7 @@ const SongItem = forwardRef<
       };
     }, [contextMenu]);
 
-    // Hide menu on drag, play, delete, etc.
+    // Hide menu on drag
     useEffect(() => {
       if (isDragging) setContextMenu(null);
     }, [isDragging]);
@@ -78,11 +79,12 @@ const SongItem = forwardRef<
     // Touch and hold for context menu
     const handleTouchStart = (e: React.TouchEvent) => {
       const touch = e.touches[0];
-      // Prevent context menu if touching an icon
       const target = e.target as HTMLElement;
-      if (target.closest(".trash-icon") || target.closest(".drag-handle")) {
+
+      // Prevent context menu if touching an icon
+      if (target.closest(".trash-icon") || target.closest(".drag-handle"))
         return;
-      }
+
       setTouchTimer(
         setTimeout(() => {
           setContextMenu({ x: touch.clientX, y: touch.clientY });
@@ -93,27 +95,24 @@ const SongItem = forwardRef<
       if (touchTimer) clearTimeout(touchTimer);
       setTouchTimer(null);
     };
-    // Prevent menu on scroll/move (treat as cancel)
     const handleTouchMove = () => {
       if (touchTimer) clearTimeout(touchTimer);
       setTouchTimer(null);
     };
 
-    // Option actions
-    const handlePlayNext = (e: React.MouseEvent | React.TouchEvent) => {
+    // ✅ Context menu option actions (unified)
+    const handleOptionClick = (
+      e: React.MouseEvent | React.TouchEvent,
+      action: "playNext" | "duplicate" | "goToCurrent"
+    ) => {
       e.stopPropagation();
       setContextMenu(null);
-      onAddQueue(track.id);
-    };
-    const handleDuplicate = (e: React.MouseEvent | React.TouchEvent) => {
-      e.stopPropagation();
-      setContextMenu(null);
-      onDuplicate(track.id);
-    };
-    const handleGoToCurrent = (e: React.MouseEvent | React.TouchEvent) => {
-      e.stopPropagation();
-      setContextMenu(null);
-      onGoToCurrent();
+
+      if (action === "goToCurrent") {
+        onGoToCurrent();
+      } else {
+        onAction(action, track.id);
+      }
     };
 
     return (
@@ -170,12 +169,18 @@ const SongItem = forwardRef<
             className="trash-icon"
           />
         </li>
+
+        {/* ✅ Custom right-click / long-press menu */}
         {contextMenu && (
           <div ref={menuRef} className="song-context-menu">
-            <button onClick={handlePlayNext}>Play next</button>
-            <button onClick={handleDuplicate}>Duplicate</button>
+            <button onClick={(e) => handleOptionClick(e, "playNext")}>
+              Play next
+            </button>
+            <button onClick={(e) => handleOptionClick(e, "duplicate")}>
+              Duplicate
+            </button>
             <button
-              onClick={handleGoToCurrent}
+              onClick={(e) => handleOptionClick(e, "goToCurrent")}
               disabled={isCurrentSongVisible}
               style={isCurrentSongVisible ? { opacity: 0.5 } : {}}
             >

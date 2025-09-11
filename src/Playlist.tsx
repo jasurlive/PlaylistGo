@@ -21,10 +21,10 @@ const Playlist: React.FC<PlaylistProps> = ({
     <div className="playlists-container">
       <PlaylistSection
         title="Random Playlist"
-        songs={adminList}
+        songs={adminList} //generates the songs from excel sheet. check "public/python/songs.xlsx"
         setSongs={setadminList} //for drag n drop function
-        currentVideoId={currentVideoId}
-        deleteSong={(id) => deleteSong(id, false)}
+        currentVideoId={currentVideoId} //needed to highlight (animate) the current playing song item
+        deleteSong={(id) => deleteSong(id, false)} //deletes the song from admin list
         playSelectedVideo={playSelectedVideo}
       />
       <PlaylistSection
