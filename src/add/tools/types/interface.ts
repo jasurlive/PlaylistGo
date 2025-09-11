@@ -48,25 +48,15 @@ export interface PlaylistProps {
   customSongs: Video[];
   jasursList: Video[];
   currentVideoId: string;
-  playSelectedVideo: (id: string) => void;
-  setCustomSongs: React.Dispatch<React.SetStateAction<Video[]>>;
-  setJasursList: React.Dispatch<React.SetStateAction<Video[]>>;
+  playSelectedVideo?: (id: string) => void;
+  setCustomSongs?: React.Dispatch<React.SetStateAction<Video[]>>;
+  setJasursList?: React.Dispatch<React.SetStateAction<Video[]>>;
 }
 
 export interface NavMenuProps {
-  searchQuery: string;
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-  searchResults: Video[];
-  searchYouTube: () => void;
-  clearSearch: () => void;
-  addedSongs: Set<string>;
-  addSongFromSearch: (song: Video) => void;
   customSongs: Video[];
   jasursList: Video[];
-  setCustomSongs: React.Dispatch<React.SetStateAction<Video[]>>;
-  setJasursList: React.Dispatch<React.SetStateAction<Video[]>>;
   currentVideo: Video;
-  playSelectedVideo: (id: string) => void;
 }
 
 export interface UserStatus {
@@ -92,15 +82,9 @@ export interface PlayerContentProps {
   isRepeatOne: boolean;
   setIsRepeatOne: React.Dispatch<React.SetStateAction<boolean>>;
   playerRef: React.RefObject<any>;
-  searchQuery: string;
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-  searchResults: Video[];
-  searchYouTube: () => void;
-  clearSearch: () => void;
+
   addedSongs: Set<string>;
   addSongFromSearch: (song: Video) => void;
-  customSongs: Video[];
-  jasursList: Video[];
   setCustomSongs: React.Dispatch<React.SetStateAction<Video[]>>;
   setJasursList: React.Dispatch<React.SetStateAction<Video[]>>;
   setPlayedSeconds: React.Dispatch<React.SetStateAction<number>>;
@@ -138,23 +122,21 @@ export interface SearchBarProps {
 export interface PlaylistSectionProps {
   title: string;
   songs: Video[];
-  setSongs: React.Dispatch<React.SetStateAction<Video[]>>;
+  setSongs?: React.Dispatch<React.SetStateAction<Video[]>>;
   currentVideoId: string;
-  playSelectedVideo: (id: string) => void;
+  playSelectedVideo?: (id: string) => void;
   deleteSong: (id: string) => void;
 }
 
 export interface SongItemProps {
   track: Video;
-  playSelectedVideo: (id: string) => void;
+  playSelectedVideo?: (id: string) => void;
   deleteSong: (id: string) => void;
   currentVideoId: string;
-  // For context menu actions
   onPlayNext?: (id: string) => void;
   onDuplicate?: (id: string) => void;
   onGoToCurrent?: () => void;
   isCurrentSongVisible?: boolean;
-  // For ref forwarding
   ref?: React.Ref<HTMLLIElement>;
 }
 

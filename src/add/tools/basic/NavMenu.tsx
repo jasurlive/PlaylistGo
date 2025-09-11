@@ -8,10 +8,7 @@ import ModalToggle from "../player/controls/modalToggle";
 const NavMenu: React.FC<NavMenuProps> = ({
   customSongs,
   jasursList,
-  setCustomSongs,
-  setJasursList,
   currentVideo,
-  playSelectedVideo,
 }) => {
   return (
     <ModalToggle storageKey="playlistViewState" defaultOpen={true}>
@@ -29,9 +26,6 @@ const NavMenu: React.FC<NavMenuProps> = ({
                   customSongs={customSongs}
                   jasursList={jasursList}
                   currentVideoId={currentVideo.id}
-                  playSelectedVideo={playSelectedVideo}
-                  setCustomSongs={setCustomSongs}
-                  setJasursList={setJasursList}
                 />
               </div>
             </div>

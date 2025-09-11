@@ -63,7 +63,7 @@ const PlaylistSection: React.FC<PlaylistSectionProps> = ({
     const reordered = [...songs];
     const [song] = reordered.splice(idx, 1);
     reordered.splice(curIdx + 1, 0, song);
-    setSongs(reordered);
+    setSongs?.(reordered);
   };
 
   const handleDuplicate = (id: string) => {
@@ -73,14 +73,14 @@ const PlaylistSection: React.FC<PlaylistSectionProps> = ({
     const newSong = { ...song, id: song.id + "_copy_" + Date.now() };
     const newSongs = [...songs];
     newSongs.splice(idx + 1, 0, newSong);
-    setSongs(newSongs);
+    setSongs?.(newSongs);
   };
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
 
-    setSongs((items) => {
+    setSongs?.((items) => {
       const oldIndex = items.findIndex((item) => item.id === active.id);
       const newIndex = items.findIndex((item) => item.id === over.id);
       return arrayMove(items, oldIndex, newIndex);

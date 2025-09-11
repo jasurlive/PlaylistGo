@@ -103,15 +103,8 @@ const Player: React.FC = () => {
         playerRef={playerRef}
         setPlayedSeconds={setPlayedSeconds}
         setDuration={setDuration}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        searchResults={searchResults}
-        searchYouTube={searchYouTube}
-        clearSearch={clearSearch}
         addedSongs={addedSongs}
         addSongFromSearch={addSongFromSearch}
-        customSongs={customSongs}
-        jasursList={jasursList}
         setCustomSongs={setCustomSongs}
         setJasursList={setJasursList}
       />
@@ -152,19 +145,9 @@ const Player: React.FC = () => {
       />
 
       <NavMenu
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        searchResults={searchResults}
-        searchYouTube={searchYouTube}
-        clearSearch={clearSearch}
-        addedSongs={addedSongs}
-        addSongFromSearch={addSongFromSearch}
         customSongs={customSongs}
         jasursList={jasursList}
-        setCustomSongs={setCustomSongs}
-        setJasursList={setJasursList}
         currentVideo={currentVideo}
-        playSelectedVideo={handlePlaySelectedVideo}
       />
     </div>
   );
