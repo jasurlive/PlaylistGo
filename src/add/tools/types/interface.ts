@@ -48,15 +48,19 @@ export interface PlaylistProps {
   customSongs: Video[];
   jasursList: Video[];
   currentVideoId: string;
-  playSelectedVideo?: (id: string) => void;
-  setCustomSongs?: React.Dispatch<React.SetStateAction<Video[]>>;
-  setJasursList?: React.Dispatch<React.SetStateAction<Video[]>>;
+  playSelectedVideo: (id: string) => void;
+  setCustomSongs: React.Dispatch<React.SetStateAction<Video[]>>;
+  setJasursList: React.Dispatch<React.SetStateAction<Video[]>>;
 }
 
 export interface NavMenuProps {
   customSongs: Video[];
   jasursList: Video[];
   currentVideo: Video;
+
+  playSelectedVideo: (id: string) => void;
+  setCustomSongs: React.Dispatch<React.SetStateAction<Video[]>>;
+  setJasursList: React.Dispatch<React.SetStateAction<Video[]>>;
 }
 
 export interface UserStatus {
