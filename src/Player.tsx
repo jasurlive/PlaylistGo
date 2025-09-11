@@ -103,10 +103,6 @@ const Player: React.FC = () => {
         playerRef={playerRef}
         setPlayedSeconds={setPlayedSeconds}
         setDuration={setDuration}
-        addedSongs={addedSongs}
-        addSongFromSearch={addSongFromSearch}
-        setCustomSongs={setCustomSongs}
-        setJasursList={setJasursList}
       />
 
       <PlayerControls
@@ -135,8 +131,6 @@ const Player: React.FC = () => {
         setIsShuffle={setIsShuffle}
         isRepeatOne={isRepeatOne}
         setIsRepeatOne={setIsRepeatOne}
-        setIsMuted={setIsMuted}
-        isMuted={isMuted}
         playerRef={playerRef}
         playedSeconds={playedSeconds}
         duration={duration}

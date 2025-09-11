@@ -82,11 +82,6 @@ export interface PlayerContentProps {
   isRepeatOne: boolean;
   setIsRepeatOne: React.Dispatch<React.SetStateAction<boolean>>;
   playerRef: React.RefObject<any>;
-
-  addedSongs: Set<string>;
-  addSongFromSearch: (song: Video) => void;
-  setCustomSongs: React.Dispatch<React.SetStateAction<Video[]>>;
-  setJasursList: React.Dispatch<React.SetStateAction<Video[]>>;
   setPlayedSeconds: React.Dispatch<React.SetStateAction<number>>;
   setDuration: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -101,8 +96,6 @@ export interface PlayerControlsProps {
   isRepeatOne: boolean;
   setIsRepeatOne: React.Dispatch<React.SetStateAction<boolean>>;
   playerRef: RefObject<any>;
-  isMuted: boolean;
-  setIsMuted: React.Dispatch<React.SetStateAction<boolean>>;
   playedSeconds: number;
   duration: number;
   title: string;
