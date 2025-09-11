@@ -2,7 +2,7 @@ import "../../css/nav-menu.css";
 import Playlist from "../../../Playlist";
 import { NavMenuProps } from "../types/interface";
 import Shortcuts from "../player/Shortcuts";
-import PlaylistToggle from "../player/controls/playlistButton";
+import PlaylistButton from "../player/controls/playlistButton";
 import ModalToggle from "../player/controls/modalToggle";
 
 const NavMenu: React.FC<NavMenuProps> = ({
@@ -18,7 +18,7 @@ const NavMenu: React.FC<NavMenuProps> = ({
       {(isModalOpen, handleToggle) => (
         <div>
           <div className="bottom-nav">
-            <PlaylistToggle isModalOpen={isModalOpen} onToggle={handleToggle} />
+            <PlaylistButton isModalOpen={isModalOpen} onToggle={handleToggle} />
             <Shortcuts onToggleModal={handleToggle} />
           </div>
 
