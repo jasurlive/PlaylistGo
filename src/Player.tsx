@@ -142,6 +142,9 @@ const Player: React.FC = () => {
         customSongs={customSongs}
         jasursList={jasursList}
         currentVideo={currentVideo}
+        playSelectedVideo={handlePlaySelectedVideo}
+        setCustomSongs={setCustomSongs}
+        setJasursList={setJasursList}
       />
     </div>
   );

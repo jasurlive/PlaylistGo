@@ -9,6 +9,9 @@ const NavMenu: React.FC<NavMenuProps> = ({
   customSongs,
   jasursList,
   currentVideo,
+  playSelectedVideo,
+  setCustomSongs,
+  setJasursList,
 }) => {
   return (
     <ModalToggle storageKey="playlistViewState" defaultOpen={true}>
@@ -26,6 +29,9 @@ const NavMenu: React.FC<NavMenuProps> = ({
                   customSongs={customSongs}
                   jasursList={jasursList}
                   currentVideoId={currentVideo.id}
+                  playSelectedVideo={playSelectedVideo}
+                  setCustomSongs={setCustomSongs}
+                  setJasursList={setJasursList}
                 />
               </div>
             </div>

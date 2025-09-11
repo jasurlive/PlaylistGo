@@ -7,12 +7,13 @@ const Playlist: React.FC<PlaylistProps> = ({
   currentVideoId,
   setCustomSongs,
   setJasursList,
+  playSelectedVideo,
 }) => {
   const deleteSong = (id: string, isCustom: boolean) => {
     if (isCustom) {
-      setCustomSongs?.((prev) => prev.filter((song) => song.id !== id));
+      setCustomSongs((prev) => prev.filter((song) => song.id !== id));
     } else {
-      setJasursList?.((prev) => prev.filter((song) => song.id !== id));
+      setJasursList((prev) => prev.filter((song) => song.id !== id));
     }
   };
 
@@ -24,6 +25,7 @@ const Playlist: React.FC<PlaylistProps> = ({
         setSongs={setJasursList}
         currentVideoId={currentVideoId}
         deleteSong={(id) => deleteSong(id, false)}
+        playSelectedVideo={playSelectedVideo}
       />
       <PlaylistSection
         title="Your Playlist"
@@ -31,6 +33,7 @@ const Playlist: React.FC<PlaylistProps> = ({
         setSongs={setCustomSongs}
         currentVideoId={currentVideoId}
         deleteSong={(id) => deleteSong(id, true)}
+        playSelectedVideo={playSelectedVideo}
       />
     </div>
   );
