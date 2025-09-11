@@ -4,6 +4,7 @@ import { LuRepeat1, LuShuffle } from "react-icons/lu";
 import { RxTrackNext, RxTrackPrevious } from "react-icons/rx";
 import "../../../css/buttons.css";
 import FullScreenComponent from "./fullScreen";
+import PlaylistToggle from "./playlistToggle";
 import { ControlButtonsProps } from "../../types/interface";
 
 const ControlButtons: React.FC<ControlButtonsProps> = ({
@@ -51,6 +52,7 @@ const ControlButtons: React.FC<ControlButtonsProps> = ({
       >
         <LuRepeat1 />
       </button>
+
       <FullScreenComponent
         isFullScreen={isFullScreen}
         setIsFullScreen={setIsFullScreen}

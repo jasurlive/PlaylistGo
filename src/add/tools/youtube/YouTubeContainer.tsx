@@ -10,8 +10,6 @@ const YouTubeContainer: React.FC<YouTubeContainerProps> = ({
   isShuffle,
   isRepeatOne,
   setIsPlaying,
-  setIsShuffle,
-  setIsRepeatOne,
   setCurrentVideo,
   playerRef,
   setPlayedSeconds, // Add setPlayedSeconds prop

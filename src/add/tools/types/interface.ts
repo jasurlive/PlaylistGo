@@ -180,8 +180,8 @@ export interface YouTubeContainerProps {
   isShuffle: boolean;
   isRepeatOne: boolean;
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsShuffle: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsRepeatOne: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsShuffle: (value: boolean) => void;
+  setIsRepeatOne: (value: boolean) => void;
   setCurrentVideo: React.Dispatch<React.SetStateAction<Video>>;
   playerRef: React.RefObject<any>;
   setPlayedSeconds: React.Dispatch<React.SetStateAction<number>>;
