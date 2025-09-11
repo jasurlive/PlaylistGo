@@ -4,7 +4,6 @@ import { FaHeadphones } from "react-icons/fa";
 import { HiChevronDoubleDown } from "react-icons/hi2";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
-  arrayMove,
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
@@ -18,6 +17,7 @@ import {
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import SongItem from "./SongItem";
 import { PlaylistSectionProps } from "../types/interface";
+import { useHandleRightClick } from "./handleRightClick";
 
 const PlaylistSection: React.FC<PlaylistSectionProps> = ({
   title,
@@ -27,6 +27,13 @@ const PlaylistSection: React.FC<PlaylistSectionProps> = ({
   playSelectedVideo,
   deleteSong,
 }) => {
+  // ✅ use reusable hook
+  const { handleSongAction } = useHandleRightClick(
+    songs,
+    setSongs,
+    currentVideoId
+  );
+
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 10 } }),
     useSensor(KeyboardSensor),
@@ -56,35 +63,9 @@ const PlaylistSection: React.FC<PlaylistSectionProps> = ({
     );
   };
 
-  const handlePlayNext = (id: string) => {
-    const idx = songs.findIndex((s) => s.id === id);
-    const curIdx = songs.findIndex((s) => s.id === currentVideoId);
-    if (idx === -1 || curIdx === -1 || idx === curIdx) return;
-    const reordered = [...songs];
-    const [song] = reordered.splice(idx, 1);
-    reordered.splice(curIdx + 1, 0, song);
-    setSongs?.(reordered);
-  };
-
-  const handleDuplicate = (id: string) => {
-    const idx = songs.findIndex((s) => s.id === id);
-    if (idx === -1) return;
-    const song = songs[idx];
-    const newSong = { ...song, id: song.id + "_copy_" + Date.now() };
-    const newSongs = [...songs];
-    newSongs.splice(idx + 1, 0, newSong);
-    setSongs?.(newSongs);
-  };
-
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
-    if (!over || active.id === over.id) return;
-
-    setSongs?.((items) => {
-      const oldIndex = items.findIndex((item) => item.id === active.id);
-      const newIndex = items.findIndex((item) => item.id === over.id);
-      return arrayMove(items, oldIndex, newIndex);
-    });
+    handleSongAction("reorder", { activeId: active.id, overId: over?.id });
   };
 
   return (
@@ -124,8 +105,7 @@ const PlaylistSection: React.FC<PlaylistSectionProps> = ({
                   playSelectedVideo={playSelectedVideo}
                   deleteSong={deleteSong}
                   currentVideoId={currentVideoId}
-                  onAddQueue={handlePlayNext}
-                  onDuplicate={handleDuplicate}
+                  onAction={handleSongAction}
                   onGoToCurrent={scrollToCurrentSong}
                   isCurrentSongVisible={isCurrentSongVisible()}
                   ref={track.id === currentVideoId ? currentSongRef : undefined}
