@@ -137,7 +137,7 @@ const SongItem = forwardRef<
           } ${isDragging || isMouseOnHold ? "dragging" : ""}`}
           onClick={() => {
             setContextMenu(null);
-            playSelectedVideo(track.id);
+            playSelectedVideo?.(track.id);
           }}
           onContextMenu={handleContextMenu}
           onTouchStart={handleTouchStart}

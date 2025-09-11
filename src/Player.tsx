@@ -103,17 +103,6 @@ const Player: React.FC = () => {
         playerRef={playerRef}
         setPlayedSeconds={setPlayedSeconds}
         setDuration={setDuration}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        searchResults={searchResults}
-        searchYouTube={searchYouTube}
-        clearSearch={clearSearch}
-        addedSongs={addedSongs}
-        addSongFromSearch={addSongFromSearch}
-        customSongs={customSongs}
-        jasursList={jasursList}
-        setCustomSongs={setCustomSongs}
-        setJasursList={setJasursList}
       />
 
       <PlayerControls
@@ -142,8 +131,6 @@ const Player: React.FC = () => {
         setIsShuffle={setIsShuffle}
         isRepeatOne={isRepeatOne}
         setIsRepeatOne={setIsRepeatOne}
-        setIsMuted={setIsMuted}
-        isMuted={isMuted}
         playerRef={playerRef}
         playedSeconds={playedSeconds}
         duration={duration}
@@ -152,19 +139,9 @@ const Player: React.FC = () => {
       />
 
       <NavMenu
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        searchResults={searchResults}
-        searchYouTube={searchYouTube}
-        clearSearch={clearSearch}
-        addedSongs={addedSongs}
-        addSongFromSearch={addSongFromSearch}
         customSongs={customSongs}
         jasursList={jasursList}
-        setCustomSongs={setCustomSongs}
-        setJasursList={setJasursList}
         currentVideo={currentVideo}
-        playSelectedVideo={handlePlaySelectedVideo}
       />
     </div>
   );
