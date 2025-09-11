@@ -6,7 +6,7 @@ interface PlaylistToggleProps {
   onToggle: () => void;
 }
 
-const PlaylistToggle: React.FC<PlaylistToggleProps> = ({
+const PlaylistButton: React.FC<PlaylistToggleProps> = ({
   isModalOpen,
   onToggle,
 }) => {
@@ -22,4 +22,4 @@ const PlaylistToggle: React.FC<PlaylistToggleProps> = ({
   );
 };
 
-export default PlaylistToggle;
+export default PlaylistButton;
