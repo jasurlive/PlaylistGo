@@ -4,11 +4,11 @@ import { generateUniqueId } from "./add/tools/playlist/fetch/ID"; //giving uniqu
 import { fetchPlaylist } from "./add/tools/playlist/fetch/fetchPlaylist"; //imports songs from excel sheet
 
 import { usecustomList } from "./add/tools/player/hooks/useCustomSongs"; //loads custom songs from localstorage
-import { useYouTubeSearch } from "./add/tools/youtube/useYouTubeSearch";
+import { useYouTubeSearch } from "./add/tools/youtube/hooks/useYouTubeSearch";
 
 import PlayerContent from "./add/tools/player/PlayerContent"; //manages iframe of youtube video
 import NavMenu from "./add/tools/basic/NavMenu"; //navbar, playlist toggle, etc.
-import SearchBar from "./add/tools/player/search/SearchBar";
+import SearchBar from "./add/tools/youtube/search/SearchBar";
 
 import PlayerControls from "./add/tools/player/PlayerControls"; //all control buttons, seek bar, etc.
 import { usePlayerControls } from "./add/tools/player/videoControls"; // unified player controls hook (play, pause, next, prev)
