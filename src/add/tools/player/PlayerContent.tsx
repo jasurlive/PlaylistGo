@@ -3,6 +3,7 @@ import Shortcuts from "./Shortcuts";
 import YouTubeContainer from "../youtube/YouTubeContainer";
 import { PlayerContentProps } from "../types/interface";
 import { playNextVideo, playPreviousVideo } from "./videoControls";
+import { useSettingsControl } from "../player/controls/settingsControl";
 
 const PlayerContent: React.FC<PlayerContentProps> = ({
   isPlaying,
@@ -10,9 +11,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   currentVideo,
   setCurrentVideo,
   videoTracks,
-  isShuffle,
   setIsShuffle,
-  isRepeatOne,
   setIsRepeatOne,
   playerRef,
   setPlayedSeconds,
@@ -21,6 +20,16 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   const handlePlayPauseToggle = () => {
     setIsPlaying((prev) => !prev);
   };
+
+  // ✅ Use reusable hook
+  const {
+    shuffle,
+    repeatOne,
+    toggleShuffle,
+    toggleRepeatOne,
+    setShuffle,
+    setRepeatOne,
+  } = useSettingsControl({ setIsShuffle, setIsRepeatOne });
 
   return (
     <>
@@ -46,22 +55,22 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
             currentVideo,
             setCurrentVideo,
             setIsPlaying,
-            isShuffle,
+            shuffle,
             playerRef
           )
         }
-        onToggleShuffle={() => setIsShuffle(!isShuffle)}
-        onToggleRepeatOne={() => setIsRepeatOne(!isRepeatOne)}
+        onToggleShuffle={toggleShuffle}
+        onToggleRepeatOne={toggleRepeatOne}
       />
       <YouTubeContainer
         currentVideo={currentVideo}
         videoTracks={videoTracks}
         isPlaying={isPlaying}
-        isShuffle={isShuffle}
-        isRepeatOne={isRepeatOne}
+        isShuffle={shuffle}
+        isRepeatOne={repeatOne}
         setIsPlaying={setIsPlaying}
-        setIsShuffle={setIsShuffle}
-        setIsRepeatOne={setIsRepeatOne}
+        setIsShuffle={setShuffle}
+        setIsRepeatOne={setRepeatOne}
         setCurrentVideo={setCurrentVideo}
         playerRef={playerRef}
         setPlayedSeconds={setPlayedSeconds}
