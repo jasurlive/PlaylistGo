@@ -3,7 +3,7 @@ import { generateUniqueId } from "./ID";
 import { Video } from "../../types/interface";
 
 export const fetchPlaylist = async (
-  setJasursList: React.Dispatch<React.SetStateAction<Video[]>>,
+  setadminsList: React.Dispatch<React.SetStateAction<Video[]>>,
   setCurrentVideo: React.Dispatch<React.SetStateAction<Video>>,
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>,
   playerRef: React.RefObject<any>
@@ -22,7 +22,7 @@ export const fetchPlaylist = async (
       thumbnail: "",
     }));
 
-    setJasursList(processedData);
+    setadminsList(processedData);
 
     if (processedData.length > 0) {
       setCurrentVideo(processedData[0]);

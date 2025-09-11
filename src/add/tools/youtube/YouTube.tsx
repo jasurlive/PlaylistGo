@@ -24,7 +24,6 @@ const YTPlayer: React.FC<YTPlayerProps> = ({
   autoplay,
   isPlaying,
   setIsPlaying,
-  isMuted,
   setPlayedSeconds, // Add setPlayedSeconds prop
   setDuration, // Add setDuration prop
   onSeek, // Add onSeek prop
@@ -65,7 +64,6 @@ const YTPlayer: React.FC<YTPlayerProps> = ({
         url={url}
         playing={isPlaying} // Controlled via the isPlaying state
         controls
-        muted={isMuted} // Controlled via the isMuted state passed as prop
         width="100%"
         height="100%"
         config={{

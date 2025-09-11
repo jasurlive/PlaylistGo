@@ -15,8 +15,6 @@ const YouTubeContainer: React.FC<YouTubeContainerProps> = ({
   setPlayedSeconds, // Add setPlayedSeconds prop
   setDuration, // Add setDuration prop
 }) => {
-  const [isMuted, setIsMuted] = useState(false); // Add state for mute
-
   const onVideoEndHandler = () => {
     if (isRepeatOne) {
       if (playerRef.current && typeof playerRef.current.seekTo === "function") {
@@ -35,11 +33,6 @@ const YouTubeContainer: React.FC<YouTubeContainerProps> = ({
     }
   };
 
-  // Toggle mute state
-  const handleMuteToggle = () => {
-    setIsMuted((prev) => !prev);
-  };
-
   return (
     <div className="youtube-container">
       <div className="video-wrapper">
@@ -51,9 +44,6 @@ const YouTubeContainer: React.FC<YouTubeContainerProps> = ({
           autoplay={true}
           isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
-          isMuted={isMuted}
-          setIsMuted={setIsMuted} // Pass isMuted state to YTPlayer
-          handleMuteToggle={handleMuteToggle} // Pass handleMuteToggle to YTPlayer
           setPlayedSeconds={setPlayedSeconds} // Pass setPlayedSeconds to YTPlayer
           setDuration={setDuration} // Pass setDuration to YTPlayer
           onSeek={(time) => playerRef.current?.seekTo(time)} // Pass onSeek prop

@@ -2,18 +2,18 @@ import PlaylistSection from "./add/tools/playlist/PlaylistSection";
 import { PlaylistProps } from "./add/tools/types/interface";
 
 const Playlist: React.FC<PlaylistProps> = ({
-  customSongs,
-  jasursList,
+  customList,
+  adminsList,
   currentVideoId,
-  setCustomSongs,
-  setJasursList,
+  setcustomList,
+  setadminsList,
   playSelectedVideo,
 }) => {
   const deleteSong = (id: string, isCustom: boolean) => {
     if (isCustom) {
-      setCustomSongs((prev) => prev.filter((song) => song.id !== id));
+      setcustomList((prev) => prev.filter((song) => song.id !== id));
     } else {
-      setJasursList((prev) => prev.filter((song) => song.id !== id));
+      setadminsList((prev) => prev.filter((song) => song.id !== id));
     }
   };
 
@@ -21,16 +21,16 @@ const Playlist: React.FC<PlaylistProps> = ({
     <div className="playlists-container">
       <PlaylistSection
         title="Random Playlist"
-        songs={jasursList}
-        setSongs={setJasursList}
+        songs={adminsList}
+        setSongs={setadminsList} //for drag n drop function
         currentVideoId={currentVideoId}
         deleteSong={(id) => deleteSong(id, false)}
         playSelectedVideo={playSelectedVideo}
       />
       <PlaylistSection
         title="Your Playlist"
-        songs={customSongs}
-        setSongs={setCustomSongs}
+        songs={customList}
+        setSongs={setcustomList}
         currentVideoId={currentVideoId}
         deleteSong={(id) => deleteSong(id, true)}
         playSelectedVideo={playSelectedVideo}
