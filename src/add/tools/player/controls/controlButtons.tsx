@@ -4,7 +4,7 @@ import { LuRepeat1, LuShuffle } from "react-icons/lu";
 import { RxTrackNext, RxTrackPrevious } from "react-icons/rx";
 import "../../../css/buttons.css";
 import FullScreenComponent from "./fullScreen";
-import PlaylistToggle from "./playlistToggle";
+import AddFavorites from "./addFavorites";
 import { ControlButtonsProps } from "../../types/interface";
 
 const ControlButtons: React.FC<ControlButtonsProps> = ({
@@ -21,6 +21,7 @@ const ControlButtons: React.FC<ControlButtonsProps> = ({
 }) => {
   return (
     <div className="controls">
+      <AddFavorites />
       <button
         className={`shuffle-button ${isShuffle ? "active" : ""} #side`}
         id="shuffle"
@@ -28,11 +29,9 @@ const ControlButtons: React.FC<ControlButtonsProps> = ({
       >
         <LuShuffle />
       </button>
-
       <button onClick={playPreviousVideo}>
         <RxTrackPrevious />
       </button>
-
       <button className="play-pause" onClick={onPlayPauseToggle}>
         {isPlaying ? (
           <GrPause className={`pause-icon ${isPlaying ? "playing" : ""}`} />
@@ -40,11 +39,9 @@ const ControlButtons: React.FC<ControlButtonsProps> = ({
           <GrPlayFill className={`play-icon ${isPlaying ? "" : "playing"}`} />
         )}
       </button>
-
       <button onClick={playNextVideo}>
         <RxTrackNext />
       </button>
-
       <button
         className={`repeat-button ${isRepeatOne ? "active" : ""} #side`}
         id="repeat"
@@ -52,7 +49,6 @@ const ControlButtons: React.FC<ControlButtonsProps> = ({
       >
         <LuRepeat1 />
       </button>
-
       <FullScreenComponent
         isFullScreen={isFullScreen}
         setIsFullScreen={setIsFullScreen}

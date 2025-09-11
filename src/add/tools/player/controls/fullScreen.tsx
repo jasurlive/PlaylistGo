@@ -14,7 +14,11 @@ const FullScreenComponent: React.FC<FullScreenComponentProps> = ({
 
   return (
     <>
-      <button className="fullscreen-button" onClick={toggleFullScreen}>
+      <button
+        className="fullscreen-button"
+        id="fullscreen"
+        onClick={toggleFullScreen}
+      >
         {isFullScreen ? <BsFullscreenExit /> : <BsFullscreen />}
       </button>
       <Shortcuts onToggleFullScreen={toggleFullScreen} />
