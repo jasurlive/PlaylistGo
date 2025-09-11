@@ -10,6 +10,7 @@
 .progress-bar {
     position: relative;
     height: 8px;
+    border-radius: 5px;
     background-color: #ddd;
     overflow: hidden;
     z-index: 10;
@@ -18,7 +19,7 @@
 
 .progress {
     height: 100%;
-    background-color: #273760;
+    background-color: #2f4e9c;
     transition: width 0.2s ease-in-out;
 }
 
@@ -32,7 +33,7 @@
     }
 
     50% {
-        background-color: #85baff;
+        background-color: #4f9eff;
     }
 
     75% {
@@ -51,7 +52,7 @@
     width: 10px;
     height: 10px;
     transform: translate(-50%, -50%);
-    border-radius: 10%;
+    border-radius: 30%;
     pointer-events: none;
     animation: cursorDance 25s infinite linear;
 }
@@ -60,6 +61,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 0.5rem;
     font-size: 14px;
     color: #ddd;
     white-space: nowrap;

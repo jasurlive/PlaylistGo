@@ -56,13 +56,6 @@ body {
   border-radius: 15px;
 }
 
-.video-timing {
-  margin-top: 10px;
-  font-size: 1rem;
-  color: #ffffff;
-  text-align: center;
-}
-
 .music-player {
   width: 100%;
   color: #ffffff;
@@ -77,55 +70,7 @@ body {
   text-overflow: ellipsis;
 }
 
-.add-song {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-}
 
-.add-song input {
-  width: 40%;
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #007bff;
-  border-radius: 5px;
-  transition: border 0.3s;
-}
-
-.add-song input:focus {
-  border-color: #0056b3;
-  outline: none;
-}
-
-.timing-bar {
-  margin: 10px 0;
-  text-align: center;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 5px;
-  background-color: #444;
-  border-radius: 5px;
-  overflow: hidden;
-  position: relative;
-}
-
-.progress {
-  height: 100%;
-  background-color: #02ffb3;
-  transition: width 0.3s ease;
-}
-
-.timing-info {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.9rem;
-  color: #ffffff;
-  margin-top: 5px;
-}
 
 /* ----------------------------------------------------------- DESKTOP */
 @media (min-width: 601px) {
@@ -153,11 +98,6 @@ body {
   .music-player {
     padding: 10px 0;
     border-radius: 10px;
-  }
-
-  .add-song input {
-    font-size: 0.9rem;
-    width: 100%;
   }
 
   .music-player h2 {

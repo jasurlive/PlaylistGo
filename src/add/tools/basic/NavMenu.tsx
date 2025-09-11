@@ -7,11 +7,11 @@ import ModalToggle from "../player/controls/modalToggle";
 
 const NavMenu: React.FC<NavMenuProps> = ({
   customList,
-  adminsList,
+  adminList,
   currentVideo,
   playSelectedVideo,
   setcustomList,
-  setadminsList,
+  setadminList,
 }) => {
   return (
     <ModalToggle storageKey="playlistViewState" defaultOpen={true}>
@@ -27,11 +27,11 @@ const NavMenu: React.FC<NavMenuProps> = ({
               <div className="modal-content">
                 <Playlist
                   customList={customList}
-                  adminsList={adminsList}
+                  adminList={adminList}
                   currentVideoId={currentVideo.id}
                   playSelectedVideo={playSelectedVideo}
                   setcustomList={setcustomList}
-                  setadminsList={setadminsList}
+                  setadminList={setadminList}
                 />
               </div>
             </div>
