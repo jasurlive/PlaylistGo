@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import { generateUniqueId } from "./add/tools/player/fetch/ID"; //giving unique "id"s to songs
-import { fetchPlaylist } from "./add/tools/player/fetch/fetchPlaylist"; //imports songs from excel sheet
+import { generateUniqueId } from "./add/tools/playlist/fetch/ID"; //giving unique "id"s to songs
+import { fetchPlaylist } from "./add/tools/playlist/fetch/fetchPlaylist"; //imports songs from excel sheet
 
-import { usecustomList } from "./add/tools/player/use/useCustomSongs"; //loads custom songs from localstorage
+import { usecustomList } from "./add/tools/player/hooks/useCustomSongs"; //loads custom songs from localstorage
 import { useYouTubeSearch } from "./add/tools/youtube/useYouTubeSearch";
 
 import PlayerContent from "./add/tools/player/PlayerContent"; //manages iframe of youtube video
