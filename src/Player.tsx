@@ -1,19 +1,22 @@
 import React, { useState, useRef, useEffect } from "react";
-import { generateUniqueId } from "./add/tools/player/fetch/ID";
-import "./add/css/player.css";
-import { fetchPlaylist } from "./add/tools/player/fetch/fetchPlaylist";
-import { usecustomList } from "./add/tools/player/use/useCustomSongs";
+
+import { generateUniqueId } from "./add/tools/player/fetch/ID"; //giving unique "id"s to songs
+import { fetchPlaylist } from "./add/tools/player/fetch/fetchPlaylist"; //imports songs from excel sheet
+
+import { usecustomList } from "./add/tools/player/use/useCustomSongs"; //loads custom songs from localstorage
 import { useYouTubeSearch } from "./add/tools/youtube/useYouTubeSearch";
-import { Video } from "./add/tools/types/interface";
-import PlayerContent from "./add/tools/player/PlayerContent";
-import NavMenu from "./add/tools/basic/NavMenu";
+
+import PlayerContent from "./add/tools/player/PlayerContent"; //manages iframe of youtube video
+import NavMenu from "./add/tools/basic/NavMenu"; //navbar, playlist toggle, etc.
 import SearchBar from "./add/tools/player/search/SearchBar";
-import PlayerControls from "./add/tools/player/PlayerControls";
+
+import PlayerControls from "./add/tools/player/PlayerControls"; //all control buttons, seek bar, etc.
+import { usePlayerControls } from "./add/tools/player/videoControls"; // unified player controls hook (play, pause, next, prev)
+
+import "./add/css/player.css";
 import "./add/css/header.css";
-import {
-  playNextVideo,
-  playPreviousVideo,
-} from "./add/tools/player/videoControls";
+
+import { Video } from "./add/tools/types/interface";
 
 const Player: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -26,7 +29,7 @@ const Player: React.FC = () => {
   const { customList, setcustomList } = usecustomList();
   const [isShuffle, setIsShuffle] = useState(false);
   const [isRepeatOne, setIsRepeatOne] = useState(false);
-  const [adminsList, setadminsList] = useState<Video[]>([]);
+  const [adminList, setadminList] = useState<Video[]>([]);
   const playerRef = useRef<any>(null);
   const [playedSeconds, setPlayedSeconds] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -42,10 +45,10 @@ const Player: React.FC = () => {
   } = useYouTubeSearch();
 
   useEffect(() => {
-    fetchPlaylist(setadminsList, setCurrentVideo, setIsPlaying, playerRef);
+    fetchPlaylist(setadminList, setCurrentVideo, setIsPlaying, playerRef);
   }, []);
 
-  const videoTracks = [...customList, ...adminsList];
+  const videoTracks = [...customList, ...adminList];
 
   const addSongFromSearch = (song: Video) => {
     setcustomList((prevSongs) => [
@@ -55,17 +58,15 @@ const Player: React.FC = () => {
     setAddedSongs((prev) => new Set(prev).add(song.url));
   };
 
-  const handlePlaySelectedVideo = (id: string) => {
-    const selectedVideo = videoTracks.find((video) => video.id === id);
-    if (selectedVideo) {
-      setCurrentVideo(selectedVideo);
-      setIsPlaying(true);
-    }
-  };
-
-  const handlePlayPauseToggle = () => {
-    setIsPlaying((prev) => !prev);
-  };
+  const { togglePlayPause, playNext, playPrevious, playSelected } =
+    usePlayerControls(
+      videoTracks,
+      currentVideo,
+      setCurrentVideo,
+      isShuffle,
+      setIsPlaying,
+      playerRef
+    );
 
   const handleSeek = (time: number) => {
     if (playerRef.current && typeof playerRef.current.seekTo === "function") {
@@ -77,6 +78,7 @@ const Player: React.FC = () => {
   return (
     <div className="music-player" id="player-container">
       <div className="header-logo" onClick={() => (window.location.href = "/")}>
+        {/* beautiful logo */}
         <div className="logo-text">🎧 playlistgo.vercel.app ツ🖤</div>
       </div>
       <SearchBar // all youtube search related functions
@@ -106,32 +108,15 @@ const Player: React.FC = () => {
 
       <PlayerControls // all control buttons, seek bar, etc.
         isPlaying={isPlaying} //for play/pause button
-        onPlayPauseToggle={handlePlayPauseToggle}
-        playNextVideo={() =>
-          playNextVideo(
-            videoTracks,
-            currentVideo,
-            setCurrentVideo,
-            setIsPlaying,
-            isShuffle,
-            playerRef
-          )
-        }
-        playPreviousVideo={() =>
-          playPreviousVideo(
-            videoTracks,
-            currentVideo,
-            setCurrentVideo,
-            setIsPlaying,
-            playerRef
-          )
-        }
+        onPlayPauseToggle={togglePlayPause} // simplified play pause
+        playNextVideo={playNext}
+        playPreviousVideo={playPrevious}
         isShuffle={isShuffle}
         setIsShuffle={setIsShuffle}
         isRepeatOne={isRepeatOne}
         setIsRepeatOne={setIsRepeatOne}
         playerRef={playerRef}
-        playedSeconds={playedSeconds}
+        playedSeconds={playedSeconds} //for showin current time of song
         duration={duration}
         title={currentVideo.title}
         onSeek={handleSeek} //for handling clicks/touches on seek bar
@@ -139,11 +124,11 @@ const Player: React.FC = () => {
 
       <NavMenu //navbar, playlist animation, etc.
         customList={customList}
-        adminsList={adminsList} //displaying admin&user playlists (songs)
+        adminList={adminList} //displaying admin&user playlists (songs)
         currentVideo={currentVideo}
-        playSelectedVideo={handlePlaySelectedVideo} //handling click on song from playlist
+        playSelectedVideo={playSelected} //handling click on song from playlist
         setcustomList={setcustomList} //for drag n drop function for playlists
-        setadminsList={setadminsList}
+        setadminList={setadminList} //same as above
       />
     </div>
   );

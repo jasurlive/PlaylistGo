@@ -46,21 +46,21 @@ export interface Song {
 }
 export interface PlaylistProps {
   customList: Video[];
-  adminsList: Video[];
+  adminList: Video[];
   currentVideoId: string;
   playSelectedVideo: (id: string) => void;
   setcustomList: React.Dispatch<React.SetStateAction<Video[]>>;
-  setadminsList: React.Dispatch<React.SetStateAction<Video[]>>;
+  setadminList: React.Dispatch<React.SetStateAction<Video[]>>;
 }
 
 export interface NavMenuProps {
   customList: Video[];
-  adminsList: Video[];
+  adminList: Video[];
   currentVideo: Video;
 
   playSelectedVideo: (id: string) => void;
   setcustomList: React.Dispatch<React.SetStateAction<Video[]>>;
-  setadminsList: React.Dispatch<React.SetStateAction<Video[]>>;
+  setadminList: React.Dispatch<React.SetStateAction<Video[]>>;
 }
 
 export interface UserStatus {
