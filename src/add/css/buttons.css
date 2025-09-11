@@ -2,13 +2,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1.2rem;
     color: white;
     margin: 3rem 0;
 }
 
-.controls button,
-.fullscreen-button {
+.controls button {
     background: none;
     border: none;
     cursor: pointer;
@@ -20,10 +19,8 @@
     transform: scale(0.85);
 }
 
-.fullscreen-button svg {
-    color: #c3c3c3;
-    transition: color 0.3s;
-    width: 1.5rem;
+.favorite-button.active {
+    color: #ff028d;
 }
 
 .pause-icon.playing,
@@ -54,9 +51,12 @@
 }
 
 .shuffle-button,
-.repeat-button {
+.repeat-button,
+.fullscreen-button,
+.favorite-button {
     color: #c3c3c3;
     transition: color 0.3s;
+    font-size: 1.5rem;
 }
 
 .shuffle-button.active,
@@ -65,7 +65,9 @@
 }
 
 #shuffle,
-#repeat {
+#repeat,
+#favorite,
+#fullscreen {
     font-size: 1.5rem;
 
 }
