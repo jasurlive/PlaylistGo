@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Video } from "../types/interface";
-import { generateUniqueId } from "../playlist/fetch/ID";
+import { Video } from "../../types/interface";
+import { generateUniqueId } from "../../playlist/fetch/ID";
 
 export const useYouTubeSearch = () => {
   const [searchQuery, setSearchQuery] = useState("");
