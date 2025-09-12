@@ -2,7 +2,7 @@ import React from "react";
 import Shortcuts from "./Shortcuts";
 import YouTubeContainer from "../youtube/YouTubeContainer";
 import { PlayerContentProps } from "../types/interface";
-import { usePlayerControls } from "./hooks/videoControls";
+import { usePlayerControls } from "./hooks/usePlayerControls";
 import { useSettingsControl } from "./hooks/useSettingsControl";
 
 const PlayerContent: React.FC<PlayerContentProps> = ({

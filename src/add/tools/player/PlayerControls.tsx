@@ -4,6 +4,7 @@ import "../../css/buttons.css";
 import Title from "./components/songTitle";
 import TimeBar from "./components/timeBar";
 import ControlButtons from "./components/controlButtons";
+import { useFullScreen } from "./hooks/useFullScreen";
 
 const PlayerControls: React.FC<PlayerControlsProps> = ({
   isPlaying,
@@ -19,34 +20,8 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
   duration,
   onSeek,
 }) => {
-  // -------------------------------
-  // Fullscreen logic
-  // -------------------------------
-  const [isFullScreen, setIsFullScreen] = useState(false);
-
-  const toggleFullScreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement
-        .requestFullscreen()
-        .then(() => setIsFullScreen(true))
-        .catch((err) => console.error("Failed to set fullscreen:", err));
-    } else {
-      document
-        .exitFullscreen()
-        .then(() => setIsFullScreen(false))
-        .catch((err) => console.error("Failed to exit fullscreen:", err));
-    }
-  };
-
-  useEffect(() => {
-    const handleFullScreenChange = () => {
-      setIsFullScreen(!!document.fullscreenElement);
-    };
-    document.addEventListener("fullscreenchange", handleFullScreenChange);
-    return () => {
-      document.removeEventListener("fullscreenchange", handleFullScreenChange);
-    };
-  }, []);
+  // Fullscreen hook
+  const { isFullScreen, toggleFullScreen } = useFullScreen();
 
   return (
     <div className="controls-container">
