@@ -102,39 +102,39 @@ const Player: React.FC = () => {
 
       <PlayerContent // main player component, video iframe, handling next video on end, updating played songs, etc.
         isPlaying={isPlaying} //for play/pause button
-        setIsPlaying={setIsPlaying}
+        setIsPlaying={setIsPlaying} //for play/pause button
         currentVideo={currentVideo} //for handling things around current song
-        setCurrentVideo={setCurrentVideo}
+        setCurrentVideo={setCurrentVideo} //for handling things around current song
         videoTracks={videoTracks} //for handling shuffle and next/previous video
-        isShuffle={isShuffle}
+        isShuffle={isShuffle} //plays next video randomly if true
         setIsShuffle={setIsShuffle} //handling shuffle
-        isRepeatOne={isRepeatOne}
-        setIsRepeatOne={setIsRepeatOne}
-        playerRef={playerRef}
-        setPlayedSeconds={setPlayedSeconds}
+        isRepeatOne={isRepeatOne} //repeats current video if true
+        setIsRepeatOne={setIsRepeatOne} //handling repeat one
+        playerRef={playerRef} //sync-s states with the player
+        setPlayedSeconds={setPlayedSeconds} //tracks current time of song
         setDuration={setDuration} //track song duration
       />
 
       <PlayerControls // all control buttons, seek bar, etc.
         isPlaying={isPlaying} //for play/pause button
         onPlayPauseToggle={togglePlayPause} // simplified play pause
-        playNextVideo={playNext}
-        playPreviousVideo={playPrevious}
-        isShuffle={isShuffle}
-        setIsShuffle={setIsShuffle}
-        isRepeatOne={isRepeatOne}
-        setIsRepeatOne={setIsRepeatOne}
-        playerRef={playerRef}
+        playNextVideo={playNext} //next video button
+        playPreviousVideo={playPrevious} //previous video button
+        isShuffle={isShuffle} //for shuffle button
+        setIsShuffle={setIsShuffle} //handling shuffle
+        isRepeatOne={isRepeatOne} //for repeat one button
+        setIsRepeatOne={setIsRepeatOne} //handling repeat one
+        playerRef={playerRef} //sync-s states with the youtube iframe player
         playedSeconds={playedSeconds} //for showin current time of song
-        duration={duration}
-        title={currentVideo.title}
+        duration={duration} //for showing song duration
+        title={currentVideo.title} //for showing current song title
         onSeek={handleSeek} //for handling clicks/touches on seek bar
       />
 
       <NavMenu //navbar, playlist animation, etc.
         customList={customList}
         adminList={adminList} //displaying admin&user playlists (songs)
-        currentVideo={currentVideo}
+        currentVideo={currentVideo} //highlighting current song in playlist
         playSelectedVideo={playSelected} //handling click on song from playlist
         setcustomList={setcustomList} //for drag n drop function for playlists
         setadminList={setadminList} //same as above
