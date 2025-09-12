@@ -3,6 +3,7 @@ import { GrPause, GrPlayFill } from "react-icons/gr";
 import { LuRepeat1, LuShuffle } from "react-icons/lu";
 import { RxTrackNext, RxTrackPrevious } from "react-icons/rx";
 import "../../../css/buttons.css";
+import { useFullScreen } from "../hooks/useFullScreen";
 import FullScreenComponent from "./fullScreen";
 import AddFavorites from "./addFavorites";
 import { ControlButtonsProps } from "../../types/interface";
@@ -17,8 +18,8 @@ const ControlButtons: React.FC<ControlButtonsProps> = ({
   isRepeatOne,
   setIsRepeatOne,
   isFullScreen,
-  setIsFullScreen,
 }) => {
+  const { toggleFullScreen } = useFullScreen();
   return (
     <div className="controls">
       <AddFavorites />
@@ -51,7 +52,7 @@ const ControlButtons: React.FC<ControlButtonsProps> = ({
       </button>
       <FullScreenComponent
         isFullScreen={isFullScreen}
-        setIsFullScreen={setIsFullScreen}
+        toggleFullScreen={toggleFullScreen}
       />
     </div>
   );
