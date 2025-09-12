@@ -5,10 +5,12 @@ import { fetchPlaylist } from "./add/tools/playlist/fetch/fetchPlaylist"; //impo
 
 import { usecustomList } from "./add/tools/player/hooks/useCustomSongs"; //loads custom songs from localstorage
 import { useYouTubeSearch } from "./add/tools/youtube/hooks/useYouTubeSearch";
+import { useSeekControl } from "./add/tools/player/hooks/useHandleSeek"; //handles clicks on seek bar
 
 import PlayerContent from "./add/tools/player/PlayerContent"; //manages iframe of youtube video
 import NavMenu from "./add/tools/basic/NavMenu"; //navbar, playlist toggle, etc.
 import SearchBar from "./add/tools/youtube/search/SearchBar";
+import Header from "./add/tools/basic/Header"; //header with logo
 
 import PlayerControls from "./add/tools/player/PlayerControls"; //all control buttons, seek bar, etc.
 import { usePlayerControls } from "./add/tools/player/hooks/videoControls"; // unified player controls hook (play, pause, next, prev)
@@ -77,19 +79,11 @@ const Player: React.FC = () => {
       playerRef
     );
 
-  const handleSeek = (time: number) => {
-    if (playerRef.current && typeof playerRef.current.seekTo === "function") {
-      playerRef.current.seekTo(time);
-      setPlayedSeconds(time);
-    }
-  };
+  const { handleSeek } = useSeekControl(playerRef, setPlayedSeconds);
 
   return (
     <div className="music-player" id="player-container">
-      <div className="header-logo" onClick={() => (window.location.href = "/")}>
-        {/* beautiful logo */}
-        <div className="logo-text">🎧 playlistgo.vercel.app ツ🖤</div>
-      </div>
+      <Header />
       <SearchBar // all youtube search related functions
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -132,7 +126,7 @@ const Player: React.FC = () => {
       />
 
       <NavMenu //navbar, playlist animation, etc.
-        customList={customList}
+        customList={customList} //displays users' custom playlists (songs)
         adminList={adminList} //displaying admin&user playlists (songs)
         currentVideo={currentVideo} //highlighting current song in playlist
         playSelectedVideo={playSelected} //handling click on song from playlist
