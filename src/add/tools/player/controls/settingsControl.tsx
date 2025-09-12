@@ -11,11 +11,13 @@ export const useSettingsControl = ({
   setIsShuffle,
   setIsRepeatOne,
 }: Omit<SettingsControlProps, "isShuffle" | "isRepeatOne">) => {
+  //load simple "true"/"false" from localStorage
   const getStoredBoolean = (key: string, defaultValue = false): boolean => {
     const saved = localStorage.getItem(key);
     return saved !== null ? saved === "true" : defaultValue;
   };
 
+  // state initialized from localStorage
   const [shuffle, setShuffle] = useState<boolean>(() =>
     getStoredBoolean("isShuffle")
   );
@@ -23,14 +25,15 @@ export const useSettingsControl = ({
     getStoredBoolean("isRepeatOne")
   );
 
+  // setting handlers (store plain "true"/"false")
   const settingHandlers = {
     isShuffle: (value: boolean) => {
-      localStorage.setItem("isShuffle", JSON.stringify(value));
+      localStorage.setItem("isShuffle", String(value));
       setShuffle(value);
       setIsShuffle(value);
     },
     isRepeatOne: (value: boolean) => {
-      localStorage.setItem("isRepeatOne", JSON.stringify(value));
+      localStorage.setItem("isRepeatOne", String(value));
       setRepeatOne(value);
       setIsRepeatOne(value);
     },
