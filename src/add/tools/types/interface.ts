@@ -82,9 +82,9 @@ export interface PlayerContentProps {
   setCurrentVideo: React.Dispatch<React.SetStateAction<Video>>;
   videoTracks: Video[];
   isShuffle: boolean;
-  setIsShuffle: React.Dispatch<React.SetStateAction<boolean>>;
   isRepeatOne: boolean;
-  setIsRepeatOne: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsShuffle: (value: boolean) => void;
+  setIsRepeatOne: (value: boolean) => void;
   playerRef: React.RefObject<any>;
   setPlayedSeconds: React.Dispatch<React.SetStateAction<number>>;
   setDuration: React.Dispatch<React.SetStateAction<number>>;
@@ -96,9 +96,10 @@ export interface PlayerControlsProps {
   playNextVideo: () => void;
   playPreviousVideo: () => void;
   isShuffle: boolean;
-  setIsShuffle: React.Dispatch<React.SetStateAction<boolean>>;
   isRepeatOne: boolean;
-  setIsRepeatOne: React.Dispatch<React.SetStateAction<boolean>>;
+
+  setIsShuffle: (value: boolean) => void;
+  setIsRepeatOne: (value: boolean) => void;
   playerRef: RefObject<any>;
   playedSeconds: number;
   duration: number;

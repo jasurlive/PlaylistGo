@@ -12,6 +12,7 @@ import SearchBar from "./add/tools/youtube/search/SearchBar";
 
 import PlayerControls from "./add/tools/player/PlayerControls"; //all control buttons, seek bar, etc.
 import { usePlayerControls } from "./add/tools/player/videoControls"; // unified player controls hook (play, pause, next, prev)
+import { useSettingsControl } from "./add/tools/player/hooks/settingsControl"; // unified settings hook
 
 import "./add/css/player.css";
 import "./add/css/header.css";
@@ -27,12 +28,22 @@ const Player: React.FC = () => {
     thumbnail: "",
   });
   const { customList, setcustomList } = usecustomList();
-  const [isShuffle, setIsShuffle] = useState(false);
-  const [isRepeatOne, setIsRepeatOne] = useState(false);
   const [adminList, setadminList] = useState<Video[]>([]);
   const playerRef = useRef<any>(null);
   const [playedSeconds, setPlayedSeconds] = useState(0);
   const [duration, setDuration] = useState(0);
+
+  const {
+    shuffle: isShuffle,
+    repeatOne: isRepeatOne,
+    toggleShuffle,
+    toggleRepeatOne,
+    setShuffle: setIsShuffle,
+    setRepeatOne: setIsRepeatOne,
+  } = useSettingsControl({
+    setIsShuffle: (v) => {}, // no-op if not needed
+    setIsRepeatOne: (v) => {}, // no-op if not needed
+  });
 
   const {
     searchQuery,

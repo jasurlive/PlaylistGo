@@ -3,7 +3,7 @@ import Shortcuts from "./Shortcuts";
 import YouTubeContainer from "../youtube/YouTubeContainer";
 import { PlayerContentProps } from "../types/interface";
 import { usePlayerControls } from "./videoControls";
-import { useSettingsControl } from "../player/controls/settingsControl";
+import { useSettingsControl } from "./hooks/settingsControl";
 
 const PlayerContent: React.FC<PlayerContentProps> = ({
   isPlaying,
