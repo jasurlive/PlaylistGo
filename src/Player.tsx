@@ -6,6 +6,8 @@ import { fetchPlaylist } from "./add/tools/playlist/fetch/fetchPlaylist"; //impo
 import { usecustomList } from "./add/tools/player/hooks/useCustomSongs"; //loads custom songs from localstorage
 import { useYouTubeSearch } from "./add/tools/youtube/hooks/useYouTubeSearch";
 import { useSeekControl } from "./add/tools/player/hooks/useHandleSeek"; //handles clicks on seek bar
+import { usePlayerControls } from "./add/tools/player/hooks/usePlayerControls"; // unified player controls hook (play, pause, next, prev)
+import { useSettingsControl } from "./add/tools/player/hooks/useSettingsControl"; // loads and saves settings (shuffle, repeat) from localstorage
 
 import PlayerContent from "./add/tools/player/PlayerContent"; //manages iframe of youtube video
 import NavMenu from "./add/tools/basic/NavMenu"; //navbar, playlist toggle, etc.
@@ -13,8 +15,6 @@ import SearchBar from "./add/tools/youtube/search/SearchBar";
 import Header from "./add/tools/basic/Header"; //header with logo
 
 import PlayerControls from "./add/tools/player/PlayerControls"; //all control buttons, seek bar, etc.
-import { usePlayerControls } from "./add/tools/player/hooks/videoControls"; // unified player controls hook (play, pause, next, prev)
-import { useSettingsControl } from "./add/tools/player/hooks/useSettingsControl"; // unified settings hook
 
 import "./add/css/player.css";
 import "./add/css/header.css";

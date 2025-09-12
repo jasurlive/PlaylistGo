@@ -1,6 +1,6 @@
 import React from "react";
 import YTPlayer from "./YouTube";
-import { usePlayerControls } from "../player/hooks/videoControls"; // now our hook lives here
+import { usePlayerControls } from "../player/hooks/usePlayerControls"; // now our hook lives here
 import { YouTubeContainerProps } from "../types/interface";
 
 const YouTubeContainer: React.FC<YouTubeContainerProps> = ({
