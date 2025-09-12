@@ -17,7 +17,7 @@ import {
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import SongItem from "./SongItem";
 import { PlaylistSectionProps } from "../types/interface";
-import { useHandleRightClick } from "./hooks/handleRightClick";
+import { useHandleRightClick } from "./hooks/useHandleRightClick";
 
 const PlaylistSection: React.FC<PlaylistSectionProps> = ({
   title,

@@ -1,3 +1,24 @@
+:root {
+    --title-container-gap: 1rem;
+    --title-container-width-desktop: 35rem;
+    --title-container-width-mobile: 100%;
+    --title-shadow: 0 4px 8px rgba(0, 0, 0, 0.035);
+
+    --title-name-color: #ffffff;
+    --title-name-font-size-desktop: 1.5rem;
+    --title-name-font-size-mobile: 1rem;
+    --title-name-gap: 10px;
+    --title-name-animation-duration-desktop: 5s;
+    --title-name-animation-duration-mobile: 10s;
+
+    --title-artist-color: #ffffff;
+    --title-artist-font-size: 1rem;
+    --title-artist-gap: 10px;
+
+    --title-svg-size-desktop: 1.2em;
+    --title-svg-size-mobile: 1em;
+}
+
 .title-container {
     position: relative;
     display: flex;
@@ -5,9 +26,9 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 100%;
-    gap: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.035);
+    width: var(--title-container-width-desktop);
+    gap: var(--title-container-gap);
+    box-shadow: var(--title-shadow);
     overflow: hidden;
 }
 
@@ -15,35 +36,28 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    color: #ffffff;
+    gap: var(--title-name-gap);
+    color: var(--title-name-color);
     text-align: center;
     white-space: nowrap;
-    font-size: 1.5rem;
-    animation: marquee 5s linear infinite;
+    font-size: var(--title-name-font-size-desktop);
+    animation: marquee var(--title-name-animation-duration-desktop) linear infinite;
 }
 
 .title-artist {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    color: #ffffff;
+    gap: var(--title-artist-gap);
+    color: var(--title-artist-color);
     text-align: center;
-}
-
-.title-name {
-    font-size: 1.5rem;
-}
-
-.title-artist {
-    font-size: 1rem;
+    font-size: var(--title-artist-font-size);
 }
 
 .title-name svg,
 .title-artist svg {
-    font-size: 1.2em;
-    color: #ffffff;
+    font-size: var(--title-svg-size-desktop);
+    color: var(--title-name-color);
 }
 
 @keyframes marquee {
@@ -68,31 +82,31 @@
     }
 }
 
-
+/* ================= MOBILE ================= */
 @media (max-width: 600px) {
-
     .title-container {
-        width: 100%;
+        width: var(--title-container-width-mobile);
     }
 
     .title-name {
         margin-top: 1rem;
-        font-size: 1rem;
-        animation: marquee 10s linear infinite;
+        font-size: var(--title-name-font-size-mobile);
+        animation: marquee var(--title-name-animation-duration-mobile) linear infinite;
     }
 
     .title-artist {
-        font-size: 1rem;
+        font-size: var(--title-artist-font-size);
     }
 
     .title-name svg,
     .title-artist svg {
-        font-size: 1em;
+        font-size: var(--title-svg-size-mobile);
     }
 }
 
+/* ================= DESKTOP ================= */
 @media (min-width: 601px) {
     .title-container {
-        width: 35rem;
+        width: var(--title-container-width-desktop);
     }
 }

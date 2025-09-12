@@ -1,3 +1,16 @@
+:root {
+  --bottom-nav-bg-hover: #dfdfdf3b;
+  --bottom-nav-color: #ffffff;
+  --bottom-nav-animation: 0.5s;
+  --modal-animation: 0.15s;
+  --bottom-nav-z: 20;
+  --modal-overlay-z: 15;
+  --modal-bg-sm: #0e2136c6;
+  --button-radius: 0.2rem;
+  --button-padding: 0.2rem 0;
+  --svg-animation-duration: 5s;
+}
+
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -5,8 +18,60 @@
   width: 100%;
   display: flex;
   align-items: center;
-  z-index: 20;
-  animation: slideUpCurtain 0.5s ease-out forwards;
+  z-index: var(--bottom-nav-z);
+  animation: slideUpCurtain var(--bottom-nav-animation) ease-out forwards;
+}
+
+.bottom-nav button {
+  text-decoration: none;
+  color: var(--bottom-nav-color);
+  transition: background-color 0.3s ease-in, border-color 0.3s ease;
+  background: transparent;
+  display: flex;
+  flex: 1;
+  padding: var(--button-padding);
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-top-left-radius: var(--button-radius);
+  border-top-right-radius: var(--button-radius);
+  flex-direction: column;
+  outline: none;
+  cursor: pointer;
+}
+
+.bottom-nav button:hover {
+  background-color: var(--bottom-nav-bg-hover);
+  color: var(--bottom-nav-color);
+}
+
+.bottom-nav svg {
+  animation: colorShiftNav var(--svg-animation-duration) linear infinite;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideUpCurtain var(--modal-animation) ease-out forwards;
+}
+
+.modal-content {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 1000px) {
+  .modal-overlay {
+    background-color: var(--modal-bg-sm);
+    z-index: var(--modal-overlay-z);
+  }
 }
 
 @keyframes slideUpCurtain {
@@ -21,100 +86,48 @@
   }
 }
 
-.bottom-nav button {
-  text-decoration: none;
-  color: #ffffff;
-  transition: background-color 0.3s ease-in, border-color 0.3s ease;
-  background: transparent;
-  display: flex;
-  flex: 1;
-  padding: 0.2rem 0;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-top-left-radius: 0.2rem;
-  border-top-right-radius: 0.2rem;
-  flex-direction: column;
-  outline: none;
-  cursor: pointer;
-}
-
-.bottom-nav svg {
-  animation: colorShiftNav 5s linear infinite;
-}
-
 @keyframes colorShiftNav {
   0% {
-    color: #ff007f
+    color: #ff007f;
   }
 
   10% {
-    color: #ff9900
+    color: #ff9900;
   }
 
   20% {
-    color: #ccff00
+    color: #ccff00;
   }
 
   30% {
-    color: #00ff00
+    color: #00ff00;
   }
 
   40% {
-    color: #00ffff
+    color: #00ffff;
   }
 
   50% {
-    color: #0099ff
+    color: #0099ff;
   }
 
   60% {
-    color: #6600ff
+    color: #6600ff;
   }
 
   70% {
-    color: #cc00ff
+    color: #cc00ff;
   }
 
   80% {
-    color: #ff00cc
+    color: #ff00cc;
   }
 
   90% {
-    color: #ff0033
+    color: #ff0033;
   }
 
   100% {
-    color: #ff007f
-  }
-}
-
-.bottom-nav button:hover {
-  background-color: #dfdfdf3b;
-  color: #ffffff;
-}
-
-.modal-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: slideUpCurtain 0.15s ease-out forwards;
-}
-
-.modal-content {
-  width: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-@media screen and (max-width: 1000px) {
-  .modal-overlay {
-    background-color: #0e2136c6;
-    z-index: 15;
+    color: #ff007f;
   }
 }

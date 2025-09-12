@@ -1,3 +1,35 @@
+:root {
+    --social-btn-bottom: 5px;
+    --social-btn-right: 5px;
+    --social-btn-bg: linear-gradient(135deg, #0700c898, #e11cff83);
+    --social-btn-hover-bg: #1c4777;
+    --social-btn-color: #fff;
+    --social-btn-padding: 12px;
+    --social-btn-radius: 15%;
+    --social-btn-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    --social-btn-border: white 1px solid;
+    --social-btn-font-size: 1.5rem;
+    --social-btn-z: 100;
+    --social-btn-active-scale: 0.8;
+    --social-btn-hover-scale: 1.1;
+    --social-btn-transition: 0.3s;
+
+    --social-menu-bg: linear-gradient(135deg, #e11cffbc, #2574fcae);
+    --social-menu-padding: 12px;
+    --social-menu-radius: 8px;
+    --social-menu-gap: 12px;
+    --social-menu-font-size: 2rem;
+    --social-menu-z: 100;
+    --social-menu-animation-duration: 0.5s;
+
+    --social-icon-color: #ffffff;
+    --social-icon-hover-color: #69fdbf;
+    --social-icon-ielts-bg: rgb(219, 0, 0);
+    --social-icon-ielts-size: 2rem;
+    --social-icon-ielts-font-size: 0.7rem;
+    --social-icon-ielts-radius: 50%;
+}
+
 .social-container {
     display: flex;
     flex-direction: column;
@@ -7,26 +39,26 @@
 
 .social-button {
     position: fixed;
-    bottom: 5px;
-    right: 5px;
+    bottom: var(--social-btn-bottom);
+    right: var(--social-btn-right);
     cursor: pointer;
-    background: linear-gradient(135deg, #0700c898, #e11cff83);
-    color: #fff;
-    padding: 12px;
-    border-radius: 15%;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s;
-    border: white 1px solid;
-    font-size: 1.5rem;
-    z-index: 100;
+    background: var(--social-btn-bg);
+    color: var(--social-btn-color);
+    padding: var(--social-btn-padding);
+    border-radius: var(--social-btn-radius);
+    box-shadow: var(--social-btn-shadow);
+    transition: transform var(--social-btn-transition);
+    border: var(--social-btn-border);
+    font-size: var(--social-btn-font-size);
+    z-index: var(--social-btn-z);
 }
 
 .social-button:hover {
-    background-color: #1c4777;
+    background-color: var(--social-btn-hover-bg);
 }
 
 .social-button:active {
-    transform: scale(0.8);
+    transform: scale(var(--social-btn-active-scale));
 }
 
 .social-menu {
@@ -34,13 +66,13 @@
     position: relative;
     flex-direction: column;
     margin-bottom: 2rem;
-    gap: 12px;
-    background: linear-gradient(135deg, #e11cffbc, #2574fcae);
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 2rem;
-    animation: slideIn 0.5s ease-in-out;
-    z-index: 100;
+    gap: var(--social-menu-gap);
+    background: var(--social-menu-bg);
+    padding: var(--social-menu-padding);
+    border-radius: var(--social-menu-radius);
+    font-size: var(--social-menu-font-size);
+    animation: slideIn var(--social-menu-animation-duration) ease-in-out;
+    z-index: var(--social-menu-z);
 }
 
 .social-menu a {
@@ -50,34 +82,34 @@
 }
 
 .social-icon {
-    color: #ffffff;
+    color: var(--social-icon-color);
 }
 
 .social-icon-ielts {
-    width: 2rem;
-    height: 2rem;
-    background-color: rgb(219, 0, 0);
-    border-radius: 50%;
+    width: var(--social-icon-ielts-size);
+    height: var(--social-icon-ielts-size);
+    background-color: var(--social-icon-ielts-bg);
+    border-radius: var(--social-icon-ielts-radius);
     display: flex;
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
     text-decoration: none;
     font-weight: bold;
-    font-size: 0.7rem;
+    font-size: var(--social-icon-ielts-font-size);
     color: white;
 }
 
 .social-icon:hover,
 .social-icon-ielts:hover {
-    color: #69fdbf;
-    transform: scale(1.1);
-    transition: transform 0.3s ease-in-out;
+    color: var(--social-icon-hover-color);
+    transform: scale(var(--social-btn-hover-scale));
+    transition: transform var(--social-btn-transition) ease-in-out;
 }
 
 .social-icon:active,
 .social-icon-ielts:active {
-    transform: scale(0.8);
+    transform: scale(var(--social-btn-active-scale));
 }
 
 @keyframes slideIn {
@@ -92,6 +124,6 @@
 
 @media screen and (max-width: 600px) {
     .social-menu {
-        background: linear-gradient(135deg, #e11cffbc, #2574fcae);
+        background: var(--social-menu-bg);
     }
 }

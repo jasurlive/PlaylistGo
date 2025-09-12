@@ -1,13 +1,35 @@
+:root {
+  --body-bg: #282c34;
+  --body-color: #333;
+  --font-family: "Trebuchet MS", Arial, sans-serif;
+
+  --youtube-border: rgba(255, 255, 255, 0.515);
+  --youtube-radius: 15px;
+  --youtube-radius-sm: 10px;
+  --youtube-bg: #000000b5;
+  --youtube-bg-size: 20px 20px;
+
+  --music-player-color: #ffffff;
+  --music-player-radius: 15px;
+  --music-player-radius-sm: 10px;
+  --music-player-padding: 15px;
+  --music-player-padding-sm: 10px;
+  --music-player-h2-font: 1.5rem;
+  --music-player-h2-font-sm: 1.2rem;
+
+  --youtube-max-width: 35rem;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-family: var(--font-family);
 }
 
 body {
-  background-color: #282c34;
-  color: #333;
+  background-color: var(--body-bg);
+  color: var(--body-color);
 }
 
 @keyframes gradientAnimation {
@@ -29,11 +51,11 @@ body {
   width: 100%;
   max-width: 100%;
   margin: 1.5rem auto;
-  border: 1px solid rgba(255, 255, 255, 0.515);
-  border-radius: 15px;
+  border: 1px solid var(--youtube-border);
+  border-radius: var(--youtube-radius);
   overflow: hidden;
-  background-color: #000000b5;
-  background-size: 20px 20px;
+  background-color: var(--youtube-bg);
+  background-size: var(--youtube-bg-size);
   background-repeat: no-repeat;
   background-position: bottom right;
   user-select: none;
@@ -53,13 +75,13 @@ body {
   width: 100%;
   height: 100%;
   border: none;
-  border-radius: 15px;
+  border-radius: var(--youtube-radius);
 }
 
 .music-player {
   width: 100%;
-  color: #ffffff;
-  border-radius: 15px;
+  color: var(--music-player-color);
+  border-radius: var(--music-player-radius);
   transition: background 0.3s, color 0.3s;
 }
 
@@ -70,37 +92,35 @@ body {
   text-overflow: ellipsis;
 }
 
-
-
-/* ----------------------------------------------------------- DESKTOP */
+/* ================= DESKTOP ================= */
 @media (min-width: 601px) {
   .youtube-container {
-    max-width: 35rem;
+    max-width: var(--youtube-max-width);
   }
 
   .music-player {
-    padding: 15px;
-    border-radius: 10px;
+    padding: var(--music-player-padding);
+    border-radius: var(--music-player-radius);
   }
 
   .music-player h2 {
-    font-size: 1.5rem;
+    font-size: var(--music-player-h2-font);
     padding: 10px;
   }
 }
 
-/* ----------------------------------------------------------- MOBILE */
+/* ================= MOBILE ================= */
 @media (max-width: 600px) {
   .youtube-container {
-    border-radius: 10px;
+    border-radius: var(--youtube-radius-sm);
   }
 
   .music-player {
-    padding: 10px 0;
-    border-radius: 10px;
+    padding: var(--music-player-padding-sm) 0;
+    border-radius: var(--music-player-radius-sm);
   }
 
   .music-player h2 {
-    font-size: 1.2rem;
+    font-size: var(--music-player-h2-font-sm);
   }
 }

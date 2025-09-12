@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PlayerControlsProps } from "../types/interface";
-import "../../css/controls.css";
+import "../../css/buttons.css";
 import Title from "./components/songTitle";
 import TimeBar from "./components/timeBar";
 import ControlButtons from "./components/controlButtons";
