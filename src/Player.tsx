@@ -36,13 +36,11 @@ const Player: React.FC = () => {
   const {
     shuffle: isShuffle,
     repeatOne: isRepeatOne,
-    toggleShuffle,
-    toggleRepeatOne,
     setShuffle: setIsShuffle,
     setRepeatOne: setIsRepeatOne,
   } = useSettingsControl({
-    setIsShuffle: (v) => {}, // no-op if not needed
-    setIsRepeatOne: (v) => {}, // no-op if not needed
+    setIsShuffle: () => {},
+    setIsRepeatOne: () => {},
   });
 
   const {
