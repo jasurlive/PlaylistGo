@@ -2,8 +2,8 @@ import "../../css/nav-menu.css";
 import Playlist from "../../../Playlist";
 import { NavMenuProps } from "../types/interface";
 import Shortcuts from "../player/Shortcuts";
-import PlaylistButton from "../player/controls/playlistButton";
-import ModalToggle from "../player/controls/modalToggle";
+import PlaylistButton from "../player/components/playlistButton";
+import ModalToggle from "../player/components/modalToggle";
 
 const NavMenu: React.FC<NavMenuProps> = ({
   customList,

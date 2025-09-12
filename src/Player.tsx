@@ -11,7 +11,7 @@ import NavMenu from "./add/tools/basic/NavMenu"; //navbar, playlist toggle, etc.
 import SearchBar from "./add/tools/youtube/search/SearchBar";
 
 import PlayerControls from "./add/tools/player/PlayerControls"; //all control buttons, seek bar, etc.
-import { usePlayerControls } from "./add/tools/player/videoControls"; // unified player controls hook (play, pause, next, prev)
+import { usePlayerControls } from "./add/tools/player/hooks/videoControls"; // unified player controls hook (play, pause, next, prev)
 import { useSettingsControl } from "./add/tools/player/hooks/settingsControl"; // unified settings hook
 
 import "./add/css/player.css";

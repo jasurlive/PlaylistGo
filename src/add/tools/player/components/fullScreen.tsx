@@ -2,7 +2,7 @@ import React from "react";
 import { BsFullscreen, BsFullscreenExit } from "react-icons/bs";
 import "../../../css/buttons.css";
 import { FullScreenComponentProps } from "../../types/interface";
-import Shortcuts from "../../player/Shortcuts";
+import Shortcuts from "../Shortcuts";
 
 const FullScreenComponent: React.FC<FullScreenComponentProps> = ({
   isFullScreen,
