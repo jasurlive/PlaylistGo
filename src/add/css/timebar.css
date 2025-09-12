@@ -1,7 +1,26 @@
+:root {
+    --timing-bar-gap: 8px;
+    --timing-bar-width-desktop: 35rem;
+    --timing-bar-width-mobile: 100%;
+    --progress-bar-height: 8px;
+    --progress-bar-radius: 5px;
+    --progress-bar-bg: #ddd;
+    --progress-color: #2f4e9c;
+    --progress-transition: width 0.2s ease-in-out;
+
+    --seek-cursor-width: 10px;
+    --seek-cursor-height: 10px;
+    --seek-cursor-radius: 30%;
+    --seek-cursor-animation-duration: 25s;
+
+    --timing-info-font-size: 14px;
+    --timing-info-color: #ddd;
+}
+
 .timing-bar {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--timing-bar-gap);
     width: 30%;
     font-family: sans-serif;
     cursor: pointer;
@@ -9,9 +28,9 @@
 
 .progress-bar {
     position: relative;
-    height: 8px;
-    border-radius: 5px;
-    background-color: #ddd;
+    height: var(--progress-bar-height);
+    border-radius: var(--progress-bar-radius);
+    background-color: var(--progress-bar-bg);
     overflow: hidden;
     z-index: 10;
     cursor: pointer;
@@ -19,8 +38,8 @@
 
 .progress {
     height: 100%;
-    background-color: #2f4e9c;
-    transition: width 0.2s ease-in-out;
+    background-color: var(--progress-color);
+    transition: var(--progress-transition);
 }
 
 @keyframes cursorDance {
@@ -49,12 +68,12 @@
     position: absolute;
     top: 50%;
     left: 0;
-    width: 10px;
-    height: 10px;
+    width: var(--seek-cursor-width);
+    height: var(--seek-cursor-height);
     transform: translate(-50%, -50%);
-    border-radius: 30%;
+    border-radius: var(--seek-cursor-radius);
     pointer-events: none;
-    animation: cursorDance 25s infinite linear;
+    animation: cursorDance var(--seek-cursor-animation-duration) infinite linear;
 }
 
 .timing-info {
@@ -62,24 +81,26 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 0.5rem;
-    font-size: 14px;
-    color: #ddd;
+    font-size: var(--timing-info-font-size);
+    color: var(--timing-info-color);
     white-space: nowrap;
     width: 100%;
 }
 
+/* ================= MOBILE ================= */
 @media (max-width: 600px) {
 
     .time-bar-container,
     .timing-bar {
-        width: 100%;
+        width: var(--timing-bar-width-mobile);
     }
 }
 
+/* ================= DESKTOP ================= */
 @media (min-width: 601px) {
 
     .timing-bar,
     .timing-info {
-        width: 35rem;
+        width: var(--timing-bar-width-desktop);
     }
 }

@@ -1,18 +1,57 @@
+/* vars: colors, sizes, powers */
+:root {
+    --color-text: #c3c3c3;
+    --color-white: #fff;
+    --color-active-fav: #ff028d;
+    --color-active-state: #02ffb3;
+    /* go wild */
+
+    --color-shift-1: #ff90c0;
+    --color-shift-2: #00eeff;
+    --color-shift-3: #85baff;
+    --color-shift-4: #d773ff;
+    --color-shift-5: #00ffcc;
+    /* disco mode */
+
+    --gap-controls: 1.2rem;
+    --margin-controls: 3rem 0;
+    --font-size-controls: 2.5rem;
+    --font-size-icons: 1.5rem;
+
+    --transition-fast: 0.3s;
+    /* blink and done */
+    --transition-scale: 0.05s ease-in;
+    /* squash effect */
+}
+
+.controls-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+/* flexy flex */
 .controls {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.2rem;
-    color: white;
-    margin: 3rem 0;
+    gap: var(--gap-controls);
+    color: var(--color-white);
+    margin: var(--margin-controls);
 }
 
 .controls button {
     background: none;
     border: none;
     cursor: pointer;
-    color: #c3c3c3;
-    transition: color 0.3s, transform 0.05s ease-in;
+    color: var(--color-text);
+    transition: color var(--transition-fast), transform var(--transition-scale);
+    font-size: var(--font-size-controls);
 }
 
 .controls button:active {
@@ -20,7 +59,7 @@
 }
 
 .favorite-button.active {
-    color: #ff028d;
+    color: var(--color-active-fav);
 }
 
 .pause-icon.playing,
@@ -28,61 +67,55 @@
     animation: colorShiftPause 5s linear infinite;
 }
 
-@keyframes colorShiftPause {
-    0% {
-        color: #ff90c0;
-    }
-
-    25% {
-        color: #00eeff;
-    }
-
-    50% {
-        color: #85baff;
-    }
-
-    75% {
-        color: #d773ff;
-    }
-
-    100% {
-        color: #00ffcc;
-    }
-}
-
 .shuffle-button,
 .repeat-button,
 .fullscreen-button,
 .favorite-button {
-    color: #c3c3c3;
-    transition: color 0.3s;
-    font-size: 1.5rem;
+    color: var(--color-text);
+    transition: color var(--transition-fast);
+    font-size: var(--font-size-icons);
 }
 
 .shuffle-button.active,
 .repeat-button.active {
-    color: #02ffb3;
+    color: var(--color-active-state);
 }
 
 #shuffle,
 #repeat,
 #favorite,
 #fullscreen {
-    font-size: 1.5rem;
-
+    font-size: var(--font-size-icons);
 }
 
-.controls button {
-    font-size: 2.5rem;
+/* disco lights */
+@keyframes colorShiftPause {
+    0% {
+        color: var(--color-shift-1);
+    }
+
+    25% {
+        color: var(--color-shift-2);
+    }
+
+    50% {
+        color: var(--color-shift-3);
+    }
+
+    75% {
+        color: var(--color-shift-4);
+    }
+
+    100% {
+        color: var(--color-shift-5);
+    }
 }
 
-/* ------------------------------------------------------------ MOBILE */
+/* small screens: small surprises */
 @media (max-width: 600px) {}
 
-/* ------------------------------------------------------------ DESKTOP */
-
+/* big screens: big flex */
 @media (min-width: 601px) {
-
     .controls {
         z-index: 10;
     }

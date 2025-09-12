@@ -1,6 +1,14 @@
-/*************  ✨ Windsurf Command 🌟  *************/
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lobster&family=Great+Vibes&family=Kaushan+Script&family=Alex+Brush&display=swap");
+
+:root {
+  --logo-font: "Kaushan Script", cursive, sans-serif;
+  --logo-font-size: 1.4rem;
+  --logo-font-weight: 700;
+  --logo-gradient: linear-gradient(90deg, #ff0000, #ff9900, #33cc33, #3399ff, #cc33ff);
+  --logo-bg-size: 500% 500%;
+  --logo-animation-duration: 40s;
+}
 
 .header-logo {
   position: absolute;
@@ -9,15 +17,15 @@
 }
 
 .logo-text {
-  font-family: "Kaushan Script", cursive, sans-serif;
-  font-size: 1.4rem;
-  font-weight: 700;
-  background: linear-gradient(90deg, #ff0000, #ff9900, #33cc33, #3399ff, #cc33ff);
-  background-size: 500% 500%;
+  font-family: var(--logo-font);
+  font-size: var(--logo-font-size);
+  font-weight: var(--logo-font-weight);
+  background: var(--logo-gradient);
+  background-size: var(--logo-bg-size);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: equalizerEffect 40s linear infinite;
+  animation: equalizerEffect var(--logo-animation-duration) linear infinite;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,6 +36,7 @@
   z-index: 10;
 }
 
+/* lets dance, baby! */
 @keyframes equalizerEffect {
 
   0%,
@@ -54,6 +63,7 @@
   }
 }
 
+/* ================= MOBILE RESPONSIVENESS ================= */
 @media (max-width: 600px) {
   .header-logo {
     position: relative;
@@ -65,5 +75,3 @@
     cursor: pointer;
   }
 }
-
-/*******  c40758ec-c43c-4151-9029-ceb49fc3a259  *******/

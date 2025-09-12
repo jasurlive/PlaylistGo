@@ -1,22 +1,68 @@
+:root {
+  --song-bg: #184475;
+  --song-bg-active: linear-gradient(90deg, rgba(255, 0, 255, 0.8), rgba(0, 255, 255, 0.8));
+  --song-border: rgba(170, 170, 170, 0.736);
+  --song-border-active: #ffffff;
+  --song-radius: 5px;
+  --song-padding: 1.05rem;
+  --song-margin: 5px 0;
+  --song-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --song-transition: 0.3s ease-in-out;
+  --song-title-font: 0.8rem;
+  --song-title-margin: 0 2rem 0 3rem;
+  --song-title-color-active: #ffffff;
+
+  --drag-handle-width: 2.5rem;
+  --drag-handle-height: 1.7rem;
+  --drag-icon-size: 1rem;
+
+  --context-bg: #232b3b;
+  --context-color: #fff;
+  --context-border-radius: 8px;
+  --context-box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.25);
+  --context-padding: 0.3rem 0;
+  --context-border: 1px solid #0eb085;
+  --context-hover-bg: #0eb085;
+  --context-font-size: 1rem;
+  --context-animation-duration: 0.15s;
+
+  --playlist-section-padding: 1rem;
+  --playlist-section-border: 1px solid #ccc;
+  --playlist-section-radius: 5px;
+  --playlist-section-bg-desktop: #1734556f;
+  --playlist-header-padding: 1rem 0;
+  --playlist-header-gap: 0.4rem;
+
+  --no-songs-font: 1.2rem;
+  --no-songs-color: #fff;
+
+  --song-gradient-animation-duration: 3s;
+
+  --scrollbar-thumb-color: #07017d;
+  --scrollbar-track-color: #fffdf3;
+  --scrollbar-thumb-radius: 1rem;
+  --scrollbar-thumb-hover-color: #a82626;
+}
+
 .song-item {
   position: relative;
-  padding: 1.05rem;
-  margin: 5px 0;
-  background-color: #184475;
-  border-radius: 5px;
+  padding: var(--song-padding);
+  margin: var(--song-margin);
+  background-color: var(--song-bg);
+  border-radius: var(--song-radius);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s ease-in-out;
+  box-shadow: var(--song-shadow);
+  transition: background var(--song-transition);
   user-select: none;
-  border: rgba(170, 170, 170, 0.736) solid 1px;
+  border: var(--song-border) solid 1px;
 }
 
 .song-item .song-title {
-  margin: 0 2rem 0 3rem;
-  font-size: 0.8rem;
+  margin: var(--song-title-margin);
+  font-size: var(--song-title-font);
   flex-grow: 1;
   text-align: left;
   white-space: nowrap;
@@ -25,17 +71,15 @@
 }
 
 .song-item.active {
-  background: linear-gradient(90deg,
-      rgba(255, 0, 255, 0.8),
-      rgba(0, 255, 255, 0.8));
-  animation: gradientAnimationSong 3s infinite ease-in-out;
-  color: white;
-  border: #ffffff solid 1px;
+  background: var(--song-bg-active);
+  animation: gradientAnimationSong var(--song-gradient-animation-duration) infinite ease-in-out;
+  color: var(--song-title-color-active);
+  border: var(--song-border-active) solid 1px;
 }
 
 .no-songs-message {
-  font-size: 1.2rem;
-  color: #fff;
+  font-size: var(--no-songs-font);
+  color: var(--no-songs-color);
   text-align: center;
   margin-top: 1rem;
 }
@@ -43,8 +87,8 @@
 .trash-icon,
 .drag-handle {
   position: absolute;
-  width: 1rem;
-  height: 1rem;
+  width: var(--drag-icon-size);
+  height: var(--drag-icon-size);
 }
 
 .trash-icon {
@@ -53,8 +97,8 @@
 
 .drag-handle {
   left: 0.5rem;
-  width: 2.5rem;
-  height: 1.7rem;
+  width: var(--drag-handle-width);
+  height: var(--drag-handle-height);
   cursor: grab;
 }
 
@@ -70,15 +114,15 @@
 .song-context-menu {
   position: relative;
   z-index: 20;
-  background: #232b3b;
-  color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.25);
-  padding: 0.3rem 0;
+  background: var(--context-bg);
+  color: var(--context-color);
+  border-radius: var(--context-border-radius);
+  box-shadow: var(--context-box-shadow);
+  padding: var(--context-padding);
   display: flex;
   flex-direction: column;
-  animation: fadeInMenu 0.15s;
-  border: 1px solid #0eb085;
+  animation: fadeInMenu var(--context-animation-duration);
+  border: var(--context-border);
 }
 
 .song-context-menu button {
@@ -87,7 +131,7 @@
   color: inherit;
   text-align: left;
   padding: 0.7rem 1.2rem;
-  font-size: 1rem;
+  font-size: var(--context-font-size);
   cursor: pointer;
   width: 100%;
   transition: background 0.15s;
@@ -95,7 +139,7 @@
 
 .song-context-menu button:hover:not(:disabled),
 .song-context-menu button:focus:not(:disabled) {
-  background: #0eb085;
+  background: var(--context-hover-bg);
   color: #fff;
 }
 
@@ -120,28 +164,22 @@
 
   0%,
   75% {
-    background: linear-gradient(90deg,
-        rgba(255, 99, 132, 0.7),
-        rgba(54, 162, 235, 0.7));
+    background: linear-gradient(90deg, rgba(255, 99, 132, 0.7), rgba(54, 162, 235, 0.7));
   }
 
   25% {
-    background: linear-gradient(90deg,
-        rgba(255, 159, 64, 0.7),
-        rgba(75, 192, 192, 0.7));
+    background: linear-gradient(90deg, rgba(255, 159, 64, 0.7), rgba(75, 192, 192, 0.7));
   }
 
   50% {
-    background: linear-gradient(90deg,
-        rgba(75, 192, 192, 0.7),
-        rgba(153, 102, 255, 0.7));
+    background: linear-gradient(90deg, rgba(75, 192, 192, 0.7), rgba(153, 102, 255, 0.7));
   }
 }
 
 .playlist-section {
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: var(--playlist-section-padding);
+  border: var(--playlist-section-border);
+  border-radius: var(--playlist-section-radius);
   text-align: center;
 }
 
@@ -149,11 +187,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 0;
+  padding: var(--playlist-header-padding);
   margin: 0.2rem 0;
   cursor: pointer;
-  border: 1px solid #ccc;
-  gap: 0.4rem;
+  border: var(--playlist-section-border);
+  gap: var(--playlist-header-gap);
 }
 
 .playlists-container {
@@ -161,7 +199,6 @@
   justify-content: space-between;
   margin-top: 25px;
 }
-
 
 .playlist-section h3 {
   font-size: 1rem;
@@ -177,7 +214,6 @@ ul {
   padding: 0;
 }
 
-
 h2 {
   font-size: 1.5rem;
   padding: 0.2rem;
@@ -185,10 +221,8 @@ h2 {
   vertical-align: middle;
 }
 
-/* ------------------------------------------------------------------------- Mobile */
+/* ================= MOBILE ================= */
 @media (max-width: 1000px) {
-
-
   .playlists-wrapper {
     position: relative;
     width: 100%;
@@ -211,7 +245,6 @@ h2 {
   }
 
   .playlists-container {
-    display: flex;
     flex-direction: row;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
@@ -221,7 +254,7 @@ h2 {
     -webkit-overflow-scrolling: touch;
     position: relative;
     scrollbar-width: 2rem;
-    scrollbar-color: #07017d #fffdf3;
+    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
   }
 
   .playlists-container::-webkit-scrollbar {
@@ -229,12 +262,12 @@ h2 {
   }
 
   .playlists-container::-webkit-scrollbar-track {
-    background: #fffdf3;
+    background: var(--scrollbar-track-color);
   }
 
   .playlists-container::-webkit-scrollbar-thumb {
-    background: #07017d;
-    border-radius: 1rem;
+    background: var(--scrollbar-thumb-color);
+    border-radius: var(--scrollbar-thumb-radius);
   }
 
   .playlist-section {
@@ -243,7 +276,7 @@ h2 {
     height: 100%;
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: #07017d #fffdf3;
+    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
   }
 
   .playlist-section::-webkit-scrollbar {
@@ -251,12 +284,12 @@ h2 {
   }
 
   .playlist-section::-webkit-scrollbar-track {
-    background: #fffdf3;
+    background: var(--scrollbar-track-color);
   }
 
   .playlist-section::-webkit-scrollbar-thumb {
-    background: #07017d;
-    border-radius: 1rem;
+    background: var(--scrollbar-thumb-color);
+    border-radius: var(--scrollbar-thumb-radius);
   }
 
   .song-item .song-title {
@@ -282,7 +315,7 @@ h2 {
   }
 }
 
-/* ------------------------------------------------------------------------- Desktop */
+/* ================= DESKTOP ================= */
 @media (min-width: 1001px) {
   .playlist-section {
     position: relative;
@@ -290,8 +323,8 @@ h2 {
     width: 30%;
     overflow-y: auto;
     scrollbar-width: wide;
-    scrollbar-color: #07017d #fffdf3;
-    background-color: #1734556f;
+    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+    background-color: var(--playlist-section-bg-desktop);
   }
 
   .no-songs-message-mobile {
@@ -321,7 +354,7 @@ h2 {
   }
 
   .playlist-section::-webkit-scrollbar-thumb:hover {
-    background-color: #a82626;
+    background-color: var(--scrollbar-thumb-hover-color);
   }
 
   .song-item:hover {
