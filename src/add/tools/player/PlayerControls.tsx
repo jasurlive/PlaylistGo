@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { PlayerControlsProps } from "../types/interface";
 import "../../css/controls.css";
-import Title from "./controls/songTitle";
-import TimeBar from "./controls/timeBar";
-import ControlButtons from "./controls/controlButtons";
+import Title from "./components/songTitle";
+import TimeBar from "./components/timeBar";
+import ControlButtons from "./components/controlButtons";
 
 const PlayerControls: React.FC<PlayerControlsProps> = ({
   isPlaying,
