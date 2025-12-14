@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { firestore } from "../api/Firebase";
 import { TfiStatsUp } from "react-icons/tfi";
-import { FaUsersViewfinder } from "react-icons/fa6";
-import { FaUserSecret } from "react-icons/fa";
+import { FaUsersViewfinder, FaUserSecret } from "react-icons/fa6";
 import { RiLoader2Fill } from "react-icons/ri";
 import {
   doc,
@@ -23,165 +22,124 @@ import { UserStatus } from "../types/interface";
 
 function Online() {
   const [onlineUsers, setOnlineUsers] = useState<UserStatus[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [allTimeVisitors, setAllTimeVisitors] = useState<number>(0);
+  const [loading, setLoading] = useState(true);
+  const [allTimeVisitors, setAllTimeVisitors] = useState(0);
 
   useEffect(() => {
-    const fetchIpAndUpdate = async () => {
-      try {
-        const parser = new UAParser();
-        const uaResult = parser.getResult();
-        const browser = uaResult.browser.name || "unknown";
-        const os = uaResult.os.name || "unknown";
-        const device = uaResult.device.model || "Desktop";
+    let heartbeatInterval: number;
+    let unsubscribeSnapshot: (() => void) | undefined;
 
-        let ip: string = localStorage.getItem("userIP") ?? "";
-        let city: string = localStorage.getItem("userCity") ?? "";
-        let country: string = localStorage.getItem("userCountry") ?? "";
+    const fetchUserData = async () => {
+      const parser = new UAParser();
+      const { name: browser = "unknown" } = parser.getResult().browser;
+      const { name: os = "unknown" } = parser.getResult().os;
+      const { model: device = "Desktop" } = parser.getResult().device;
 
-        if (!ip || !city || !country) {
-          const geoResponse = await fetch(
-            "https://get.geojs.io/v1/ip/geo.json"
-          );
-          const geoData = await geoResponse.json();
-          ip = geoData.ip || "unknown";
-          city = geoData.city || "Unknown";
-          country = geoData.country || "Unknown";
+      let ip = localStorage.getItem("userIP") || "";
+      let city = localStorage.getItem("userCity") || "";
+      let country = localStorage.getItem("userCountry") || "";
 
-          localStorage.setItem("userIP", ip);
-          localStorage.setItem("userCity", city);
-          localStorage.setItem("userCountry", country);
-        }
+      if (!ip || !city || !country) {
+        const geoRes = await fetch("https://get.geojs.io/v1/ip/geo.json");
+        const geoData = await geoRes.json();
+        ip = geoData.ip || "unknown";
+        city = geoData.city || "Unknown";
+        country = geoData.country || "Unknown";
 
-        const docId = `${ip}-${browser}-${device}-${os}`
-          .toLowerCase()
-          .replace(/ /g, "-");
-        const userStatusDocRef = doc(firestore, "djmusic", docId);
-
-        const setOnline = async () => {
-          await setDoc(
-            userStatusDocRef,
-            {
-              state: "online",
-              last_changed: serverTimestamp(),
-              last_active: serverTimestamp(), // ✅ always fresh
-              browser,
-              os,
-              device,
-              ip,
-              city,
-              country,
-            },
-            { merge: true }
-          );
-        };
-
-        const setOffline = async () => {
-          await setDoc(
-            userStatusDocRef,
-            {
-              state: "offline",
-              last_changed: serverTimestamp(),
-            },
-            { merge: true }
-          );
-        };
-
-        // ✅ 1. Mark user online instantly
-        await setOnline();
-
-        // ✅ 2. Heartbeat every 1 min to refresh last_active
-        const heartbeat = setInterval(() => {
-          setOnline();
-        }, 60 * 1000);
-
-        // ✅ 3. Track online users with 20-min freshness
-        const userStatusCollectionRef = collection(firestore, "djmusic");
-        const unsubscribe = onSnapshot(userStatusCollectionRef, (snapshot) => {
-          const now = Date.now();
-          const twentyMinutesAgo = now - 20 * 60 * 1000;
-          const activeUsers = snapshot.docs
-            .map((doc) => doc.data() as UserStatus)
-            .filter((u) => {
-              if (u.state !== "online" || !u.last_active) return false;
-              const lastActive =
-                u.last_active.toDate?.() ?? new Date(u.last_active);
-              return lastActive.getTime() > twentyMinutesAgo;
-            });
-          setOnlineUsers(activeUsers);
-        });
-
-        // ✅ 4. Cleanup on tab close/refresh
-        const handleUnload = () => setOffline();
-        window.addEventListener("beforeunload", handleUnload);
-
-        return () => {
-          clearInterval(heartbeat);
-          unsubscribe();
-          window.removeEventListener("beforeunload", handleUnload);
-          setOffline();
-        };
-      } catch (error) {
-        console.error("Error fetching location data:", error);
+        localStorage.setItem("userIP", ip);
+        localStorage.setItem("userCity", city);
+        localStorage.setItem("userCountry", country);
       }
-    };
 
-    const updateAllTimeVisitors = async () => {
-      try {
-        const visitorsDocRef = doc(
-          firestore,
-          "alltimeVisitors",
-          "DJvisitorCount"
-        );
-        const visitorDoc = await getDoc(visitorsDocRef);
+      const docId = `${ip}-${browser}-${device}-${os}`
+        .toLowerCase()
+        .replace(/ /g, "-");
+      const userRef = doc(firestore, "djmusic", docId);
 
-        if (visitorDoc.exists()) {
-          const visitorsData = visitorDoc.data();
-          const currentVisitors = visitorsData?.count || 0;
-
-          await setDoc(
-            visitorsDocRef,
-            { count: currentVisitors + 1 },
-            { merge: true }
-          );
-        } else {
-          await setDoc(visitorsDocRef, { count: 1 });
-        }
-
-        const updatedVisitorCount = await getDoc(visitorsDocRef);
-        setAllTimeVisitors(updatedVisitorCount.data()?.count || 0);
-      } catch (error) {
-        console.error("Error updating all-time visitors:", error);
-      }
-    };
-
-    const deleteOldOnlineUserData = async () => {
-      try {
-        const twoWeeksAgo = Timestamp.fromDate(new Date(Date.now() - 12096e5));
-        const userStatusCollectionRef = collection(firestore, "djmusic");
-        const oldUsersQuery = query(
-          userStatusCollectionRef,
-          where("last_changed", "<", twoWeeksAgo)
+      const setOnline = () =>
+        setDoc(
+          userRef,
+          {
+            state: "online",
+            last_changed: serverTimestamp(),
+            last_active: serverTimestamp(),
+            browser,
+            os,
+            device,
+            ip,
+            city,
+            country,
+          },
+          { merge: true }
         );
 
-        const snapshot = await getDocs(oldUsersQuery);
-        snapshot.forEach((doc) => {
-          deleteDoc(doc.ref);
-        });
-      } catch (error) {
-        console.error("Error deleting old online user data:", error);
-      }
+      const setOffline = () =>
+        setDoc(
+          userRef,
+          { state: "offline", last_changed: serverTimestamp() },
+          { merge: true }
+        );
+
+      await setOnline();
+
+      heartbeatInterval = window.setInterval(setOnline, 60_000);
+
+      const usersCol = collection(firestore, "djmusic");
+      unsubscribeSnapshot = onSnapshot(usersCol, (snapshot) => {
+        const now = Date.now();
+        const twentyMinutesAgo = now - 20 * 60 * 1000;
+        const activeUsers = snapshot.docs
+          .map((d) => d.data() as UserStatus)
+          .filter(
+            (u) =>
+              u.state === "online" &&
+              u.last_active &&
+              (u.last_active.toDate?.()?.getTime() ??
+                new Date(u.last_active).getTime()) > twentyMinutesAgo
+          );
+        setOnlineUsers(activeUsers);
+      });
+
+      window.addEventListener("beforeunload", setOffline);
+
+      return setOffline;
     };
 
-    const fetchData = async () => {
-      await fetchIpAndUpdate();
-      await updateAllTimeVisitors();
-      await deleteOldOnlineUserData();
+    const updateVisitorCount = async () => {
+      const visitorsRef = doc(firestore, "alltimeVisitors", "DJvisitorCount");
+      const visitorDoc = await getDoc(visitorsRef);
+      const currentCount = visitorDoc.exists()
+        ? visitorDoc.data()?.count || 0
+        : 0;
 
+      await setDoc(visitorsRef, { count: currentCount + 1 }, { merge: true });
+      const updatedDoc = await getDoc(visitorsRef);
+      setAllTimeVisitors(updatedDoc.data()?.count || 0);
+    };
+
+    const cleanOldUsers = async () => {
+      const twoWeeksAgo = Timestamp.fromDate(new Date(Date.now() - 12096e5));
+      const usersCol = collection(firestore, "djmusic");
+      const oldQuery = query(usersCol, where("last_changed", "<", twoWeeksAgo));
+      const snapshot = await getDocs(oldQuery);
+      snapshot.forEach((d) => deleteDoc(d.ref));
+    };
+
+    const init = async () => {
+      const setOffline = await fetchUserData();
+      await updateVisitorCount();
+      await cleanOldUsers();
       setLoading(false);
+
+      return () => {
+        clearInterval(heartbeatInterval);
+        unsubscribeSnapshot?.();
+        window.removeEventListener("beforeunload", setOffline);
+        setOffline();
+      };
     };
 
-    fetchData();
+    init();
   }, []);
 
   if (loading) {
