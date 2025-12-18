@@ -9,10 +9,10 @@ export const blacklistedUsers: {
   device?: string;
   os?: string;
 }[] = [
-  { country: "Kazakhstan" }, // Block all from Kazakhstan
-  { country: "North Korea", city: "Pyongyang" }, // Block only New York, USA
-  { device: "iPhone", os: "ios" },
-  { browser: "Mobile Safari", os: "ios" },
+  // { country: "Kazakhstan" }, // Block all from Kazakhstan
+  // { country: "North Korea", city: "Pyongyang" }, // Block only New York, USA
+  // { device: "iPhone", os: "ios" },
+  // { browser: "Mobile Safari", os: "ios" },
 ];
 
 const detectBrowserDeviceOs = () => {
