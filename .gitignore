@@ -29,4 +29,5 @@ public/python/__pycache__
 
 # Env
 .env
+.venv
 
