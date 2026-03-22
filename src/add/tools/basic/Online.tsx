@@ -54,7 +54,7 @@ function Online() {
       const docId = `${ip}-${browser}-${device}-${os}`
         .toLowerCase()
         .replace(/ /g, "-");
-      const userRef = doc(firestore, "djmusic", docId);
+      const userRef = doc(firestore, "playlistgo", docId);
 
       const setOnline = () =>
         setDoc(
@@ -84,7 +84,7 @@ function Online() {
 
       heartbeatInterval = window.setInterval(setOnline, 60_000);
 
-      const usersCol = collection(firestore, "djmusic");
+      const usersCol = collection(firestore, "playlistgo");
       unsubscribeSnapshot = onSnapshot(usersCol, (snapshot) => {
         const now = Date.now();
         const twentyMinutesAgo = now - 20 * 60 * 1000;
@@ -106,7 +106,7 @@ function Online() {
     };
 
     const updateVisitorCount = async () => {
-      const visitorsRef = doc(firestore, "alltimeVisitors", "DJvisitorCount");
+      const visitorsRef = doc(firestore, "alltimeVisitors", "PlaylistGoCount");
       const visitorDoc = await getDoc(visitorsRef);
       const currentCount = visitorDoc.exists()
         ? visitorDoc.data()?.count || 0
@@ -119,7 +119,7 @@ function Online() {
 
     const cleanOldUsers = async () => {
       const twoWeeksAgo = Timestamp.fromDate(new Date(Date.now() - 12096e5));
-      const usersCol = collection(firestore, "djmusic");
+      const usersCol = collection(firestore, "playlistgo");
       const oldQuery = query(usersCol, where("last_changed", "<", twoWeeksAgo));
       const snapshot = await getDocs(oldQuery);
       snapshot.forEach((d) => deleteDoc(d.ref));
