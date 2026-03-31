@@ -4,6 +4,10 @@
 
 Welcome to **PlaylistGo**, an open-source, web-based music player built in **TypeScript** that lets you search and play songs directly from **YouTube** using a simple **Excel playlist sheet**. Whether you're here to vibe or to code, this project is for you! 🎉✅🔍♻️
 
+<img width="1920" height="1035" alt="image" src="https://github.com/user-attachments/assets/6079e8de-1c57-4980-b3c2-660b1ad570e2" />
+
+<img width="1920" height="1035" alt="image" src="https://github.com/user-attachments/assets/93eefc1c-2ccf-4887-9838-a399b1bc34e0" />
+
 <img width="1918" height="889" alt="PlaylistGo UI" src="https://github.com/user-attachments/assets/ae79b29c-bd2d-4ca8-87de-72afaa01ec94" />
 
 <img src="https://github.com/user-attachments/assets/a6fc2858-a750-40f1-b4c2-6518c5ad607d" alt="PlaylistGo UI" />
