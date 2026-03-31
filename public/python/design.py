@@ -14,21 +14,15 @@ from PyQt6.QtCore import Qt, QSize
 class Ui_MainWindow:
     def setupUi(self, MainWindow):
         MainWindow.setWindowTitle("YouTube Song Manager")
-        MainWindow.resize(1200, 800)
+        MainWindow.showMaximized()
 
         self.central_widget = QWidget(MainWindow)
 
         self.layout = QVBoxLayout(self.central_widget)
         self.layout.setContentsMargins(30, 30, 30, 30)
 
-        gradient_css = """
-            background: qlineargradient(
-                x1: 0, y1: 0, x2: 1, y2: 1, 
-                stop: 0 #1e3c72, stop: 1 #2a5298
-            );
-            border-radius: 15px;
-        """
-        self.central_widget.setStyleSheet(gradient_css)
+        plain_css = """background-color: #1e3c72;"""
+        self.central_widget.setStyleSheet(plain_css)
 
         self.header_label = QLabel("YouTube Song Manager")
         self.header_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
