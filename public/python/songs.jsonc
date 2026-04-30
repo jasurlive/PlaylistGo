@@ -1,0 +1,23 @@
+[
+    {
+      // Your GitHub username (with @)
+      "Contributor": "@your-username",
+  
+      // Title of the song or video
+      "Title": "Song or Video Title",
+  
+      // Add Full YouTube link
+      "Youtube Link": "https://youtu.be/example"
+    },
+    // example:
+    {
+      "Contributor": "@jasurlive",
+      "Title": "Imagine Dragons - Believer",
+      "Youtube Link": "https://youtu.be/W0DM5lcj6mw"
+    },
+    {
+      "Contributor": "",
+      "Title": "",
+      "Youtube Link": ""
+    }
+  ]
