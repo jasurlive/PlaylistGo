@@ -32,8 +32,6 @@ Song Name,https://www.youtube.com/watch?v=example
 Another Song,
 ```
 
-If `url` is empty, PlaylistGo searches YouTube for the song title.
-
 ### Adding songs
 
 You do not need to change the code to add songs.
