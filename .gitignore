@@ -13,7 +13,7 @@ dist-ssr
 *.local
 
 public/python/__pycache__
-
+__pycache__/
 
 
 # Editor directories and files
@@ -29,5 +29,5 @@ public/python/__pycache__
 
 # Env
 .env
-.venv
+.venv/
 
